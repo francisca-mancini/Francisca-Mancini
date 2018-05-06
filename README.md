@@ -12,3 +12,6 @@ New shopify Website
 
 ## Build for production
 `yarn run build`
+
+## Contact
+hello.bonhomme@gmail.com
