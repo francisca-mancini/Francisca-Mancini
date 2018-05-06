@@ -1,0 +1,5 @@
+.header {
+  composes:
+    global(text-red)
+  ;
+}

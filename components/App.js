@@ -1,5 +1,7 @@
 import { withRouter } from 'next/router';
 
+import '../style.css';
+
 import Header from './molecules/Header';
 import Footer from './molecules/Footer';
 
@@ -11,16 +13,6 @@ function App({ children, router }) {
       <Header />
       {children}
       <Footer />
-      <style jsx global>{`
-        * {
-          font-family: Menlo, Monaco, 'Lucida Console', 'Liberation Mono',
-            'DejaVu Sans Mono', 'Bitstream Vera Sans Mono', 'Courier New',
-            monospace, serif;
-        }
-        body {
-          margin: 0;
-        }
-      `}</style>
     </div>
   );
 }

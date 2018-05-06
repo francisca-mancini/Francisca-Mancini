@@ -1,6 +1,8 @@
+import generalStyles from './general.css';
+
 export default function Header() {
   return (
-    <header>
+    <header className={generalStyles.header}>
       header
     </header>
   )

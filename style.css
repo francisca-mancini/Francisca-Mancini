@@ -1,0 +1,5 @@
+/* https://github.com/sindresorhus/modern-normalize */
+@import './node_modules/modern-normalize/modern-normalize.css';
+/* https://tailwindcss.com */
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";

@@ -9,7 +9,7 @@ function Home(data) {
         home
       </div>
     </App>
-  )
+  );
 }
 
 export default withData(Home);
