@@ -1,13 +1,15 @@
-import App from '../components/App'
-import Header from '../components/Header'
-import Submit from '../components/Submit'
-import PostList from '../components/PostList'
-import withData from '../lib/withData'
+import withData from '../lib/withData';
 
-export default withData(() => (
-  <App>
-    <Header />
-    <Submit />
-    <PostList />
-  </App>
-))
+import App from '../components/App';
+
+function Home(data) {
+  return (
+    <App>
+      <div>
+        home
+      </div>
+    </App>
+  )
+}
+
+export default withData(Home);
