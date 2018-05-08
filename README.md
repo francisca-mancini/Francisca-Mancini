@@ -3,16 +3,16 @@ New shopify Website with DVTK.
 
 ## Next.js
 We're using Next.js to get a full server-side rendered app.
-See the config file at `./next.config.js` or check the documentation (https://nextjs.org/docs).
+See the config file at `./next.config.js` or check [the documentation](https://nextjs.org/docs).
 
 #### Installation
 `$ yarn`
 
 #### Run dev server
-`$ yarn run dev`
+`$ yarn dev`
 
 #### Build for production
-`$ yarn run build`
+`$ yarn build`
 
 #### Run production server
 `$ yarn start`
@@ -38,7 +38,7 @@ Example:
 }
 ```
 
-See `./tailwind-config.js` for the project's styleguide or check the documentation (https://tailwindcss.com/docs).
+See `./tailwind-config.js` for the project's styleguide or check [the documentation](https://tailwindcss.com/docs).
 
 ## Contact
 hello.bonhomme@gmail.com
