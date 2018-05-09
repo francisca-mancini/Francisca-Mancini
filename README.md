@@ -40,5 +40,24 @@ Example:
 
 See `./tailwind-config.js` for the project's styleguide or check [the documentation](https://tailwindcss.com/docs).
 
+## Component structure
+We're dividing components in 3 category:
+
+### Atoms
+Single UI elements, like `<Heading />` that would display titles or `<Spacing />` that would manage spacings.
+
+### Molecules
+Complex components that are made of multiple **Atoms**.
+
+### Organisms
+Components that fetch **data** and are made of **Atoms** and **Molecules**, they are mostly page specific but can be re-used across the app.
+
+## Storybook
+Everytime we build a new **Atom** or **Molecule** (not needed for Organisms) we create a story for that component. It makes it easier to keep track of each component and its props.
+
+In the same component's folder just add a `/ComponentName/ComponentName.stories.js`.
+
+See [storybook documentation](https://storybook.js.org/basics/introduction/)
+
 ## Contact
 hello.bonhomme@gmail.com
