@@ -44,7 +44,7 @@ Example:
 }
 ```
 
-See `./tailwind-config.js` for the project's styleguide or check [the documentation](https://tailwindcss.com/docs).
+See `./tailwind.config.js` for the project's styleguide or check [the documentation](https://tailwindcss.com/docs).
 <br />
 <br />
 

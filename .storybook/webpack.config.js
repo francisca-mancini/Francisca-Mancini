@@ -18,7 +18,7 @@ const postCSSLoaderOptions = {
   // https://github.com/facebookincubator/create-react-app/issues/2677
   ident: 'postcss',
   plugins: () => [
-    tailwindcss(paths.appSrc + '/tailwind-config.js'),
+    tailwindcss(paths.appSrc + '/tailwind.config.js'),
   ],
   sourceMap: true
 };
