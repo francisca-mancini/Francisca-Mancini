@@ -55,7 +55,7 @@ Components that fetch **data** and are made of **Atoms** and **Molecules**, they
 ## Storybook
 Everytime we build a new **Atom** or **Molecule** (not needed for Organisms) we create a story for that component. It makes it easier to keep track of each component and its props.
 
-In the same component's folder just add a `/ComponentName/ComponentName.stories.js`.
+In the same component's folder just add a `ComponentName.stories.js`.
 
 See [storybook documentation](https://storybook.js.org/basics/introduction/)
 
