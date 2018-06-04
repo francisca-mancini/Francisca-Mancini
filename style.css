@@ -1,5 +1,15 @@
 /* https://github.com/sindresorhus/modern-normalize */
-@import './node_modules/modern-normalize/modern-normalize.css';
+@import "./node_modules/modern-normalize/modern-normalize.css";
 /* https://tailwindcss.com */
+@import "/static/css/fontface.css";
 @import "./node_modules/tailwindcss/components.css";
 @import "./node_modules/tailwindcss/utilities.css";
+
+html {
+  font-size: 62.5%; /* 10px so 1rem = 10px */
+}
+
+body {
+  font-size: 1.8rem;
+  font-family: 'Nitti Grotesk', 'Helvetica Neue', 'sans-serif';
+}
