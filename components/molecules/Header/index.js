@@ -2,6 +2,7 @@ import generalStyles from './general.css';
 
 import Heading from '../../atoms/Heading';
 import Button from '../../atoms/Button';
+import { Grid, GridItem } from '../../atoms/Grid';
 
 export default function Header() {
   return (
@@ -9,14 +10,11 @@ export default function Header() {
       <Heading size="xl" uppercase>
         header
       </Heading>
-      <Button
-        size="s"
-        onClick={e => {
-          console.log(e);
-        }}
-      >
-        Discover the Collection
-      </Button>
+      <Grid>
+        <GridItem columnSize={4}>yo</GridItem>
+        <GridItem columnSize={4}>yo</GridItem>
+        <GridItem columnSize={4}>yo</GridItem>
+      </Grid>
     </header>
   );
 }
