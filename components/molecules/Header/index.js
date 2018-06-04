@@ -1,7 +1,7 @@
 import generalStyles from './general.css';
 
 import Heading from '../../atoms/Heading';
-import Paragraph from '../../atoms/Paragraph';
+import Button from '../../atoms/Button';
 
 export default function Header() {
   return (
@@ -9,11 +9,14 @@ export default function Header() {
       <Heading size="xl" uppercase>
         header
       </Heading>
-      <Paragraph>
-        Hi there i'm a paragraph Hi there i'm a paragraph Hi there i'm a
-        paragraph Hi there i'm a paragraph Hi there i'm a paragraph Hi there i'm
-        a paragraph Hi there i'm a paragraph Hi there i'm a paragraph
-      </Paragraph>
+      <Button
+        size="s"
+        onClick={e => {
+          console.log(e);
+        }}
+      >
+        Discover the Collection
+      </Button>
     </header>
   );
 }

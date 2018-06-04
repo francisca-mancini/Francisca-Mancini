@@ -1,0 +1,6 @@
+.dark {
+  composes:
+    global(bg-black)
+    global(text-white)
+  ;
+}

@@ -1,0 +1,8 @@
+.button {
+  composes:
+    global(cursor-pointer)
+    global(inline-block)
+    global(leading-none)
+    global(no-underline)
+  ;
+}

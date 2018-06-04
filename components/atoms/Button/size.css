@@ -1,0 +1,17 @@
+.m {
+  composes:
+    global(px-30)
+    global(py-20)
+    global(text-l)
+    global(rounded-50)
+  ;
+}
+
+.s {
+  composes:
+    global(px-20)
+    global(py-15)
+    global(text-xs)
+    global(rounded-50)
+  ;
+}
