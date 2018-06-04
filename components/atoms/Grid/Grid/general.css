@@ -1,0 +1,6 @@
+.grid {
+  composes:
+    global(flex)
+    global(flex-wrap)
+  ;
+}
