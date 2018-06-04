@@ -1,0 +1,95 @@
+@font-face {
+    font-family: 'Nitti Grotesk';
+    src: url('/static/fonts/nitti/NittiGrotesk-ExtraBold.woff2') format('woff2'),
+        url('/static/fonts/nitti/NittiGrotesk-ExtraBold.woff') format('woff');
+    font-weight: 800;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Nitti Grotesk';
+    src: url('/static/fonts/nitti/NittiGrotesk-Bold.woff2') format('woff2'),
+        url('/static/fonts/nitti/NittiGrotesk-Bold.woff') format('woff');
+    font-weight: 700;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Nitti Grotesk';
+    src: url('/static/fonts/nitti/NittiGrotesk-Light.woff2') format('woff2'),
+        url('/static/fonts/nitti/NittiGrotesk-Light.woff') format('woff');
+    font-weight: 300;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Nitti Grotesk SemiLight';
+    src: url('/static/fonts/nitti/NittiGrotesk-SemiLight.woff2') format('woff2'),
+        url('/static/fonts/nitti/NittiGrotesk-SemiLight.woff') format('woff');
+    font-weight: 350;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Nitti Grotesk';
+    src: url('/static/fonts/nitti/NittiGrotesk-Medium.woff2') format('woff2'),
+        url('/static/fonts/nitti/NittiGrotesk-Medium.woff') format('woff');
+    font-weight: 500;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Nitti Grotesk';
+    src: url('/static/fonts/nitti/NittiGrotesk-Normal.woff2') format('woff2'),
+        url('/static/fonts/nitti/NittiGrotesk-Normal.woff') format('woff');
+    font-weight: 400;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Nitti Grotesk';
+    src: url('/static/fonts/nitti/NittiGrotesk-Black.woff2') format('woff2'),
+        url('/static/fonts/nitti/NittiGrotesk-Black.woff') format('woff');
+    font-weight: 900;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Traulha-Trial';
+    src: url('/static/fonts/traulha/Traulha-Trial-Italica.woff2') format('woff2'),
+        url('/static/fonts/traulha/Traulha-Trial-Italica.woff') format('woff');
+    font-weight: 400;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: 'Traulha-Trial';
+    src: url('/static/fonts/traulha/Traulha-Trial-Regulara.woff2') format('woff2'),
+        url('/static/fonts/traulha/Traulha-Trial-Regulara.woff') format('woff');
+    font-weight: 400;
+    font-style: normal;
+}
+
+/* @font-face {
+    font-family: 'Traulha-Trial';
+    src: url('/static/fonts/traulha/Traulha-Trial-Clinat.woff2') format('woff2'),
+        url('/static/fonts/traulha/Traulha-Trial-Clinat.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Traulha-Trial';
+    src: url('/static/fonts/traulha/Traulha-Trial-Lineara.woff2') format('woff2'),
+        url('/static/fonts/traulha/Traulha-Trial-Lineara.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Traulha-Trial';
+    src: url('/static/fonts/traulha/Traulha-Trial-Jornau.woff2') format('woff2'),
+        url('/static/fonts/traulha/Traulha-Trial-Jornau.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+} */
