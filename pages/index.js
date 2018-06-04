@@ -1,15 +1,12 @@
 import withData from '../lib/withData';
 
 import App from '../components/App';
-import Shop from '../components/molecules/Shop';
-
-import logo from '../static/images/logo.jpg';
+import CollectionIntro from '../components/organisms/CollectionIntro';
 
 function Home(data) {
   return (
     <App>
-      <img src={logo} alt="logo" />
-      <Shop />
+      <CollectionIntro />
       <div>
         home
       </div>
