@@ -211,7 +211,7 @@ module.exports = {
   tracking: {
     tight: '-0.05em',
     normal: '0',
-    wide: '0.05em'
+    wide: '0.06em'
   },
 
   /*
@@ -755,7 +755,7 @@ module.exports = {
     textColors: ['responsive', 'hover'],
     textSizes: ['responsive'],
     textStyle: ['responsive', 'hover'],
-    tracking: false,
+    tracking: [],
     userSelect: false,
     verticalAlign: false,
     visibility: ['responsive'],
