@@ -1,0 +1,14 @@
+.link {
+  composes:
+    global(no-underline)
+    global(inline-block)
+  ;
+  color: inherit;
+}
+
+.isUnderlined {
+  composes:
+    global(border-b-1)
+    global(border-solid)
+  ;
+}
