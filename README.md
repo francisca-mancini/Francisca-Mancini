@@ -21,6 +21,11 @@ See the config file at `./next.config.js` or check [the documentation](https://n
 <br />
 <br />
 
+#### Run storybook styleguide
+`$ yarn run storybook`
+<br />
+<br />
+
 ## Storefront API
 We're using Shopify's storefront API to get/send data to the shop, using GraphQL and Apollo.
 
