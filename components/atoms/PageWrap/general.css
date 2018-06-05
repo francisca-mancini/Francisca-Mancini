@@ -2,8 +2,7 @@
   composes:
     global(w-full)
     global(mx-auto)
-    global(md:px-30)
-    global(px-20)
+    global(px-30)
     global(max-w-xl)
   ;
 }
