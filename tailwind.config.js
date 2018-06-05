@@ -211,7 +211,7 @@ module.exports = {
   tracking: {
     tight: '-0.05em',
     normal: '0',
-    wide: '0.05em'
+    wide: '0.06em'
   },
 
   /*
@@ -321,6 +321,7 @@ module.exports = {
 
   borderRadius: {
     none: '0',
+    s: '0.3rem',
     '50': '5rem',
     round: '50%'
   },
@@ -457,7 +458,7 @@ module.exports = {
   */
 
   maxWidth: {
-    xl: '136.6rem',
+    xl: '144rem',
     full: '100%'
   },
 
@@ -507,7 +508,14 @@ module.exports = {
     '35': '3.5rem',
     '40': '4rem',
     '45': '4.5rem',
-    '50': '5rem'
+    '50': '5rem',
+    '55': '5.5rem',
+    '60': '6rem',
+    '65': '6.5rem',
+    '70': '7rem',
+    '75': '7.5rem',
+    '80': '8rem',
+    '85': '8.5rem'
   },
 
   /*
@@ -538,7 +546,14 @@ module.exports = {
     '35': '3.5rem',
     '40': '4rem',
     '45': '4.5rem',
-    '50': '5rem'
+    '50': '5rem',
+    '55': '5.5rem',
+    '60': '6rem',
+    '65': '6.5rem',
+    '70': '7rem',
+    '75': '7.5rem',
+    '80': '8rem',
+    '85': '8.5rem'
   },
 
   /*
@@ -568,7 +583,14 @@ module.exports = {
     '35': '3.5rem',
     '40': '4rem',
     '45': '4.5rem',
-    '50': '5rem'
+    '50': '5rem',
+    '55': '5.5rem',
+    '60': '6rem',
+    '65': '6.5rem',
+    '70': '7rem',
+    '75': '7.5rem',
+    '80': '8rem',
+    '85': '8.5rem'
   },
 
   /*
@@ -589,7 +611,7 @@ module.exports = {
 
   shadows: {
     default: '0 2px 4px 0 rgba(0,0,0,0.10)',
-    md: '0 4px 8px 0 rgba(0,0,0,0.12), 0 2px 4px 0 rgba(0,0,0,0.08)',
+    md: '0 3px 13px 0 rgba(0, 0, 0, 0.07)',
     lg: '0 15px 30px 0 rgba(0,0,0,0.11), 0 5px 15px 0 rgba(0,0,0,0.08)',
     inner: 'inset 0 2px 4px 0 rgba(0,0,0,0.06)',
     none: 'none'
@@ -613,9 +635,9 @@ module.exports = {
     '0': 0,
     '10': 10,
     '20': 20,
-    '30': 30,
-    '40': 40,
-    '50': 50
+    header: 500,
+    modal: 400,
+    full: 1000
   },
 
   /*
@@ -713,31 +735,31 @@ module.exports = {
     fontWeights: ['responsive', 'hover'],
     height: ['responsive'],
     leading: ['responsive'],
-    lists: ['responsive'],
+    lists: false,
     margin: ['responsive'],
     maxHeight: ['responsive'],
     maxWidth: ['responsive'],
     minHeight: ['responsive'],
     minWidth: ['responsive'],
     negativeMargin: ['responsive'],
-    opacity: ['responsive'],
+    opacity: ['responsive', 'hover'],
     overflow: ['responsive'],
     padding: ['responsive'],
     pointerEvents: ['responsive'],
     position: ['responsive'],
     resize: ['responsive'],
-    shadows: false,
-    svgFill: [],
-    svgStroke: [],
+    shadows: ['responsive'],
+    svgFill: false,
+    svgStroke: false,
     textAlign: ['responsive'],
     textColors: ['responsive', 'hover'],
     textSizes: ['responsive'],
     textStyle: ['responsive', 'hover'],
-    tracking: ['responsive'],
+    tracking: [],
     userSelect: false,
     verticalAlign: false,
     visibility: ['responsive'],
-    whitespace: ['responsive'],
+    whitespace: false,
     width: ['responsive'],
     zIndex: ['responsive']
   },

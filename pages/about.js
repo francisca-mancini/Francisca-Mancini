@@ -6,15 +6,18 @@ import PageWrap from '../components/atoms/PageWrap';
 
 import Shop from '../components/molecules/Shop';
 
-function Home(data) {
+import logo from '../static/images/logo.jpg';
+
+function About(data) {
   return (
-    <App headerLight={true}>
+    <App>
       <PageWrap>
+        <img src={logo} alt="logo" />
         <Shop />
-        <div>home</div>
+        <div>About</div>
       </PageWrap>
     </App>
   );
 }
 
-export default withData(Home);
+export default withData(About);

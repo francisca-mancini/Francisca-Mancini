@@ -1,5 +1,36 @@
 .header {
   composes:
-    global(text-red)
+    global(fixed)
+    global(w-full)
+    global(py-30)
   ;
+}
+
+.dropdown {
+  composes:
+    global(absolute)
+    global(pt-10)
+  ;
+
+  transition: 0.25s ease-out;
+  transform: translateY(-15px);
+  visibility: hidden;
+  opacity: 0;
+  will-change: transform;
+}
+
+.dropdownInner {
+  composes:
+    global(py-20)
+    global(px-25)
+    global(bg-white)
+    global(rounded-s)
+    global(shadow-md)
+  ;
+}
+
+.dropdownTrigger:hover .dropdown {
+  transform: translateY(0);
+  visibility: visible;
+  opacity: 1;
 }

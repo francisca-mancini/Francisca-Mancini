@@ -23,15 +23,23 @@ export default function Heading({
   center,
   color,
   uppercase,
-  font
+  font,
+  weight,
+  tracking
 }) {
   const HeadingTag = tag;
   const sizeToClass = propToClassName(size, sizeMap);
-  const headingClassName = classNames(sizeToClass, `font-${font}`, {
-    'text-center': center,
-    uppercase: uppercase,
-    [`text-${color}`]: color
-  });
+  const headingClassName = classNames(
+    sizeToClass,
+    `font-${font}`,
+    `font-${weight}`,
+    `tracking-${tracking}`,
+    {
+      'text-center': center,
+      uppercase: uppercase,
+      [`text-${color}`]: color
+    }
+  );
 
   return <HeadingTag className={headingClassName}>{children}</HeadingTag>;
 }
@@ -43,7 +51,9 @@ Heading.propTypes = {
   size: PropTypes.oneOf(Object.keys(sizeMap)),
   center: PropTypes.bool,
   uppercase: PropTypes.bool,
-  font: PropTypes.oneOf(['sans', 'serif'])
+  font: PropTypes.oneOf(['sans', 'serif']),
+  weight: PropTypes.string,
+  tracking: PropTypes.string
 };
 
 Heading.defaultProps = {
@@ -51,5 +61,7 @@ Heading.defaultProps = {
   size: 'xl',
   center: false,
   uppercase: false,
-  font: 'sans'
+  font: 'sans',
+  weight: 'normal',
+  tracking: 'normal'
 };
