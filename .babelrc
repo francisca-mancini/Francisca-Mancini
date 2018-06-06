@@ -1,7 +1,6 @@
 {
   "presets": ["next/babel"],
   "plugins": [
-    "inline-react-svg",
     [
       "transform-assets-import-to-string",
       {
