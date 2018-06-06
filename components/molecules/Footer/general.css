@@ -1,0 +1,18 @@
+.footer {
+  composes:
+    global(py-30)
+  ;
+}
+
+.isLight {
+  composes:
+    global(bg-black)
+  ;
+}
+
+.isDark {
+  composes:
+    global(bg-black)
+    global(md-bg-white)
+  ;
+}
