@@ -5,14 +5,14 @@ import '../style.css';
 import Header from './molecules/Header';
 import Footer from './molecules/Footer';
 
-function App({ children, router, headerLight }) {
+function App({ children, router, headerLight, footerLight }) {
   const pathname = router.pathname;
 
   return (
     <div className="root bg-black">
       <Header isLight={headerLight} />
       <div className="pt-80">{children}</div>
-      <Footer />
+      <Footer isLight={footerLight} />
     </div>
   );
 }

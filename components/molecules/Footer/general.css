@@ -1,0 +1,31 @@
+.footer {
+  composes:
+    global(py-30)
+  ;
+}
+
+.isLight {
+  composes:
+    global(bg-black)
+  ;
+}
+
+.isDark {
+  composes:
+    global(bg-black)
+    global(md-bg-white)
+  ;
+}
+
+.navItemLight {
+  composes:
+    global(text-white)
+  ;
+}
+
+.navItemDark {
+  composes:
+    global(md-text-black)
+    global(text-white)
+  ;
+}
