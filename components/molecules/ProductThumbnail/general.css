@@ -1,0 +1,16 @@
+.product {
+  composes:
+    global(w-full)
+    global(px-20)
+  ;
+}
+
+.imageContainer {
+  composes:
+    global(relative)
+    global(flex)
+    global(items-center)
+    global(justify-center)
+    global(mb-30)
+  ;
+}

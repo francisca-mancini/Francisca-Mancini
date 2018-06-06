@@ -9,7 +9,7 @@ function App({ children, router, headerLight, footerLight }) {
   const pathname = router.pathname;
 
   return (
-    <div className="root bg-black">
+    <div className="root">
       <Header isLight={headerLight} />
       <div className="pt-80">{children}</div>
       <Footer isLight={footerLight} />
