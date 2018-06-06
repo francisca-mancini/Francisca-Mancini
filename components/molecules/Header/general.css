@@ -1,6 +1,7 @@
 .header {
   composes:
     global(fixed)
+    global(z-header)
     global(w-full)
     global(py-30)
   ;

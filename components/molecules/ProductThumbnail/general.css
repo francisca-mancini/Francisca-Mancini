@@ -2,6 +2,9 @@
   composes:
     global(w-full)
     global(px-20)
+    global(flex)
+    global(items-center)
+    global(justify-center)
   ;
 }
 
