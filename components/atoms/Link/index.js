@@ -4,17 +4,21 @@ import classNames from 'classnames';
 
 import generalStyles from './general.css';
 
+const tagList = ['span', 'a', 'div'];
+
 export default function AtomLink({
   children,
   className,
   underline,
   href,
   prefetch,
+  tag,
   onClick
 }) {
   const linkClassName = classNames(generalStyles.link, className, {
     [generalStyles.isUnderline]: underline
   });
+  const LinkTag = tag;
 
   const handleClick = e => {
     if (!onClick) return;
@@ -24,9 +28,9 @@ export default function AtomLink({
 
   return (
     <Link href={href} prefetch={prefetch}>
-      <a className={linkClassName} onClick={handleClick}>
+      <LinkTag className={linkClassName} onClick={handleClick}>
         {children}
-      </a>
+      </LinkTag>
     </Link>
   );
 }
@@ -35,11 +39,13 @@ AtomLink.propTypes = {
   children: PropTypes.oneOfType([PropTypes.node, PropTypes.string]).isRequired,
   underline: PropTypes.bool,
   className: PropTypes.string,
-  prefetch: PropTypes.bool
+  prefetch: PropTypes.bool,
+  tag: PropTypes.oneOf(tagList)
 };
 
 AtomLink.defaultProps = {
   underline: false,
   prefetch: false,
-  className: ''
+  className: '',
+  tag: 'a'
 };
