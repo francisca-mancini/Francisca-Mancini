@@ -1,5 +1,4 @@
 import PropTypes from 'prop-types';
-import NextLink from 'next/link';
 import classNames from 'classnames';
 import MediaQuery from 'react-responsive';
 
@@ -10,23 +9,23 @@ import Link from '../../atoms/Link';
 import PageWrap from '../../atoms/PageWrap';
 import { Grid, GridItem, InlineGrid } from '../../atoms/Grid';
 
-import LogoWhite from '../../../static/images/sprites/logo-white.svg';
-import LogoBlack from '../../../static/images/sprites/logo-black.svg';
-import LogoMiniWhite from '../../../static/images/sprites/logo-mini-white.svg';
-import LogoMiniBlack from '../../../static/images/sprites/logo-mini-black.svg';
-import CartWhite from '../../../static/images/sprites/cart-white.svg';
-import CartBlack from '../../../static/images/sprites/cart-black.svg';
-import MenuWhite from '../../../static/images/sprites/menu-white.svg';
-import MenuBlack from '../../../static/images/sprites/menu-black.svg';
+import logoWhite from '../../../static/images/sprites/logo-white.svg';
+import logoBlack from '../../../static/images/sprites/logo-black.svg';
+import logoMiniWhite from '../../../static/images/sprites/logo-mini-white.svg';
+import logoMiniBlack from '../../../static/images/sprites/logo-mini-black.svg';
+import cartWhite from '../../../static/images/sprites/cart-white.svg';
+import cartBlack from '../../../static/images/sprites/cart-black.svg';
+import menuWhite from '../../../static/images/sprites/menu-white.svg';
+import menuBlack from '../../../static/images/sprites/menu-black.svg';
 
 import generalStyles from './general.css';
 
 export default function Header({ isLight }) {
   const headerClassName = classNames(generalStyles.header);
-  const LogoTag = isLight ? LogoWhite : LogoBlack;
-  const LogoMiniTag = isLight ? LogoMiniWhite : LogoMiniBlack;
-  const CartTag = isLight ? CartWhite : CartBlack;
-  const MenuTag = isLight ? MenuWhite : MenuBlack;
+  const logoSrc = isLight ? logoWhite : logoBlack;
+  const logoMiniSrc = isLight ? logoMiniWhite : logoMiniBlack;
+  const cartSrc = isLight ? cartWhite : cartBlack;
+  const menuSrc = isLight ? menuWhite : menuBlack;
   const linkColor = isLight ? 'white' : 'black';
 
   const NavLink = ({ children, href, isDropdown, isDropdownTrigger }) => {
@@ -74,15 +73,15 @@ export default function Header({ isLight }) {
       <PageWrap>
         <InlineGrid>
           <MediaQuery maxDeviceWidth={767}>
-            <MenuTag width={34} height={18} />
+            <img src={menuSrc} width={34} height={18} />
           </MediaQuery>
           <Link href="/" className="leading-none flex items-center">
             <MediaQuery minDeviceWidth={768} values={{ deviceWidth: 800 }}>
               {matches => {
                 if (matches) {
-                  return <LogoTag width={243} height={16} />;
+                  return <img src={logoSrc} width={243} height={16} />;
                 } else {
-                  return <LogoMiniTag width={41} height={44} />;
+                  return <img src={logoMiniSrc} width={41} height={44} />;
                 }
               }}
             </MediaQuery>
@@ -103,7 +102,7 @@ export default function Header({ isLight }) {
                   </InlineGrid>
                 );
               } else {
-                return <CartTag width={20} height={20} />;
+                return <img src={cartSrc} width={20} height={20} />;
               }
             }}
           </MediaQuery>
