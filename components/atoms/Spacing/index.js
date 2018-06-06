@@ -46,7 +46,7 @@ Spacing.propTypes = {
 };
 
 Spacing.defaultProps = {
-  size: 5,
+  size: 60,
   position: 'y',
   type: 'margin'
 };
