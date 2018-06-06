@@ -22,14 +22,21 @@ export default function Paragraph({
   size,
   font,
   center,
+  weight,
   color
 }) {
   const ParagraphTag = tag;
   const sizeToClass = propToClassName(size, sizeMap);
-  const paragraphClassName = classNames(sizeToClass, `font-${font}`, 'my-0', {
-    'text-center': center,
-    [`text-${color}`]: color
-  });
+  const paragraphClassName = classNames(
+    sizeToClass,
+    `font-${font}`,
+    `font-${weight}`,
+    'my-0',
+    {
+      'text-center': center,
+      [`text-${color}`]: color
+    }
+  );
 
   return <ParagraphTag className={paragraphClassName}>{children}</ParagraphTag>;
 }
@@ -40,12 +47,14 @@ Paragraph.propTypes = {
   color: PropTypes.string,
   size: PropTypes.oneOf(Object.keys(sizeMap)),
   center: PropTypes.bool,
-  font: PropTypes.oneOf(['sans', 'serif'])
+  font: PropTypes.oneOf(['sans', 'serif']),
+  weight: PropTypes.string
 };
 
 Paragraph.defaultProps = {
   tag: 'p',
   size: 'm',
   center: false,
-  font: 'sans'
+  font: 'sans',
+  weight: 'normal'
 };
