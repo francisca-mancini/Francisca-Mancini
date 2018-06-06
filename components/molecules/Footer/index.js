@@ -22,8 +22,11 @@ export default function Footer({ isLight }) {
     isLight: isLight,
     isDark: !isLight
   });
+  const navItemClassName = cx('navItem', {
+    navItemLight: isLight,
+    navItemDark: !isLight
+  });
   const logoSrc = isLight ? logoWhite : logoBlack;
-  const linkColor = isLight ? 'white' : 'black';
 
   const NavLink = ({ children, href }) => {
     return (
@@ -35,7 +38,7 @@ export default function Footer({ isLight }) {
             size="xxxs"
             weight="semilight"
             tracking="wide"
-            color={linkColor}
+            className={navItemClassName}
           >
             {children}
           </Heading>
@@ -48,18 +51,20 @@ export default function Footer({ isLight }) {
     <footer className={footerClassName}>
       <PageWrap>
         <InlineGrid direction={['col', 'col', 'row']}>
-          <Link href="/" className="leading-none flex items-center">
-            <MediaQuery minDeviceWidth={768} values={{ deviceWidth: 800 }}>
-              {matches => {
-                if (matches) {
-                  return <img src={logoSrc} width={243} height={16} />;
-                } else {
-                  return <img src={logoMini} width={156} height={45} />;
-                }
-              }}
-            </MediaQuery>
-          </Link>
-          <InlineGrid>
+          <Spacing size={[20, 20, 0]} position="b">
+            <Link href="/" className="leading-none flex items-center">
+              <MediaQuery minDeviceWidth={768} values={{ deviceWidth: 800 }}>
+                {matches => {
+                  if (matches) {
+                    return <img src={logoSrc} width={243} height={16} />;
+                  } else {
+                    return <img src={logoMini} width={156} height={45} />;
+                  }
+                }}
+              </MediaQuery>
+            </Link>
+          </Spacing>
+          <InlineGrid className="flex-wrap" justify="center">
             <NavLink href="/about">About</NavLink>
             <NavLink href="/contact">Contact</NavLink>
             <NavLink href="https://instagram.com">Instagram</NavLink>

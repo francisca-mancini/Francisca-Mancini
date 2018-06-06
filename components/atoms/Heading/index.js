@@ -25,7 +25,8 @@ export default function Heading({
   uppercase,
   font,
   weight,
-  tracking
+  tracking,
+  className
 }) {
   const HeadingTag = tag;
   const sizeToClass = propToClassName(size, sizeMap);
@@ -34,6 +35,7 @@ export default function Heading({
     `font-${font}`,
     `font-${weight}`,
     `tracking-${tracking}`,
+    className,
     {
       'text-center': center,
       uppercase: uppercase,

@@ -16,3 +16,16 @@
     global(md-bg-white)
   ;
 }
+
+.navItemLight {
+  composes:
+    global(text-white)
+  ;
+}
+
+.navItemDark {
+  composes:
+    global(md-text-black)
+    global(text-white)
+  ;
+}

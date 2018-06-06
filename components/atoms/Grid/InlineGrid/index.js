@@ -29,7 +29,13 @@ const directionMap = {
   'row-reverse': 'flex-row-reverse'
 };
 
-export default function InlineGrid({ children, align, justify, direction }) {
+export default function InlineGrid({
+  children,
+  align,
+  justify,
+  direction,
+  className
+}) {
   const alignClassName = propToClassName(align, alignMap);
   const justifyClassName = propToClassName(justify, justifyMap);
   const directionClassName = propToClassName(direction, directionMap);
@@ -37,7 +43,8 @@ export default function InlineGrid({ children, align, justify, direction }) {
     generalStyles.inlineGrid,
     alignClassName,
     justifyClassName,
-    directionClassName
+    directionClassName,
+    className
   );
 
   return <div className={inlineGridClassName}>{children}</div>;
