@@ -7,6 +7,7 @@ import Spacing from '../components/atoms/Spacing';
 import { Grid, GridItem } from '../components/atoms/Grid';
 
 import ProductThumbnail from '../components/molecules/ProductThumbnail';
+import CollectionIntro from '../components/molecules/CollectionIntro';
 
 import Shop from '../components/molecules/Shop';
 
@@ -14,8 +15,10 @@ function Home(data) {
   return (
     <App>
       <PageWrap>
-        <div>home</div>
-        <Spacing>
+        <Spacing size={80} type="padding">
+          <CollectionIntro />
+        </Spacing>
+        <Spacing size={80} type="padding">
           <Grid gap={[0, 70]}>
             <GridItem columnSize={[12, 6]}>
               <ProductThumbnail />
