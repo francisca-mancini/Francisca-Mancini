@@ -761,7 +761,7 @@ module.exports = {
     visibility: ['responsive'],
     whitespace: false,
     width: ['responsive'],
-    zIndex: ['responsive']
+    zIndex: ['responsive', 'hover']
   },
 
   /*

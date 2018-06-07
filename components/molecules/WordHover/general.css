@@ -2,6 +2,7 @@
   composes:
     global(font-normal)
     global(relative)
+    global(hover-z-20)
   ;
 }
 
@@ -15,12 +16,11 @@
     global(pin-l)
     global(bg-center)
     global(bg-cover)
+    global(pointer-events-none);
   ;
   transform: rotate(0.001deg);
   transform-origin: center center;
   transition: opacity 0.2;
-
-  background-color: rgba(0,0,0,0.5);
 }
 
 .bubbleVisible {

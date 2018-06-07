@@ -30,6 +30,7 @@ export default class WordHover extends Component {
   componentDidMount() {
     window.addEventListener('mousemove', this.handleMouseMove);
     this.initNearby();
+    this.setBubblePosition();
   }
 
   initNearby() {
@@ -38,8 +39,17 @@ export default class WordHover extends Component {
     });
   }
 
+  setBubblePosition() {
+    const bounds = this.wordRef.getBoundingClientRect();
+
+    this.setState({
+      bubbleX: bounds.left,
+      bubbleY: bounds.top
+    });
+  }
+
   handleNearby(distance) {
-    const distanceThreshold = { min: 0, max: 75 };
+    const distanceThreshold = { min: 0, max: 40 };
 
     if (distance > distanceThreshold.max) {
       this.setState({ isMouseOver: false });
