@@ -18,7 +18,7 @@
     font-family: 'Nitti Grotesk';
     src: url('/static/fonts/nitti/NittiGrotesk-Light.woff2') format('woff2'),
         url('/static/fonts/nitti/NittiGrotesk-Light.woff') format('woff');
-    font-weight: 300;
+    font-weight: 200;
     font-style: normal;
 }
 
@@ -26,7 +26,7 @@
     font-family: 'Nitti Grotesk SemiLight';
     src: url('/static/fonts/nitti/NittiGrotesk-SemiLight.woff2') format('woff2'),
         url('/static/fonts/nitti/NittiGrotesk-SemiLight.woff') format('woff');
-    font-weight: 350;
+    font-weight: 300;
     font-style: normal;
 }
 
