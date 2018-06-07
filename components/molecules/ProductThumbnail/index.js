@@ -3,15 +3,13 @@ import Heading from '../../atoms/Heading';
 import Paragraph from '../../atoms/Paragraph';
 import Link from '../../atoms/Link';
 
-import generalStyles from './general.css';
-
 import productImage from '../../../static/images/_temp/product.jpg';
 
 export default function ProductThumbnail() {
   return (
-    <div className={generalStyles.product}>
+    <div className="w-full px-20 flex items-center justify-center">
       <Link tag="div" href="/product">
-        <div className={generalStyles.imageContainer}>
+        <div className="relative flex items-center justify-center mb-30">
           <img src={productImage} alt="yo" />
         </div>
         <div>
