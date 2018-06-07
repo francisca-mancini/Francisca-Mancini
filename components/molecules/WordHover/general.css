@@ -1,0 +1,36 @@
+.word {
+  composes:
+    global(font-normal)
+    global(relative)
+  ;
+}
+
+.bubble {
+  composes:
+    global(fixed)
+    global(z-10)
+    global(overflow-hidden)
+    global(rounded-round)
+    global(pin-t)
+    global(pin-l)
+    global(bg-center)
+    global(bg-cover)
+  ;
+  transform: rotate(0.001deg);
+  transform-origin: center center;
+  transition: opacity 0.2;
+
+  background-color: rgba(0,0,0,0.5);
+}
+
+.bubbleVisible {
+  composes:
+    global(opacity-100)
+  ;
+}
+
+.bubbleHidden {
+  composes:
+    global(opacity-0)
+  ;
+}
