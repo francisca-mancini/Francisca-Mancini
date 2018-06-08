@@ -1,16 +1,25 @@
+import classNames from 'classnames';
+
 import Spacing from '../../atoms/Spacing';
 import Heading from '../../atoms/Heading';
 import Paragraph from '../../atoms/Paragraph';
 import Link from '../../atoms/Link';
 
-import productImage from '../../../static/images/_temp/product.jpg';
+import ProductShape from '../../atoms/ProductShape';
+
+import productImage from '../../../static/images/_temp/voiledenuit.png';
+
+import generalStyles from './general.css';
 
 export default function ProductThumbnail() {
   return (
     <div className="w-full px-20 flex items-center justify-center">
-      <Link tag="div" href="/product">
-        <div className="relative flex items-center justify-center mb-30">
-          <img src={productImage} alt="yo" />
+      <Link className="w-full" tag="div" href="/product">
+        <div
+          className={classNames(generalStyles.imageContainer, 'pixiContainer')}
+        >
+          <img className={generalStyles.image} src={productImage} alt="yo" />
+          <ProductShape />
         </div>
         <div>
           <Spacing size={15}>
