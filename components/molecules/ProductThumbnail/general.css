@@ -25,6 +25,7 @@
     global(max-w-full)
     global(absolute)
     global(z-10)
+    global(opacity-0)
   ;
   top: 50%;
   left: 50%;

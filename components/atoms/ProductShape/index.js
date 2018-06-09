@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import isNode from 'detect-node';
 
-import ThresholdFilter from '../../../lib/thresholdShader';
+import ThresholdFilter from '../../../lib/thresholdGradientShader';
+import GradientFilter from '../../../lib/gradientFilter';
+import GradientTestFilter from '../../../lib/gradientTestFilter';
 import findParent from '../../../lib/findParent';
 import createLinearGradient from '../../../lib/createLinearGradient';
 
@@ -15,6 +17,7 @@ export default class ProductShape extends Component {
   constructor() {
     super();
 
+    this.circleColor = 0xff0000;
     this.baseShapeSize = 150;
     this.circlesSize = 200;
     this.movingCirclesCount = 4;
@@ -28,6 +31,7 @@ export default class ProductShape extends Component {
     if (!isNode) {
       this.initPixi();
       this.addShaderPass();
+      // this.addGradientPass();
     }
   }
 
@@ -43,30 +47,66 @@ export default class ProductShape extends Component {
       powerPreference: 'high-performance',
       resolution: 2,
       autoResize: true,
-      transparent: false
+      transparent: false,
+      backgroundColor: 0xffffff
     });
 
     this.canvasRef.appendChild(this.app.view);
     this.app.ticker.add(this.renderPixi);
 
     this.container = new PIXI.Container();
+
     this.app.stage.addChild(this.container);
     this.container.x = (this.app.screen.width - this.container.width) / 2;
     this.container.y = (this.app.screen.height - this.container.height) / 2;
 
     this.addBaseShape();
     this.addMovingCircles();
+    // this.createGradientCanvas();
   }
 
-  addGradient() {
-    const gradientCanvas = createLinearGradient(
+  createGradientCanvas() {
+    const stops = ['#ff0000', '#0600ff'];
+
+    createLinearGradient(
       this.width,
       this.height,
-      [0xff0000, 0x0600ff],
-      canvas => {
-        console.log(canvas);
-      }
+      stops,
+      this.addGradient.bind(this)
     );
+  }
+
+  addShaderPass() {
+    const blurFilter = new PIXI.filters.BlurFilter();
+    blurFilter.blur = 10;
+    blurFilter.autoFit = true;
+
+    const thresholdFilter = new ThresholdFilter();
+
+    this.container.filters = [blurFilter, thresholdFilter];
+    this.container.filterArea = this.app.screen;
+  }
+
+  addGradientPass() {
+    // var graphics = new PIXI.Graphics();
+    // graphics.beginFill(0xFF700B, 1);
+    // graphics.drawRect(0, 0, this.app.renderer.width, this.app.renderer.height);
+    // this.app.stage.addChild(graphics);
+
+    const gradientFilter = new GradientTestFilter();
+    gradientFilter.autoFit = true;
+    gradientFilter.filterArea = this.app.screen;
+
+    this.container.filters = [gradientFilter];
+  }
+
+  addGradient(canvas) {
+    this.gradient = PIXI.Sprite.from(canvas);
+
+    this.app.stage.addChild(this.gradient);
+
+    this.gradient.blendMode = PIXI.BLEND_MODES.ADD;
+    // this.container.mask = this.gradient;
   }
 
   addBaseShape() {
@@ -93,7 +133,7 @@ export default class ProductShape extends Component {
     const circle = new PIXI.Graphics();
 
     circle.lineStyle(0);
-    circle.beginFill(0xffffff, 1);
+    circle.beginFill(this.circleColor, 1);
     circle.drawCircle(x, y, size);
     circle.endFill();
     circle.interactive = true;
@@ -102,28 +142,15 @@ export default class ProductShape extends Component {
     return circle;
   }
 
-  addShaderPass() {
-    const blurFilter = new PIXI.filters.BlurFilter();
-    blurFilter.blur = 10;
-    blurFilter.autoFit = true;
-
-    const thresholdFilter = new ThresholdFilter();
-
-    this.container.filters = [blurFilter, thresholdFilter];
-    this.container.filterArea = this.app.screen;
-  }
-
   renderPixi() {
     this.renderDelta += 0.005;
 
     if (this.movingCircles.length > 0) {
       this.movingCircles.forEach(item => {
         const rawScale = Math.sin(this.renderDelta / 10) * 1.2;
-        // const scale = Math.min(Math.max(parseInt(rawScale), 0.8), 1.2);
 
         item.circle.x = Math.cos(this.renderDelta) * item.movingFactor.x;
         item.circle.y = Math.sin(this.renderDelta) * item.movingFactor.y;
-        // item.circle.scale.set(scale, scale);
       });
     }
   }
