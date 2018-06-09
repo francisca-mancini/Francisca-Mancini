@@ -46,18 +46,22 @@ export default class WordHover extends Component {
     this.setBubblePosition();
 
     this.RAF.subscribe(this.loop);
+    this.RAF.start();
   }
 
   componentWillUnmount() {
     this.RAF.unsubscribe();
     this.RAF = null;
+    window.removeEventListener('mousemove', this.handleMouseMove);
   }
 
   handleVisibilityChange(visible) {
     if (visible) {
       this.RAF.start();
+      window.addEventListener('mousemove', this.handleMouseMove);
     } else {
       this.RAF.stop();
+      window.removeEventListener('mousemove', this.handleMouseMove);
     }
   }
 
