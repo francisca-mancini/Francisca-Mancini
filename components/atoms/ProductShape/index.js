@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 import isNode from 'detect-node';
+import PropTypes from 'prop-types';
 
-import ThresholdFilter from '../../../lib/thresholdGradientShader';
+import ThresholdGradientFilter from '../../../lib/thresholdGradientShader';
 import findParent from '../../../lib/findParent';
+import numberToVec from '../../../lib/numberToVec';
 
 let PIXI;
 
@@ -17,7 +19,8 @@ export default class ProductShape extends Component {
     this.circleColor = 0xff0000;
     this.baseShapeSize = 150;
     this.circlesSize = 200;
-    this.movingCirclesCount = 4;
+    this.movingCirclesCount = 5;
+    this.movingFactor = 50;
     this.renderDelta = 0;
     this.movingCircles = [];
 
@@ -61,13 +64,21 @@ export default class ProductShape extends Component {
   }
 
   addShaderPass() {
+    const { color1, color2 } = this.props;
     const blurFilter = new PIXI.filters.BlurFilter();
     blurFilter.blur = 10;
     blurFilter.autoFit = true;
 
-    const thresholdFilter = new ThresholdFilter();
+    const thresholdGradientFilter = new ThresholdGradientFilter();
+    thresholdGradientFilter.autoFit = true;
+    thresholdGradientFilter.uniforms.c1r = numberToVec(color1[0]);
+    thresholdGradientFilter.uniforms.c1g = numberToVec(color1[1]);
+    thresholdGradientFilter.uniforms.c1b = numberToVec(color1[2]);
+    thresholdGradientFilter.uniforms.c2r = numberToVec(color2[0]);
+    thresholdGradientFilter.uniforms.c2g = numberToVec(color2[1]);
+    thresholdGradientFilter.uniforms.c2b = numberToVec(color2[2]);
 
-    this.container.filters = [blurFilter, thresholdFilter];
+    this.container.filters = [blurFilter, thresholdGradientFilter];
     this.container.filterArea = this.app.screen;
   }
 
@@ -83,8 +94,14 @@ export default class ProductShape extends Component {
       this.movingCircles.push({
         circle: circle,
         movingFactor: {
-          x: Math.random() >= 0.5 ? Math.random() * 30 : Math.random() * -20,
-          y: Math.random() >= 0.5 ? Math.random() * 20 : Math.random() * -30
+          x:
+            Math.random() >= 0.5
+              ? Math.random() * this.movingFactor
+              : Math.random() * -this.movingFactor,
+          y:
+            Math.random() >= 0.5
+              ? Math.random() * -this.movingFactor
+              : Math.random() * this.movingFactor
         },
         scaleFactor: Math.random() + 0.2
       });
@@ -111,8 +128,8 @@ export default class ProductShape extends Component {
       this.movingCircles.forEach(item => {
         const rawScale = Math.sin(this.renderDelta / 10) * 1.2;
 
-        item.circle.x = Math.cos(this.renderDelta) * item.movingFactor.x;
-        item.circle.y = Math.sin(this.renderDelta) * item.movingFactor.y;
+        item.circle.x = Math.sin(this.renderDelta) * item.movingFactor.x;
+        item.circle.y = Math.cos(this.renderDelta) * item.movingFactor.y;
       });
     }
   }
@@ -128,3 +145,8 @@ export default class ProductShape extends Component {
     );
   }
 }
+
+ProductShape.propTypes = {
+  color1: PropTypes.array.isRequired,
+  color2: PropTypes.array.isRequired
+};
