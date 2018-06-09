@@ -18,7 +18,7 @@
     global(bg-cover)
     global(pointer-events-none);
   ;
-  transform: rotate(0.001deg);
+  transform: rotate(0.01deg);
   transform-origin: center center;
   transition: opacity 0.2;
 }

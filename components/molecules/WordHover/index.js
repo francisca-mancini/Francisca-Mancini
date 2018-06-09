@@ -20,6 +20,7 @@ export default class WordHover extends Component {
     };
 
     this.bubbleSize = 100;
+    this.duration = 200;
 
     this.wordRef = null;
 
@@ -87,7 +88,6 @@ export default class WordHover extends Component {
   render() {
     const { bubbleScale, bubbleX, bubbleY, isMouseOver } = this.state;
     const { children, image } = this.props;
-    let animation;
 
     const bubbleStyle = {
       width: `${this.bubbleSize}px`,
@@ -115,7 +115,7 @@ export default class WordHover extends Component {
       >
         <VelocityComponent
           animation={bubbleAnimation}
-          duration={80}
+          duration={this.duration}
           easing="ease-out"
         >
           <div
