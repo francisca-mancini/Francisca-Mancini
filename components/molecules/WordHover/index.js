@@ -56,10 +56,8 @@ export default class WordHover extends Component {
   handleVisibilityChange(visible) {
     if (visible) {
       this.RAF.start();
-      console.log('start');
     } else {
       this.RAF.stop();
-      console.log('stop');
     }
   }
 
