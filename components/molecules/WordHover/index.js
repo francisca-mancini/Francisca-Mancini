@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import throttle from 'lodash/throttle';
-import { VelocityComponent } from 'velocity-react';
 import classNames from 'classnames';
+import VisibilitySensor from 'react-visibility-sensor';
 
 import Nearby from '../../../lib/nearby';
 import lineEq from '../../../lib/lineEq';
+import Raf from '../../../lib/raf';
 
 import generalStyles from './general.css';
 
@@ -13,25 +14,53 @@ export default class WordHover extends Component {
     super();
 
     this.state = {
-      isMouseOver: false,
-      bubbleScale: 0,
-      bubbleX: 0,
-      bubbleY: 0
+      isMouseOver: false
     };
 
     this.bubbleSize = 100;
     this.duration = 200;
+    this.motionFactor = 0.15;
+    this.mousePos = {
+      x: 0,
+      y: 0
+    };
+    this.position = {
+      x: 0,
+      y: 0
+    };
+    this.scale = 0;
+    this.targetScale = 0;
+    this.RAF = new Raf();
 
     this.wordRef = null;
 
     this.handleNearby = throttle(this.handleNearby, 20);
-    this.handleMouseMove = throttle(this.handleMouseMove.bind(this), 20);
+    this.handleMouseMove = throttle(this.handleMouseMove.bind(this), 10);
+    this.loop = this.loop.bind(this);
+    this.handleVisibilityChange = this.handleVisibilityChange.bind(this);
   }
 
   componentDidMount() {
     window.addEventListener('mousemove', this.handleMouseMove);
     this.initNearby();
     this.setBubblePosition();
+
+    this.RAF.subscribe(this.loop);
+  }
+
+  componentWillUnmount() {
+    this.RAF.unsubscribe();
+    this.RAF = null;
+  }
+
+  handleVisibilityChange(visible) {
+    if (visible) {
+      this.RAF.start();
+      console.log('start');
+    } else {
+      this.RAF.stop();
+      console.log('stop');
+    }
   }
 
   initNearby() {
@@ -43,10 +72,10 @@ export default class WordHover extends Component {
   setBubblePosition() {
     const bounds = this.wordRef.getBoundingClientRect();
 
-    this.setState({
-      bubbleX: bounds.left,
-      bubbleY: bounds.top
-    });
+    this.position = {
+      x: bounds.left,
+      y: bounds.top
+    };
   }
 
   handleNearby(distance) {
@@ -63,10 +92,9 @@ export default class WordHover extends Component {
         distance
       );
 
-      this.setState({
-        bubbleScale: distanceToOne,
-        isMouseOver: true
-      });
+      this.targetScale = distanceToOne;
+
+      this.setState({ isMouseOver: true });
     }
   }
 
@@ -78,15 +106,30 @@ export default class WordHover extends Component {
       const rawX = e.clientX;
       const rawY = e.clientY;
 
-      this.setState({
-        bubbleX: rawX - halfBubble,
-        bubbleY: rawY - halfBubble
-      });
+      const targetPosition = {
+        x: rawX - halfBubble,
+        y: rawY - halfBubble
+      };
+
+      this.mousePos = {
+        x: targetPosition.x,
+        y: targetPosition.y
+      };
     }
   }
 
+  loop() {
+    this.position.x += (this.mousePos.x - this.position.x) * this.motionFactor;
+    this.position.y += (this.mousePos.y - this.position.y) * this.motionFactor;
+    this.scale += (this.targetScale - this.scale) * this.motionFactor;
+
+    this.bubbleRef.style.transform = `translate(${this.position.x}px, ${
+      this.position.y
+    }px) scale(${this.scale})`;
+  }
+
   render() {
-    const { bubbleScale, bubbleX, bubbleY, isMouseOver } = this.state;
+    const { isMouseOver } = this.state;
     const { children, image } = this.props;
 
     const bubbleStyle = {
@@ -95,39 +138,32 @@ export default class WordHover extends Component {
       backgroundImage: `url(${image})`
     };
 
-    const bubbleAnimation = {
-      translateX: parseFloat(bubbleX.toFixed(2)),
-      translateY: parseFloat(bubbleY.toFixed(2)),
-      scale: parseFloat(bubbleScale.toFixed(4))
-    };
-
     const bubbleClassName = classNames(generalStyles.bubble, {
       [generalStyles.bubbleHidden]: !isMouseOver,
       [generalStyles.bubbleVisible]: isMouseOver
     });
 
     return (
-      <span
-        className={generalStyles.word}
-        ref={ref => {
-          this.wordRef = ref;
-        }}
+      <VisibilitySensor
+        onChange={this.handleVisibilityChange}
+        partialVisibility
       >
-        <VelocityComponent
-          animation={bubbleAnimation}
-          duration={this.duration}
-          easing="ease-out"
+        <span
+          className={generalStyles.word}
+          ref={ref => {
+            this.wordRef = ref;
+          }}
         >
           <div
             style={bubbleStyle}
             className={bubbleClassName}
             ref={ref => {
-              this.areaRef = ref;
+              this.bubbleRef = ref;
             }}
           />
-        </VelocityComponent>
-        {children}
-      </span>
+          {children}
+        </span>
+      </VisibilitySensor>
     );
   }
 }

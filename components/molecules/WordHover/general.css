@@ -20,7 +20,7 @@
   ;
   transform: rotate(0.01deg);
   transform-origin: center center;
-  transition: opacity 0.2;
+  transition: opacity 0.15s;
 }
 
 .bubbleVisible {
