@@ -2,10 +2,7 @@ import React, { Component } from 'react';
 import isNode from 'detect-node';
 
 import ThresholdFilter from '../../../lib/thresholdGradientShader';
-import GradientFilter from '../../../lib/gradientFilter';
-import GradientTestFilter from '../../../lib/gradientTestFilter';
 import findParent from '../../../lib/findParent';
-import createLinearGradient from '../../../lib/createLinearGradient';
 
 let PIXI;
 
@@ -31,7 +28,6 @@ export default class ProductShape extends Component {
     if (!isNode) {
       this.initPixi();
       this.addShaderPass();
-      // this.addGradientPass();
     }
   }
 
@@ -62,18 +58,6 @@ export default class ProductShape extends Component {
 
     this.addBaseShape();
     this.addMovingCircles();
-    // this.createGradientCanvas();
-  }
-
-  createGradientCanvas() {
-    const stops = ['#ff0000', '#0600ff'];
-
-    createLinearGradient(
-      this.width,
-      this.height,
-      stops,
-      this.addGradient.bind(this)
-    );
   }
 
   addShaderPass() {
@@ -85,28 +69,6 @@ export default class ProductShape extends Component {
 
     this.container.filters = [blurFilter, thresholdFilter];
     this.container.filterArea = this.app.screen;
-  }
-
-  addGradientPass() {
-    // var graphics = new PIXI.Graphics();
-    // graphics.beginFill(0xFF700B, 1);
-    // graphics.drawRect(0, 0, this.app.renderer.width, this.app.renderer.height);
-    // this.app.stage.addChild(graphics);
-
-    const gradientFilter = new GradientTestFilter();
-    gradientFilter.autoFit = true;
-    gradientFilter.filterArea = this.app.screen;
-
-    this.container.filters = [gradientFilter];
-  }
-
-  addGradient(canvas) {
-    this.gradient = PIXI.Sprite.from(canvas);
-
-    this.app.stage.addChild(this.gradient);
-
-    this.gradient.blendMode = PIXI.BLEND_MODES.ADD;
-    // this.container.mask = this.gradient;
   }
 
   addBaseShape() {
