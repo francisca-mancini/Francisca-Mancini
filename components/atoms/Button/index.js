@@ -26,8 +26,6 @@ export default class Button extends PureComponent {
     this.bgSettings = {
       x: 0,
       y: 0,
-      targetX: 0,
-      targetY: 0,
       fraction: 6,
       translateFactor: 0,
       motionFactor: 0.2,
@@ -39,9 +37,7 @@ export default class Button extends PureComponent {
     this.innerSettings = {
       x: 0,
       y: 0,
-      targetX: 0,
-      targetY: 0,
-      fraction: 10,
+      fraction: 7,
       translateFactor: 0,
       motionFactor: 0.2
     };
@@ -60,6 +56,12 @@ export default class Button extends PureComponent {
     this.RAF.subscribe(this.loop);
     this.RAF.start();
 
+    this.bgBounds = this.bgRef.getBoundingClientRect();
+    this.innerBounds = this.innerRef.getBoundingClientRect();
+    this.bgHalfW = this.bgBounds.width / 2;
+    this.bgHalfH = this.bgBounds.height / 2;
+    this.innerHalfW = this.innerBounds.width / 2;
+    this.innerHalfH = this.innerBounds.height / 2;
     window.addEventListener('mousemove', this.handleMouseMove);
   }
 
@@ -84,28 +86,25 @@ export default class Button extends PureComponent {
   handleMouseMove(e) {
     const rawX = e.clientX;
     const rawY = e.clientY;
-    const bgBounds = this.bgRef.getBoundingClientRect();
-    const bgHalfW = bgBounds.width / 2;
-    const bgHalfH = bgBounds.height / 2;
-    const innerBounds = this.innerRef.getBoundingClientRect();
-    const innerHalfW = innerBounds.width / 2;
-    const innerHalfH = innerBounds.height / 2;
 
     this.bgSettings.x = this.toFloat(
-      ((rawX - (bgBounds.left + bgHalfW)) / this.bgSettings.fraction) *
+      ((rawX - (this.bgBounds.left + this.bgHalfW)) /
+        this.bgSettings.fraction) *
         this.bgSettings.translateFactor
     );
     this.bgSettings.y = this.toFloat(
-      ((rawY - (bgBounds.top + bgHalfH)) / this.bgSettings.fraction) *
+      ((rawY - (this.bgBounds.top + this.bgHalfH)) / this.bgSettings.fraction) *
         this.bgSettings.translateFactor
     );
 
     this.innerSettings.x = this.toFloat(
-      ((rawX - (innerBounds.left + innerHalfW)) / this.innerSettings.fraction) *
+      ((rawX - (this.innerBounds.left + this.innerHalfW)) /
+        this.innerSettings.fraction) *
         this.innerSettings.translateFactor
     );
     this.innerSettings.y = this.toFloat(
-      ((rawY - (innerBounds.top + innerHalfH)) / this.innerSettings.fraction) *
+      ((rawY - (this.innerBounds.top + this.innerHalfH)) /
+        this.innerSettings.fraction) *
         this.innerSettings.translateFactor
     );
   }
@@ -117,7 +116,7 @@ export default class Button extends PureComponent {
   }
 
   handleNearby(distance) {
-    const distanceThreshold = { min: 0, max: 70 };
+    const distanceThreshold = { min: 0, max: 80 };
 
     if (distance <= distanceThreshold.max) {
       const scale = lineEq(
@@ -130,7 +129,7 @@ export default class Button extends PureComponent {
 
       this.bgSettings.translateFactor = lineEq(
         0,
-        0.5,
+        1,
         distanceThreshold.max,
         distanceThreshold.min,
         distance
@@ -138,13 +137,13 @@ export default class Button extends PureComponent {
 
       this.innerSettings.translateFactor = lineEq(
         0,
-        0.5,
+        1,
         distanceThreshold.max,
         distanceThreshold.min,
         distance
       );
 
-      this.bgSettings.targetScale = this.toFloat(scale);
+      this.bgSettings.targetScale = scale;
       this.setState({ isMouseOver: true });
     } else {
       this.setState({ isMouseOver: false });
@@ -156,18 +155,6 @@ export default class Button extends PureComponent {
       this.bgSettings.scale +=
         (this.bgSettings.targetScale - this.bgSettings.scale) *
         this.bgSettings.motionFactor;
-      this.bgSettings.x +=
-        (this.bgSettings.targetX - this.bgSettings.x) *
-        this.bgSettings.motionFactor;
-      this.bgSettings.y +=
-        (this.bgSettings.targetY - this.bgSettings.y) *
-        this.bgSettings.motionFactor;
-      this.innerSettings.x +=
-        (this.innerSettings.targetX - this.innerSettings.x) *
-        this.innerSettings.motionFactor;
-      this.innerSettings.y +=
-        (this.innerSettings.targetY - this.innerSettings.y) *
-        this.innerSettings.motionFactor;
 
       this.bgRef.style.transition = '0s';
       this.bgRef.style.transform = `translate(${this.bgSettings.x}px, ${
@@ -180,10 +167,10 @@ export default class Button extends PureComponent {
       }px) rotate(0.01deg)`;
     } else {
       this.bgRef.style.transform = `translate(0, 0) scale(1) rotate(0.01deg)`;
-      this.bgRef.style.transition = '0.4s';
+      this.bgRef.style.transition = '0.7s ease-out';
 
       this.innerRef.style.transform = `translate(0, 0) otate(0.01deg)`;
-      this.innerRef.style.transition = '0.4s';
+      this.innerRef.style.transition = '0.7s ease-out';
     }
   }
 
