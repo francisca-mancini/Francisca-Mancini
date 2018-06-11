@@ -5,5 +5,25 @@
     global(leading-none)
     global(no-underline)
     global(font-semilight)
+    global(relative)
+    global(rounded-50)
   ;
+}
+
+.bg {
+  composes:
+    global(absolute)
+    global(inline-block)
+    global(pin)
+    global(rounded-50)
+    global(bg-black)
+  ;
+}
+
+.inner {
+  composes:
+    global(relative)
+    global(inline-block)
+  ;
+  will-change: transform;
 }
