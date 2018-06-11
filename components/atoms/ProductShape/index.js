@@ -19,12 +19,13 @@ export default class ProductShape extends Component {
     this.circleColor = 0xff0000;
     this.baseShapeSize = 150;
     this.circlesSize = 200;
-    this.movingCirclesCount = 5;
-    this.movingFactor = 50;
+    this.movingCirclesCount = 10;
+    this.movingFactor = 70;
     this.renderDelta = 0;
     this.movingCircles = [];
 
     this.renderPixi = this.renderPixi.bind(this);
+    this.handleMouseMove = this.handleMouseMove.bind(this);
   }
 
   componentDidMount() {
@@ -32,6 +33,21 @@ export default class ProductShape extends Component {
       this.initPixi();
       this.addShaderPass();
     }
+
+    // window.addEventListener('mousemove', this.handleMouseMove);
+  }
+
+  componentWillUnmount() {
+    // window.removeEventListener('mousemove', this.handleMouseMove);
+  }
+
+  handleMouseMove(e) {
+    if (!this.baseCircle) return;
+
+    const mouseposition = this.app.renderer.plugins.interaction.mouse.global;
+
+    this.baseCircle.x = mouseposition.x - this.baseCircle.width;
+    this.baseCircle.y = mouseposition.y - this.baseCircle.height;
   }
 
   initPixi() {
@@ -132,6 +148,8 @@ export default class ProductShape extends Component {
         item.circle.y = Math.cos(this.renderDelta) * item.movingFactor.y;
       });
     }
+
+    this.handleMouseMove();
   }
 
   render() {
