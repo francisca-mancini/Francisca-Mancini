@@ -8,10 +8,12 @@ import { Grid, GridItem } from '../components/atoms/Grid';
 
 import ProductThumbnail from '../components/molecules/ProductThumbnail';
 import CollectionIntro from '../components/molecules/CollectionIntro';
+import HeroVideo from '../components/molecules/HeroVideo';
 
 function Home(data) {
   return (
-    <App>
+    <App hasTopPad={false} headerLight>
+      <HeroVideo />
       <PageWrap>
         <Spacing size={80} type="padding">
           <CollectionIntro />
