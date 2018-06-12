@@ -2,6 +2,7 @@ import { Fragment, PureComponent } from 'react';
 import Link from 'next/link';
 import classNames from 'classnames/bind';
 import PropTypes from 'prop-types';
+import throttle from 'lodash/throttle';
 
 import Nearby from '../../../lib/nearby';
 import lineEq from '../../../lib/lineEq';
@@ -44,6 +45,7 @@ export default class Button extends PureComponent {
 
     this.RAF = new Raf();
 
+    this.updateBounds = throttle(this.updateBounds.bind(this), 200);
     this.handleMouseMove = this.handleMouseMove.bind(this);
     this.handleClick = this.handleClick.bind(this);
     this.toFloat = this.toFloat.bind(this);
@@ -56,13 +58,9 @@ export default class Button extends PureComponent {
     this.RAF.subscribe(this.loop);
     this.RAF.start();
 
-    this.bgBounds = this.bgRef.getBoundingClientRect();
-    this.innerBounds = this.innerRef.getBoundingClientRect();
-    this.bgHalfW = this.bgBounds.width / 2;
-    this.bgHalfH = this.bgBounds.height / 2;
-    this.innerHalfW = this.innerBounds.width / 2;
-    this.innerHalfH = this.innerBounds.height / 2;
+    this.updateBounds();
     window.addEventListener('mousemove', this.handleMouseMove);
+    window.addEventListener('scroll', this.updateBounds);
   }
 
   componentWillUnmount() {
@@ -70,6 +68,16 @@ export default class Button extends PureComponent {
     this.RAF = null;
 
     window.removeEventListener('mousemove', this.handleMouseMove);
+    window.removeEventListener('scroll', this.updateBounds);
+  }
+
+  updateBounds() {
+    this.bgBounds = this.bgRef.getBoundingClientRect();
+    this.innerBounds = this.innerRef.getBoundingClientRect();
+    this.bgHalfW = this.bgBounds.width / 2;
+    this.bgHalfH = this.bgBounds.height / 2;
+    this.innerHalfW = this.innerBounds.width / 2;
+    this.innerHalfH = this.innerBounds.height / 2;
   }
 
   handleClick(e) {
