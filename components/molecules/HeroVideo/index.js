@@ -70,24 +70,26 @@ export default class HeroVideo extends PureComponent {
         partialVisibility
       >
         <div className={generalStyles.hero} onClick={this.handleClick}>
-          <video
-            ref={ref => {
-              this.videoRef = ref;
-            }}
-            className={generalStyles.video}
-            src={video}
-            autoPlay
-            loop
-            muted
-          />
-          <div className={generalStyles.seekbarContainer}>
-            <div className={generalStyles.seekbar}>
-              <div
-                ref={ref => {
-                  this.barRef = ref;
-                }}
-                className={generalStyles.bar}
-              />
+          <div className={generalStyles.inner}>
+            <video
+              ref={ref => {
+                this.videoRef = ref;
+              }}
+              className={generalStyles.video}
+              src={video}
+              autoPlay
+              loop
+              muted
+            />
+            <div className={generalStyles.seekbarContainer}>
+              <div className={generalStyles.seekbar}>
+                <div
+                  ref={ref => {
+                    this.barRef = ref;
+                  }}
+                  className={generalStyles.bar}
+                />
+              </div>
             </div>
           </div>
         </div>

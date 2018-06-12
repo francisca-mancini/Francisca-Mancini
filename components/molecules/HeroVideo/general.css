@@ -2,14 +2,31 @@
   composes:
     global(relative)
   ;
+  height: 0;
+  padding-bottom: 56.4%;
+}
+
+.inner {
+  composes:
+    global(absolute)
+    global(pin-t)
+    global(pin-l)
+    global(w-full)
+    global(h-full)
+    global(max-h-80screen)
+    global(overflow-hidden)
+  ;
 }
 
 .video {
   composes:
+    global(absolute)
     global(block)
-    global(max-w-full)
     global(w-full)
   ;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
 .seekbarContainer {
