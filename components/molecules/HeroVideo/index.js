@@ -60,7 +60,7 @@ export default class HeroVideo extends PureComponent {
   loop() {
     const timeFraction =
       (this.videoRef.currentTime / this.videoTotalTime) * 100;
-    this.barRef.style.transform = `translateX(${timeFraction}%)`;
+    this.barRef.style.transform = `translateX(${timeFraction.toFixed(3)}%)`;
   }
 
   render() {
@@ -70,26 +70,24 @@ export default class HeroVideo extends PureComponent {
         partialVisibility
       >
         <div className={generalStyles.hero} onClick={this.handleClick}>
-          <div className={generalStyles.inner}>
-            <video
-              ref={ref => {
-                this.videoRef = ref;
-              }}
-              className={generalStyles.video}
-              src={video}
-              autoPlay
-              loop
-              muted
-            />
-            <div className={generalStyles.seekbarContainer}>
-              <div className={generalStyles.seekbar}>
-                <div
-                  ref={ref => {
-                    this.barRef = ref;
-                  }}
-                  className={generalStyles.bar}
-                />
-              </div>
+          <video
+            ref={ref => {
+              this.videoRef = ref;
+            }}
+            className={generalStyles.video}
+            src={video}
+            autoPlay
+            loop
+            muted
+          />
+          <div className={generalStyles.seekbarContainer}>
+            <div className={generalStyles.seekbar}>
+              <div
+                ref={ref => {
+                  this.barRef = ref;
+                }}
+                className={generalStyles.bar}
+              />
             </div>
           </div>
         </div>
