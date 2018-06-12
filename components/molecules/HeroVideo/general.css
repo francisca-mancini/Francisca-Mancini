@@ -1,14 +1,18 @@
 .hero {
   composes:
     global(relative)
+    global(h-full)
+    global(max-h-80screen)
+    global(overflow-hidden)
   ;
 }
 
 .video {
   composes:
+    global(relative)
     global(block)
-    global(max-w-full)
     global(w-full)
+    global(h-full)
   ;
 }
 

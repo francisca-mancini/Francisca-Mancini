@@ -14,12 +14,12 @@ import bubbleImage2 from '../../../static/images/_temp/bubble2.jpg';
 export default function CollectionIntro() {
   return (
     <Fragment>
-      <Heading weight="semilight" size="xxl" center>
+      <Heading font="serif" weight="semilight" size="xl" center>
         Collection N˚1: Maps, Travel
       </Heading>
       <Spacing size={50}>
         <MaxWidth value={1000} center>
-          <Paragraph weight="semilight" size="xxl" tag="div" center>
+          <Paragraph weight="light" size="xxl" tag="div" center>
             This first collection maps out a fantastic{' '}
             <WordHover image={bubbleImage}>world</WordHover>. Each fragrance,
             inspired by a place and a time, embodies the spirit of that magical

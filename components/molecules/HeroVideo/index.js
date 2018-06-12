@@ -60,7 +60,7 @@ export default class HeroVideo extends PureComponent {
   loop() {
     const timeFraction =
       (this.videoRef.currentTime / this.videoTotalTime) * 100;
-    this.barRef.style.transform = `translateX(${timeFraction}%)`;
+    this.barRef.style.transform = `translateX(${timeFraction.toFixed(3)}%)`;
   }
 
   render() {

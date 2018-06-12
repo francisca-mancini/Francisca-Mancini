@@ -26,16 +26,25 @@ const alignMap = {
   stretch: 'items-stretch'
 };
 
-export default function Grid({ children, direction, gap, align }) {
+const justifyMap = {
+  center: 'justify-center',
+  start: 'justify-start',
+  end: 'justify-end',
+  stretch: 'justify-stretch'
+};
+
+export default function Grid({ children, direction, gap, align, justify }) {
   const directionClassName = propToClassName(direction);
   const gapClassName = propToClassName(gap, gapMap);
   const alignClassName = propToClassName(align, alignMap);
+  const justifyClassName = propToClassName(justify, justifyMap);
 
   const gridClassName = classNames(
     generalStyles.grid,
     directionClassName,
     alignClassName,
-    gapClassName
+    gapClassName,
+    justifyClassName
   );
 
   return (
@@ -53,11 +62,14 @@ Grid.propTypes = {
       PropTypes.oneOf(Object.keys(gapMap).map(key => parseInt(key, 10)))
     ),
     PropTypes.oneOf(Object.keys(gapMap).map(key => parseInt(key, 10)))
-  ])
+  ]),
+  align: PropTypes.oneOf(Object.keys(alignMap)),
+  justify: PropTypes.oneOf(Object.keys(justifyMap))
 };
 
 Grid.defaultProps = {
   gap: [20, 20, 50],
   direction: 'flex-row',
-  align: 'center'
+  align: 'center',
+  justify: 'start'
 };
