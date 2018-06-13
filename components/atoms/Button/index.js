@@ -124,7 +124,12 @@ export default class Button extends PureComponent {
   }
 
   handleNearby(distance) {
-    const distanceThreshold = { min: 0, max: 80 };
+    const { size } = this.props;
+    const sizeMap = {
+      s: 50,
+      m: 80
+    };
+    const distanceThreshold = { min: 0, max: sizeMap[size] };
 
     if (distance <= distanceThreshold.max) {
       const scale = lineEq(
