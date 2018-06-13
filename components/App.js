@@ -13,7 +13,9 @@ function App({ children, router, headerLight, footerLight, hasTopPad }) {
   return (
     <div className="root">
       <Header isLight={headerLight} />
-      <div className={classNames({ 'pt-80': hasTopPad })}>{children}</div>
+      <div className={classNames('pb-80', { 'pt-80': hasTopPad })}>
+        {children}
+      </div>
       <Footer isLight={footerLight} />
     </div>
   );

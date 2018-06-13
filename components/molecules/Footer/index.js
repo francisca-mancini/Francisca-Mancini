@@ -66,7 +66,7 @@ export default function Footer({ isLight }) {
           </Spacing>
           <InlineGrid className="flex-wrap" justify="center">
             <NavLink href="/about">About</NavLink>
-            <NavLink href="/contact">Contact</NavLink>
+            <NavLink href="/about#contact">Contact</NavLink>
             <NavLink href="https://instagram.com">Instagram</NavLink>
             <NavLink href="/help">Help</NavLink>
             <NavLink href="/newsletter">Newsletter</NavLink>
