@@ -7901,6 +7901,10 @@ statuses@~1.4.0:
   version "1.4.0"
   resolved "https://registry.yarnpkg.com/statuses/-/statuses-1.4.0.tgz#bb73d446da2796106efcc1b601a253d6c46bd087"
 
+stickybits@^3.3.2:
+  version "3.3.2"
+  resolved "https://registry.yarnpkg.com/stickybits/-/stickybits-3.3.2.tgz#25c9a36a7b406a37ae69f38f932d3b256305a485"
+
 stream-browserify@^2.0.1:
   version "2.0.1"
   resolved "https://registry.yarnpkg.com/stream-browserify/-/stream-browserify-2.0.1.tgz#66266ee5f9bdb9940a4e4514cafb43bb71e5c9db"
