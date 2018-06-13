@@ -13,7 +13,10 @@ const gapMap = {
   '20': 'px-20',
   '30': 'px-30',
   '40': 'px-40',
-  '50': 'px-50'
+  '50': 'px-50',
+  '60': 'px-60',
+  '70': 'px-70',
+  '80': 'px-80'
 };
 
 // columnSize can be a number from 1 to 12
