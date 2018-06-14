@@ -1,18 +1,26 @@
+import classNames from 'classnames';
+import PropTypes from 'prop-types';
+
 import Spacing from '../../atoms/Spacing';
 import Heading from '../../atoms/Heading';
 import Paragraph from '../../atoms/Paragraph';
 import Link from '../../atoms/Link';
 
-import styles from './general.module.css';
+import ProductShape from '../../atoms/ProductShape';
 
-import productImage from '../../../static/images/_temp/product.jpg';
+import productImage from '../../../static/images/_temp/voiledenuit.png';
 
-export default function ProductThumbnail() {
+import generalStyles from './general.module.css';
+
+export default function ProductThumbnail({ color1, color2 }) {
   return (
     <div className="w-full px-20 flex items-center justify-center">
-      <Link tag="div" href="/product">
-        <div className="relative flex items-center justify-center mb-30">
-          <img src={productImage} alt="yo" />
+      <Link className="w-full" tag="div" href="/product">
+        <div
+          className={classNames(generalStyles.imageContainer, 'pixiContainer')}
+        >
+          <img className={generalStyles.image} src={productImage} alt="yo" />
+          <ProductShape color1={color1} color2={color2} />
         </div>
         <div>
           <Spacing size={15}>
@@ -28,3 +36,8 @@ export default function ProductThumbnail() {
     </div>
   );
 }
+
+ProductThumbnail.propTypes = {
+  color1: PropTypes.array.isRequired,
+  color2: PropTypes.array.isRequired
+};

@@ -167,8 +167,8 @@ module.exports = {
   */
 
   fontWeights: {
-    light: 300,
-    semilight: 350,
+    light: 200,
+    semilight: 300,
     normal: 400,
     medium: 500,
     semibold: 600,
@@ -478,6 +478,7 @@ module.exports = {
 
   maxHeight: {
     full: '100%',
+    '80screen': '80vh',
     screen: '100vh'
   },
 
@@ -761,7 +762,7 @@ module.exports = {
     visibility: ['responsive'],
     whitespace: false,
     width: ['responsive'],
-    zIndex: ['responsive']
+    zIndex: ['responsive', 'hover']
   },
 
   /*

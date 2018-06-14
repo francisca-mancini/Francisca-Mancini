@@ -57,6 +57,19 @@ module.exports = {
           dev,
           isServer
         })
+      },
+      {
+        test: /\.(mp3|wav|mp4|ogg|webm)$/,
+        loader: 'url-loader',
+        options: Object.assign(
+          {},
+          {
+            emitFile: !isServer,
+            limit: 8192,
+            name: `static/[path][${dev ? 'name' : 'hash'}].[ext]`,
+            publicPath: `/_next/`
+          }
+        )
       }
     );
 

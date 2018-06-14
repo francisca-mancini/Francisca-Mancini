@@ -1,0 +1,48 @@
+.hero {
+  composes:
+    global(relative)
+    global(h-full)
+    global(max-h-80screen)
+    global(overflow-hidden)
+  ;
+}
+
+.video {
+  composes:
+    global(relative)
+    global(block)
+    global(w-full)
+    global(h-full)
+  ;
+}
+
+.seekbarContainer {
+  composes:
+    global(absolute)
+    global(pin-l)
+    global(pin-r)
+    global(pin-b)
+    global(p-20)
+  ;
+}
+
+.seekbar {
+  composes:
+    global(w-full)
+    global(relative)
+    global(overflow-hidden)
+  ;
+  height: 2px;
+  background-color: rgba(255,255,255,0.3);
+}
+
+.bar {
+  composes:
+    global(absolute)
+    global(pin-t)
+    global(w-full)
+    global(h-full)
+    global(bg-white)
+  ;
+  left: -100%;
+}
