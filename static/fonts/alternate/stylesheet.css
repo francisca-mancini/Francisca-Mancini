@@ -1,0 +1,24 @@
+@font-face {
+    font-family: 'AlternateGothicOne';
+    src: url('AlternateGothicOne.woff2') format('woff2'),
+        url('AlternateGothicOne.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'AlternateGothicTwo';
+    src: url('AlternateGothicTwo.woff2') format('woff2'),
+        url('AlternateGothicTwo.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'AlternateGothicThree';
+    src: url('AlternateGothicThree.woff2') format('woff2'),
+        url('AlternateGothicThree.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+

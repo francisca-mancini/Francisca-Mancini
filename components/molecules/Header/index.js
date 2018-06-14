@@ -39,6 +39,7 @@ export default function Header({ isLight }) {
           <Link href={href}>
             <Heading
               tag="span"
+              font="alternate"
               uppercase
               size="xxxs"
               weight="semilight"
