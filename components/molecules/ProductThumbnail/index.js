@@ -41,3 +41,8 @@ ProductThumbnail.propTypes = {
   color1: PropTypes.array.isRequired,
   color2: PropTypes.array.isRequired
 };
+
+ProductThumbnail.defaultProps = {
+  color1: [107, 40, 84],
+  color2: [128, 174, 232]
+};
