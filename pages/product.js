@@ -11,7 +11,9 @@ export default function Product() {
     <App hasTopPad={false}>
       <PageWrap>
         <Hero />
-        <Story />
+      </PageWrap>
+      <Story />
+      <PageWrap>
         <YouMightLike />
       </PageWrap>
     </App>
