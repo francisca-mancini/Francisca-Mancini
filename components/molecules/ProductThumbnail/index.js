@@ -3,6 +3,8 @@ import Heading from '../../atoms/Heading';
 import Paragraph from '../../atoms/Paragraph';
 import Link from '../../atoms/Link';
 
+import styles from './general.module.css';
+
 import productImage from '../../../static/images/_temp/product.jpg';
 
 export default function ProductThumbnail() {

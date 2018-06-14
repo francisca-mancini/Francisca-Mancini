@@ -13,7 +13,7 @@ import logoWhite from '../../../static/images/sprites/logo-white.svg';
 import logoBlack from '../../../static/images/sprites/logo-black.svg';
 import logoMini from '../../../static/images/sprites/logo-mini-center.svg';
 
-import generalStyles from './general.css';
+import generalStyles from './general.module.css';
 
 const cx = classNames.bind({ ...generalStyles });
 
