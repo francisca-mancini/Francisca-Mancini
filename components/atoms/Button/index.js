@@ -8,9 +8,9 @@ import Nearby from '../../../lib/nearby';
 import lineEq from '../../../lib/lineEq';
 import Raf from '../../../lib/raf';
 
-import generalStyles from './general.css';
-import sizeStyles from './size.css';
-import kindStyles from './kind.css';
+import generalStyles from './general.module.css';
+import sizeStyles from './size.module.css';
+import kindStyles from './kind.module.css';
 
 const tagList = ['div', 'button', 'span'];
 

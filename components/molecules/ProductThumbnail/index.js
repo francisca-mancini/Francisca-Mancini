@@ -10,7 +10,7 @@ import ProductShape from '../../atoms/ProductShape';
 
 import productImage from '../../../static/images/_temp/voiledenuit.png';
 
-import generalStyles from './general.css';
+import generalStyles from './general.module.css';
 
 export default function ProductThumbnail({ color1, color2 }) {
   return (

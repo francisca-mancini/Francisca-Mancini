@@ -7,7 +7,7 @@ import Nearby from '../../../lib/nearby';
 import lineEq from '../../../lib/lineEq';
 import Raf from '../../../lib/raf';
 
-import generalStyles from './general.css';
+import generalStyles from './general.module.css';
 
 export default class WordHover extends Component {
   constructor() {
