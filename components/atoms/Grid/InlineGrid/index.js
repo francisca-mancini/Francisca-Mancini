@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 
 import propToClassName from '../../../../lib/propToClassName';
 
-import generalStyles from './general.css';
+import generalStyles from './general.module.css';
 
 const alignMap = {
   start: 'items-start',

@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import Link from 'next/link';
 import classNames from 'classnames';
 
-import generalStyles from './general.css';
+import generalStyles from './general.module.css';
 
 const tagList = ['span', 'a', 'div'];
 

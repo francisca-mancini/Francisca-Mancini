@@ -6,7 +6,7 @@ import propToClassName from '../../../../lib/propToClassName';
 
 import GridContext from '../../../contexts/GridContext';
 
-import generalStyles from './general.css';
+import generalStyles from './general.module.css';
 
 const gapMap = {
   '0': '-mx-0',

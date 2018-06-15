@@ -3,7 +3,7 @@ import VisibilitySensor from 'react-visibility-sensor';
 
 import Raf from '../../../lib/raf';
 
-import generalStyles from './general.css';
+import generalStyles from './general.module.css';
 
 import video from '../../../static/videos/_temp/video.mp4';
 

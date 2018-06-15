@@ -18,7 +18,7 @@ import cartBlack from '../../../static/images/sprites/cart-black.svg';
 import menuWhite from '../../../static/images/sprites/menu-white.svg';
 import menuBlack from '../../../static/images/sprites/menu-black.svg';
 
-import generalStyles from './general.css';
+import generalStyles from './general.module.css';
 
 export default function Header({ isLight }) {
   const headerClassName = classNames(generalStyles.header);
