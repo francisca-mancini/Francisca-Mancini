@@ -44,5 +44,6 @@
     global(h-full)
     global(bg-white)
   ;
+  transition: transform 1s linear;
   left: -100%;
 }

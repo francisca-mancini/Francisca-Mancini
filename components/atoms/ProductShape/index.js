@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import isNode from 'detect-node';
 import PropTypes from 'prop-types';
 import throttle from 'lodash/throttle';
+import VisibilitySensor from 'react-visibility-sensor';
 
 import ThresholdGradientFilter from '../../../lib/thresholdGradientShader';
 import findParent from '../../../lib/findParent';
@@ -28,6 +29,7 @@ export default class ProductShape extends Component {
 
     this.renderPixi = this.renderPixi.bind(this);
     this.resize = throttle(this.resize.bind(this), 100);
+    this.handleVisibilityChange = this.handleVisibilityChange.bind(this);
   }
 
   componentDidMount() {
@@ -41,6 +43,14 @@ export default class ProductShape extends Component {
 
   componentWillUnmount() {
     window.removeEventListener('resize', this.resize);
+  }
+
+  handleVisibilityChange(isVisible) {
+    if (isVisible) {
+      if (this.app) this.app.ticker.start();
+    } else {
+      if (this.app) this.app.ticker.stop();
+    }
   }
 
   resize() {
@@ -158,12 +168,17 @@ export default class ProductShape extends Component {
 
   render() {
     return (
-      <div
-        className="absolute pin"
-        ref={ref => {
-          this.canvasRef = ref;
-        }}
-      />
+      <VisibilitySensor
+        onChange={this.handleVisibilityChange}
+        partialVisibility
+      >
+        <div
+          className="absolute pin"
+          ref={ref => {
+            this.canvasRef = ref;
+          }}
+        />
+      </VisibilitySensor>
     );
   }
 }

@@ -1,7 +1,6 @@
 import React, { PureComponent } from 'react';
 import VisibilitySensor from 'react-visibility-sensor';
-
-import Raf from '../../../lib/raf';
+import ReactPlayer from 'react-player';
 
 import generalStyles from './general.module.css';
 
@@ -12,55 +11,31 @@ export default class HeroVideo extends PureComponent {
     super();
 
     this.state = {
-      isPlaying: true
+      isPlaying: false
     };
 
-    this.RAF = new Raf();
-    this.videoTotalTime = 0;
+    this.duration = 0;
 
-    this.loop = this.loop.bind(this);
     this.handleVisibilityChange = this.handleVisibilityChange.bind(this);
-    this.handleClick = this.handleClick.bind(this);
   }
 
-  componentDidMount() {
-    this.RAF.subscribe(this.loop);
-    this.RAF.start();
+  onDuration = duration => {
+    this.duration = duration;
+  };
 
-    this.videoTotalTime = this.videoRef.duration;
-  }
+  onProgress = state => {
+    this.currentTime = state.playedSeconds;
 
-  componentWillUnmount() {
-    this.RAF.unsubscribe();
-    this.RAF = null;
-  }
+    const timeFraction = (this.currentTime / this.duration) * 100;
+    this.barRef.style.transform = `translateX(${timeFraction.toFixed(3)}%)`;
+  };
 
   handleVisibilityChange(visible) {
     if (visible) {
-      this.RAF.start();
+      this.setState({ isPlaying: true });
     } else {
-      this.RAF.stop();
+      this.setState({ isPlaying: false });
     }
-  }
-
-  handleClick() {
-    const { isPlaying } = this.state;
-
-    if (isPlaying) {
-      this.setState({ isPlaying: false }, () => {
-        this.videoRef.pause();
-      });
-    } else {
-      this.setState({ isPlaying: true }, () => {
-        this.videoRef.play();
-      });
-    }
-  }
-
-  loop() {
-    const timeFraction =
-      (this.videoRef.currentTime / this.videoTotalTime) * 100;
-    this.barRef.style.transform = `translateX(${timeFraction.toFixed(3)}%)`;
   }
 
   render() {
@@ -69,16 +44,22 @@ export default class HeroVideo extends PureComponent {
         onChange={this.handleVisibilityChange}
         partialVisibility
       >
-        <div className={generalStyles.hero} onClick={this.handleClick}>
-          <video
+        <div className={generalStyles.hero}>
+          <ReactPlayer
             ref={ref => {
-              this.videoRef = ref;
+              this.playerRef = ref;
             }}
             className={generalStyles.video}
-            src={video}
-            autoPlay
-            loop
+            width="100%"
+            height="auto"
+            url={video}
+            volume={0}
             muted
+            loop
+            playsinline
+            playing={this.state.isPlaying}
+            onProgress={this.onProgress}
+            onDuration={this.onDuration}
           />
           <div className={generalStyles.seekbarContainer}>
             <div className={generalStyles.seekbar}>
