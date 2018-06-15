@@ -5,7 +5,7 @@ import Heading from '../../../atoms/Heading';
 import PageWrap from '../../../atoms/PageWrap';
 import MaxWidth from '../../../atoms/MaxWidth';
 
-import generalStyles from './general.css';
+import generalStyles from './general.module.css';
 
 const Note = ({ label, children }) => {
   return (

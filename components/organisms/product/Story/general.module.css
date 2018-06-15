@@ -3,6 +3,9 @@
 }
 
 .noteLeft {
+  composes:
+    global(text-right)
+  ;
   min-width: 90px;
 }
 

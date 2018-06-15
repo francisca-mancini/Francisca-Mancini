@@ -8,7 +8,7 @@ import Heading from '../../../atoms/Heading';
 import Button from '../../../atoms/Button';
 import Spacing from '../../../atoms/Spacing';
 
-import generalStyles from './hero.css';
+import generalStyles from './hero.module.css';
 
 import product2 from '../../../../static/images/_temp/product2.png';
 
