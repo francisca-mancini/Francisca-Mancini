@@ -1,11 +1,32 @@
 import Spacing from '../../../atoms/Spacing';
-import { Grid, GridItem } from '../../../atoms/Grid';
+import { Grid, GridItem, InlineGrid } from '../../../atoms/Grid';
 import Paragraph from '../../../atoms/Paragraph';
 import Heading from '../../../atoms/Heading';
 import PageWrap from '../../../atoms/PageWrap';
 import MaxWidth from '../../../atoms/MaxWidth';
 
 import generalStyles from './general.css';
+
+const Note = ({ label, children }) => {
+  return (
+    <Spacing size={10}>
+      <MaxWidth value={500} center>
+        <InlineGrid justify="start" align="center">
+          <div className={generalStyles.noteLeft}>
+            <Heading size="xxl" uppercase>
+              {label}
+            </Heading>
+          </div>
+          <div className={generalStyles.noteRight}>
+            <Heading size="xxl" font="jenson">
+              {children}
+            </Heading>
+          </div>
+        </InlineGrid>
+      </MaxWidth>
+    </Spacing>
+  );
+};
 
 export default function Story() {
   return (
@@ -21,56 +42,9 @@ export default function Story() {
                   </Heading>
                 </Spacing>
 
-                <Spacing size={10}>
-                  <MaxWidth value={450} center>
-                    <Grid gap={10} align="center">
-                      <GridItem columnSize={3}>
-                        <Heading uppercase size="xxl">
-                          TOP
-                        </Heading>
-                      </GridItem>
-                      <GridItem columnSize={9}>
-                        <Heading size="xxl" font="jenson">
-                          Ambrette / Coconut water
-                        </Heading>
-                      </GridItem>
-                    </Grid>
-                  </MaxWidth>
-                </Spacing>
-
-                <Spacing size={10}>
-                  <MaxWidth value={450} center>
-                    <Grid gap={10} align="center">
-                      <GridItem columnSize={3}>
-                        <Heading uppercase size="xxl">
-                          Heart
-                        </Heading>
-                      </GridItem>
-                      <GridItem columnSize={9}>
-                        <Heading size="xxl" font="jenson">
-                          Patchouli Leaves
-                        </Heading>
-                      </GridItem>
-                    </Grid>
-                  </MaxWidth>
-                </Spacing>
-
-                <Spacing size={10}>
-                  <MaxWidth value={450} center>
-                    <Grid gap={10} align="center">
-                      <GridItem columnSize={3}>
-                        <Heading uppercase size="xxl">
-                          Base
-                        </Heading>
-                      </GridItem>
-                      <GridItem columnSize={9}>
-                        <Heading size="xxl" font="jenson">
-                          Coco Absolu / Wold musk
-                        </Heading>
-                      </GridItem>
-                    </Grid>
-                  </MaxWidth>
-                </Spacing>
+                <Note label="Top">Ambrette / Coconut water</Note>
+                <Note label="Heart">Patchouli Leaves</Note>
+                <Note label="Base">Coco Absolu / Wold musk</Note>
               </GridItem>
               <GridItem columnSize={6}>
                 <Spacing size={30} position="b">

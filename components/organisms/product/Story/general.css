@@ -1,3 +1,13 @@
 .story {
   background-color: #FDE6E3;
 }
+
+.noteLeft {
+  min-width: 90px;
+}
+
+.noteRight {
+  composes:
+    global(ml-30)
+  ;
+}
