@@ -1,0 +1,256 @@
+@font-face {
+    font-family: 'Adobe Jenson Pro';
+    src: url('AJensonPro-LtDisp.woff2') format('woff2'),
+        url('AJensonPro-LtDisp.woff') format('woff');
+    font-weight: 300;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Adobe Jenson Pro';
+    src: url('AJensonPro-SemiboldItDisp.woff2') format('woff2'),
+        url('AJensonPro-SemiboldItDisp.woff') format('woff');
+    font-weight: 600;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: 'Adobe Jenson Pro';
+    src: url('AJensonPro-SemiboldDisp.woff2') format('woff2'),
+        url('AJensonPro-SemiboldDisp.woff') format('woff');
+    font-weight: 600;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Adobe Jenson Pro';
+    src: url('AJensonPro-SemiboldItSubh.woff2') format('woff2'),
+        url('AJensonPro-SemiboldItSubh.woff') format('woff');
+    font-weight: 600;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: 'Adobe Jenson Pro';
+    src: url('AJensonPro-BoldCapt.woff2') format('woff2'),
+        url('AJensonPro-BoldCapt.woff') format('woff');
+    font-weight: bold;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Adobe Jenson Pro';
+    src: url('AJensonPro-ItCapt.woff2') format('woff2'),
+        url('AJensonPro-ItCapt.woff') format('woff');
+    font-weight: normal;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: 'Adobe Jenson Pro';
+    src: url('AJensonPro-LtIt.woff2') format('woff2'),
+        url('AJensonPro-LtIt.woff') format('woff');
+    font-weight: 300;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: 'Adobe Jenson Pro';
+    src: url('AJensonPro-SemiboldCapt.woff2') format('woff2'),
+        url('AJensonPro-SemiboldCapt.woff') format('woff');
+    font-weight: 600;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Adobe Jenson Pro';
+    src: url('AJensonPro-Disp.woff2') format('woff2'),
+        url('AJensonPro-Disp.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Adobe Jenson Pro';
+    src: url('AJensonPro-LtItSubh.woff2') format('woff2'),
+        url('AJensonPro-LtItSubh.woff') format('woff');
+    font-weight: 300;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: 'Adobe Jenson Pro';
+    src: url('AJensonPro-Capt.woff2') format('woff2'),
+        url('AJensonPro-Capt.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Adobe Jenson Pro';
+    src: url('AJensonPro-BoldIt.woff2') format('woff2'),
+        url('AJensonPro-BoldIt.woff') format('woff');
+    font-weight: bold;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: 'Adobe Jenson Pro';
+    src: url('AJensonPro-LtItCapt.woff2') format('woff2'),
+        url('AJensonPro-LtItCapt.woff') format('woff');
+    font-weight: 300;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: 'Adobe Jenson Pro';
+    src: url('AJensonPro-SemiboldItCapt.woff2') format('woff2'),
+        url('AJensonPro-SemiboldItCapt.woff') format('woff');
+    font-weight: 600;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: 'Adobe Jenson Pro';
+    src: url('AJensonPro-Lt.woff2') format('woff2'),
+        url('AJensonPro-Lt.woff') format('woff');
+    font-weight: 300;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Adobe Jenson Pro';
+    src: url('AJensonPro-BoldDisp.woff2') format('woff2'),
+        url('AJensonPro-BoldDisp.woff') format('woff');
+    font-weight: bold;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Adobe Jenson Pro';
+    src: url('AJensonPro-SemiboldIt.woff2') format('woff2'),
+        url('AJensonPro-SemiboldIt.woff') format('woff');
+    font-weight: 600;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: 'Adobe Jenson Pro';
+    src: url('AJensonPro-Regular.woff2') format('woff2'),
+        url('AJensonPro-Regular.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Adobe Jenson Pro';
+    src: url('AJensonPro-Subh.woff2') format('woff2'),
+        url('AJensonPro-Subh.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Adobe Jenson Pro';
+    src: url('AJensonPro-LtSubh.woff2') format('woff2'),
+        url('AJensonPro-LtSubh.woff') format('woff');
+    font-weight: 300;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Adobe Jenson Pro';
+    src: url('AJensonPro-SemiboldSubh.woff2') format('woff2'),
+        url('AJensonPro-SemiboldSubh.woff') format('woff');
+    font-weight: 600;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Adobe Jenson Pro';
+    src: url('AJensonPro-Bold.woff2') format('woff2'),
+        url('AJensonPro-Bold.woff') format('woff');
+    font-weight: bold;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Adobe Jenson Pro';
+    src: url('AJensonPro-BoldItCapt.woff2') format('woff2'),
+        url('AJensonPro-BoldItCapt.woff') format('woff');
+    font-weight: bold;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: 'Adobe Jenson Pro';
+    src: url('AJensonPro-BoldSubh.woff2') format('woff2'),
+        url('AJensonPro-BoldSubh.woff') format('woff');
+    font-weight: bold;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Adobe Jenson Pro';
+    src: url('AJensonPro-ItDisp.woff2') format('woff2'),
+        url('AJensonPro-ItDisp.woff') format('woff');
+    font-weight: normal;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: 'Adobe Jenson Pro';
+    src: url('AJensonPro-LtCapt.woff2') format('woff2'),
+        url('AJensonPro-LtCapt.woff') format('woff');
+    font-weight: 300;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Adobe Jenson Pro';
+    src: url('AJensonPro-LtItDisp.woff2') format('woff2'),
+        url('AJensonPro-LtItDisp.woff') format('woff');
+    font-weight: 300;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: 'Adobe Jenson Pro';
+    src: url('AJensonPro-Semibold.woff2') format('woff2'),
+        url('AJensonPro-Semibold.woff') format('woff');
+    font-weight: 600;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Adobe Jenson Pro';
+    src: url('AJensonPro-It.woff2') format('woff2'),
+        url('AJensonPro-It.woff') format('woff');
+    font-weight: normal;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: 'Adobe Jenson Pro';
+    src: url('AJensonPro-BoldItDisp.woff2') format('woff2'),
+        url('AJensonPro-BoldItDisp.woff') format('woff');
+    font-weight: bold;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: 'Adobe Jenson Pro';
+    src: url('AJensonPro-ItSubh.woff2') format('woff2'),
+        url('AJensonPro-ItSubh.woff') format('woff');
+    font-weight: normal;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: 'Adobe Jenson Pro';
+    src: url('AJensonPro-BoldItSubh.woff2') format('woff2'),
+        url('AJensonPro-BoldItSubh.woff') format('woff');
+    font-weight: bold;
+    font-style: italic;
+}
+

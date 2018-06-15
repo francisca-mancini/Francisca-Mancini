@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import isNode from 'detect-node';
 import PropTypes from 'prop-types';
+import throttle from 'lodash/throttle';
 
 import ThresholdGradientFilter from '../../../lib/thresholdGradientShader';
 import findParent from '../../../lib/findParent';
@@ -16,15 +17,17 @@ export default class ProductShape extends Component {
   constructor() {
     super();
 
+    this.circleSizeFactor = 2.6;
+    this.baseSizeFactor = 3.6;
+
     this.circleColor = 0xff0000;
-    this.baseShapeSize = 150;
-    this.circlesSize = 200;
     this.movingCirclesCount = 5;
     this.movingFactor = 50;
     this.renderDelta = 0;
     this.movingCircles = [];
 
     this.renderPixi = this.renderPixi.bind(this);
+    this.resize = throttle(this.resize.bind(this), 100);
   }
 
   componentDidMount() {
@@ -32,6 +35,22 @@ export default class ProductShape extends Component {
       this.initPixi();
       this.addShaderPass();
     }
+
+    window.addEventListener('resize', this.resize);
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('resize', this.resize);
+  }
+
+  resize() {
+    const parent = findParent(this.canvasRef, 'pixiContainer');
+
+    this.width = parent.offsetWidth;
+    this.height = parent.offsetHeight;
+
+    this.baseShapeSize = this.width / this.baseSizeFactor;
+    this.circlesSize = this.width / this.circleSizeFactor;
   }
 
   initPixi() {
@@ -39,6 +58,9 @@ export default class ProductShape extends Component {
 
     this.width = parent.offsetWidth;
     this.height = parent.offsetHeight;
+
+    this.baseShapeSize = this.width / this.baseSizeFactor;
+    this.circlesSize = this.width / this.circleSizeFactor;
 
     this.app = new PIXI.Application({
       width: this.width,

@@ -1,3 +1,36 @@
+
+@font-face {
+    font-family: 'jenson';
+    src: url('/static/fonts/jenson/AJensonPro-Lt.woff2') format('woff2'),
+        url('/static/fonts/jenson/AJensonPro-Lt.woff') format('woff');
+    font-weight: 300;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'AlternateGothicOne';
+    src: url('/static/fonts/alternate/AlternateGothicOne.woff2') format('woff2'),
+        url('/static/fonts/alternate/AlternateGothicOne.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'AlternateGothicTwo';
+    src: url('/static/fonts/alternate/AlternateGothicTwo.woff2') format('woff2'),
+        url('/static/fonts/alternate/AlternateGothicTwo.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'alternate';
+    src: url('/static/fonts/alternate/AlternateGothicThree.woff2') format('woff2'),
+        url('/static/fonts/alternate/AlternateGothicThree.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
 @font-face {
     font-family: 'Nitti Grotesk';
     src: url('/static/fonts/nitti/NittiGrotesk-ExtraBold.woff2') format('woff2'),

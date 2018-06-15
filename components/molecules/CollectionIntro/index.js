@@ -19,7 +19,7 @@ export default function CollectionIntro() {
       </Heading>
       <Spacing size={50}>
         <MaxWidth value={1000} center>
-          <Paragraph weight="light" size="xxl" tag="div" center>
+          <Paragraph font="jenson" weight="light" size="xxl" tag="div" center>
             This first collection maps out a fantastic{' '}
             <WordHover image={bubbleImage}>world</WordHover>. Each fragrance,
             inspired by a place and a time, embodies the spirit of that magical

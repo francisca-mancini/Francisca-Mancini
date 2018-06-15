@@ -111,6 +111,8 @@ module.exports = {
 
   fonts: {
     sans: ['Nitti Grotesk', 'Helvetica Neue', 'sans-serif'],
+    jenson: ['jenson', 'DejaVu Serif', 'Liberation Serif', 'Georgia', 'serif'],
+    alternate: ['alternate', 'Helvetica Neue', 'sans-serif'],
     serif: [
       'Traulha-Trial',
       'DejaVu Serif',
