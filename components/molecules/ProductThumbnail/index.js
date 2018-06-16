@@ -24,7 +24,7 @@ export default function ProductThumbnail({ color1, color2 }) {
         </div>
         <div>
           <Spacing size={15}>
-            <Heading uppercase size="xxxxs" center font="serif">
+            <Heading uppercase size="xxxxs" center font="serif" tracking="wide">
               Renaissance
             </Heading>
           </Spacing>

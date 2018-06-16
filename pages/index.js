@@ -22,7 +22,7 @@ function Home(data) {
         </Spacing>
         <Spacing size={80} type="padding">
           <Spacing position="b">
-            <Heading tag="h3" size="xl" font="serif" center>
+            <Heading tag="h3" size="xl" font="jenson" center>
               Shop Featured Products
             </Heading>
           </Spacing>
@@ -35,10 +35,12 @@ function Home(data) {
                 />
               </GridItem>
               <GridItem columnSize={[12, 6]}>
-                <ProductThumbnail
-                  color1={[165, 200, 253]}
-                  color2={[25, 67, 101]}
-                />
+                <div style={{ transform: 'translateY(120px)' }}>
+                  <ProductThumbnail
+                    color1={[165, 200, 253]}
+                    color2={[25, 67, 101]}
+                  />
+                </div>
               </GridItem>
             </Grid>
           </Spacing>
