@@ -2,11 +2,6 @@ import { Fragment, PureComponent } from 'react';
 import Link from 'next/link';
 import classNames from 'classnames/bind';
 import PropTypes from 'prop-types';
-import throttle from 'lodash/throttle';
-
-import Nearby from '../../../lib/nearby';
-import lineEq from '../../../lib/lineEq';
-import Raf from '../../../lib/raf';
 
 import generalStyles from './general.module.css';
 import sizeStyles from './size.module.css';
@@ -19,65 +14,6 @@ const cx = classNames.bind({ ...generalStyles, ...sizeStyles, ...kindStyles });
 export default class Button extends PureComponent {
   constructor() {
     super();
-
-    this.state = {
-      isMouseOver: false
-    };
-
-    this.bgSettings = {
-      x: 0,
-      y: 0,
-      fraction: 6,
-      translateFactor: 0,
-      motionFactor: 0.2,
-      scale: 1,
-      maxScale: 1.1,
-      targetScale: 1
-    };
-
-    this.innerSettings = {
-      x: 0,
-      y: 0,
-      fraction: 7,
-      translateFactor: 0,
-      motionFactor: 0.2
-    };
-
-    this.RAF = new Raf();
-
-    this.updateBounds = throttle(this.updateBounds.bind(this), 200);
-    this.handleMouseMove = this.handleMouseMove.bind(this);
-    this.handleClick = this.handleClick.bind(this);
-    this.toFloat = this.toFloat.bind(this);
-    this.loop = this.loop.bind(this);
-  }
-
-  componentDidMount() {
-    this.initNearby();
-
-    this.RAF.subscribe(this.loop);
-    this.RAF.start();
-
-    this.updateBounds();
-    window.addEventListener('mousemove', this.handleMouseMove);
-    window.addEventListener('scroll', this.updateBounds);
-  }
-
-  componentWillUnmount() {
-    this.RAF.unsubscribe();
-    this.RAF = null;
-
-    window.removeEventListener('mousemove', this.handleMouseMove);
-    window.removeEventListener('scroll', this.updateBounds);
-  }
-
-  updateBounds() {
-    this.bgBounds = this.bgRef.getBoundingClientRect();
-    this.innerBounds = this.innerRef.getBoundingClientRect();
-    this.bgHalfW = this.bgBounds.width / 2;
-    this.bgHalfH = this.bgBounds.height / 2;
-    this.innerHalfW = this.innerBounds.width / 2;
-    this.innerHalfH = this.innerBounds.height / 2;
   }
 
   handleClick(e) {
@@ -85,106 +21,6 @@ export default class Button extends PureComponent {
     if (!onClick) return;
 
     onClick(e);
-  }
-
-  toFloat(num) {
-    return parseInt(num.toFixed(2));
-  }
-
-  handleMouseMove(e) {
-    const rawX = e.clientX;
-    const rawY = e.clientY;
-
-    this.bgSettings.x = this.toFloat(
-      ((rawX - (this.bgBounds.left + this.bgHalfW)) /
-        this.bgSettings.fraction) *
-        this.bgSettings.translateFactor
-    );
-    this.bgSettings.y = this.toFloat(
-      ((rawY - (this.bgBounds.top + this.bgHalfH)) / this.bgSettings.fraction) *
-        this.bgSettings.translateFactor
-    );
-
-    this.innerSettings.x = this.toFloat(
-      ((rawX - (this.innerBounds.left + this.innerHalfW)) /
-        this.innerSettings.fraction) *
-        this.innerSettings.translateFactor
-    );
-    this.innerSettings.y = this.toFloat(
-      ((rawY - (this.innerBounds.top + this.innerHalfH)) /
-        this.innerSettings.fraction) *
-        this.innerSettings.translateFactor
-    );
-  }
-
-  initNearby() {
-    new Nearby(this.innerRef, {
-      onProgress: this.handleNearby.bind(this)
-    });
-  }
-
-  handleNearby(distance) {
-    const { size } = this.props;
-    const sizeMap = {
-      s: 50,
-      m: 80
-    };
-    const distanceThreshold = { min: 0, max: sizeMap[size] };
-
-    if (distance <= distanceThreshold.max) {
-      const scale = lineEq(
-        1,
-        this.bgSettings.maxScale,
-        distanceThreshold.max,
-        distanceThreshold.min,
-        distance
-      );
-
-      this.bgSettings.translateFactor = lineEq(
-        0,
-        1,
-        distanceThreshold.max,
-        distanceThreshold.min,
-        distance
-      );
-
-      this.innerSettings.translateFactor = lineEq(
-        0,
-        1,
-        distanceThreshold.max,
-        distanceThreshold.min,
-        distance
-      );
-
-      this.bgSettings.targetScale = scale;
-      this.setState({ isMouseOver: true });
-    } else {
-      this.setState({ isMouseOver: false });
-    }
-  }
-
-  loop() {
-    if (this.state.isMouseOver) {
-      this.bgSettings.scale +=
-        (this.bgSettings.targetScale - this.bgSettings.scale) *
-        this.bgSettings.motionFactor;
-
-      this.bgRef.style.transition = '0s';
-      this.bgRef.style.transform = `translate(${this.bgSettings.x}px, ${
-        this.bgSettings.y
-      }px) scale(${this.bgSettings.scale}) rotate(0.01deg)`;
-
-      this.innerRef.style.transition = '0s';
-      this.innerRef.style.transform = `translate(${this.innerSettings.x}px, ${
-        this.innerSettings.y
-      }px) rotate(0.01deg)`;
-    } else {
-      this.bgRef.style.transform = `translate(0, 0) scale(1) rotate(0.01deg)`;
-      this.bgRef.style.transition = '0.7s ease-out';
-
-      this.innerRef.style.transform = `translate(0, 0) otate(0.01deg)`;
-      this.innerRef.style.transition = '0.7s ease-out';
-    }
   }
 
   render() {
@@ -199,20 +35,8 @@ export default class Button extends PureComponent {
           className={cx('button', kind, size)}
           onClick={this.handleClick}
         >
-          <span
-            ref={ref => {
-              this.bgRef = ref;
-            }}
-            className={cx('bg')}
-          />
-          <span
-            ref={ref => {
-              this.innerRef = ref;
-            }}
-            className={cx('inner')}
-          >
-            {children}
-          </span>
+          <span className={cx('bg')} />
+          <span className={cx('inner')}>{children}</span>
         </ButtonTag>
       </LinkTag>
     );
