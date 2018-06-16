@@ -36,6 +36,7 @@ export default function Footer({ isLight }) {
             tag="span"
             uppercase
             size="xxxs"
+            font="alternate"
             weight="semilight"
             tracking="wide"
             className={navItemClassName}
