@@ -18,6 +18,11 @@
     global(rounded-50)
     global(bg-black)
   ;
+  transition: 0.2s ease-in-out;
+}
+
+.button:hover .bg {
+  transform: scale(1.06);
 }
 
 .inner {
