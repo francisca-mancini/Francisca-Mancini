@@ -4,7 +4,7 @@ import ReactPlayer from 'react-player';
 
 import generalStyles from './general.module.css';
 
-import video from '../../../static/videos/_temp/video.mp4';
+import video from '../../../static/videos/_temp/video2.mp4';
 
 export default class HeroVideo extends PureComponent {
   constructor() {
