@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import isNode from 'detect-node';
 import PropTypes from 'prop-types';
 import throttle from 'lodash/throttle';
-import VisibilitySensor from 'react-visibility-sensor';
+import Observer from '@researchgate/react-intersection-observer';
 
 import ThresholdGradientFilter from '../../../lib/thresholdGradientShader';
 import findParent from '../../../lib/findParent';
@@ -45,8 +45,8 @@ export default class ProductShape extends Component {
     window.removeEventListener('resize', this.resize);
   }
 
-  handleVisibilityChange(isVisible) {
-    if (isVisible) {
+  handleVisibilityChange(e) {
+    if (e.isIntersecting) {
       if (this.app) this.app.ticker.start();
     } else {
       if (this.app) this.app.ticker.stop();
@@ -168,17 +168,14 @@ export default class ProductShape extends Component {
 
   render() {
     return (
-      <VisibilitySensor
-        onChange={this.handleVisibilityChange}
-        partialVisibility
-      >
+      <Observer onChange={this.handleVisibilityChange}>
         <div
           className="absolute pin"
           ref={ref => {
             this.canvasRef = ref;
           }}
         />
-      </VisibilitySensor>
+      </Observer>
     );
   }
 }

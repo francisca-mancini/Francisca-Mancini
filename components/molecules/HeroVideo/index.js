@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react';
-import VisibilitySensor from 'react-visibility-sensor';
+import Observer from '@researchgate/react-intersection-observer';
 import ReactPlayer from 'react-player';
 
 import generalStyles from './general.module.css';
@@ -16,7 +16,7 @@ export default class HeroVideo extends PureComponent {
 
     this.duration = 0;
 
-    this.handleVisibilityChange = this.handleVisibilityChange.bind(this);
+    this.handleIntersection = this.handleIntersection.bind(this);
   }
 
   onDuration = duration => {
@@ -30,20 +30,17 @@ export default class HeroVideo extends PureComponent {
     this.barRef.style.transform = `translateX(${timeFraction.toFixed(3)}%)`;
   };
 
-  handleVisibilityChange(visible) {
-    if (visible) {
-      this.setState({ isPlaying: true });
-    } else {
-      this.setState({ isPlaying: false });
-    }
+  handleIntersection(e) {
+    this.setState({ isPlaying: e.isIntersecting });
   }
 
   render() {
+    const options = {
+      onChange: this.handleIntersection
+    };
+
     return (
-      <VisibilitySensor
-        onChange={this.handleVisibilityChange}
-        partialVisibility
-      >
+      <Observer {...options}>
         <div className={generalStyles.hero}>
           <ReactPlayer
             ref={ref => {
@@ -72,7 +69,7 @@ export default class HeroVideo extends PureComponent {
             </div>
           </div>
         </div>
-      </VisibilitySensor>
+      </Observer>
     );
   }
 }
