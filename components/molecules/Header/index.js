@@ -28,9 +28,16 @@ export default function Header({ isLight }) {
   const menuSrc = isLight ? menuWhite : menuBlack;
   const linkColor = isLight ? 'white' : 'black';
 
-  const NavLink = ({ children, href, isDropdown, isDropdownTrigger }) => {
+  const NavLink = ({
+    children,
+    href,
+    isDropdown,
+    isDropdownTrigger,
+    zIndex
+  }) => {
     const linkClassName = classNames({
-      [generalStyles.dropdownTrigger]: isDropdownTrigger
+      [generalStyles.dropdownTrigger]: isDropdownTrigger,
+      'relative z-10': zIndex
     });
 
     return (
@@ -96,7 +103,9 @@ export default function Header({ isLight }) {
                       Collections
                       <CollectionDropdown />
                     </NavLink>
-                    <NavLink href="/shop">Shop</NavLink>
+                    <NavLink href="/shop" zIndex>
+                      Shop
+                    </NavLink>
                     <NavLink href="/philosophy">Philosophy</NavLink>
                     <NavLink href="/account">Account</NavLink>
                     <NavLink href="/cart">Cart / 0</NavLink>
