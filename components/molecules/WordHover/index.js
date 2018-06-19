@@ -41,7 +41,9 @@ export default class WordHover extends Component {
   }
 
   componentDidMount() {
-    window.addEventListener('mousemove', this.handleMouseMove);
+    window.addEventListener('mousemove', this.handleMouseMove, {
+      passive: true
+    });
     this.initNearby();
     this.setBubblePosition();
 
