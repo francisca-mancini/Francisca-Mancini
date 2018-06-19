@@ -46,7 +46,6 @@ export default function Grid({ children, direction, gap, align, justify }) {
     generalStyles.grid,
     directionClassName,
     alignClassName,
-    gapClassName,
     justifyClassName
   );
 
