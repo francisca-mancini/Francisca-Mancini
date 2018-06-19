@@ -9,6 +9,7 @@ export default class MyDocument extends Document {
         </Head>
         <body>
           <Main />
+          <script src="https://cdn.polyfill.io/v2/polyfill.min.js?rum=0&features=IntersectionObserver" />
           <NextScript />
         </body>
       </html>
