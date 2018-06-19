@@ -3,7 +3,7 @@
     font-family: 'jenson';
     src: url('/static/fonts/jenson/AJensonPro-Lt.woff2') format('woff2'),
         url('/static/fonts/jenson/AJensonPro-Lt.woff') format('woff');
-    font-weight: 300;
+    font-weight: normal;
     font-style: normal;
 }
 

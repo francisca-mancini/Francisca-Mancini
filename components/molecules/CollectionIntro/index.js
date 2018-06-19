@@ -14,7 +14,7 @@ import bubbleImage2 from '../../../static/images/_temp/bubble2.jpg';
 export default function CollectionIntro() {
   return (
     <Fragment>
-      <Heading font="serif" weight="semilight" size="xl" center>
+      <Heading font="jenson" size="xl" center>
         Collection N˚1: Maps, Travel
       </Heading>
       <Spacing size={50}>
