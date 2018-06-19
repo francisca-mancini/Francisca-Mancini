@@ -6,6 +6,7 @@ import PageWrap from '../components/atoms/PageWrap';
 import Spacing from '../components/atoms/Spacing';
 import { Grid, GridItem } from '../components/atoms/Grid';
 import Heading from '../components/atoms/Heading';
+import Button from '../components/atoms/Button';
 
 import ProductThumbnail from '../components/molecules/ProductThumbnail';
 
@@ -87,63 +88,69 @@ export default class Shop extends PureComponent {
             </Grid>
           </Spacing>
           <Spacing size={80}>
-            <Heading size="s" center>
-              Shop Layering Packs
-            </Heading>
-
             <Spacing size={20}>
-              <Grid align="stretch">
+              <Grid align="stretch" gap={0}>
                 <GridItem columnSize={4}>
-                  <div style={stickyStyle} className="stickybits">
-                    <Spacing type="padding" size={80}>
+                  <div
+                    style={stickyStyle}
+                    className="stickybits h-screen flex flex-col items-center justify-center"
+                  >
+                    <div className="flex w-100 items-center justify-center">
                       <ProductThumbnail
                         image={layeringImage}
                         color1={[121, 66, 105]}
                         color2={[138, 173, 229]}
                       />
-                    </Spacing>
+                    </div>
                   </div>
                 </GridItem>
                 <GridItem columnSize={4}>
-                  <div style={stickyStyle} className="stickybits">
-                    <Spacing type="padding" size={80}>
+                  <div
+                    style={stickyStyle}
+                    className="stickybits h-screen flex flex-col items-center justify-center"
+                  >
+                    <Heading size="s" center>
+                      Shop Layering Packs
+                    </Heading>
+                    <div className="w-100 h-80 flex flex-col items-center justify-center">
                       <ProductThumbnail
                         image={layeringImage2}
                         color1={[255, 197, 237]}
                         color2={[191, 225, 255]}
                       />
-                    </Spacing>
+                      <Button size="s">Shop Renaissance Layering Pack</Button>
+                    </div>
                   </div>
                 </GridItem>
                 <GridItem columnSize={4}>
-                  <Spacing size={80}>
+                  <div className="h-90screen flex items-center justify-center">
                     <ProductThumbnail
                       image={layeringImage3}
                       color1={[176, 29, 35]}
                       color2={[233, 137, 77]}
                     />
-                  </Spacing>
-                  <Spacing size={80}>
+                  </div>
+                  <div className="h-90screen flex items-center justify-center">
                     <ProductThumbnail
                       image={layeringImage3}
                       color1={[57, 96, 127]}
                       color2={[166, 201, 161]}
                     />
-                  </Spacing>
-                  <Spacing size={80}>
+                  </div>
+                  <div className="h-90screen flex items-center justify-center">
                     <ProductThumbnail
                       image={layeringImage3}
                       color1={[66, 66, 77]}
                       color2={[197, 217, 242]}
                     />
-                  </Spacing>
-                  <Spacing size={80}>
+                  </div>
+                  <div className="h-90screen flex items-center justify-center">
                     <ProductThumbnail
                       image={layeringImage3}
                       color1={[199, 111, 159]}
                       color2={[243, 215, 128]}
                     />
-                  </Spacing>
+                  </div>
                 </GridItem>
               </Grid>
             </Spacing>

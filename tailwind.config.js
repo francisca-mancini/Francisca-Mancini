@@ -401,7 +401,9 @@ module.exports = {
   height: {
     auto: 'auto',
     px: '1px',
+    80: '80%',
     full: '100%',
+    '90screen': '90vh',
     screen: '100vh'
   },
 
