@@ -1,9 +1,10 @@
 .m {
   composes:
     global(px-30)
-    global(py-20)
     global(text-l)
   ;
+  padding-top: 22px;
+  padding-bottom: 24px;
 }
 
 .s {
