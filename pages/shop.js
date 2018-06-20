@@ -109,16 +109,20 @@ export default class Shop extends PureComponent {
                     style={stickyStyle}
                     className="stickybits h-screen flex flex-col items-center justify-center"
                   >
-                    <Heading size="s" center>
-                      Shop Layering Packs
-                    </Heading>
+                    <span className="absolute pin-t pin-l w-full pt-40 text-center">
+                      <Heading size="s" center>
+                        Shop Layering Packs
+                      </Heading>
+                    </span>
                     <div className="w-100 h-80 flex flex-col items-center justify-center">
                       <ProductThumbnail
                         image={layeringImage2}
                         color1={[255, 197, 237]}
                         color2={[191, 225, 255]}
                       />
-                      <Button size="s">Shop Renaissance Layering Pack</Button>
+                      <span className="absolute pin-b pin-l w-full pb-40 text-center">
+                        <Button size="s">Shop Renaissance Layering Pack</Button>
+                      </span>
                     </div>
                   </div>
                 </GridItem>
