@@ -7,12 +7,19 @@ import '../style.css';
 import Header from './molecules/Header';
 import Footer from './molecules/Footer';
 
-function App({ children, router, headerLight, footerLight, hasTopPad }) {
+function App({
+  children,
+  router,
+  headerLight,
+  isHome,
+  footerLight,
+  hasTopPad
+}) {
   const pathname = router.pathname;
 
   return (
     <div className="root">
-      <Header isLight={headerLight} />
+      <Header isLight={headerLight} isHome={isHome} />
       <div className={classNames('pb-80', { 'pt-80': hasTopPad })}>
         {children}
       </div>

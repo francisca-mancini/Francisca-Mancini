@@ -1,6 +1,8 @@
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import MediaQuery from 'react-responsive';
+import throttle from 'lodash/throttle';
 
 import Heading from '../../atoms/Heading';
 import Button from '../../atoms/Button';
@@ -20,112 +22,144 @@ import menuBlack from '../../../static/images/sprites/menu-black.svg';
 
 import generalStyles from './general.module.css';
 
-export default function Header({ isLight }) {
-  const headerClassName = classNames(generalStyles.header);
-  const logoSrc = isLight ? logoWhite : logoBlack;
-  const logoMiniSrc = isLight ? logoMiniWhite : logoMiniBlack;
-  const cartSrc = isLight ? cartWhite : cartBlack;
-  const menuSrc = isLight ? menuWhite : menuBlack;
-  const linkColor = isLight ? 'white' : 'black';
+export default class Header extends Component {
+  constructor(props) {
+    super(props);
 
-  const NavLink = ({
-    children,
-    href,
-    isDropdown,
-    isDropdownTrigger,
-    zIndex
-  }) => {
-    const linkClassName = classNames({
-      [generalStyles.dropdownTrigger]: isDropdownTrigger,
-      'relative z-10': zIndex
-    });
+    this.state = {
+      isLight: props.isLight
+    };
 
-    return (
-      <div className={linkClassName}>
-        <Spacing size={isDropdown ? 5 : 10} position={isDropdown ? 'y' : 'x'}>
-          <Link href={href}>
-            <Heading
-              tag="span"
-              font="alternate"
-              uppercase
-              size="xxxs"
-              weight="semilight"
-              tracking="wide"
-              color={isDropdown ? 'black' : linkColor}
-            >
-              {children}
-            </Heading>
-          </Link>
-        </Spacing>
-      </div>
-    );
-  };
+    this.handleScroll = throttle(this.handleScroll.bind(this), 200);
+  }
+  componentDidMount() {
+    window.addEventListener('scroll', this.handleScroll, { passive: true });
+  }
 
-  const CollectionDropdown = () => {
-    return (
-      <div className={generalStyles.dropdown}>
-        <div className={generalStyles.dropdownInner}>
-          <NavLink isDropdown href="/collection/maps-travel">
-            N°1: MAPS, TRAVEL
-          </NavLink>
-          <NavLink isDropdown href="/collection/maps-travel">
-            N°1: MAPS, TRAVEL
-          </NavLink>
+  componentWillUnmount() {
+    window.removeEventListener('scroll', this.handleScroll);
+  }
+
+  handleScroll(e) {
+    const y = e.pageY;
+
+    if (this.props.isHome && y >= 10) {
+      this.setState({ isLight: false });
+    } else {
+      this.setState({ isLight: true });
+    }
+  }
+
+  render() {
+    const { isLight } = this.state;
+    const headerClassName = classNames(generalStyles.header);
+    const logoSrc = isLight ? logoWhite : logoBlack;
+    const logoMiniSrc = isLight ? logoMiniWhite : logoMiniBlack;
+    const cartSrc = isLight ? cartWhite : cartBlack;
+    const menuSrc = isLight ? menuWhite : menuBlack;
+    const linkColor = isLight ? 'white' : 'black';
+
+    const NavLink = ({
+      children,
+      href,
+      isDropdown,
+      isDropdownTrigger,
+      zIndex
+    }) => {
+      const linkClassName = classNames({
+        [generalStyles.dropdownTrigger]: isDropdownTrigger,
+        'relative z-10': zIndex
+      });
+
+      return (
+        <div className={linkClassName}>
+          <Spacing size={isDropdown ? 5 : 10} position={isDropdown ? 'y' : 'x'}>
+            <Link href={href}>
+              <Heading
+                tag="span"
+                font="alternate"
+                uppercase
+                size="xxxs"
+                weight="semilight"
+                tracking="wide"
+                color={isDropdown ? 'black' : linkColor}
+              >
+                {children}
+              </Heading>
+            </Link>
+          </Spacing>
         </div>
-      </div>
-    );
-  };
+      );
+    };
 
-  return (
-    <header className={headerClassName}>
-      <PageWrap>
-        <InlineGrid>
-          <MediaQuery maxDeviceWidth={767}>
-            <img src={menuSrc} width={34} height={18} />
-          </MediaQuery>
-          <Link href="/" className="leading-none flex items-center">
-            <MediaQuery minDeviceWidth={768} values={{ deviceWidth: 800 }}>
+    const CollectionDropdown = () => {
+      return (
+        <div className={generalStyles.dropdown}>
+          <div className={generalStyles.dropdownInner}>
+            <NavLink isDropdown href="/collection/maps-travel">
+              N°1: MAPS, TRAVEL
+            </NavLink>
+            <NavLink isDropdown href="/collection/maps-travel">
+              N°1: MAPS, TRAVEL
+            </NavLink>
+          </div>
+        </div>
+      );
+    };
+
+    return (
+      <header className={headerClassName}>
+        <PageWrap>
+          <InlineGrid>
+            <MediaQuery maxDeviceWidth={767}>
+              <img src={menuSrc} width={34} height={18} />
+            </MediaQuery>
+            <Link href="/" className="leading-none flex items-center">
+              <MediaQuery minDeviceWidth={768} values={{ deviceWidth: 800 }}>
+                {matches => {
+                  if (matches) {
+                    return <img src={logoSrc} width={243} height={16} />;
+                  } else {
+                    return <img src={logoMiniSrc} width={41} height={44} />;
+                  }
+                }}
+              </MediaQuery>
+            </Link>
+            <MediaQuery minDeviceWidth={768}>
               {matches => {
                 if (matches) {
-                  return <img src={logoSrc} width={243} height={16} />;
+                  return (
+                    <InlineGrid>
+                      <NavLink className="relative" isDropdownTrigger>
+                        Collections
+                        <CollectionDropdown />
+                      </NavLink>
+                      <NavLink href="/shop" zIndex>
+                        Shop
+                      </NavLink>
+                      <NavLink href="/philosophy">Philosophy</NavLink>
+                      <NavLink href="/account">Account</NavLink>
+                      <NavLink href="/cart">Cart / 0</NavLink>
+                    </InlineGrid>
+                  );
                 } else {
-                  return <img src={logoMiniSrc} width={41} height={44} />;
+                  return <img src={cartSrc} width={20} height={20} />;
                 }
               }}
             </MediaQuery>
-          </Link>
-          <MediaQuery minDeviceWidth={768}>
-            {matches => {
-              if (matches) {
-                return (
-                  <InlineGrid>
-                    <NavLink className="relative" isDropdownTrigger>
-                      Collections
-                      <CollectionDropdown />
-                    </NavLink>
-                    <NavLink href="/shop" zIndex>
-                      Shop
-                    </NavLink>
-                    <NavLink href="/philosophy">Philosophy</NavLink>
-                    <NavLink href="/account">Account</NavLink>
-                    <NavLink href="/cart">Cart / 0</NavLink>
-                  </InlineGrid>
-                );
-              } else {
-                return <img src={cartSrc} width={20} height={20} />;
-              }
-            }}
-          </MediaQuery>
-        </InlineGrid>
-      </PageWrap>
-    </header>
-  );
+          </InlineGrid>
+        </PageWrap>
+      </header>
+    );
+  }
 }
 
 Header.propTypes = {
-  isLight: PropTypes.bool
+  isLight: PropTypes.bool,
+  isHome: PropTypes.bool
 };
 
 Header.defaultProps = {
-  isLight: false
+  isLight: false,
+  isHome: false
 };

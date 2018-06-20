@@ -14,7 +14,7 @@ import Heading from '../components/atoms/Heading';
 
 function Home(data) {
   return (
-    <App hasTopPad={false} headerLight>
+    <App hasTopPad={false} headerLight isHome>
       <HeroVideo />
       <PageWrap>
         <Spacing size={80} type="padding">
