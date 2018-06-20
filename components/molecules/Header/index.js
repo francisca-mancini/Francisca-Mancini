@@ -43,9 +43,13 @@ export default class Header extends Component {
   handleScroll(e) {
     const y = e.pageY;
 
+    console.log(this.state.isLight);
+
     if (this.props.isHome && y >= 10) {
       this.setState({ isLight: false });
-    } else {
+    }
+
+    if (this.props.isHome && y < 10) {
       this.setState({ isLight: true });
     }
   }
