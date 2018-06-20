@@ -151,7 +151,8 @@ module.exports = {
     base: '2rem',
     l: '2.8rem',
     xl: '3rem',
-    xxl: '3.6rem'
+    xxl: '3.6rem',
+    xxxl: '4rem'
   },
 
   /*

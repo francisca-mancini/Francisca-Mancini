@@ -13,7 +13,8 @@ const sizeMap = {
   m: 'text-m',
   l: 'text-l',
   xl: 'text-xl',
-  xxl: 'text-xxl'
+  xxl: 'text-xxl',
+  xxxl: 'text-xxxl'
 };
 
 export default function Paragraph({
@@ -22,6 +23,7 @@ export default function Paragraph({
   size,
   font,
   center,
+  justified,
   weight,
   color
 }) {
@@ -34,6 +36,7 @@ export default function Paragraph({
     'my-0',
     {
       'text-center': center,
+      'text-justify': justified,
       [`text-${color}`]: color
     }
   );

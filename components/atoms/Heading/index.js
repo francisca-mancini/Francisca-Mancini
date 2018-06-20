@@ -13,7 +13,8 @@ const sizeMap = {
   m: 'text-m',
   l: 'text-l',
   xl: 'text-xl',
-  xxl: 'text-xxl'
+  xxl: 'text-xxl',
+  xxxl: 'text-xxxl'
 };
 
 export default function Heading({
