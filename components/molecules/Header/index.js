@@ -1,3 +1,4 @@
+import { withRouter } from 'next/router';
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
@@ -5,11 +6,10 @@ import MediaQuery from 'react-responsive';
 import throttle from 'lodash/throttle';
 
 import Heading from '../../atoms/Heading';
-import Button from '../../atoms/Button';
 import Spacing from '../../atoms/Spacing';
 import Link from '../../atoms/Link';
 import PageWrap from '../../atoms/PageWrap';
-import { Grid, GridItem, InlineGrid } from '../../atoms/Grid';
+import { InlineGrid } from '../../atoms/Grid';
 
 import logoWhite from '../../../static/images/sprites/logo-white.svg';
 import logoBlack from '../../../static/images/sprites/logo-black.svg';
@@ -22,7 +22,7 @@ import menuBlack from '../../../static/images/sprites/menu-black.svg';
 
 import generalStyles from './general.module.css';
 
-export default class Header extends Component {
+class Header extends Component {
   constructor(props) {
     super(props);
 
@@ -89,8 +89,14 @@ export default class Header extends Component {
       isDropdownTrigger,
       zIndex
     }) => {
-      const linkClassName = classNames({
+      const pathname = this.props.router.pathname;
+      const notActive = pathname === '/' || pathname === '/product';
+      const isActive = pathname === href;
+
+      const linkClassName = classNames(generalStyles.link, {
         [generalStyles.dropdownTrigger]: isDropdownTrigger,
+        [generalStyles.link]: !notActive && !isActive,
+        [generalStyles.active]: notActive || isActive,
         'relative z-10': zIndex
       });
 
@@ -176,6 +182,8 @@ export default class Header extends Component {
     );
   }
 }
+
+export default withRouter(Header);
 
 Header.propTypes = {
   isLight: PropTypes.bool,

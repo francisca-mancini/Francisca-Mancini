@@ -7,6 +7,14 @@
   ;
 }
 
+.link {
+composes: global(opacity-50)
+}
+
+.active {
+  composes: global(opacity-100)
+}
+
 .dropdown {
   composes:
     global(absolute)
