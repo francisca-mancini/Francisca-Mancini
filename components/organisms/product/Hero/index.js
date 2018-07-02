@@ -11,6 +11,7 @@ import Spacing from '../../../atoms/Spacing';
 import generalStyles from './hero.module.css';
 
 import product2 from '../../../../static/images/_temp/product2.png';
+import downArrow from '../../../../static/images/sprites/down-arrow.svg';
 
 export default class Hero extends PureComponent {
   componentDidMount() {
@@ -39,6 +40,10 @@ export default class Hero extends PureComponent {
               <Paragraph size="s">
                 Collection N°1 Maps, Travel • Fragrances • Atlantica
               </Paragraph>
+            </div>
+            <div className={generalStyles.learnMore}>
+              <Heading size="xs">Learn more</Heading>
+              <img src={downArrow} alt="learn more" />
             </div>
           </div>
         </GridItem>

@@ -31,6 +31,25 @@
   composes: centerFlex;
 }
 
+.learnMore {
+  composes:
+    global(absolute)
+    global(z-10)
+    global(text-center)
+    global(pin-b)
+    global(pb-30)
+    global(flex)
+    global(flex-col)
+    global(items-center)
+    global(justify-center)
+    global(opacity-50)
+    global(cursor-pointer)
+  ;
+  width: calc(100% + 100px);
+  left: calc(100% + 50px);
+  /* transform: translateX(-50%); */
+}
+
 .right {
   composes: centerFlex;
 }

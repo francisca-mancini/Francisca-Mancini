@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="10px" height="6px" viewBox="0 0 10 6" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 50.2 (55047) - http://www.bohemiancoding.com/sketch -->
+    <title>Desktop / read more btn</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="-" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Desktop/Product-page-100ml" transform="translate(-679.000000, -747.000000)" fill="#000000" fill-rule="nonzero">
+            <g id="content" transform="translate(0.000000, 136.000000)">
+                <g id="READ-MORE" transform="translate(526.000000, 582.000000)">
+                    <g id="Desktop-/-read-more-btn" transform="translate(153.000000, 29.000000)">
+                        <path d="M1.3524612,0.694556872 C1.15659772,0.499897924 0.840016735,0.500874395 0.645357787,0.696737881 C0.450698839,0.892601367 0.45167531,1.20918235 0.647538796,1.4038413 L4.62278703,5.35464221 C4.8177967,5.5484526 5.13269977,5.5484526 5.32770944,5.35464221 L9.3524612,1.35464221 C9.54832469,1.15998327 9.54930116,0.843402282 9.35464221,0.647538796 C9.15998327,0.45167531 8.84340228,0.450698839 8.6475388,0.645357787 L4.97524824,4.29506418 L1.3524612,0.694556872 Z" id="Path-3"></path>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>
