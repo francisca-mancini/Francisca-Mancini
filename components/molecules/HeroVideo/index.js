@@ -41,7 +41,7 @@ export default class HeroVideo extends PureComponent {
 
     return (
       <Observer {...options}>
-        <div className={generalStyles.hero}>
+        <div id="heroVideo" className={generalStyles.hero}>
           <ReactPlayer
             ref={ref => {
               this.playerRef = ref;

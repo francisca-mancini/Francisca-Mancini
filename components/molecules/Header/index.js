@@ -30,28 +30,47 @@ export default class Header extends Component {
       isLight: props.isLight
     };
 
+    this.heroHeight = 0;
+
     this.handleScroll = throttle(this.handleScroll.bind(this), 200);
+    this.handleResize = throttle(this.handleResize.bind(this), 200);
   }
+
   componentDidMount() {
     window.addEventListener('scroll', this.handleScroll, { passive: true });
+    window.addEventListener('resize', this.handleResize, { passive: true });
+
+    if (this.props.isHome) {
+      this.getHeroHeight();
+    }
   }
 
   componentWillUnmount() {
     window.removeEventListener('scroll', this.handleScroll);
+    window.removeEventListener('resize', this.handleResize);
+  }
+
+  getHeroHeight() {
+    const hero = document.querySelector('#heroVideo');
+    const height = hero.offsetHeight - 40;
+
+    this.heroHeight = height;
   }
 
   handleScroll(e) {
     const y = e.pageY;
 
-    console.log(this.state.isLight);
-
-    if (this.props.isHome && y >= 10) {
+    if (this.props.isHome && y >= this.heroHeight) {
       this.setState({ isLight: false });
     }
 
-    if (this.props.isHome && y < 10) {
+    if (this.props.isHome && y < this.heroHeight) {
       this.setState({ isLight: true });
     }
+  }
+
+  handleResize() {
+    this.getHeroHeight();
   }
 
   render() {
