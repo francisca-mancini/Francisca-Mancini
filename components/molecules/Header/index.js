@@ -90,7 +90,10 @@ class Header extends Component {
       zIndex
     }) => {
       const pathname = this.props.router.pathname;
-      const notActive = pathname === '/' || pathname === '/product';
+      const notActive =
+        pathname === '/' ||
+        pathname === '/product' ||
+        pathname === '/collection';
       const isActive = pathname === href;
 
       const linkClassName = classNames(generalStyles.link, {
