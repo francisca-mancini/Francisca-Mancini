@@ -8,10 +8,11 @@ import Heading from '../../../atoms/Heading';
 import Button from '../../../atoms/Button';
 import Spacing from '../../../atoms/Spacing';
 
+import LearnMore from '../../../molecules/LearnMore';
+
 import generalStyles from './hero.module.css';
 
 import product2 from '../../../../static/images/_temp/product2.png';
-import downArrow from '../../../../static/images/sprites/down-arrow.svg';
 
 export default class Hero extends PureComponent {
   componentDidMount() {
@@ -42,8 +43,7 @@ export default class Hero extends PureComponent {
               </Paragraph>
             </div>
             <div className={generalStyles.learnMore}>
-              <Heading size="xs">Learn more</Heading>
-              <img src={downArrow} alt="learn more" />
+              <LearnMore>Learn more</LearnMore>
             </div>
           </div>
         </GridItem>
