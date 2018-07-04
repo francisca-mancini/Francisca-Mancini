@@ -6,6 +6,8 @@ import Heading from '../../../atoms/Heading';
 import Paragraph from '../../../atoms/Paragraph';
 import Spacing from '../../../atoms/Spacing';
 import ProductShape from '../../../atoms/ProductShape';
+import MaxWidth from '../../../atoms/MaxWidth';
+import ParallaxWrapper from '../../../atoms/ParallaxWrapper';
 
 import generalStyles from './general.module.css';
 import heroStyles from './hero.module.css';
@@ -60,38 +62,52 @@ export default class Fragrance extends PureComponent {
       >
         <div className={generalStyles.container}>
           <div className={heroStyles.container}>
-            <div className={heroStyles.shapeContainer}>
-              <div
-                className={classNames(heroStyles.shapeRatio, 'pixiContainer')}
-              >
-                <ProductShape isTransparent color1={color1} color2={color2} />
+            <ParallaxWrapper speed={1}>
+              <div className={heroStyles.shapeContainer}>
+                <div
+                  className={classNames(heroStyles.shapeRatio, 'pixiContainer')}
+                >
+                  <ProductShape isTransparent color1={color1} color2={color2} />
+                </div>
               </div>
-            </div>
-            <img
-              className={heroStyles.thirdImage}
-              src={thirdImage1}
-              alt="lol"
-            />
-            <img
-              className={heroStyles.secondImage}
-              src={secondImage1}
-              alt="lol"
-            />
-            <img className={heroStyles.mainImage} src={mainImage1} alt="lol" />
+            </ParallaxWrapper>
+            <ParallaxWrapper speed={1.7}>
+              <img
+                className={heroStyles.thirdImage}
+                src={thirdImage1}
+                alt="lol"
+              />
+            </ParallaxWrapper>
+            <ParallaxWrapper speed={2.2}>
+              <img
+                className={heroStyles.secondImage}
+                src={secondImage1}
+                alt="lol"
+              />
+            </ParallaxWrapper>
+            <ParallaxWrapper speed={2.8}>
+              <img
+                className={heroStyles.mainImage}
+                src={mainImage1}
+                alt="lol"
+              />
+            </ParallaxWrapper>
           </div>
           <Heading size="m" font="serif" uppercase center>
             {children}
           </Heading>
           <Spacing size={30}>
-            <Paragraph size="xl" font="jenson">
-              This highly spiritual scent, with Frankincense, incense, musks,
-              and fire it can be found after a trip across the north of Africa,
-              from the High Atlas to the Nile. There is an altar carved in
-              stone, and to the right, on the floor there is an ancient vase.
-              Inside this vase, set aside for ceremonial offerings, lays
-              Atlantica, a magical ritual perfume made out of the most precious
-              oils.
-            </Paragraph>
+            <MaxWidth center value={720}>
+              <Paragraph size="xl" font="jenson">
+                This highly spiritual scent, with Frankincense, incense, musks,
+                and fire it can be found after a trip across the north of
+                Africa, from the High Atlas to the Nile. There is an altar
+                carved in stone, and to the right, on the floor there is an
+                ancient vase. Inside this vase, set aside for ceremonial
+                offerings, lays Atlantica, a magical ritual perfume made out of
+                the most precious oils.
+              </Paragraph>
+            </MaxWidth>
           </Spacing>
         </div>
       </Waypoint>
