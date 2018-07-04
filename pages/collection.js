@@ -135,8 +135,8 @@ export default class Collection extends PureComponent {
                     className="stickybits flex flex-col h-screen items-center justify-center"
                     style={stickyStyle}
                   >
-                    <Button size="s" href={shopSlug}>
-                      {title}
+                    <Button size="s">
+                      <Link href={shopSlug}>{title}</Link>
                     </Button>
                     <Spacing size={20} position="t">
                       <Link

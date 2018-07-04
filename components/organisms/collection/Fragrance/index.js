@@ -23,7 +23,6 @@ export default class Fragrance extends PureComponent {
 
   componentDidUpdate(prevProps, prevState) {
     if (prevState.inView !== this.state.inView && this.state.inView) {
-      console.log('change');
       this.props.onIndexChange(this.props.index);
     }
   }
@@ -33,15 +32,6 @@ export default class Fragrance extends PureComponent {
   }
 
   handleWaypointEnter(previousPosition, currentPosition, event) {
-    // const num = Math.round(e.intersectionRatio * 100) / 100;
-    // const index = parseFloat(num.toFixed(1));
-
-    // if (index === 0.5) {
-    //   this.props.onIndexChange(this.props.index);
-    // }
-    // console.log(previousPosition)
-    // console.log(currentPosition)
-    // console.log(event)
     this.setState({ inView: true });
   }
 
