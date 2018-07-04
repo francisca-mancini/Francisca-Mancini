@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react';
-import Observer from '@researchgate/react-intersection-observer';
+import Waypoint from 'react-waypoint';
 
 import Heading from '../../../atoms/Heading';
 import Paragraph from '../../../atoms/Paragraph';
@@ -11,24 +11,62 @@ export default class Fragrance extends PureComponent {
   constructor() {
     super();
 
-    this.handleIntersection = this.handleIntersection.bind(this);
+    this.state = {
+      inView: false,
+      containerHeight: 0
+    };
   }
 
-  handleIntersection(e) {
-    const num = Math.round(e.intersectionRatio * 100) / 100;
-    const index = parseFloat(num.toFixed(1));
+  componentDidMount() {
+    this.setContainerHeight();
+  }
 
-    if (index === 0.5) {
+  componentDidUpdate(prevProps, prevState) {
+    if (prevState.inView !== this.state.inView && this.state.inView) {
+      console.log('change');
       this.props.onIndexChange(this.props.index);
     }
   }
 
+  setContainerHeight() {
+    this.setState({ containerHeight: this.containerRef.offsetHeight / 3 });
+  }
+
+  handleWaypointEnter(previousPosition, currentPosition, event) {
+    // const num = Math.round(e.intersectionRatio * 100) / 100;
+    // const index = parseFloat(num.toFixed(1));
+
+    // if (index === 0.5) {
+    //   this.props.onIndexChange(this.props.index);
+    // }
+    // console.log(previousPosition)
+    // console.log(currentPosition)
+    // console.log(event)
+    this.setState({ inView: true });
+  }
+
+  handleWaypointLeave(e) {
+    this.setState({ inView: false });
+  }
+
   render() {
+    const { containerHeight } = this.state;
     const { children, index } = this.props;
 
     return (
-      <Observer onChange={this.handleIntersection} threshold={[0.4, 0.5, 0.51]}>
-        <div className={generalStyles.container}>
+      <Waypoint
+        onEnter={this.handleWaypointEnter.bind(this)}
+        onLeave={this.handleWaypointLeave.bind(this)}
+        fireOnRapidScroll
+        topOffset={`${containerHeight}px`}
+        bottomOffset={`${containerHeight}px`}
+      >
+        <div
+          className={generalStyles.container}
+          ref={ref => {
+            this.containerRef = ref;
+          }}
+        >
           <Heading size="m" font="serif" uppercase center>
             {children}
           </Heading>
@@ -44,7 +82,7 @@ export default class Fragrance extends PureComponent {
             </Paragraph>
           </Spacing>
         </div>
-      </Observer>
+      </Waypoint>
     );
   }
 }
