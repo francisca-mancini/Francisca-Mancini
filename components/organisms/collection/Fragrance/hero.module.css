@@ -1,0 +1,59 @@
+.container {
+  composes:
+    global(relative)
+    global(mb-40)
+  ;
+  padding-bottom: 56%;
+}
+
+.image {
+  composes:
+    global(absolute)
+    global(max-w-full)
+    global(max-h-full)
+  ;
+}
+
+.shapeContainer {
+  composes: image;
+  composes:
+    global(w-50)
+    global(pin-r)
+  ;
+  top: -10%;
+}
+
+.shapeRatio {
+  composes:
+    global(relative)
+  ;
+  padding-bottom: 100%;
+}
+
+.mainImage {
+  composes: image;
+  composes:
+    global(pin-b)
+    global(h-80)
+  ;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.secondImage {
+  composes: image;
+  composes:
+    global(pin-t)
+    global(h-80)
+  ;
+  left: 10%;
+}
+
+.thirdImage {
+  composes: image; 
+  composes:
+    global(h-50)
+  ;
+  top: 10%;
+  right: 10%;
+}

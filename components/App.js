@@ -13,14 +13,17 @@ function App({
   headerLight,
   isHome,
   footerLight,
-  hasTopPad
+  hasTopPad,
+  hasBottomPad
 }) {
   const pathname = router.pathname;
 
   return (
     <div className="root">
       <Header isLight={headerLight} isHome={isHome} />
-      <div className={classNames('pb-80', { 'pt-80': hasTopPad })}>
+      <div
+        className={classNames({ 'pt-80': hasTopPad, 'pb-80': hasBottomPad })}
+      >
         {children}
       </div>
       <Footer isLight={footerLight} />
@@ -36,6 +39,7 @@ App.propTypes = {
 
 App.defaultProps = {
   hasTopPad: true,
+  hasBottomPad: true,
   headerLight: false,
   footerLight: false
 };

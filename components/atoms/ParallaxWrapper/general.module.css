@@ -1,0 +1,5 @@
+.wrap {
+  composes:
+    global(h-full)
+    global(w-full);
+}

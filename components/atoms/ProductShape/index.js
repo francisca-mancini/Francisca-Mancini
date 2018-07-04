@@ -2,11 +2,12 @@ import React, { Component } from 'react';
 import isNode from 'detect-node';
 import PropTypes from 'prop-types';
 import throttle from 'lodash/throttle';
-import Observer from '@researchgate/react-intersection-observer';
+import Observer from 'react-intersection-observer';
 
 import ThresholdGradientFilter from '../../../lib/thresholdGradientShader';
 import findParent from '../../../lib/findParent';
 import numberToVec from '../../../lib/numberToVec';
+import hexToRgb from '../../../lib/hexToRgb';
 
 let PIXI;
 
@@ -45,8 +46,8 @@ export default class ProductShape extends Component {
     window.removeEventListener('resize', this.resize);
   }
 
-  handleVisibilityChange(e) {
-    if (e.isIntersecting) {
+  handleVisibilityChange(inView) {
+    if (inView) {
       if (this.app) this.app.ticker.start();
     } else {
       if (this.app) this.app.ticker.stop();
@@ -78,9 +79,11 @@ export default class ProductShape extends Component {
       powerPreference: 'high-performance',
       resolution: 2,
       autoResize: true,
-      transparent: false,
-      backgroundColor: 0xffffff
+      transparent: this.props.isTransparent
     });
+    if (!this.props.isTransparent) {
+      this.app.renderer.backgroundColor = 0xffffff;
+    }
 
     this.canvasRef.appendChild(this.app.view);
     this.app.ticker.add(this.renderPixi);
@@ -103,12 +106,12 @@ export default class ProductShape extends Component {
 
     const thresholdGradientFilter = new ThresholdGradientFilter();
     thresholdGradientFilter.autoFit = true;
-    thresholdGradientFilter.uniforms.c1r = numberToVec(color1[0]);
-    thresholdGradientFilter.uniforms.c1g = numberToVec(color1[1]);
-    thresholdGradientFilter.uniforms.c1b = numberToVec(color1[2]);
-    thresholdGradientFilter.uniforms.c2r = numberToVec(color2[0]);
-    thresholdGradientFilter.uniforms.c2g = numberToVec(color2[1]);
-    thresholdGradientFilter.uniforms.c2b = numberToVec(color2[2]);
+    thresholdGradientFilter.uniforms.c1r = numberToVec(hexToRgb(color1).r);
+    thresholdGradientFilter.uniforms.c1g = numberToVec(hexToRgb(color1).g);
+    thresholdGradientFilter.uniforms.c1b = numberToVec(hexToRgb(color1).b);
+    thresholdGradientFilter.uniforms.c2r = numberToVec(hexToRgb(color2).r);
+    thresholdGradientFilter.uniforms.c2g = numberToVec(hexToRgb(color2).g);
+    thresholdGradientFilter.uniforms.c2b = numberToVec(hexToRgb(color2).b);
 
     this.container.filters = [blurFilter, thresholdGradientFilter];
     this.container.filterArea = this.app.screen;
@@ -182,5 +185,10 @@ export default class ProductShape extends Component {
 
 ProductShape.propTypes = {
   color1: PropTypes.array.isRequired,
-  color2: PropTypes.array.isRequired
+  color2: PropTypes.array.isRequired,
+  isTransparent: PropTypes.bool
+};
+
+ProductShape.defaultProps = {
+  isTransparent: false
 };

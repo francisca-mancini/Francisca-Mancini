@@ -44,7 +44,7 @@ ProductThumbnail.propTypes = {
 };
 
 ProductThumbnail.defaultProps = {
-  color1: [107, 40, 84],
-  color2: [128, 174, 232],
+  color1: '#6b2854',
+  color2: '#80aee8',
   image: productImage
 };

@@ -1,0 +1,9 @@
+.container {
+  composes:
+    global(min-h-screen)
+    global(flex)
+    global(flex-col)
+    global(justify-center)
+  ;
+  padding: 140px 0;
+}

@@ -10,7 +10,6 @@
     "storybook": "start-storybook -p 9001 -c .storybook"
   },
   "dependencies": {
-    "@researchgate/react-intersection-observer": "^0.7.3",
     "@zeit/next-css": "^0.1.5",
     "apollo-boost": "^0.1.3",
     "babel-plugin-transform-assets-import-to-string": "^1.1.0",
@@ -28,8 +27,10 @@
     "react": "^16.3.2",
     "react-apollo": "2.1.0",
     "react-dom": "^16.3.2",
+    "react-intersection-observer": "^6.1.0",
     "react-player": "^1.6.4",
     "react-responsive": "^4.1.0",
+    "rellax": "^1.6.2",
     "stickybits": "^3.3.2"
   },
   "author": "Maxime Bonhomme",

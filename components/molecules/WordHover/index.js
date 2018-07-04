@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import throttle from 'lodash/throttle';
 import classNames from 'classnames';
-import Observer from '@researchgate/react-intersection-observer';
+import Observer from 'react-intersection-observer';
 
 import Nearby from '../../../lib/nearby';
 import lineEq from '../../../lib/lineEq';
@@ -57,8 +57,8 @@ export default class WordHover extends Component {
     window.removeEventListener('mousemove', this.handleMouseMove);
   }
 
-  handleVisibilityChange(e) {
-    if (e.isIntersecting) {
+  handleVisibilityChange(inView) {
+    if (inView) {
       this.RAF.start();
       window.addEventListener('mousemove', this.handleMouseMove);
     } else {
@@ -148,7 +148,7 @@ export default class WordHover extends Component {
     });
 
     return (
-      <Observer onChange={this.handleVisibilityChange}>
+      <Observer tag="span" onChange={this.handleVisibilityChange}>
         <span
           className={generalStyles.word}
           ref={ref => {
