@@ -29,17 +29,11 @@ function Home(data) {
           <Spacing position="b" type="padding" size={80}>
             <Grid gap={[0, 70]}>
               <GridItem columnSize={[12, 6]}>
-                <ProductThumbnail
-                  color1={[107, 40, 84]}
-                  color2={[128, 174, 232]}
-                />
+                <ProductThumbnail color1="#E88F56" color2="#AC1620" />
               </GridItem>
               <GridItem columnSize={[12, 6]}>
                 <div style={{ transform: 'translateY(120px)' }}>
-                  <ProductThumbnail
-                    color1={[165, 200, 253]}
-                    color2={[25, 67, 101]}
-                  />
+                  <ProductThumbnail color1="#E1C68F" color2="#C5729F" />
                 </div>
               </GridItem>
             </Grid>
@@ -47,10 +41,7 @@ function Home(data) {
           <Spacing size={80}>
             <Grid gap={[0, 70]} justify="center">
               <GridItem columnSize={[12, 6]}>
-                <ProductThumbnail
-                  color1={[107, 40, 84]}
-                  color2={[128, 174, 232]}
-                />
+                <ProductThumbnail color1="#3B3E41" color2="#CEE4FF" />
               </GridItem>
             </Grid>
           </Spacing>

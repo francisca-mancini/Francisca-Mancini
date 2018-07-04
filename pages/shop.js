@@ -35,54 +35,36 @@ export default class Shop extends PureComponent {
             <Grid gap={[0, 30]}>
               <GridItem columnSize={[12, 6, 4]}>
                 <Spacing size={70}>
-                  <ProductThumbnail
-                    color1={[182, 33, 35]}
-                    color2={[229, 139, 89]}
-                  />
+                  <ProductThumbnail color1="#E88F56" color2="#AC1620" />
                 </Spacing>
               </GridItem>
               <GridItem columnSize={[12, 6, 4]}>
                 <div style={{ transform: 'translateY(120px)' }}>
                   <Spacing size={70}>
-                    <ProductThumbnail
-                      color1={[64, 98, 126]}
-                      color2={[167, 198, 164]}
-                    />
+                    <ProductThumbnail color1="#E1C68F" color2="#C5729F" />
                   </Spacing>
                 </div>
               </GridItem>
               <GridItem columnSize={[12, 6, 4]}>
                 <Spacing size={70}>
-                  <ProductThumbnail
-                    color1={[198, 117, 158]}
-                    color2={[229, 193, 141]}
-                  />
+                  <ProductThumbnail color1="#3B3E41" color2="#CEE4FF" />
                 </Spacing>
               </GridItem>
               <GridItem columnSize={[12, 6, 4]}>
                 <Spacing size={70}>
-                  <ProductThumbnail
-                    color1={[70, 73, 78]}
-                    color2={[199, 220, 247]}
-                  />
+                  <ProductThumbnail color1="#A5C899" color2="#194365" />
                 </Spacing>
               </GridItem>
               <GridItem columnSize={[12, 6, 4]}>
                 <div style={{ transform: 'translateY(120px)' }}>
                   <Spacing size={70}>
-                    <ProductThumbnail
-                      color1={[255, 197, 237]}
-                      color2={[191, 225, 255]}
-                    />
+                    <ProductThumbnail color1="#E88F56" color2="#AC1620" />
                   </Spacing>
                 </div>
               </GridItem>
               <GridItem columnSize={[12, 6, 4]}>
                 <Spacing size={70}>
-                  <ProductThumbnail
-                    color1={[121, 66, 105]}
-                    color2={[138, 173, 229]}
-                  />
+                  <ProductThumbnail color1="#3B3E41" color2="#CEE4FF" />
                 </Spacing>
               </GridItem>
             </Grid>
@@ -98,8 +80,8 @@ export default class Shop extends PureComponent {
                     <div className="flex w-100 items-center justify-center">
                       <ProductThumbnail
                         image={layeringImage}
-                        color1={[121, 66, 105]}
-                        color2={[138, 173, 229]}
+                        color1="#6B2854"
+                        color2="#80AEE8"
                       />
                     </div>
                   </div>
@@ -117,8 +99,8 @@ export default class Shop extends PureComponent {
                     <div className="w-100 h-80 flex flex-col items-center justify-center">
                       <ProductThumbnail
                         image={layeringImage2}
-                        color1={[255, 197, 237]}
-                        color2={[191, 225, 255]}
+                        color1="#FFC5E9"
+                        color2="#BEE0FF"
                       />
                       <span className="absolute pin-b pin-l w-full pb-40 text-center">
                         <Button size="s">Shop Renaissance Layering Pack</Button>
@@ -130,29 +112,29 @@ export default class Shop extends PureComponent {
                   <div className="h-90screen flex items-center justify-center">
                     <ProductThumbnail
                       image={layeringImage3}
-                      color1={[176, 29, 35]}
-                      color2={[233, 137, 77]}
+                      color1="#6B2854"
+                      color2="#80AEE8"
                     />
                   </div>
                   <div className="h-90screen flex items-center justify-center">
                     <ProductThumbnail
                       image={layeringImage3}
-                      color1={[57, 96, 127]}
-                      color2={[166, 201, 161]}
+                      color1="#3B3E41"
+                      color2="#CEE4FF"
                     />
                   </div>
                   <div className="h-90screen flex items-center justify-center">
                     <ProductThumbnail
                       image={layeringImage3}
-                      color1={[66, 66, 77]}
-                      color2={[197, 217, 242]}
+                      color1="#E1C68F"
+                      color2="#C5729F"
                     />
                   </div>
                   <div className="h-90screen flex items-center justify-center">
                     <ProductThumbnail
                       image={layeringImage3}
-                      color1={[199, 111, 159]}
-                      color2={[243, 215, 128]}
+                      color1="#6B2854"
+                      color2="#80AEE8"
                     />
                   </div>
                 </GridItem>
