@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react';
-import Observer from '@researchgate/react-intersection-observer';
+import Observer from 'react-intersection-observer';
 import ReactPlayer from 'react-player';
 
 import generalStyles from './general.module.css';
@@ -30,17 +30,13 @@ export default class HeroVideo extends PureComponent {
     this.barRef.style.transform = `translateX(${timeFraction.toFixed(3)}%)`;
   };
 
-  handleIntersection(e) {
-    this.setState({ isPlaying: e.isIntersecting });
+  handleIntersection(inView) {
+    this.setState({ isPlaying: inView });
   }
 
   render() {
-    const options = {
-      onChange: this.handleIntersection
-    };
-
     return (
-      <Observer {...options}>
+      <Observer onChange={this.handleIntersection}>
         <div id="heroVideo" className={generalStyles.hero}>
           <ReactPlayer
             ref={ref => {

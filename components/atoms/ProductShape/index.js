@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import isNode from 'detect-node';
 import PropTypes from 'prop-types';
 import throttle from 'lodash/throttle';
-import Observer from '@researchgate/react-intersection-observer';
+import Observer from 'react-intersection-observer';
 
 import ThresholdGradientFilter from '../../../lib/thresholdGradientShader';
 import findParent from '../../../lib/findParent';
@@ -46,8 +46,8 @@ export default class ProductShape extends Component {
     window.removeEventListener('resize', this.resize);
   }
 
-  handleVisibilityChange(e) {
-    if (e.isIntersecting) {
+  handleVisibilityChange(inView) {
+    if (inView) {
       if (this.app) this.app.ticker.start();
     } else {
       if (this.app) this.app.ticker.stop();

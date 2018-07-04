@@ -46,13 +46,7 @@ export default class Collection extends PureComponent {
   constructor() {
     super();
 
-    this.state = {
-      index: 0,
-      bgColor: data[0].bgColour,
-      title: data[0].title,
-      shopSlug: data[0].slug,
-      layerSlug: data[0].layeringPack
-    };
+    this.state = { index: 0 };
   }
 
   componentDidMount() {
@@ -60,21 +54,16 @@ export default class Collection extends PureComponent {
   }
 
   handleNewIndex(index) {
-    const item = data[index];
-
     this.setState({
-      index: index,
-      bgColor: item.bgColor,
-      title: item.title,
-      shopSlug: item.slug,
-      layerSlug: item.layeringPack
+      index
     });
   }
 
   render() {
-    const { bgColor, title, shopSlug, layerSlug } = this.state;
+    const { index } = this.state;
+    const dataItem = data[index];
     const containerStyle = {
-      backgroundColor: bgColor,
+      backgroundColor: dataItem.bgColor,
       transition: '0.8s ease-in-out'
     };
     const stickyStyle = {
@@ -100,10 +89,10 @@ export default class Collection extends PureComponent {
                     className="stickybits flex flex-col h-screen justify-center"
                     style={stickyStyle}
                   >
-                    {data.map((item, index) => {
+                    {data.map((item, i) => {
                       const itemClassName = classNames({
-                        'opacity-100': index === this.state.index,
-                        'opacity-50': index !== this.state.index
+                        'opacity-100': i === index,
+                        'opacity-50': i !== index
                       });
 
                       return (
@@ -124,11 +113,11 @@ export default class Collection extends PureComponent {
                   </div>
                 </GridItem>
                 <GridItem columnSize={8}>
-                  {data.map((item, index) => {
+                  {data.map((item, i) => {
                     return (
                       <Fragrance
                         key={item.slug}
-                        index={index}
+                        index={i}
                         onIndexChange={this.handleNewIndex.bind(this)}
                         color1={item.color1}
                         color2={item.color2}
@@ -144,13 +133,13 @@ export default class Collection extends PureComponent {
                     style={stickyStyle}
                   >
                     <Button size="s">
-                      <Link href={shopSlug}>{title}</Link>
+                      <Link href={dataItem.shopSlug}>{dataItem.title}</Link>
                     </Button>
                     <Spacing size={20} position="t">
                       <Link
                         className="opacity-50"
                         tag="a"
-                        href={layerSlug}
+                        href={dataItem.layerSlug}
                         underline
                       >
                         <Heading size="xs">Shop layering pack</Heading>

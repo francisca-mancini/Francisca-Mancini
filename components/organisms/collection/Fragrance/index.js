@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react';
-import Waypoint from 'react-waypoint';
+import Observer from 'react-intersection-observer';
 import classNames from 'classnames';
 
 import Heading from '../../../atoms/Heading';
@@ -17,49 +17,17 @@ import secondImage1 from '../../../../static/images/_temp/collection/second1.png
 import thirdImage1 from '../../../../static/images/_temp/collection/third1.png';
 
 export default class Fragrance extends PureComponent {
-  constructor() {
-    super();
-
-    this.state = {
-      inView: false,
-      containerHeight: 0
-    };
-  }
-
-  componentDidMount() {
-    this.setContainerHeight();
-  }
-
-  componentDidUpdate(prevProps, prevState) {
-    if (prevState.inView !== this.state.inView && this.state.inView) {
+  handleIntersection(inView) {
+    if (inView) {
       this.props.onIndexChange(this.props.index);
     }
   }
 
-  setContainerHeight() {
-    this.setState({ containerHeight: window.innerHeight / 2.5 });
-  }
-
-  handleWaypointEnter(previousPosition, currentPosition, event) {
-    this.setState({ inView: true });
-  }
-
-  handleWaypointLeave(e) {
-    this.setState({ inView: false });
-  }
-
   render() {
-    const { containerHeight } = this.state;
-    const { children, index, color1, color2 } = this.props;
+    const { children, color1, color2 } = this.props;
 
     return (
-      <Waypoint
-        onEnter={this.handleWaypointEnter.bind(this)}
-        onLeave={this.handleWaypointLeave.bind(this)}
-        fireOnRapidScroll
-        topOffset={`${containerHeight}px`}
-        bottomOffset={`${containerHeight}px`}
-      >
+      <Observer onChange={this.handleIntersection.bind(this)} threshold={0.5}>
         <div className={generalStyles.container}>
           <div className={heroStyles.container}>
             <ParallaxWrapper speed={1}>
@@ -93,24 +61,28 @@ export default class Fragrance extends PureComponent {
               />
             </ParallaxWrapper>
           </div>
-          <Heading size="m" font="serif" uppercase center>
-            {children}
-          </Heading>
+          <ParallaxWrapper speed={1.2} positionAbsolute={false}>
+            <Heading size="m" font="serif" uppercase center>
+              {children}
+            </Heading>
+          </ParallaxWrapper>
           <Spacing size={30}>
             <MaxWidth center value={720}>
-              <Paragraph size="xl" font="jenson">
-                This highly spiritual scent, with Frankincense, incense, musks,
-                and fire it can be found after a trip across the north of
-                Africa, from the High Atlas to the Nile. There is an altar
-                carved in stone, and to the right, on the floor there is an
-                ancient vase. Inside this vase, set aside for ceremonial
-                offerings, lays Atlantica, a magical ritual perfume made out of
-                the most precious oils.
-              </Paragraph>
+              <ParallaxWrapper positionAbsolute={false}>
+                <Paragraph size="xl" font="jenson">
+                  This highly spiritual scent, with Frankincense, incense,
+                  musks, and fire it can be found after a trip across the north
+                  of Africa, from the High Atlas to the Nile. There is an altar
+                  carved in stone, and to the right, on the floor there is an
+                  ancient vase. Inside this vase, set aside for ceremonial
+                  offerings, lays Atlantica, a magical ritual perfume made out
+                  of the most precious oils.
+                </Paragraph>
+              </ParallaxWrapper>
             </MaxWidth>
           </Spacing>
         </div>
-      </Waypoint>
+      </Observer>
     );
   }
 }
