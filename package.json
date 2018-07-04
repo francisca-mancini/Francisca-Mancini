@@ -31,6 +31,7 @@
     "react-player": "^1.6.4",
     "react-responsive": "^4.1.0",
     "react-waypoint": "^8.0.2",
+    "rellax": "^1.6.2",
     "stickybits": "^3.3.2"
   },
   "author": "Maxime Bonhomme",
