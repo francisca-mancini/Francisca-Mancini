@@ -19,18 +19,24 @@ const data = [
   {
     title: 'Atlantica',
     bgColor: '#d9d9e2',
+    color1: '#E1C68F',
+    color2: '#C5729F',
     slug: '/atlantica',
     layeringPack: '/layering-atlantica'
   },
   {
     title: 'Sadokan',
     bgColor: '#edfff4',
+    color1: '#A5C899',
+    color2: '#194365',
     slug: '/sadokan',
     layeringPack: '/layering-sadokan'
   },
   {
     title: 'Renaissance',
     bgColor: '#fef3ec',
+    color1: '#E88F56',
+    color2: '#AC1620',
     slug: '/renaissance',
     layeringPack: '/layering-renaissance'
   }
@@ -124,6 +130,8 @@ export default class Collection extends PureComponent {
                         key={item.slug}
                         index={index}
                         onIndexChange={this.handleNewIndex.bind(this)}
+                        color1={item.color1}
+                        color2={item.color2}
                       >
                         {item.title}
                       </Fragrance>

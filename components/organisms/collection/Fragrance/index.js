@@ -1,11 +1,18 @@
 import React, { PureComponent } from 'react';
 import Waypoint from 'react-waypoint';
+import classNames from 'classnames';
 
 import Heading from '../../../atoms/Heading';
 import Paragraph from '../../../atoms/Paragraph';
 import Spacing from '../../../atoms/Spacing';
+import ProductShape from '../../../atoms/ProductShape';
 
 import generalStyles from './general.module.css';
+import heroStyles from './hero.module.css';
+
+import mainImage1 from '../../../../static/images/_temp/collection/main1.png';
+import secondImage1 from '../../../../static/images/_temp/collection/second1.png';
+import thirdImage1 from '../../../../static/images/_temp/collection/third1.png';
 
 export default class Fragrance extends PureComponent {
   constructor() {
@@ -28,7 +35,7 @@ export default class Fragrance extends PureComponent {
   }
 
   setContainerHeight() {
-    this.setState({ containerHeight: this.containerRef.offsetHeight / 3 });
+    this.setState({ containerHeight: window.innerHeight / 2.5 });
   }
 
   handleWaypointEnter(previousPosition, currentPosition, event) {
@@ -41,7 +48,7 @@ export default class Fragrance extends PureComponent {
 
   render() {
     const { containerHeight } = this.state;
-    const { children, index } = this.props;
+    const { children, index, color1, color2 } = this.props;
 
     return (
       <Waypoint
@@ -51,12 +58,27 @@ export default class Fragrance extends PureComponent {
         topOffset={`${containerHeight}px`}
         bottomOffset={`${containerHeight}px`}
       >
-        <div
-          className={generalStyles.container}
-          ref={ref => {
-            this.containerRef = ref;
-          }}
-        >
+        <div className={generalStyles.container}>
+          <div className={heroStyles.container}>
+            <div className={heroStyles.shapeContainer}>
+              <div
+                className={classNames(heroStyles.shapeRatio, 'pixiContainer')}
+              >
+                <ProductShape isTransparent color1={color1} color2={color2} />
+              </div>
+            </div>
+            <img
+              className={heroStyles.thirdImage}
+              src={thirdImage1}
+              alt="lol"
+            />
+            <img
+              className={heroStyles.secondImage}
+              src={secondImage1}
+              alt="lol"
+            />
+            <img className={heroStyles.mainImage} src={mainImage1} alt="lol" />
+          </div>
           <Heading size="m" font="serif" uppercase center>
             {children}
           </Heading>
