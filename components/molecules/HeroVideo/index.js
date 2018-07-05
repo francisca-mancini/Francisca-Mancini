@@ -1,6 +1,7 @@
 import React, { PureComponent } from 'react';
 import Observer from 'react-intersection-observer';
 import ReactPlayer from 'react-player';
+import PropTypes from 'prop-types';
 
 import generalStyles from './general.module.css';
 
@@ -19,6 +20,14 @@ export default class HeroVideo extends PureComponent {
     this.handleIntersection = this.handleIntersection.bind(this);
   }
 
+  componentDidUpdate(prevProps) {
+    if (prevProps.isPlaying !== this.props.isPlaying && this.props.isPlaying) {
+      setTimeout(() => {
+        this.setState({ isPlaying: true });
+      }, 1150); // quick&dirty: following Loader's .containerHide timings
+    }
+  }
+
   onDuration = duration => {
     this.duration = duration;
   };
@@ -31,6 +40,9 @@ export default class HeroVideo extends PureComponent {
   };
 
   handleIntersection(inView) {
+    const { isPlaying } = this.props;
+
+    if (!isPlaying) return;
     this.setState({ isPlaying: inView });
   }
 
@@ -69,3 +81,11 @@ export default class HeroVideo extends PureComponent {
     );
   }
 }
+
+HeroVideo.propTypes = {
+  isPlaying: PropTypes.bool
+};
+
+HeroVideo.defaultProps = {
+  isPlaying: true
+};

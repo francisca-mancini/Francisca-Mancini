@@ -19,7 +19,7 @@ function App({
   const pathname = router.pathname;
 
   return (
-    <div className="root">
+    <div className="root" id="root">
       <Header isLight={headerLight} isHome={isHome} />
       <div
         className={classNames({ 'pt-80': hasTopPad, 'pb-80': hasBottomPad })}

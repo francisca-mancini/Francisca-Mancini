@@ -1,0 +1,158 @@
+.container {
+  composes:
+    global(fixed)
+    global(pin)
+    global(z-full)
+    global(bg-black)
+    global(overflow-hidden)
+  ;
+
+  transition: all 0.9s cubic-bezier(0.785, 0.135, 0.2, 1);
+}
+
+.containerHide {
+  animation: hideContainer 0.15s 1s 1 ease-out forwards;
+}
+
+.inner {
+  composes:
+    global(flex)
+    global(items-center)
+    global(justify-center)
+    global(h-full)
+    global(bg-cover)
+  ;
+
+  transition: 0.9s cubic-bezier(0.785, 0.135, 0.2, 1);
+  transform: scale(1.1);
+  will-change: transform;
+}
+
+.innerHide {
+  transform: scale(1);
+}
+
+.svg,
+.svgMask,
+.holderInner {
+  width: 240px;
+  height: 130px;
+  transform-origin: bottom right; 
+  will-change: transform;
+}
+
+.strokeHolder,
+.maskHolder,
+.holder {
+  width: 240px;
+  height: 130px;
+  composes:
+    global(absolute)
+    global(flex)
+    global(items-center)
+    global(justify-center)
+    global(overflow-hidden)
+  ;
+  will-change: transform;
+  top: 50%;
+  left: 50%;
+  transform: translate(-120px, -65px);
+  transform-origin: bottom right;
+}
+
+.holder {
+  transform: translate(-120px, -65px) rotate(145deg);
+}
+.holderInner {
+  transform: rotate(-145deg);
+}
+
+.strokeHolder {
+  animation: strokeHolderOut 1.3s 2s 1 forwards cubic-bezier(0.770, 0, 0.175, 1.000);
+}
+.svg {
+  animation: strokeOut 1.3s 2s 1 forwards cubic-bezier(0.770, 0, 0.175, 1.000);
+}
+
+.maskHolder {
+  transform: translate(-120px, -65px) rotate(-90deg);
+  animation: maskHolderIn 1.3s 2s 1 forwards cubic-bezier(0.770, 0, 0.175, 1.000);
+  transform-origin: top right;
+}
+.svgMask {
+  animation: maskIn 1.3s 2s 1 forwards cubic-bezier(0.770, 0, 0.175, 1.000);
+  transform: rotate(90deg);
+  transform-origin: top right;
+}
+
+.path {
+  /* animation: stroke 1.3s 0.5s 1 forwards cubic-bezier(0.445, 0.050, 0.650, 0.900); */
+}
+/* 
+.path1 {
+  composes: path;
+  stroke-dasharray: 2000px;
+  stroke-dashoffset: 2000px;
+}
+.path2 {
+  composes: path;
+  stroke-dasharray: 780px;
+  stroke-dashoffset: 780px;
+}
+.path3 {
+  composes: path;
+  stroke-dasharray: 600px;
+  stroke-dashoffset: 600px;
+}
+.path4 {
+  composes: path;
+  stroke-dasharray: 600px;
+  stroke-dashoffset: 600px;
+}
+.path5 {
+  composes: path;
+  stroke-dasharray: 630px;
+  stroke-dashoffset: 630px;
+}
+.path6 {
+  composes: path;
+  stroke-dasharray: 1950px;
+  stroke-dashoffset: 1950px;
+} */
+
+@keyframes stroke {
+  100% {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes strokeOut {
+  100% {
+    transform: rotate(-145deg);
+  }
+}
+
+@keyframes strokeHolderOut {
+  100% {
+    transform: translate(-120px, -65px) rotate(145deg);
+  }
+}
+
+@keyframes maskHolderIn {
+  100% {
+    transform: translate(-120px, -65px) rotate(0);
+  }
+}
+
+@keyframes maskIn {
+  100% {
+    transform: rotate(0);
+  }
+}
+
+@keyframes hideContainer {
+  100% {
+    opacity: 0;
+    visibility: hidden;
+  }
+}
