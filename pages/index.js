@@ -1,6 +1,5 @@
 import React, { PureComponent } from 'react';
 import withData from '../lib/withData';
-import NoSSR from 'react-no-ssr';
 
 import App from '../components/App';
 
