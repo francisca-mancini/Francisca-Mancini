@@ -58,7 +58,11 @@ class Header extends Component {
   }
 
   handleScroll(e) {
-    const y = e.pageY;
+    let y = e.pageY;
+
+    if (e.pageY === undefined) {
+      y = window.pageYOffset;
+    }
 
     if (this.props.isHome && y >= this.heroHeight) {
       this.setState({ isLight: false });
