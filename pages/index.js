@@ -45,9 +45,8 @@ class Home extends PureComponent {
     const { isLoaded, secondTime } = this.state;
     const collectionProps = {
       style: {
-        transition: '1.1s cubic-bezier(0.770, 0, 0.175, 1.000)',
-        opacity: isLoaded ? 1 : 0,
-        transform: isLoaded ? 'translateY(0)' : 'translateY(200px)'
+        transition: '1.1s 0.5s cubic-bezier(0.770, 0, 0.175, 1.000)',
+        opacity: isLoaded ? 1 : 0
       }
     };
 
@@ -56,11 +55,11 @@ class Home extends PureComponent {
         {!secondTime && <Loader onUpdate={this.onLoaderUpdate} />}
         <HeroVideo isPlaying={isLoaded} />
         <PageWrap>
-          <Spacing size={80} type="padding">
-            <div {...collectionProps}>
+          <div {...collectionProps}>
+            <Spacing size={80} type="padding">
               <CollectionIntro />
-            </div>
-          </Spacing>
+            </Spacing>
+          </div>
           <Spacing size={80} type="padding">
             <Spacing position="b">
               <Heading tag="h3" size="xl" font="jenson" center>
