@@ -40,13 +40,13 @@ export default class Fragrance extends PureComponent {
               </div>
             </ParallaxWrapper>
             <ParallaxWrapper speed={1.7}>
-              <img className={heroStyles.thirdImage} src={image3} alt="lol" />
+              <img className={heroStyles.thirdImage} src={image3} alt="" />
             </ParallaxWrapper>
             <ParallaxWrapper speed={2.2}>
-              <img className={heroStyles.secondImage} src={image2} alt="lol" />
+              <img className={heroStyles.secondImage} src={image2} alt="" />
             </ParallaxWrapper>
             <ParallaxWrapper speed={2.8}>
-              <img className={heroStyles.mainImage} src={image1} alt="lol" />
+              <img className={heroStyles.mainImage} src={image1} alt="" />
             </ParallaxWrapper>
           </div>
           <ParallaxWrapper speed={1.2} positionAbsolute={false}>

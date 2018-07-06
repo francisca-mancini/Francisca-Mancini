@@ -128,10 +128,12 @@ export default class Collection extends PureComponent {
                         <div className={itemClassName}>
                           <Spacing key={item.slug} size={10}>
                             <Heading
+                              className="leading-none"
                               tag="h3"
                               font="serif"
                               size="xxxs"
                               uppercase
+                              tracking="02"
                             >
                               {item.title}
                             </Heading>
