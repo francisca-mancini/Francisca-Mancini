@@ -24,7 +24,7 @@ export default class Fragrance extends PureComponent {
   }
 
   render() {
-    const { children, color1, color2 } = this.props;
+    const { children, color1, color2, image1, image2, image3 } = this.props;
 
     return (
       <Observer onChange={this.handleIntersection.bind(this)} threshold={0.5}>
@@ -40,25 +40,13 @@ export default class Fragrance extends PureComponent {
               </div>
             </ParallaxWrapper>
             <ParallaxWrapper speed={1.7}>
-              <img
-                className={heroStyles.thirdImage}
-                src={thirdImage1}
-                alt="lol"
-              />
+              <img className={heroStyles.thirdImage} src={image3} alt="lol" />
             </ParallaxWrapper>
             <ParallaxWrapper speed={2.2}>
-              <img
-                className={heroStyles.secondImage}
-                src={secondImage1}
-                alt="lol"
-              />
+              <img className={heroStyles.secondImage} src={image2} alt="lol" />
             </ParallaxWrapper>
             <ParallaxWrapper speed={2.8}>
-              <img
-                className={heroStyles.mainImage}
-                src={mainImage1}
-                alt="lol"
-              />
+              <img className={heroStyles.mainImage} src={image1} alt="lol" />
             </ParallaxWrapper>
           </div>
           <ParallaxWrapper speed={1.2} positionAbsolute={false}>
@@ -69,7 +57,7 @@ export default class Fragrance extends PureComponent {
           <Spacing size={30}>
             <MaxWidth center value={720}>
               <ParallaxWrapper positionAbsolute={false}>
-                <Paragraph size="xl" font="jenson">
+                <Paragraph indent justified size="xl" font="jenson">
                   This highly spiritual scent, with Frankincense, incense,
                   musks, and fire it can be found after a trip across the north
                   of Africa, from the High Atlas to the Nile. There is an altar

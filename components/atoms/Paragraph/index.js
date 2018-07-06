@@ -25,10 +25,14 @@ export default function Paragraph({
   center,
   justified,
   weight,
-  color
+  color,
+  indent
 }) {
   const ParagraphTag = tag;
   const sizeToClass = propToClassName(size, sizeMap);
+  const paragraphStyles = {
+    'text-indent': indent ? '10%' : '0'
+  };
   const paragraphClassName = classNames(
     sizeToClass,
     `font-${font}`,
@@ -41,7 +45,11 @@ export default function Paragraph({
     }
   );
 
-  return <ParagraphTag className={paragraphClassName}>{children}</ParagraphTag>;
+  return (
+    <ParagraphTag className={paragraphClassName} style={paragraphStyles}>
+      {children}
+    </ParagraphTag>
+  );
 }
 
 Paragraph.propTypes = {
@@ -51,7 +59,8 @@ Paragraph.propTypes = {
   size: PropTypes.oneOf(Object.keys(sizeMap)),
   center: PropTypes.bool,
   font: PropTypes.oneOf(['sans', 'serif']),
-  weight: PropTypes.string
+  weight: PropTypes.string,
+  indent: PropTypes.bool
 };
 
 Paragraph.defaultProps = {
@@ -59,5 +68,6 @@ Paragraph.defaultProps = {
   size: 'm',
   center: false,
   font: 'sans',
-  weight: 'normal'
+  weight: 'normal',
+  indent: false
 };
