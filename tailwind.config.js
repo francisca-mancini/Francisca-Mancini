@@ -216,6 +216,7 @@ module.exports = {
   tracking: {
     tight: '-0.05em',
     normal: '0',
+    '02': '0.2rem',
     wide: '0.06em'
   },
 

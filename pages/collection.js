@@ -15,6 +15,18 @@ import HeroVideo from '../components/molecules/HeroVideo';
 import CollectionIntro from '../components/organisms/collection/CollectionIntro';
 import Fragrance from '../components/organisms/collection/Fragrance';
 
+import atlantica1 from '../static/images/_temp/collection/atlantica1.png';
+import atlantica2 from '../static/images/_temp/collection/atlantica2.jpg';
+import atlantica3 from '../static/images/_temp/collection/atlantica3.jpg';
+
+import sadokan1 from '../static/images/_temp/collection/sadokan1.png';
+import sadokan2 from '../static/images/_temp/collection/sadokan2.jpg';
+import sadokan3 from '../static/images/_temp/collection/sadokan3.jpg';
+
+import renaissance1 from '../static/images/_temp/collection/renaissance1.png';
+import renaissance2 from '../static/images/_temp/collection/renaissance2.jpg';
+import renaissance3 from '../static/images/_temp/collection/renaissance3.jpg';
+
 const data = [
   {
     title: 'Atlantica',
@@ -22,7 +34,10 @@ const data = [
     color1: '#E1C68F',
     color2: '#C5729F',
     slug: '/atlantica',
-    layeringPack: '/layering-atlantica'
+    layeringPack: '/layering-atlantica',
+    image1: atlantica1,
+    image2: atlantica2,
+    image3: atlantica3
   },
   {
     title: 'Sadokan',
@@ -30,7 +45,10 @@ const data = [
     color1: '#A5C899',
     color2: '#194365',
     slug: '/sadokan',
-    layeringPack: '/layering-sadokan'
+    layeringPack: '/layering-sadokan',
+    image1: sadokan1,
+    image2: sadokan2,
+    image3: sadokan3
   },
   {
     title: 'Renaissance',
@@ -38,7 +56,10 @@ const data = [
     color1: '#E88F56',
     color2: '#AC1620',
     slug: '/renaissance',
-    layeringPack: '/layering-renaissance'
+    layeringPack: '/layering-renaissance',
+    image1: renaissance1,
+    image2: renaissance2,
+    image3: renaissance3
   }
 ];
 
@@ -107,10 +128,12 @@ export default class Collection extends PureComponent {
                         <div className={itemClassName}>
                           <Spacing key={item.slug} size={10}>
                             <Heading
+                              className="leading-none"
                               tag="h3"
                               font="serif"
                               size="xxxs"
                               uppercase
+                              tracking="02"
                             >
                               {item.title}
                             </Heading>
@@ -129,6 +152,9 @@ export default class Collection extends PureComponent {
                         onIndexChange={this.handleNewIndex.bind(this)}
                         color1={item.color1}
                         color2={item.color2}
+                        image1={item.image1}
+                        image2={item.image2}
+                        image3={item.image3}
                       >
                         {item.title}
                       </Fragrance>

@@ -58,7 +58,11 @@ class Header extends Component {
   }
 
   handleScroll(e) {
-    const y = e.pageY;
+    let y = e.pageY;
+
+    if (e.pageY === undefined) {
+      y = window.pageYOffset;
+    }
 
     if (this.props.isHome && y >= this.heroHeight) {
       this.setState({ isLight: false });
@@ -91,14 +95,14 @@ class Header extends Component {
       href,
       isDropdown,
       isDropdownTrigger,
-      zIndex
+      zIndex,
+      isCollection
     }) => {
       const pathname = this.props.router.pathname;
-      const notActive =
-        pathname === '/' ||
-        pathname === '/product' ||
-        pathname === '/collection';
-      const isActive = pathname === href;
+      const notActive = pathname === '/';
+      const isShop = pathname === '/product' && href === '/shop';
+      const isCollect = pathname === '/collection' && isCollection;
+      const isActive = pathname === href || isShop || isCollect;
 
       const linkClassName = classNames(generalStyles.link, {
         [generalStyles.dropdownTrigger]: isDropdownTrigger,
@@ -166,7 +170,12 @@ class Header extends Component {
                 if (matches) {
                   return (
                     <InlineGrid>
-                      <NavLink className="relative" isDropdownTrigger>
+                      <NavLink
+                        isCollection
+                        className="relative"
+                        href="#"
+                        isDropdownTrigger
+                      >
                         Collections
                         <CollectionDropdown />
                       </NavLink>

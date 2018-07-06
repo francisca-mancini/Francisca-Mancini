@@ -13,12 +13,12 @@ const Note = ({ label, children }) => {
       <MaxWidth value={500} center>
         <InlineGrid justify="start" align="center">
           <div className={generalStyles.noteLeft}>
-            <Heading size="xxl" uppercase>
+            <Heading size="xl" uppercase>
               {label}
             </Heading>
           </div>
           <div className={generalStyles.noteRight}>
-            <Heading size="xxl" font="jenson">
+            <Heading size="xl" font="jenson">
               {children}
             </Heading>
           </div>

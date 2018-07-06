@@ -3,9 +3,9 @@
     global(absolute)
     global(pin-l)
     global(pin-b)
-    global(w-full)
     global(pb-30)
   ;
+  width: calc(100% + 30px);
 }
 
 .centerFlex {
@@ -45,8 +45,8 @@
     global(opacity-50)
     global(cursor-pointer)
   ;
-  width: calc(100% + 100px);
-  left: calc(100% + 50px);
+  width: calc(100% + 60px);
+  left: calc(100% + 30px);
   /* transform: translateX(-50%); */
 }
 
@@ -56,6 +56,7 @@
 
 .footerLeft {
   composes: footer;
+  left: -30px;
 }
 
 .footerRight {
@@ -63,4 +64,5 @@
   composes:
     global(text-right)
   ;
+  right: -30px;
 }
