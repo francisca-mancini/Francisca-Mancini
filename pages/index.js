@@ -1,5 +1,6 @@
 import React, { PureComponent } from 'react';
 import withData from '../lib/withData';
+import NoSSR from 'react-no-ssr';
 
 import App from '../components/App';
 
@@ -20,10 +21,21 @@ class Home extends PureComponent {
     super();
 
     this.state = {
-      isLoaded: false
+      isLoaded: true,
+      secondTime: false
     };
 
     this.onLoaderUpdate = this.onLoaderUpdate.bind(this);
+  }
+
+  componentDidMount() {
+    var firstTime = sessionStorage.getItem('hasLoadedAlready');
+
+    if (!firstTime) {
+      this.setState({ isLoaded: false, secondTime: false });
+    } else {
+      this.setState({ isLoaded: true, secondTime: true });
+    }
   }
 
   onLoaderUpdate(isLoaded) {
@@ -31,15 +43,24 @@ class Home extends PureComponent {
   }
 
   render() {
-    const { isLoaded } = this.state;
+    const { isLoaded, secondTime } = this.state;
+    const collectionProps = {
+      style: {
+        transition: '1.1s cubic-bezier(0.770, 0, 0.175, 1.000)',
+        opacity: isLoaded ? 1 : 0,
+        transform: isLoaded ? 'translateY(0)' : 'translateY(200px)'
+      }
+    };
 
     return (
-      <App hasTopPad={false} headerLight isHome>
-        <Loader onUpdate={this.onLoaderUpdate} />
+      <App hasTopPad={false} headerLight isHome isLoaded={isLoaded}>
+        {!secondTime && <Loader onUpdate={this.onLoaderUpdate} />}
         <HeroVideo isPlaying={isLoaded} />
         <PageWrap>
           <Spacing size={80} type="padding">
-            <CollectionIntro />
+            <div {...collectionProps}>
+              <CollectionIntro />
+            </div>
           </Spacing>
           <Spacing size={80} type="padding">
             <Spacing position="b">

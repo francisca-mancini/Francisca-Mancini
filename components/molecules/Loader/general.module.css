@@ -21,6 +21,7 @@
     global(justify-center)
     global(h-full)
     global(bg-cover)
+    global(bg-center)
   ;
 
   transition: 0.9s cubic-bezier(0.785, 0.135, 0.2, 1);
@@ -61,11 +62,22 @@
 }
 
 .holder {
-  transform: translate(-120px, -65px) rotate(145deg);
+  transform: translate(-120px, -65px) rotate(-100deg);
+  animation: maskHolderIn 1.3s 0.3s 1 forwards cubic-bezier(0.770, 0, 0.175, 1.000);
+  transition: 1.3s cubic-bezier(0.770, 0, 0.175, 1.000);
 }
 .holderInner {
-  transform: rotate(-145deg);
+  transform: rotate(100deg);
+  animation: maskIn 1.3s 0.3s 1 forwards cubic-bezier(0.770, 0, 0.175, 1.000);
 }
+/* .holderOut {
+  transform: translate(-120px, -195px) !important;
+  transition: 1.3s cubic-bezier(0.770, 0, 0.175, 1.000) !important;
+}
+.holderInnerOut {
+  transform: translateY(-130px) !important;
+  transition: 1.3s cubic-bezier(0.770, 0, 0.175, 1.000) !important;
+} */
 
 .strokeHolder {
   animation: strokeHolderOut 1.3s 2s 1 forwards cubic-bezier(0.770, 0, 0.175, 1.000);
@@ -85,53 +97,11 @@
   transform-origin: top right;
 }
 
-.path {
-  /* animation: stroke 1.3s 0.5s 1 forwards cubic-bezier(0.445, 0.050, 0.650, 0.900); */
-}
-/* 
-.path1 {
-  composes: path;
-  stroke-dasharray: 2000px;
-  stroke-dashoffset: 2000px;
-}
-.path2 {
-  composes: path;
-  stroke-dasharray: 780px;
-  stroke-dashoffset: 780px;
-}
-.path3 {
-  composes: path;
-  stroke-dasharray: 600px;
-  stroke-dashoffset: 600px;
-}
-.path4 {
-  composes: path;
-  stroke-dasharray: 600px;
-  stroke-dashoffset: 600px;
-}
-.path5 {
-  composes: path;
-  stroke-dasharray: 630px;
-  stroke-dashoffset: 630px;
-}
-.path6 {
-  composes: path;
-  stroke-dasharray: 1950px;
-  stroke-dashoffset: 1950px;
-} */
-
-@keyframes stroke {
-  100% {
-    stroke-dashoffset: 0;
-  }
-}
-
 @keyframes strokeOut {
   100% {
     transform: rotate(-145deg);
   }
 }
-
 @keyframes strokeHolderOut {
   100% {
     transform: translate(-120px, -65px) rotate(145deg);
@@ -143,7 +113,6 @@
     transform: translate(-120px, -65px) rotate(0);
   }
 }
-
 @keyframes maskIn {
   100% {
     transform: rotate(0);

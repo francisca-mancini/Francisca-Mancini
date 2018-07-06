@@ -1,13 +1,13 @@
 import React, { PureComponent } from 'react';
 import imagesLoaded from 'imagesloaded';
 import classNames from 'classnames';
-import { tween, styler } from 'popmotion';
+import { withRouter } from 'next/router';
 
 import generalStyles from './general.module.css';
 
 import loadingImage from '../../../static/images/loading-bg.jpg';
 
-export default class Loader extends PureComponent {
+class Loader extends PureComponent {
   constructor() {
     super();
 
@@ -96,6 +96,12 @@ export default class Loader extends PureComponent {
     const innerClassName = classNames(generalStyles.inner, {
       [generalStyles.innerHide]: hideLoader
     });
+    const holderClassName = classNames(generalStyles.holder, {
+      [generalStyles.holderOut]: hideLoader
+    });
+    const holderInnerClassName = classNames(generalStyles.holderInner, {
+      [generalStyles.holderInnerOut]: hideLoader
+    });
 
     return (
       <div
@@ -111,8 +117,8 @@ export default class Loader extends PureComponent {
           }}
           style={{ backgroundImage: `url(${loadingImage})` }}
         >
-          <div className={generalStyles.holder}>
-            <div className={generalStyles.holderInner}>
+          <div className={holderClassName}>
+            <div className={holderInnerClassName}>
               <div className={generalStyles.strokeHolder}>
                 <svg
                   className={generalStyles.svg}
@@ -206,3 +212,5 @@ export default class Loader extends PureComponent {
     );
   }
 }
+
+export default withRouter(Loader);

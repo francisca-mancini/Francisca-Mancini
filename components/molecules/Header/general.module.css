@@ -5,6 +5,15 @@
     global(w-full)
     global(py-30)
   ;
+  transition: 1.1s 0.5s cubic-bezier(0.770, 0, 0.175, 1.000);
+}
+
+.headerHidden {
+  transform: translateY(-100%);
+}
+
+.headerShow {
+  transform: translateY(0);
 }
 
 .link {

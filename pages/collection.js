@@ -51,12 +51,20 @@ export default class Collection extends PureComponent {
 
   componentDidMount() {
     stickybits('.stickybits');
+
+    this.triggerSafariHack();
   }
 
   handleNewIndex(index) {
     this.setState({
       index
     });
+  }
+
+  triggerSafariHack() {
+    var e = document.createEvent('HTMLEvents');
+    e.initEvent('resize', false, true);
+    window.dispatchEvent(e);
   }
 
   render() {

@@ -74,8 +74,12 @@ class Header extends Component {
   }
 
   render() {
+    const { isLoaded } = this.props;
     const { isLight } = this.state;
-    const headerClassName = classNames(generalStyles.header);
+    const headerClassName = classNames(generalStyles.header, {
+      [generalStyles.headerHidden]: !isLoaded,
+      [generalStyles.headerShow]: isLoaded
+    });
     const logoSrc = isLight ? logoWhite : logoBlack;
     const logoMiniSrc = isLight ? logoMiniWhite : logoMiniBlack;
     const cartSrc = isLight ? cartWhite : cartBlack;
