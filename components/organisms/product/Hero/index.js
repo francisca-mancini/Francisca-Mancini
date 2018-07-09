@@ -53,9 +53,7 @@ class Hero extends PureComponent {
             className={classNames('stickybits', generalStyles.left)}
           >
             <Paragraph weight="semilight" center size="s">
-              Is a highly spiritual scent, with Frankincense, incense, musks,
-              and fire, that can be found after a trip across the north of
-              Africa, from the High Atlas to the Nile.
+              {description}
             </Paragraph>
             <div className={generalStyles.footerLeft}>
               <Paragraph size="s">
@@ -132,6 +130,7 @@ const query = gql`
                 currencyCode
               }
             }
+            tags
             variants(first: 250) {
               pageInfo {
                 hasNextPage

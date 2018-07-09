@@ -1,9 +1,16 @@
+import { graphql, compose } from 'react-apollo';
+import gql from 'graphql-tag';
+
 import Spacing from '../../../atoms/Spacing';
 import { Grid, GridItem, InlineGrid } from '../../../atoms/Grid';
 import Paragraph from '../../../atoms/Paragraph';
 import Heading from '../../../atoms/Heading';
 import PageWrap from '../../../atoms/PageWrap';
 import MaxWidth from '../../../atoms/MaxWidth';
+
+import getProduct from '../../../../lib/getProduct';
+import getProductStory from '../../../../lib/getProductStory';
+import getProductNotes from '../../../../lib/getProductNotes';
 
 import generalStyles from './general.module.css';
 
@@ -28,7 +35,11 @@ const Note = ({ label, children }) => {
   );
 };
 
-export default function Story() {
+function Story({ data }) {
+  const product = getProduct(data, 'product-numer-1');
+  const story = product && getProductStory(product);
+  const notes = product && getProductNotes(product);
+
   return (
     <Spacing size={80} type="padding">
       <div className={generalStyles.story}>
@@ -42,9 +53,15 @@ export default function Story() {
                   </Heading>
                 </Spacing>
 
-                <Note label="Top">Ambrette / Coconut water</Note>
-                <Note label="Heart">Patchouli Leaves</Note>
-                <Note label="Base">Coco Absolu / Wold musk</Note>
+                {notes &&
+                  notes.length &&
+                  notes.map((item, index) => {
+                    return (
+                      <Note key={index} label={item.label}>
+                        {item.note}
+                      </Note>
+                    );
+                  })}
               </GridItem>
               <GridItem columnSize={6}>
                 <Spacing size={30} position="b">
@@ -53,15 +70,7 @@ export default function Story() {
                   </Heading>
                 </Spacing>
                 <Paragraph font="jenson" size="xl">
-                  {'     '}Bark is navigating down the river, between the
-                  temples of Luxor and Karnak, it stops in front of a small
-                  temple. As you walk in, there is a room to the left. A ray of
-                  light comes from the sky through a small window high up,
-                  cutting through incense smoke. There is an altar carved in
-                  stone, and to the right, on the floor there is an ancient
-                  vase. Inside this vase, set aside for ceremonial offerings,
-                  lays Atlantica, a magical ritual perfume made out of the most
-                  precious oils.
+                  {story}
                 </Paragraph>
               </GridItem>
             </Grid>
@@ -71,3 +80,28 @@ export default function Story() {
     </Spacing>
   );
 }
+
+const query = gql`
+  query query {
+    shop {
+      products(first: 20) {
+        pageInfo {
+          hasNextPage
+          hasPreviousPage
+        }
+        edges {
+          node {
+            id
+            title
+            handle
+            description
+          }
+        }
+      }
+    }
+  }
+`;
+
+const AppWithDataAndMutation = compose(graphql(query))(Story);
+
+export default AppWithDataAndMutation;
