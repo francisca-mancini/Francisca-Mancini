@@ -1,6 +1,8 @@
 import React, { PureComponent } from 'react';
 import stickybits from 'stickybits';
 import classNames from 'classnames';
+import { graphql, compose } from 'react-apollo';
+import gql from 'graphql-tag';
 
 import { Grid, GridItem } from '../../../atoms/Grid';
 import Paragraph from '../../../atoms/Paragraph';
@@ -10,13 +12,26 @@ import Spacing from '../../../atoms/Spacing';
 
 import LearnMore from '../../../molecules/LearnMore';
 
+import getProduct from '../../../../lib/getProduct';
+import getProductImages from '../../../../lib/getProductImages';
+import getProductTitle from '../../../../lib/getProductTitle';
+import getProductType from '../../../../lib/getProductType';
+import getProductPrice from '../../../../lib/getProductPrice';
+import getProductDescription from '../../../../lib/getProductDescription';
+
 import generalStyles from './hero.module.css';
 
-import product2 from '../../../../static/images/_temp/product2.png';
+class Hero extends PureComponent {
+  constructor() {
+    super();
 
-export default class Hero extends PureComponent {
+    this.product = null;
+  }
+
   componentDidMount() {
     stickybits('.stickybits');
+
+    this.product = getProduct(this.props.data, 'product-numer-1');
   }
 
   render() {
@@ -24,6 +39,11 @@ export default class Hero extends PureComponent {
       top: 0,
       bottom: 'auto'
     };
+    const images = this.product && getProductImages(this.product);
+    const title = this.product && getProductTitle(this.product);
+    const type = this.product && getProductType(this.product);
+    const price = this.product && getProductPrice(this.product);
+    const description = this.product && getProductDescription(this.product);
 
     return (
       <Grid gap={30} align="stretch">
@@ -48,18 +68,15 @@ export default class Hero extends PureComponent {
           </div>
         </GridItem>
         <GridItem columnSize={4}>
-          <div className={generalStyles.imageContainer}>
-            <img src={product2} alt="yo" />
-          </div>
-          <div className={generalStyles.imageContainer}>
-            <img src={product2} alt="yo" />
-          </div>
-          <div className={generalStyles.imageContainer}>
-            <img src={product2} alt="yo" />
-          </div>
-          <div className={generalStyles.imageContainer}>
-            <img src={product2} alt="yo" />
-          </div>
+          {images &&
+            images.length &&
+            images.map((item, index) => {
+              return (
+                <div key={index} className={generalStyles.imageContainer}>
+                  <img src={item.src} alt="" />
+                </div>
+              );
+            })}
         </GridItem>
         <GridItem columnSize={4}>
           <div
@@ -67,10 +84,12 @@ export default class Hero extends PureComponent {
             className={classNames('stickybits', generalStyles.right)}
           >
             <Heading uppercase size="m" font="serif">
-              Atlantica
+              {title}
             </Heading>
             <Spacing size={25}>
-              <Paragraph size="s">Fragrance bottle, 100ml - £500</Paragraph>
+              <Paragraph size="s">
+                {type} - £{price}
+              </Paragraph>
             </Spacing>
             <Button size="s">
               <span className="font-normal">Add to bag</span>
@@ -84,3 +103,73 @@ export default class Hero extends PureComponent {
     );
   }
 }
+
+const query = gql`
+  query query {
+    shop {
+      name
+      description
+      products(first: 20) {
+        pageInfo {
+          hasNextPage
+          hasPreviousPage
+        }
+        edges {
+          node {
+            id
+            title
+            handle
+            description
+            options {
+              id
+              name
+              values
+            }
+            productType
+            priceRange {
+              maxVariantPrice {
+                amount
+                currencyCode
+              }
+            }
+            variants(first: 250) {
+              pageInfo {
+                hasNextPage
+                hasPreviousPage
+              }
+              edges {
+                node {
+                  id
+                  title
+                  selectedOptions {
+                    name
+                    value
+                  }
+                  image {
+                    src
+                  }
+                  price
+                }
+              }
+            }
+            images(first: 250) {
+              pageInfo {
+                hasNextPage
+                hasPreviousPage
+              }
+              edges {
+                node {
+                  src
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+`;
+
+const AppWithDataAndMutation = compose(graphql(query))(Hero);
+
+export default AppWithDataAndMutation;
