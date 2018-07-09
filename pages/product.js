@@ -1,4 +1,5 @@
 import App from '../components/App';
+import withData from '../lib/withData';
 
 import PageWrap from '../components/atoms/PageWrap';
 
@@ -6,7 +7,7 @@ import Hero from '../components/organisms/product/Hero';
 import YouMightLike from '../components/organisms/product/YouMightLike';
 import Story from '../components/organisms/product/Story';
 
-export default function Product() {
+function Product() {
   return (
     <App hasTopPad={false}>
       <PageWrap>
@@ -19,3 +20,5 @@ export default function Product() {
     </App>
   );
 }
+
+export default withData(Product);
