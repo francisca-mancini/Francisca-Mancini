@@ -35,6 +35,13 @@ class Loader extends PureComponent {
     window.addEventListener('load', this.checkVideo, false);
   }
 
+  componentWillUnmount() {
+    if (this.maskRef) {
+      this.maskRef.removeEventListener('animationend', this.checkAnimation);
+    }
+    window.removeEventListener('load', this.checkVideo);
+  }
+
   componentDidUpdate(prevProps, prevState) {
     const { imagesLoaded, videoLoaded, animationLoaded, ready } = this.state;
 
