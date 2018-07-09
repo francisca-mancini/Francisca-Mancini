@@ -52,7 +52,7 @@ class Header extends Component {
 
   getHeroHeight() {
     const hero = document.querySelector('#heroVideo');
-    const height = hero.offsetHeight - 40;
+    const height = hero && hero.offsetHeight - 40;
 
     this.heroHeight = height;
   }
