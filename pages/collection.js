@@ -1,4 +1,6 @@
 import React, { PureComponent } from 'react';
+import { graphql } from 'react-apollo';
+import gql from 'graphql-tag';
 import App from '../components/App';
 import stickybits from 'stickybits';
 import classNames from 'classnames';
@@ -14,6 +16,8 @@ import HeroVideo from '../components/molecules/HeroVideo';
 
 import CollectionIntro from '../components/organisms/collection/CollectionIntro';
 import Fragrance from '../components/organisms/collection/Fragrance';
+
+import withData from '../lib/withData';
 
 import atlantica1 from '../static/images/_temp/collection/atlantica1.png';
 import atlantica2 from '../static/images/_temp/collection/atlantica2.jpg';
@@ -63,7 +67,7 @@ const data = [
   }
 ];
 
-export default class Collection extends PureComponent {
+class Collection extends PureComponent {
   constructor() {
     super();
 
@@ -74,6 +78,8 @@ export default class Collection extends PureComponent {
     stickybits('.stickybits');
 
     this.triggerSafariHack();
+
+    console.log(this.props.data);
   }
 
   handleNewIndex(index) {
@@ -189,3 +195,46 @@ export default class Collection extends PureComponent {
     );
   }
 }
+
+const query = gql`
+  query query {
+    shop {
+      name
+      description
+      collections(first: 20) {
+        edges {
+          node {
+            handle
+            id
+            description
+            title
+            products(first: 20) {
+              edges {
+                node {
+                  id
+                  handle
+                }
+              }
+            }
+          }
+        }
+      }
+      products(first: 20) {
+        pageInfo {
+          hasNextPage
+          hasPreviousPage
+        }
+        edges {
+          node {
+            id
+            title
+            handle
+            description
+          }
+        }
+      }
+    }
+  }
+`;
+
+export default withData(graphql(query)(Collection));
