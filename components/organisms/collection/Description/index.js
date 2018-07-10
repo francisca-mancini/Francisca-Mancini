@@ -13,8 +13,13 @@ export default function Description({ description }) {
   imagesArray.forEach(item => {
     if (
       item.includes('.jpg') ||
+      item.includes('.jpeg') ||
+      item.includes('.JPEG') ||
+      item.includes('.JPG') ||
       item.includes('.png') ||
-      item.includes('.jpeg')
+      item.includes('.PNG') ||
+      item.includes('.gif') ||
+      item.includes('.GIF')
     ) {
       images.push(item);
     }
