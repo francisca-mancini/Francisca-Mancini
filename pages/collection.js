@@ -19,6 +19,11 @@ import Fragrance from '../components/organisms/collection/Fragrance';
 
 import withData from '../lib/withData';
 import getCollection from '../lib/getCollection';
+import getProductTitle from '../lib/getProductTitle';
+import getProductHandle from '../lib/getProductHandle';
+import getProductDescription from '../lib/getProductDescription';
+import getProductBackground from '../lib/getProductBackground';
+import getProductCollectionImages from '../lib/getProductCollectionImages';
 
 import atlantica1 from '../static/images/_temp/collection/atlantica1.png';
 import atlantica2 from '../static/images/_temp/collection/atlantica2.jpg';
@@ -88,12 +93,12 @@ class Collection extends PureComponent {
     if (!this.collection) {
       this.props.url.push('/404');
     }
+
+    this.getProducts();
   }
 
   componentDidMount() {
     stickybits('.stickybits');
-
-    this.triggerSafariHack();
   }
 
   handleNewIndex(index) {
@@ -102,15 +107,29 @@ class Collection extends PureComponent {
     });
   }
 
-  triggerSafariHack() {
-    var e = document.createEvent('HTMLEvents');
-    e.initEvent('resize', false, true);
-    window.dispatchEvent(e);
+  getProducts() {
+    this.products = [];
+
+    this.collection.products.edges.forEach(item => {
+      const product = item.node;
+      this.products.push({
+        title: getProductTitle(product),
+        handle: getProductHandle(product),
+        description: getProductDescription(product),
+        bgColor: getProductBackground(product),
+        images: getProductCollectionImages(product),
+        color1: '#E88F56',
+        color2: '#AC1620',
+        layeringPack: '/layering-renaissance'
+      });
+    });
+
+    console.log(this.products);
   }
 
   render() {
     const { index } = this.state;
-    const dataItem = data[index];
+    const dataItem = this.products[index];
     const containerStyle = {
       backgroundColor: dataItem.bgColor,
       transition: '0.8s ease-in-out'
@@ -142,7 +161,7 @@ class Collection extends PureComponent {
                     className="stickybits flex flex-col h-screen justify-center"
                     style={stickyStyle}
                   >
-                    {data.map((item, i) => {
+                    {this.products.map((item, i) => {
                       const itemClassName = classNames({
                         'opacity-100': i === index,
                         'opacity-50': i !== index
@@ -150,7 +169,7 @@ class Collection extends PureComponent {
 
                       return (
                         <div className={itemClassName}>
-                          <Spacing key={item.slug} size={10}>
+                          <Spacing key={item.handle} size={10}>
                             <Heading
                               className="leading-none"
                               tag="h3"
@@ -168,17 +187,17 @@ class Collection extends PureComponent {
                   </div>
                 </GridItem>
                 <GridItem columnSize={8}>
-                  {data.map((item, i) => {
+                  {this.products.map((item, i) => {
                     return (
                       <Fragrance
-                        key={item.slug}
+                        key={item.handle}
                         index={i}
                         onIndexChange={this.handleNewIndex.bind(this)}
                         color1={item.color1}
                         color2={item.color2}
-                        image1={item.image1}
-                        image2={item.image2}
-                        image3={item.image3}
+                        image1={item.images[0]}
+                        image2={item.images[1]}
+                        image3={item.images[2]}
                       >
                         {item.title}
                       </Fragrance>
@@ -191,7 +210,7 @@ class Collection extends PureComponent {
                     style={stickyStyle}
                   >
                     <Button size="s">
-                      <Link href={dataItem.shopSlug}>{dataItem.title}</Link>
+                      <Link href={dataItem.handle}>{dataItem.title}</Link>
                     </Button>
                     <Spacing size={20} position="t">
                       <Link
@@ -232,23 +251,12 @@ const query = gql`
                 node {
                   id
                   handle
+                  title
+                  description
+                  descriptionHtml
                 }
               }
             }
-          }
-        }
-      }
-      products(first: 20) {
-        pageInfo {
-          hasNextPage
-          hasPreviousPage
-        }
-        edges {
-          node {
-            id
-            title
-            handle
-            description
           }
         }
       }
