@@ -24,6 +24,7 @@ import getProductHandle from '../lib/getProductHandle';
 import getProductDescription from '../lib/getProductDescription';
 import getProductBackground from '../lib/getProductBackground';
 import getProductCollectionImages from '../lib/getProductCollectionImages';
+import getProductLayeringHandle from '../lib/getProductLayeringHandle';
 
 import atlantica1 from '../static/images/_temp/collection/atlantica1.png';
 import atlantica2 from '../static/images/_temp/collection/atlantica2.jpg';
@@ -112,16 +113,22 @@ class Collection extends PureComponent {
 
     this.collection.products.edges.forEach(item => {
       const product = item.node;
-      this.products.push({
-        title: getProductTitle(product),
-        handle: getProductHandle(product),
-        description: getProductDescription(product),
-        bgColor: getProductBackground(product),
-        images: getProductCollectionImages(product),
-        color1: '#E88F56',
-        color2: '#AC1620',
-        layeringPack: '/layering-renaissance'
-      });
+
+      if (product.productType === 'fragrance') {
+        this.products.push({
+          title: getProductTitle(product),
+          handle: getProductHandle(product),
+          description: getProductDescription(product),
+          bgColor: getProductBackground(product),
+          images: getProductCollectionImages(product),
+          color1: '#E88F56',
+          color2: '#AC1620',
+          layeringHandle: getProductLayeringHandle(
+            this.collection.products,
+            product
+          )
+        });
+      }
     });
 
     console.log(this.products);
@@ -210,18 +217,22 @@ class Collection extends PureComponent {
                     style={stickyStyle}
                   >
                     <Button size="s">
-                      <Link href={dataItem.handle}>{dataItem.title}</Link>
-                    </Button>
-                    <Spacing size={20} position="t">
-                      <Link
-                        className="opacity-50"
-                        tag="a"
-                        href={dataItem.layerSlug}
-                        underline
-                      >
-                        <Heading size="xs">Shop layering pack</Heading>
+                      <Link href={`/product/${dataItem.handle}`}>
+                        {dataItem.title}
                       </Link>
-                    </Spacing>
+                    </Button>
+                    {dataItem.layeringHandle && (
+                      <Spacing size={20} position="t">
+                        <Link
+                          className="opacity-50"
+                          tag="a"
+                          href={`/product/${dataItem.layeringHandle}`}
+                          underline
+                        >
+                          <Heading size="xs">Shop layering pack</Heading>
+                        </Link>
+                      </Spacing>
+                    )}
                   </div>
                 </GridItem>
               </Grid>
@@ -254,6 +265,8 @@ const query = gql`
                   title
                   description
                   descriptionHtml
+                  productType
+                  tags
                 }
               }
             }
