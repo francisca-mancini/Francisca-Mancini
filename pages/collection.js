@@ -18,6 +18,7 @@ import CollectionIntro from '../components/organisms/collection/CollectionIntro'
 import Fragrance from '../components/organisms/collection/Fragrance';
 
 import withData from '../lib/withData';
+import getCollection from '../lib/getCollection';
 
 import atlantica1 from '../static/images/_temp/collection/atlantica1.png';
 import atlantica2 from '../static/images/_temp/collection/atlantica2.jpg';
@@ -68,18 +69,31 @@ const data = [
 ];
 
 class Collection extends PureComponent {
+  static getInitialProps({ query: { handle } }) {
+    return { collectionHandle: handle };
+  }
+
   constructor() {
     super();
 
     this.state = { index: 0 };
   }
 
+  componentWillMount() {
+    this.collection = getCollection(
+      this.props.data,
+      this.props.collectionHandle
+    );
+
+    if (!this.collection) {
+      this.props.url.push('/404');
+    }
+  }
+
   componentDidMount() {
     stickybits('.stickybits');
 
     this.triggerSafariHack();
-
-    console.log(this.props.data);
   }
 
   handleNewIndex(index) {
@@ -106,12 +120,16 @@ class Collection extends PureComponent {
       bottom: 'auto'
     };
 
+    if (!this.collection) {
+      return <div />;
+    }
+
     return (
       <App hasTopPad={false} hasBottomPad={false} headerLight isHome>
         <HeroVideo />
         <PageWrap>
           <Spacing size={80} type="padding">
-            <CollectionIntro />
+            <CollectionIntro collection={this.collection} />
           </Spacing>
         </PageWrap>
 
@@ -207,6 +225,7 @@ const query = gql`
             handle
             id
             description
+            descriptionHtml
             title
             products(first: 20) {
               edges {
