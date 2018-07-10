@@ -1,6 +1,3 @@
-import { graphql, compose } from 'react-apollo';
-import gql from 'graphql-tag';
-
 import Spacing from '../../../atoms/Spacing';
 import { Grid, GridItem, InlineGrid } from '../../../atoms/Grid';
 import Paragraph from '../../../atoms/Paragraph';
@@ -8,7 +5,6 @@ import Heading from '../../../atoms/Heading';
 import PageWrap from '../../../atoms/PageWrap';
 import MaxWidth from '../../../atoms/MaxWidth';
 
-import getProduct from '../../../../lib/getProduct';
 import getProductStory from '../../../../lib/getProductStory';
 import getProductNotes from '../../../../lib/getProductNotes';
 
@@ -35,8 +31,7 @@ const Note = ({ label, children }) => {
   );
 };
 
-function Story({ data }) {
-  const product = getProduct(data, 'product-numer-1');
+function Story({ product }) {
   const story = product && getProductStory(product);
   const notes = product && getProductNotes(product);
 
@@ -81,27 +76,4 @@ function Story({ data }) {
   );
 }
 
-const query = gql`
-  query query {
-    shop {
-      products(first: 20) {
-        pageInfo {
-          hasNextPage
-          hasPreviousPage
-        }
-        edges {
-          node {
-            id
-            title
-            handle
-            description
-          }
-        }
-      }
-    }
-  }
-`;
-
-const AppWithDataAndMutation = compose(graphql(query))(Story);
-
-export default AppWithDataAndMutation;
+export default Story;

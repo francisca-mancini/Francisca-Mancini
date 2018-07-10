@@ -1,8 +1,6 @@
 import React, { PureComponent } from 'react';
 import stickybits from 'stickybits';
 import classNames from 'classnames';
-import { graphql, compose } from 'react-apollo';
-import gql from 'graphql-tag';
 
 import { Grid, GridItem } from '../../../atoms/Grid';
 import Paragraph from '../../../atoms/Paragraph';
@@ -12,7 +10,6 @@ import Spacing from '../../../atoms/Spacing';
 
 import LearnMore from '../../../molecules/LearnMore';
 
-import getProduct from '../../../../lib/getProduct';
 import getProductImages from '../../../../lib/getProductImages';
 import getProductTitle from '../../../../lib/getProductTitle';
 import getProductType from '../../../../lib/getProductType';
@@ -22,28 +19,21 @@ import getProductDescription from '../../../../lib/getProductDescription';
 import generalStyles from './hero.module.css';
 
 class Hero extends PureComponent {
-  constructor() {
-    super();
-
-    this.product = null;
-  }
-
   componentDidMount() {
     stickybits('.stickybits');
-
-    this.product = getProduct(this.props.data, 'product-numer-1');
   }
 
   render() {
+    const { product } = this.props;
     const stickyStyle = {
       top: 0,
       bottom: 'auto'
     };
-    const images = this.product && getProductImages(this.product);
-    const title = this.product && getProductTitle(this.product);
-    const type = this.product && getProductType(this.product);
-    const price = this.product && getProductPrice(this.product);
-    const description = this.product && getProductDescription(this.product);
+    const images = product && getProductImages(product);
+    const title = product && getProductTitle(product);
+    const type = product && getProductType(product);
+    const price = product && getProductPrice(product);
+    const description = product && getProductDescription(product);
 
     return (
       <Grid gap={30} align="stretch">
@@ -102,73 +92,4 @@ class Hero extends PureComponent {
   }
 }
 
-const query = gql`
-  query query {
-    shop {
-      name
-      description
-      products(first: 20) {
-        pageInfo {
-          hasNextPage
-          hasPreviousPage
-        }
-        edges {
-          node {
-            id
-            title
-            handle
-            description
-            options {
-              id
-              name
-              values
-            }
-            productType
-            priceRange {
-              maxVariantPrice {
-                amount
-                currencyCode
-              }
-            }
-            tags
-            variants(first: 250) {
-              pageInfo {
-                hasNextPage
-                hasPreviousPage
-              }
-              edges {
-                node {
-                  id
-                  title
-                  selectedOptions {
-                    name
-                    value
-                  }
-                  image {
-                    src
-                  }
-                  price
-                }
-              }
-            }
-            images(first: 250) {
-              pageInfo {
-                hasNextPage
-                hasPreviousPage
-              }
-              edges {
-                node {
-                  src
-                }
-              }
-            }
-          }
-        }
-      }
-    }
-  }
-`;
-
-const AppWithDataAndMutation = compose(graphql(query))(Hero);
-
-export default AppWithDataAndMutation;
+export default Hero;
