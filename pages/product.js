@@ -2,7 +2,6 @@ import React, { PureComponent } from 'react';
 import { graphql } from 'react-apollo';
 import gql from 'graphql-tag';
 import App from '../components/App';
-import withData from '../lib/withData';
 
 import PageWrap from '../components/atoms/PageWrap';
 
@@ -11,6 +10,7 @@ import YouMightLike from '../components/organisms/product/YouMightLike';
 import Story from '../components/organisms/product/Story';
 
 import getProduct from '../lib/getProduct';
+import withData from '../lib/withData';
 
 class Product extends PureComponent {
   static getInitialProps({ query: { handle } }) {
