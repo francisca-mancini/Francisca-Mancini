@@ -25,54 +25,7 @@ import getProductDescription from '../lib/getProductDescription';
 import getProductBackground from '../lib/getProductBackground';
 import getProductCollectionImages from '../lib/getProductCollectionImages';
 import getProductLayeringHandle from '../lib/getProductLayeringHandle';
-
-import atlantica1 from '../static/images/_temp/collection/atlantica1.png';
-import atlantica2 from '../static/images/_temp/collection/atlantica2.jpg';
-import atlantica3 from '../static/images/_temp/collection/atlantica3.jpg';
-
-import sadokan1 from '../static/images/_temp/collection/sadokan1.png';
-import sadokan2 from '../static/images/_temp/collection/sadokan2.jpg';
-import sadokan3 from '../static/images/_temp/collection/sadokan3.jpg';
-
-import renaissance1 from '../static/images/_temp/collection/renaissance1.png';
-import renaissance2 from '../static/images/_temp/collection/renaissance2.jpg';
-import renaissance3 from '../static/images/_temp/collection/renaissance3.jpg';
-
-const data = [
-  {
-    title: 'Atlantica',
-    bgColor: '#d9d9e2',
-    color1: '#E1C68F',
-    color2: '#C5729F',
-    slug: '/atlantica',
-    layeringPack: '/layering-atlantica',
-    image1: atlantica1,
-    image2: atlantica2,
-    image3: atlantica3
-  },
-  {
-    title: 'Sadokan',
-    bgColor: '#edfff4',
-    color1: '#A5C899',
-    color2: '#194365',
-    slug: '/sadokan',
-    layeringPack: '/layering-sadokan',
-    image1: sadokan1,
-    image2: sadokan2,
-    image3: sadokan3
-  },
-  {
-    title: 'Renaissance',
-    bgColor: '#fef3ec',
-    color1: '#E88F56',
-    color2: '#AC1620',
-    slug: '/renaissance',
-    layeringPack: '/layering-renaissance',
-    image1: renaissance1,
-    image2: renaissance2,
-    image3: renaissance3
-  }
-];
+import getProductGradient from '../lib/getProductGradient';
 
 class Collection extends PureComponent {
   static getInitialProps({ query: { handle } }) {
@@ -121,8 +74,8 @@ class Collection extends PureComponent {
           description: getProductDescription(product),
           bgColor: getProductBackground(product),
           images: getProductCollectionImages(product),
-          color1: '#E88F56',
-          color2: '#AC1620',
+          color1: getProductGradient(product).color1,
+          color2: getProductGradient(product).color2,
           layeringHandle: getProductLayeringHandle(
             this.collection.products,
             product
