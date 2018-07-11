@@ -83,8 +83,6 @@ class Collection extends PureComponent {
         });
       }
     });
-
-    console.log(this.products);
   }
 
   render() {

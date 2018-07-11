@@ -1,17 +1,20 @@
 import Heading from '../../../atoms/Heading';
 import Spacing from '../../../atoms/Spacing';
 import MaxWidth from '../../../atoms/MaxWidth';
+import Button from '../../../atoms/Button';
 
 import LearnMore from '../../../molecules/LearnMore';
 
 import getCollectionTitle from '../../../../lib/getCollectionTitle';
 import getCollectionDescription from '../../../../lib/getCollectionDescription';
+import getCollectionHandle from '../../../../lib/getCollectionHandle';
 
 import Description from '../Description';
 
-export default function CollectionIntro({ collection }) {
+export default function CollectionIntro({ collection, isHome }) {
   const title = getCollectionTitle(collection);
   const description = getCollectionDescription(collection);
+  const handle = getCollectionHandle(collection);
 
   return (
     <div className="bg-white">
@@ -23,9 +26,18 @@ export default function CollectionIntro({ collection }) {
           <Description description={description} />
         </MaxWidth>
       </Spacing>
-      <div className="text-center opacity-50">
-        <LearnMore>Discover the Fragrances</LearnMore>
-      </div>
+
+      {isHome ? (
+        <div className="text-center">
+          <Button href={`/collection/${handle}`}>
+            Discover the collection
+          </Button>
+        </div>
+      ) : (
+        <div className="text-center opacity-50">
+          <LearnMore>Discover the Fragrances</LearnMore>
+        </div>
+      )}
     </div>
   );
 }

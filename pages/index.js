@@ -1,19 +1,23 @@
 import React, { PureComponent } from 'react';
 import withData from '../lib/withData';
+import { graphql } from 'react-apollo';
+import gql from 'graphql-tag';
 
 import App from '../components/App';
 
 import PageWrap from '../components/atoms/PageWrap';
 import Spacing from '../components/atoms/Spacing';
 import { Grid, GridItem } from '../components/atoms/Grid';
-
-import ProductThumbnail from '../components/molecules/ProductThumbnail';
-import CollectionIntro from '../components/molecules/CollectionIntro';
-import HeroVideo from '../components/molecules/HeroVideo';
 import Button from '../components/atoms/Button';
 import Heading from '../components/atoms/Heading';
 
+import ProductThumbnail from '../components/molecules/ProductThumbnail';
+import HeroVideo from '../components/molecules/HeroVideo';
 import Loader from '../components/molecules/Loader';
+
+import CollectionIntro from '../components/organisms/collection/CollectionIntro';
+
+import getCollectionHome from '../lib/getCollectionHome';
 
 class Home extends PureComponent {
   constructor() {
@@ -25,6 +29,11 @@ class Home extends PureComponent {
     };
 
     this.onLoaderUpdate = this.onLoaderUpdate.bind(this);
+  }
+
+  componentWillMount() {
+    const articles = this.props.data.shop.articles.edges;
+    this.collection = getCollectionHome(articles, this.props.data);
   }
 
   componentDidMount() {
@@ -57,7 +66,7 @@ class Home extends PureComponent {
         <PageWrap>
           <div {...collectionProps}>
             <Spacing size={80} type="padding">
-              <CollectionIntro />
+              <CollectionIntro isHome collection={this.collection} />
             </Spacing>
           </div>
           <Spacing size={80} type="padding">
@@ -95,4 +104,44 @@ class Home extends PureComponent {
   }
 }
 
-export default withData(Home);
+const query = gql`
+  query query {
+    shop {
+      name
+      description
+      articles(first: 20) {
+        edges {
+          node {
+            content
+          }
+        }
+      }
+      collections(first: 20) {
+        edges {
+          node {
+            handle
+            id
+            description
+            descriptionHtml
+            title
+            products(first: 20) {
+              edges {
+                node {
+                  id
+                  handle
+                  title
+                  description
+                  descriptionHtml
+                  productType
+                  tags
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+`;
+
+export default withData(graphql(query)(Home));
