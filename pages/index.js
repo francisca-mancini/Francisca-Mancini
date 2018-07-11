@@ -18,6 +18,10 @@ import Loader from '../components/molecules/Loader';
 import CollectionIntro from '../components/organisms/collection/CollectionIntro';
 
 import getCollectionHome from '../lib/getCollectionHome';
+import getProductGradient from '../lib/getProductGradient';
+import getProductHandle from '../lib/getProductHandle';
+import getProductImages from '../lib/getProductImages';
+import getProductTitle from '../lib/getProductTitle';
 
 class Home extends PureComponent {
   constructor() {
@@ -59,6 +63,8 @@ class Home extends PureComponent {
       }
     };
 
+    const products = this.collection.products.edges;
+
     return (
       <App hasTopPad={false} headerLight isHome isLoaded={isLoaded}>
         {!secondTime && <Loader onUpdate={this.onLoaderUpdate} />}
@@ -77,21 +83,56 @@ class Home extends PureComponent {
             </Spacing>
             <Spacing position="b" type="padding" size={80}>
               <Grid gap={[0, 70]}>
-                <GridItem columnSize={[12, 6]}>
-                  <ProductThumbnail color1="#E88F56" color2="#AC1620" />
-                </GridItem>
-                <GridItem columnSize={[12, 6]}>
-                  <div style={{ transform: 'translateY(120px)' }}>
-                    <ProductThumbnail color1="#E1C68F" color2="#C5729F" />
-                  </div>
-                </GridItem>
+                {products.map((item, index) => {
+                  const color1 = getProductGradient(item.node).color1;
+                  const color2 = getProductGradient(item.node).color2;
+                  const handle = getProductHandle(item.node);
+                  const images = getProductImages(item.node);
+                  const title = getProductTitle(item.node);
+
+                  console.log(images);
+
+                  if (index === 0) {
+                    return (
+                      <GridItem columnSize={[12, 6]}>
+                        <ProductThumbnail
+                          title={title}
+                          image={images[0]}
+                          href={`/product/${handle}`}
+                          color1={color1}
+                          color2={color2}
+                        />
+                      </GridItem>
+                    );
+                  } else if (index === 1) {
+                    return (
+                      <GridItem columnSize={[12, 6]}>
+                        <div style={{ transform: 'translateY(120px)' }}>
+                          <ProductThumbnail
+                            title={title}
+                            image={images[0]}
+                            href={`/product/${handle}`}
+                            color1={color1}
+                            color2={color2}
+                          />
+                        </div>
+                      </GridItem>
+                    );
+                  }
+                })}
               </Grid>
             </Spacing>
             <Spacing size={80}>
               <Grid gap={[0, 70]} justify="center">
-                <GridItem columnSize={[12, 6]}>
-                  <ProductThumbnail color1="#3B3E41" color2="#CEE4FF" />
-                </GridItem>
+                {products.map((item, index) => {
+                  if (index === 2) {
+                    return (
+                      <GridItem columnSize={[12, 6]}>
+                        <ProductThumbnail color1="#3B3E41" color2="#CEE4FF" />
+                      </GridItem>
+                    );
+                  }
+                })}
               </Grid>
             </Spacing>
             <div className="text-center">
@@ -134,6 +175,16 @@ const query = gql`
                   descriptionHtml
                   productType
                   tags
+                  images(first: 20) {
+                    edges {
+                      node {
+                        altText
+                        id
+                        originalSrc
+                        transformedSrc
+                      }
+                    }
+                  }
                 }
               }
             }

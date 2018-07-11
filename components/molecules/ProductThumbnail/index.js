@@ -12,20 +12,28 @@ import productImage from '../../../static/images/_temp/voiledenuit.png';
 
 import generalStyles from './general.module.css';
 
-export default function ProductThumbnail({ image, color1, color2 }) {
+export default function ProductThumbnail({
+  image,
+  title,
+  color1,
+  color2,
+  href
+}) {
+  const img = image && image.transformedSrc;
+
   return (
     <div className="w-full px-20 flex items-center justify-center">
-      <Link className="w-full" tag="div" href="/product">
+      <Link className="w-full" tag="div" href={href}>
         <div
           className={classNames(generalStyles.imageContainer, 'pixiContainer')}
         >
-          <img className={generalStyles.image} src={image} alt="yo" />
+          <img className={generalStyles.image} src={img} alt="yo" />
           <ProductShape color1={color1} color2={color2} />
         </div>
         <div>
           <Spacing size={15}>
             <Heading uppercase size="xxxxs" center font="serif" tracking="wide">
-              Renaissance
+              {title}
             </Heading>
           </Spacing>
           <Paragraph weight="semilight" size="xs" center>
