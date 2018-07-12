@@ -17,6 +17,7 @@ import getProductPrice from '../../../../lib/getProductPrice';
 import getProductDescription from '../../../../lib/getProductDescription';
 
 import generalStyles from './hero.module.css';
+import ProductBackgroundShapes from '../../../atoms/ProductBackgroundShapes';
 
 class Hero extends PureComponent {
   componentDidMount() {
@@ -36,58 +37,63 @@ class Hero extends PureComponent {
     const description = product && getProductDescription(product);
 
     return (
-      <Grid gap={30} align="stretch">
-        <GridItem columnSize={4}>
-          <div
-            style={stickyStyle}
-            className={classNames('stickybits', generalStyles.left)}
-          >
-            <Paragraph weight="semilight" center size="s">
-              {description}
-            </Paragraph>
-            <div className={generalStyles.footerLeft}>
-              <Paragraph size="s">
-                Collection N°1 Maps, Travel • Fragrances • Atlantica
-              </Paragraph>
-            </div>
-            <div className={generalStyles.learnMore}>
-              <LearnMore>Learn more</LearnMore>
-            </div>
-          </div>
-        </GridItem>
-        <GridItem columnSize={4}>
-          {images &&
-            images.length &&
-            images.map((item, index) => {
-              return (
-                <div key={index} className={generalStyles.imageContainer}>
-                  <img src={item.src} alt="" />
+      <div>
+        <ProductBackgroundShapes />
+        <div className="relative z-10">
+          <Grid gap={30} align="stretch">
+            <GridItem columnSize={4}>
+              <div
+                style={stickyStyle}
+                className={classNames('stickybits', generalStyles.left)}
+              >
+                <Paragraph weight="semilight" center size="s">
+                  {description}
+                </Paragraph>
+                <div className={generalStyles.footerLeft}>
+                  <Paragraph size="s">
+                    Collection N°1 Maps, Travel • Fragrances • Atlantica
+                  </Paragraph>
                 </div>
-              );
-            })}
-        </GridItem>
-        <GridItem columnSize={4}>
-          <div
-            style={stickyStyle}
-            className={classNames('stickybits', generalStyles.right)}
-          >
-            <Heading uppercase size="m" font="serif">
-              {title}
-            </Heading>
-            <Spacing size={25}>
-              <Paragraph size="s">
-                {type} - £{price}
-              </Paragraph>
-            </Spacing>
-            <Button size="s">
-              <span className="font-normal">Add to bag</span>
-            </Button>
-            <div className={generalStyles.footerRight}>
-              <Paragraph size="s">Free shipping above £100</Paragraph>
-            </div>
-          </div>
-        </GridItem>
-      </Grid>
+                <div className={generalStyles.learnMore}>
+                  <LearnMore>Learn more</LearnMore>
+                </div>
+              </div>
+            </GridItem>
+            <GridItem columnSize={4}>
+              {images &&
+                images.length &&
+                images.map((item, index) => {
+                  return (
+                    <div key={index} className={generalStyles.imageContainer}>
+                      <img src={item.src} alt="" />
+                    </div>
+                  );
+                })}
+            </GridItem>
+            <GridItem columnSize={4}>
+              <div
+                style={stickyStyle}
+                className={classNames('stickybits', generalStyles.right)}
+              >
+                <Heading uppercase size="m" font="serif">
+                  {title}
+                </Heading>
+                <Spacing size={25}>
+                  <Paragraph size="s">
+                    {type} - £{price}
+                  </Paragraph>
+                </Spacing>
+                <Button size="s">
+                  <span className="font-normal">Add to bag</span>
+                </Button>
+                <div className={generalStyles.footerRight}>
+                  <Paragraph size="s">Free shipping above £100</Paragraph>
+                </div>
+              </div>
+            </GridItem>
+          </Grid>
+        </div>
+      </div>
     );
   }
 }

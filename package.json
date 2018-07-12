@@ -33,6 +33,7 @@
     "react-player": "^1.6.4",
     "react-responsive": "^4.1.0",
     "rellax": "^1.6.2",
+    "simplex-noise": "^2.4.0",
     "stickybits": "^3.3.2"
   },
   "author": "Maxime Bonhomme",

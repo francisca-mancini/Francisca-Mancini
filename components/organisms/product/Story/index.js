@@ -12,7 +12,7 @@ import generalStyles from './general.module.css';
 
 const Note = ({ label, children }) => {
   return (
-    <Spacing size={10}>
+    <Spacing size={10} type="padding">
       <MaxWidth value={500} center>
         <InlineGrid justify="start" align="center">
           <div className={generalStyles.noteLeft}>

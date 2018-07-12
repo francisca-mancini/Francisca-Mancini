@@ -5,8 +5,8 @@ import Heading from '../../../atoms/Heading';
 
 export default function YouMightLike() {
   return (
-    <Spacing size={80}>
-      <Spacing size={60} position="b">
+    <Spacing size={80} type="padding">
+      <Spacing size={60} position="b" type="padding">
         <Heading size="s" center>
           You might like
         </Heading>
