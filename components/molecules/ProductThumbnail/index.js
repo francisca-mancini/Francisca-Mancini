@@ -8,22 +8,25 @@ import Link from '../../atoms/Link';
 
 import ProductShape from '../../atoms/ProductShape';
 
-import productImage from '../../../static/images/_temp/voiledenuit.png';
+import getProductGradient from '../../../lib/getProductGradient';
+import getProductHandle from '../../../lib/getProductHandle';
+import getProductImages from '../../../lib/getProductImages';
+import getProductTitle from '../../../lib/getProductTitle';
 
 import generalStyles from './general.module.css';
 
-export default function ProductThumbnail({
-  image,
-  title,
-  color1,
-  color2,
-  href
-}) {
-  const img = image && image.transformedSrc;
+export default function ProductThumbnail({ product }) {
+  console.log(product);
+  const color1 = getProductGradient(product).color1;
+  const color2 = getProductGradient(product).color2;
+  const handle = getProductHandle(product);
+  const images = getProductImages(product);
+  const title = getProductTitle(product);
+  const img = images[0].transformedSrc;
 
   return (
     <div className="w-full px-20 flex items-center justify-center">
-      <Link className="w-full" tag="div" href={href}>
+      <Link className="w-full" tag="div" href={`/product/${handle}`}>
         <div
           className={classNames(generalStyles.imageContainer, 'pixiContainer')}
         >
@@ -53,6 +56,5 @@ ProductThumbnail.propTypes = {
 
 ProductThumbnail.defaultProps = {
   color1: '#6b2854',
-  color2: '#80aee8',
-  image: productImage
+  color2: '#80aee8'
 };

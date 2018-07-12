@@ -18,10 +18,6 @@ import Loader from '../components/molecules/Loader';
 import CollectionIntro from '../components/organisms/collection/CollectionIntro';
 
 import getCollectionHome from '../lib/getCollectionHome';
-import getProductGradient from '../lib/getProductGradient';
-import getProductHandle from '../lib/getProductHandle';
-import getProductImages from '../lib/getProductImages';
-import getProductTitle from '../lib/getProductTitle';
 
 class Home extends PureComponent {
   constructor() {
@@ -84,37 +80,17 @@ class Home extends PureComponent {
             <Spacing position="b" type="padding" size={80}>
               <Grid gap={[0, 70]}>
                 {products.map((item, index) => {
-                  const color1 = getProductGradient(item.node).color1;
-                  const color2 = getProductGradient(item.node).color2;
-                  const handle = getProductHandle(item.node);
-                  const images = getProductImages(item.node);
-                  const title = getProductTitle(item.node);
-
-                  console.log(images);
-
                   if (index === 0) {
                     return (
                       <GridItem columnSize={[12, 6]}>
-                        <ProductThumbnail
-                          title={title}
-                          image={images[0]}
-                          href={`/product/${handle}`}
-                          color1={color1}
-                          color2={color2}
-                        />
+                        <ProductThumbnail product={item.node} />
                       </GridItem>
                     );
                   } else if (index === 1) {
                     return (
                       <GridItem columnSize={[12, 6]}>
                         <div style={{ transform: 'translateY(120px)' }}>
-                          <ProductThumbnail
-                            title={title}
-                            image={images[0]}
-                            href={`/product/${handle}`}
-                            color1={color1}
-                            color2={color2}
-                          />
+                          <ProductThumbnail product={item.node} />
                         </div>
                       </GridItem>
                     );
@@ -128,7 +104,7 @@ class Home extends PureComponent {
                   if (index === 2) {
                     return (
                       <GridItem columnSize={[12, 6]}>
-                        <ProductThumbnail color1="#3B3E41" color2="#CEE4FF" />
+                        <ProductThumbnail product={item.node} />
                       </GridItem>
                     );
                   }
@@ -136,7 +112,7 @@ class Home extends PureComponent {
               </Grid>
             </Spacing>
             <div className="text-center">
-              <Button href="/products">View all Products</Button>
+              <Button href="/shop">View all Products</Button>
             </div>
           </Spacing>
         </PageWrap>
