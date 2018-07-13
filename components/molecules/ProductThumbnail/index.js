@@ -19,7 +19,7 @@ export default function ProductThumbnail({
   color2,
   href
 }) {
-  const img = image && image.transformedSrc;
+  const img = image || productImage;
 
   return (
     <div className="w-full px-20 flex items-center justify-center">
@@ -33,7 +33,7 @@ export default function ProductThumbnail({
         <div>
           <Spacing size={15}>
             <Heading uppercase size="xxxxs" center font="serif" tracking="wide">
-              {title}
+              {title || 'Title'}
             </Heading>
           </Spacing>
           <Paragraph weight="semilight" size="xs" center>
