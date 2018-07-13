@@ -90,14 +90,12 @@ class Home extends PureComponent {
                   const images = getProductImages(item.node);
                   const title = getProductTitle(item.node);
 
-                  console.log(images);
-
                   if (index === 0) {
                     return (
                       <GridItem columnSize={[12, 6]}>
                         <ProductThumbnail
                           title={title}
-                          image={images[0]}
+                          image={images[0].originalSrc}
                           href={`/product/${handle}`}
                           color1={color1}
                           color2={color2}
@@ -110,7 +108,7 @@ class Home extends PureComponent {
                         <div style={{ transform: 'translateY(120px)' }}>
                           <ProductThumbnail
                             title={title}
-                            image={images[0]}
+                            image={images[0].originalSrc}
                             href={`/product/${handle}`}
                             color1={color1}
                             color2={color2}
