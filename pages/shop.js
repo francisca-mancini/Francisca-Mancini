@@ -77,11 +77,12 @@ export default class Shop extends PureComponent {
                     style={stickyStyle}
                     className="stickybits h-screen flex flex-col items-center justify-center"
                   >
-                    <div className="flex w-100 items-center justify-center">
+                    <div className="pt-95 pb-120 flex w-100 items-center justify-center">
                       <ProductThumbnail
                         image={layeringImage}
                         color1="#6B2854"
                         color2="#80AEE8"
+                        height
                       />
                     </div>
                   </div>
@@ -91,16 +92,17 @@ export default class Shop extends PureComponent {
                     style={stickyStyle}
                     className="stickybits h-screen flex flex-col items-center justify-center"
                   >
-                    <span className="absolute pin-t pin-l w-full pt-40 text-center">
+                    <span className="absolute z-10 pin-t pin-l w-full pt-40 text-center">
                       <Heading size="s" center>
                         Shop Layering Packs
                       </Heading>
                     </span>
-                    <div className="w-100 h-80 flex flex-col items-center justify-center">
+                    <div className="w-100 pt-95 pb-140 flex flex-col items-center justify-center">
                       <ProductThumbnail
                         image={layeringImage2}
                         color1="#FFC5E9"
                         color2="#BEE0FF"
+                        height
                       />
                       <span className="absolute pin-b pin-l w-full pb-40 text-center">
                         <Button size="s">Shop Renaissance Layering Pack</Button>
@@ -109,32 +111,36 @@ export default class Shop extends PureComponent {
                   </div>
                 </GridItem>
                 <GridItem columnSize={4}>
-                  <div className="h-90screen flex items-center justify-center">
+                  <div className="pt-95 pb-140 h-screen flex items-center justify-center">
                     <ProductThumbnail
                       image={layeringImage3}
                       color1="#6B2854"
                       color2="#80AEE8"
+                      height
                     />
                   </div>
-                  <div className="h-90screen flex items-center justify-center">
+                  <div className="pt-95 pb-140 h-screen flex items-center justify-center">
                     <ProductThumbnail
                       image={layeringImage3}
                       color1="#3B3E41"
                       color2="#CEE4FF"
+                      height
                     />
                   </div>
-                  <div className="h-90screen flex items-center justify-center">
+                  <div className="pt-95 pb-140 h-screen flex items-center justify-center">
                     <ProductThumbnail
                       image={layeringImage3}
                       color1="#E1C68F"
                       color2="#C5729F"
+                      height
                     />
                   </div>
-                  <div className="h-90screen flex items-center justify-center">
+                  <div className="pt-95 pb-140 h-screen flex items-center justify-center">
                     <ProductThumbnail
                       image={layeringImage3}
                       color1="#6B2854"
                       color2="#80AEE8"
+                      height
                     />
                   </div>
                 </GridItem>

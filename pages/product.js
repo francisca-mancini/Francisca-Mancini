@@ -36,9 +36,11 @@ class Product extends PureComponent {
           <Hero product={this.product} />
         </PageWrap>
         <Story product={this.product} />
-        <PageWrap>
-          <YouMightLike />
-        </PageWrap>
+        <div className="relative z-20 bg-white">
+          <PageWrap>
+            <YouMightLike />
+          </PageWrap>
+        </div>
       </App>
     );
   }
