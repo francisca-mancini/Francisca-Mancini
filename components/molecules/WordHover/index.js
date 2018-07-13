@@ -51,6 +51,16 @@ export default class WordHover extends Component {
     this.RAF.start();
   }
 
+  componentDidUpdate(prevProps, prevState) {
+    if (prevState.isMouseOver !== this.state.isMouseOver) {
+      if (this.state.isMouseOver) {
+        document.body.className += ' cursor';
+      } else {
+        document.querySelector('body').classList.remove('cursor');
+      }
+    }
+  }
+
   componentWillUnmount() {
     this.RAF.unsubscribe();
     this.RAF = null;
@@ -97,7 +107,6 @@ export default class WordHover extends Component {
       );
 
       this.targetScale = distanceToOne;
-
       this.setState({ isMouseOver: true });
     }
   }
@@ -147,24 +156,30 @@ export default class WordHover extends Component {
       [generalStyles.bubbleVisible]: isMouseOver
     });
 
+    const wordClassName = classNames(generalStyles.word, {
+      [generalStyles.cursor]: isMouseOver
+    });
+
     return (
-      <Observer tag="span" onChange={this.handleVisibilityChange}>
-        <span
-          className={generalStyles.word}
-          ref={ref => {
-            this.wordRef = ref;
-          }}
-        >
-          <div
-            style={bubbleStyle}
-            className={bubbleClassName}
+      <span className="whitespace-no-wrap">
+        <Observer tag="span" onChange={this.handleVisibilityChange}>
+          <span
+            className={wordClassName}
             ref={ref => {
-              this.bubbleRef = ref;
+              this.wordRef = ref;
             }}
-          />
-          {children}
-        </span>
-      </Observer>
+          >
+            <div
+              style={bubbleStyle}
+              className={bubbleClassName}
+              ref={ref => {
+                this.bubbleRef = ref;
+              }}
+            />
+            {children}
+          </span>
+        </Observer>
+      </span>
     );
   }
 }

@@ -90,7 +90,8 @@ module.exports = {
     sm: '576px',
     md: '768px',
     lg: '992px',
-    xl: '1200px'
+    xl: '1200px',
+    xxl: '1400'
   },
 
   /*
@@ -149,10 +150,16 @@ module.exports = {
     xxs: '1.5rem',
     xs: '1.6rem',
     s: '1.8rem',
+    'r-m': '1.7rem',
     m: '2rem',
     base: '2rem',
+    'rr-l': '2.2rem',
+    'r-l': '2.4rem',
+    'r-xl': '2.5rem',
     l: '2.8rem',
     xl: '3rem',
+    'rr-xxl': '3.2rem',
+    'r-xxl': '3.4rem',
     xxl: '3.6rem',
     xxxl: '4rem'
   },
@@ -784,7 +791,7 @@ module.exports = {
     userSelect: false,
     verticalAlign: false,
     visibility: ['responsive'],
-    whitespace: false,
+    whitespace: ['responsive'],
     width: ['responsive'],
     zIndex: ['responsive', 'hover']
   },

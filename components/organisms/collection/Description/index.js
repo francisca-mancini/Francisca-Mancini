@@ -1,6 +1,8 @@
 import Paragraph from '../../../atoms/Paragraph';
 import WordHover from '../../../molecules/WordHover';
 
+import getFontSize from '../../../../lib/getFontSize';
+
 export default function Description({ description }) {
   const hoverRegex = /\[hover](.*?)\[\/hover]/g;
   const imageRegex = /src="(.*?)"/g;
@@ -36,7 +38,13 @@ export default function Description({ description }) {
   });
 
   return (
-    <Paragraph font="jenson" weight="light" size="xxl" tag="div" justified>
+    <Paragraph
+      font="jenson"
+      weight="light"
+      size={getFontSize('xxl')}
+      tag="div"
+      justified
+    >
       {mappedDescription.map(item => {
         if (item.image) {
           return <WordHover image={item.image}>{item.string}</WordHover>;

@@ -10,9 +10,16 @@ const sizeMap = {
   xxs: 'text-xxs',
   xs: 'text-xs',
   s: 'text-s',
+  'r-m': 'text-r-m',
   m: 'text-m',
+  base: 'text-base',
+  'rr-l': 'text-rr-l',
+  'r-l': 'text-r-l',
+  'r-xl': 'text-r-xl',
   l: 'text-l',
   xl: 'text-xl',
+  'rr-xxl': 'text-rr-xxl',
+  'r-xxl': 'text-r-xxl',
   xxl: 'text-xxl',
   xxxl: 'text-xxxl'
 };

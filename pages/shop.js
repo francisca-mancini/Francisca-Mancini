@@ -13,6 +13,7 @@ import ProductThumbnail from '../components/molecules/ProductThumbnail';
 import layeringImage from '../static/images/_temp/product3.png';
 import layeringImage2 from '../static/images/_temp/product3-alt.png';
 import layeringImage3 from '../static/images/_temp/product3-alt-2.png';
+import MaxWidth from '../components/atoms/MaxWidth';
 
 export default class Shop extends PureComponent {
   componentDidMount() {
@@ -83,6 +84,7 @@ export default class Shop extends PureComponent {
                         color1="#6B2854"
                         color2="#80AEE8"
                         height
+                        isLayering
                       />
                     </div>
                   </div>
@@ -103,6 +105,7 @@ export default class Shop extends PureComponent {
                         color1="#FFC5E9"
                         color2="#BEE0FF"
                         height
+                        isLayering
                       />
                       <span className="absolute pin-b pin-l w-full pb-40 text-center">
                         <Button size="s">Shop Renaissance Layering Pack</Button>
@@ -117,6 +120,7 @@ export default class Shop extends PureComponent {
                       color1="#6B2854"
                       color2="#80AEE8"
                       height
+                      isLayering
                     />
                   </div>
                   <div className="pt-95 pb-140 h-screen flex items-center justify-center">
@@ -125,6 +129,7 @@ export default class Shop extends PureComponent {
                       color1="#3B3E41"
                       color2="#CEE4FF"
                       height
+                      isLayering
                     />
                   </div>
                   <div className="pt-95 pb-140 h-screen flex items-center justify-center">
@@ -133,6 +138,7 @@ export default class Shop extends PureComponent {
                       color1="#E1C68F"
                       color2="#C5729F"
                       height
+                      isLayering
                     />
                   </div>
                   <div className="pt-95 pb-140 h-screen flex items-center justify-center">
@@ -141,10 +147,23 @@ export default class Shop extends PureComponent {
                       color1="#6B2854"
                       color2="#80AEE8"
                       height
+                      isLayering
                     />
                   </div>
                 </GridItem>
               </Grid>
+            </Spacing>
+          </Spacing>
+
+          <Spacing type="padding" size={80}>
+            <Heading size="s" center>
+              Shop Discovery Pack
+            </Heading>
+
+            <Spacing>
+              <MaxWidth center value={700}>
+                <ProductThumbnail isDiscovery />
+              </MaxWidth>
             </Spacing>
           </Spacing>
         </PageWrap>

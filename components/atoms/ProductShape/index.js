@@ -19,8 +19,8 @@ export default class ProductShape extends Component {
   constructor() {
     super();
 
-    this.circleSizeFactor = 3;
-    this.baseSizeFactor = 4;
+    this.circleSizeFactor = 3.3;
+    this.baseSizeFactor = 4.4;
 
     this.circleColor = 0xff0000;
     this.movingCirclesCount = 5;
@@ -55,23 +55,33 @@ export default class ProductShape extends Component {
   }
 
   resize() {
+    const { isDiscovery } = this.props;
     const parent = findParent(this.canvasRef, 'pixiContainer');
 
     this.width = parent.offsetWidth;
     this.height = parent.offsetHeight;
 
-    this.baseShapeSize = this.width / this.baseSizeFactor;
-    this.circlesSize = this.width / this.circleSizeFactor;
+    this.baseShapeSize = isDiscovery
+      ? this.height / this.baseSizeFactor
+      : this.width / this.baseSizeFactor;
+    this.circlesSize = isDiscovery
+      ? this.height / this.circleSizeFactor
+      : this.width / this.circleSizeFactor;
   }
 
   initPixi() {
+    const { isDiscovery } = this.props;
     const parent = findParent(this.canvasRef, 'pixiContainer');
 
     this.width = parent.offsetWidth;
     this.height = parent.offsetHeight;
 
-    this.baseShapeSize = this.width / this.baseSizeFactor;
-    this.circlesSize = this.width / this.circleSizeFactor;
+    this.baseShapeSize = isDiscovery
+      ? this.height / this.baseSizeFactor
+      : this.width / this.baseSizeFactor;
+    this.circlesSize = isDiscovery
+      ? this.height / this.circleSizeFactor
+      : this.width / this.circleSizeFactor;
 
     this.app = new PIXI.Application({
       width: this.width,

@@ -9,6 +9,7 @@ import Link from '../../atoms/Link';
 import ProductShape from '../../atoms/ProductShape';
 
 import productImage from '../../../static/images/_temp/voiledenuit.png';
+import discoveryImage from '../../../static/images/_temp/discovery2.png';
 
 import generalStyles from './general.module.css';
 
@@ -17,18 +18,38 @@ export default function ProductThumbnail({
   title,
   color1,
   color2,
-  href
+  href,
+  isDiscovery,
+  isLayering
 }) {
   const img = image || productImage;
+  const containerClassName = classNames(
+    generalStyles.imageContainer,
+    'pixiContainer',
+    {
+      [generalStyles.imageContainerDiscovery]: isDiscovery
+    }
+  );
+  const imageClassName = classNames(generalStyles.image, {
+    [generalStyles.imageDiscovery]: isDiscovery,
+    [generalStyles.imageLayering]: isLayering,
+    [generalStyles.imageFragrance]: !isLayering && !isDiscovery
+  });
 
   return (
     <div className="w-full px-20 flex items-center justify-center">
       <Link className="w-full" tag="div" href={href}>
-        <div
-          className={classNames(generalStyles.imageContainer, 'pixiContainer')}
-        >
-          <img className={generalStyles.image} src={img} alt="yo" />
-          <ProductShape color1={color1} color2={color2} />
+        <div className={containerClassName}>
+          <img
+            className={imageClassName}
+            src={isDiscovery ? discoveryImage : img}
+            alt="yo"
+          />
+          <ProductShape
+            isDiscovery={isDiscovery}
+            color1={color1}
+            color2={color2}
+          />
         </div>
         <div>
           <Spacing size={15}>
