@@ -25,7 +25,7 @@ export default class ProductBackgroundShapes extends PureComponent {
 
     this.areas = [
       {
-        limit: 6,
+        limit: 4,
         x: 300,
         y: 300,
         motionFactor: 600,
@@ -43,9 +43,36 @@ export default class ProductBackgroundShapes extends PureComponent {
         circles: []
       },
       {
-        limit: 5,
+        limit: 8,
         x: 400,
         y: 600,
+        motionFactor: 800,
+        xFactor: 200,
+        yFactor: 300,
+        circles: []
+      },
+      {
+        limit: 8,
+        x: 1000,
+        y: 400,
+        motionFactor: 800,
+        xFactor: 200,
+        yFactor: 300,
+        circles: []
+      },
+      {
+        limit: 8,
+        x: 900,
+        y: 800,
+        motionFactor: 800,
+        xFactor: 200,
+        yFactor: 300,
+        circles: []
+      },
+      {
+        limit: 8,
+        x: 1200,
+        y: 300,
         motionFactor: 800,
         xFactor: 200,
         yFactor: 300,
@@ -97,9 +124,9 @@ export default class ProductBackgroundShapes extends PureComponent {
     this.areas.forEach((item, index) => {
       for (let i = 0; i <= item.limit; i++) {
         const circle = this.createCircle(100, 0, 0);
-        item.circles[index] = circle;
-        item.circles[index].x = item.x;
-        item.circles[index].y = item.y;
+        item.circles[i] = circle;
+        item.circles[i].x = item.x;
+        item.circles[i].y = item.y;
       }
     });
   }
@@ -139,14 +166,9 @@ export default class ProductBackgroundShapes extends PureComponent {
   renderPixi() {
     this.frameCount += 1;
 
-    // const y = this.simplex.noise2D(this.circle.y, this.frameCount / 1000);
-
-    // console.log(this.renderDelta)
-    // console.log(x * )
-
     this.areas.forEach((item, index) => {
       for (let i = 0; i <= item.limit; i++) {
-        const circle = item.circles[index];
+        const circle = item.circles[i];
         const x = this.simplex.noise3D(
           circle.x / item.xFactor,
           circle.y / item.yFactor,
@@ -164,11 +186,9 @@ export default class ProductBackgroundShapes extends PureComponent {
 
         circle.x += x;
         circle.y += y;
-        circle.scale.x = circle.scale.y = scale;
+        // circle.scale.x = circle.scale.y = scale >= 0.2 ? scale : 0.2;
       }
     });
-
-    // this.circle.y += y;
   }
 
   render() {
