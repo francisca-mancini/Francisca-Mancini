@@ -19,8 +19,8 @@ export default class ProductShape extends Component {
   constructor() {
     super();
 
-    this.circleSizeFactor = 2.6;
-    this.baseSizeFactor = 3.6;
+    this.circleSizeFactor = 3;
+    this.baseSizeFactor = 4;
 
     this.circleColor = 0xff0000;
     this.movingCirclesCount = 5;
