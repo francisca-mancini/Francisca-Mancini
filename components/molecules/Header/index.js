@@ -1,9 +1,12 @@
-import { withRouter } from 'next/router';
 import React, { Component } from 'react';
+import { graphql } from 'react-apollo';
+import gql from 'graphql-tag';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import MediaQuery from 'react-responsive';
 import throttle from 'lodash/throttle';
+
+import withData from '../../../lib/withData';
 
 import Heading from '../../atoms/Heading';
 import Spacing from '../../atoms/Spacing';
@@ -78,7 +81,7 @@ class Header extends Component {
   }
 
   render() {
-    const { isLoaded } = this.props;
+    const { isLoaded, pathname } = this.props;
     const { isLight } = this.state;
     const headerClassName = classNames(generalStyles.header, {
       [generalStyles.headerHidden]: !isLoaded,
@@ -98,7 +101,7 @@ class Header extends Component {
       zIndex,
       isCollection
     }) => {
-      const pathname = this.props.router.pathname;
+      console.log(pathname);
       const notActive = pathname === '/';
       const isShop = pathname === '/product' && href === '/shop';
       const isCollect = pathname === '/collection' && isCollection;
@@ -172,12 +175,12 @@ class Header extends Component {
                     <InlineGrid>
                       <NavLink
                         isCollection
-                        className="relative"
-                        href="#"
-                        isDropdownTrigger
+                        // className="relative"
+                        href="/collection/maps-travel"
+                        // isDropdownTrigger
                       >
-                        Collections
-                        <CollectionDropdown />
+                        N°1: Maps Travel
+                        {/* <CollectionDropdown /> */}
                       </NavLink>
                       <NavLink href="/shop" zIndex>
                         Shop
@@ -199,7 +202,57 @@ class Header extends Component {
   }
 }
 
-export default withRouter(Header);
+const query = gql`
+  query query {
+    shop {
+      name
+      description
+      articles(first: 20) {
+        edges {
+          node {
+            content
+          }
+        }
+      }
+      collections(first: 20) {
+        edges {
+          node {
+            handle
+            id
+            description
+            descriptionHtml
+            title
+            products(first: 20) {
+              edges {
+                node {
+                  id
+                  handle
+                  title
+                  description
+                  descriptionHtml
+                  productType
+                  tags
+                  images(first: 20) {
+                    edges {
+                      node {
+                        altText
+                        id
+                        originalSrc
+                        transformedSrc
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+`;
+
+export default Header;
 
 Header.propTypes = {
   isLight: PropTypes.bool,
