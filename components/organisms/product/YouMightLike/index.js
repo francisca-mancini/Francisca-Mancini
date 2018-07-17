@@ -11,17 +11,19 @@ export default function YouMightLike() {
           You might like
         </Heading>
       </Spacing>
-      <Grid gap={30}>
-        <GridItem columnSize={4}>
-          <ProductThumbnail />
-        </GridItem>
-        <GridItem columnSize={4}>
-          <ProductThumbnail />
-        </GridItem>
-        <GridItem columnSize={4}>
-          <ProductThumbnail />
-        </GridItem>
-      </Grid>
+      <Spacing size={80} position="b" type="padding">
+        <Grid gap={30}>
+          <GridItem columnSize={4}>
+            <ProductThumbnail />
+          </GridItem>
+          <GridItem columnSize={4}>
+            <ProductThumbnail />
+          </GridItem>
+          <GridItem columnSize={4}>
+            <ProductThumbnail />
+          </GridItem>
+        </Grid>
+      </Spacing>
     </Spacing>
   );
 }
