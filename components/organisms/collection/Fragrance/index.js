@@ -9,12 +9,10 @@ import ProductShape from '../../../atoms/ProductShape';
 import MaxWidth from '../../../atoms/MaxWidth';
 import ParallaxWrapper from '../../../atoms/ParallaxWrapper';
 
+import getFontSize from '../../../../lib/getFontSize';
+
 import generalStyles from './general.module.css';
 import heroStyles from './hero.module.css';
-
-import mainImage1 from '../../../../static/images/_temp/collection/main1.png';
-import secondImage1 from '../../../../static/images/_temp/collection/second1.png';
-import thirdImage1 from '../../../../static/images/_temp/collection/third1.png';
 
 export default class Fragrance extends PureComponent {
   handleIntersection(inView) {
@@ -50,14 +48,19 @@ export default class Fragrance extends PureComponent {
             </ParallaxWrapper>
           </div>
           <ParallaxWrapper speed={1.2} positionAbsolute={false}>
-            <Heading size="m" font="serif" uppercase center>
+            <Heading size={getFontSize('m')} font="serif" uppercase center>
               {children}
             </Heading>
           </ParallaxWrapper>
           <Spacing size={30}>
             <MaxWidth center value={720}>
               <ParallaxWrapper positionAbsolute={false}>
-                <Paragraph indent justified size="xl" font="jenson">
+                <Paragraph
+                  indent
+                  justified
+                  size={getFontSize('xl')}
+                  font="jenson"
+                >
                   This highly spiritual scent, with Frankincense, incense,
                   musks, and fire it can be found after a trip across the north
                   of Africa, from the High Atlas to the Nile. There is an altar

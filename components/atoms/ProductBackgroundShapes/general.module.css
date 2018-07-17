@@ -1,0 +1,19 @@
+.container {
+  composes:
+    global(pointer-events-none)
+    global(pin)
+    global(fixed)
+  ;
+  transition: opacity 1s ease-in;
+}
+
+.containerHidden {
+  composes:
+    global(opacity-0)
+  ;
+}
+
+.container canvas {
+  transform-origin: center;
+  transform: scale(1.05);
+}

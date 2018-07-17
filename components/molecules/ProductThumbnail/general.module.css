@@ -20,16 +20,39 @@
   padding-bottom: 100%;
 }
 
+.imageContainerDiscovery {
+  padding-bottom: 54%;
+}
+
 .image {
   composes:
     global(max-w-full)
     global(absolute)
     global(z-10)
     global(opacity-100)
-    global(w-full)
   ;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   max-width: 470px;
+}
+
+.imageFragrance {
+  composes:
+    global(w-full)
+  ;
+}
+
+.imageDiscovery {
+  composes:
+    global(w-auto)
+    global(h-full)
+  ;
+}
+
+.imageLayering {
+  composes:
+    global(w-70)
+    global(h-70)
+  ;
 }

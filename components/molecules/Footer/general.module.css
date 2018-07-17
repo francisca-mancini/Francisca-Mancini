@@ -1,6 +1,9 @@
 .footer {
   composes:
     global(py-30)
+    global(bg-white)
+    global(relative)
+    global(z-20)
   ;
 }
 

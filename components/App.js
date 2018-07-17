@@ -34,7 +34,12 @@ class App extends PureComponent {
 
     return (
       <div className="root" id="root">
-        <Header isLoaded={isLoaded} isLight={headerLight} isHome={isHome} />
+        <Header
+          pathname={pathname}
+          isLoaded={isLoaded}
+          isLight={headerLight}
+          isHome={isHome}
+        />
         <div
           className={classNames({ 'pt-80': hasTopPad, 'pb-80': hasBottomPad })}
         >

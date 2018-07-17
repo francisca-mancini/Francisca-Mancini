@@ -1,4 +1,8 @@
 .story {
+  composes:
+    global(relative)
+    global(z-20)
+  ;
   background-color: #FDE6E3;
 }
 

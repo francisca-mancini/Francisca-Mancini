@@ -7,21 +7,22 @@ import MaxWidth from '../../../atoms/MaxWidth';
 
 import getProductStory from '../../../../lib/getProductStory';
 import getProductNotes from '../../../../lib/getProductNotes';
+import getFontSize from '../../../../lib/getFontSize';
 
 import generalStyles from './general.module.css';
 
 const Note = ({ label, children }) => {
   return (
-    <Spacing size={10}>
+    <Spacing size={10} type="padding">
       <MaxWidth value={500} center>
         <InlineGrid justify="start" align="center">
           <div className={generalStyles.noteLeft}>
-            <Heading size="xl" uppercase>
+            <Heading size={getFontSize('xl')} uppercase>
               {label}
             </Heading>
           </div>
           <div className={generalStyles.noteRight}>
-            <Heading size="xl" font="jenson">
+            <Heading size={getFontSize('xl')} font="jenson">
               {children}
             </Heading>
           </div>
@@ -64,7 +65,7 @@ function Story({ product }) {
                     Story
                   </Heading>
                 </Spacing>
-                <Paragraph font="jenson" size="xl">
+                <Paragraph font="jenson" size={getFontSize('xl')}>
                   {story}
                 </Paragraph>
               </GridItem>

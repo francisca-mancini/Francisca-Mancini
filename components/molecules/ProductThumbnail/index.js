@@ -15,28 +15,50 @@ import getProductTitle from '../../../lib/getProductTitle';
 
 import generalStyles from './general.module.css';
 
-export default function ProductThumbnail({ product }) {
+export default function ProductThumbnail({ product, isDiscovery, isLayering }) {
   console.log(product);
-  const color1 = getProductGradient(product).color1;
-  const color2 = getProductGradient(product).color2;
+  const color1 = getProductGradient(product)
+    ? getProductGradient(product).color1
+    : '#6b2854';
+  const color2 = getProductGradient(product)
+    ? getProductGradient(product).color2
+    : '#80aee8';
   const handle = getProductHandle(product);
   const images = getProductImages(product);
   const title = getProductTitle(product);
   const img = images[0].transformedSrc;
+  const containerClassName = classNames(
+    generalStyles.imageContainer,
+    'pixiContainer',
+    {
+      [generalStyles.imageContainerDiscovery]: isDiscovery
+    }
+  );
+  const imageClassName = classNames(generalStyles.image, {
+    [generalStyles.imageDiscovery]: isDiscovery,
+    [generalStyles.imageLayering]: isLayering,
+    [generalStyles.imageFragrance]: !isLayering && !isDiscovery
+  });
 
   return (
     <div className="w-full px-20 flex items-center justify-center">
       <Link className="w-full" tag="div" href={`/product/${handle}`}>
-        <div
-          className={classNames(generalStyles.imageContainer, 'pixiContainer')}
-        >
-          <img className={generalStyles.image} src={img} alt="yo" />
-          <ProductShape color1={color1} color2={color2} />
+        <div className={containerClassName}>
+          <img
+            className={imageClassName}
+            src={isDiscovery ? discoveryImage : img}
+            alt="yo"
+          />
+          <ProductShape
+            isDiscovery={isDiscovery}
+            color1={color1}
+            color2={color2}
+          />
         </div>
         <div>
           <Spacing size={15}>
             <Heading uppercase size="xxxxs" center font="serif" tracking="wide">
-              {title}
+              {title || 'Title'}
             </Heading>
           </Spacing>
           <Paragraph weight="semilight" size="xs" center>

@@ -31,14 +31,16 @@ class Product extends PureComponent {
     }
 
     return (
-      <App hasTopPad={false}>
+      <App hasTopPad={false} hasBottomPad={false}>
         <PageWrap>
           <Hero product={this.product} />
         </PageWrap>
-        <Story product={this.product} />
-        <PageWrap>
-          <YouMightLike />
-        </PageWrap>
+        <div className="relative z-20 bg-white">
+          <Story product={this.product} />
+          <PageWrap>
+            <YouMightLike />
+          </PageWrap>
+        </div>
       </App>
     );
   }
