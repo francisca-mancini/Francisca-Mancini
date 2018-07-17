@@ -20,7 +20,7 @@ export default function Fragrances({ products }) {
           products.length &&
           products.map((item, index) => {
             const product = item.node;
-            const y = index % 2 === 0 ? 120 : 0;
+            const y = index % 2 === 1 ? 120 : 0;
 
             return (
               <GridItem key={index} columnSize={[12, 6, 4]}>
