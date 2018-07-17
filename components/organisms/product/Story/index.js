@@ -37,7 +37,7 @@ function Story({ product }) {
   const notes = product && getProductNotes(product);
 
   return (
-    <Spacing size={80} type="padding">
+    <Spacing size={80} position="bottom" type="padding">
       <div className={generalStyles.story}>
         <PageWrap>
           <Spacing size={80} type="padding">

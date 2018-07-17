@@ -10,6 +10,8 @@ import YouMightLike from '../components/organisms/product/YouMightLike';
 import Story from '../components/organisms/product/Story';
 
 import getProduct from '../lib/getProduct';
+import getProductHandle from '../lib/getProductHandle';
+import getProductsButHandle from '../lib/getProductsButHandle';
 import withData from '../lib/withData';
 
 class Product extends PureComponent {
@@ -19,6 +21,10 @@ class Product extends PureComponent {
 
   componentWillMount() {
     this.product = getProduct(this.props.data, this.props.productHandle);
+    this.products = getProductsButHandle(
+      this.props.data.shop.products.edges,
+      getProductHandle(this.product)
+    );
 
     if (!this.product) {
       this.props.url.push('/404');
@@ -38,7 +44,7 @@ class Product extends PureComponent {
         <div className="relative z-20 bg-white">
           <Story product={this.product} />
           <PageWrap>
-            <YouMightLike />
+            <YouMightLike products={this.products} />
           </PageWrap>
         </div>
       </App>

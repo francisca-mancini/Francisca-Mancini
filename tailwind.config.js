@@ -791,7 +791,7 @@ module.exports = {
     userSelect: false,
     verticalAlign: false,
     visibility: ['responsive'],
-    whitespace: ['responsive'],
+    whitespace: [],
     width: ['responsive'],
     zIndex: ['responsive', 'hover']
   },
