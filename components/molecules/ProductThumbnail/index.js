@@ -16,7 +16,6 @@ import getProductTitle from '../../../lib/getProductTitle';
 import generalStyles from './general.module.css';
 
 export default function ProductThumbnail({ product, isDiscovery, isLayering }) {
-  console.log(product);
   const color1 = getProductGradient(product)
     ? getProductGradient(product).color1
     : '#6b2854';
@@ -44,11 +43,7 @@ export default function ProductThumbnail({ product, isDiscovery, isLayering }) {
     <div className="w-full px-20 flex items-center justify-center">
       <Link className="w-full" tag="div" href={`/product/${handle}`}>
         <div className={containerClassName}>
-          <img
-            className={imageClassName}
-            src={isDiscovery ? discoveryImage : img}
-            alt="yo"
-          />
+          <img className={imageClassName} src={img} alt="" />
           <ProductShape
             isDiscovery={isDiscovery}
             color1={color1}
@@ -58,7 +53,7 @@ export default function ProductThumbnail({ product, isDiscovery, isLayering }) {
         <div>
           <Spacing size={15}>
             <Heading uppercase size="xxxxs" center font="serif" tracking="wide">
-              {title || 'Title'}
+              {title}
             </Heading>
           </Spacing>
           <Paragraph weight="semilight" size="xs" center>
