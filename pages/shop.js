@@ -1,6 +1,9 @@
 import React, { PureComponent } from 'react';
 import App from '../components/App';
 import stickybits from 'stickybits';
+import withData from '../lib/withData';
+import { graphql } from 'react-apollo';
+import gql from 'graphql-tag';
 
 import PageWrap from '../components/atoms/PageWrap';
 import Spacing from '../components/atoms/Spacing';
@@ -15,7 +18,19 @@ import layeringImage2 from '../static/images/_temp/product3-alt.png';
 import layeringImage3 from '../static/images/_temp/product3-alt-2.png';
 import MaxWidth from '../components/atoms/MaxWidth';
 
-export default class Shop extends PureComponent {
+import Fragrances from '../components/organisms/shop/Fragrances';
+import Layerings from '../components/organisms/shop/Layerings';
+
+import getProductsByType from '../lib/getProductsByType';
+
+class Shop extends PureComponent {
+  componentWillMount() {
+    const products = this.props.data.shop.products.edges;
+    this.fragrances = getProductsByType(products, 'fragrance');
+    this.layerings = getProductsByType(products, 'layering');
+    this.discoveries = getProductsByType(products, 'discovery');
+  }
+
   componentDidMount() {
     stickybits('.stickybits');
   }
@@ -29,47 +44,8 @@ export default class Shop extends PureComponent {
     return (
       <App>
         <PageWrap>
-          <Spacing type="padding" size={80}>
-            <Heading size="s" center>
-              Shop Fragrances
-            </Heading>
-            <Grid gap={[0, 30]}>
-              <GridItem columnSize={[12, 6, 4]}>
-                <Spacing size={70}>
-                  <ProductThumbnail color1="#E88F56" color2="#AC1620" />
-                </Spacing>
-              </GridItem>
-              <GridItem columnSize={[12, 6, 4]}>
-                <div style={{ transform: 'translateY(120px)' }}>
-                  <Spacing size={70}>
-                    <ProductThumbnail color1="#E1C68F" color2="#C5729F" />
-                  </Spacing>
-                </div>
-              </GridItem>
-              <GridItem columnSize={[12, 6, 4]}>
-                <Spacing size={70}>
-                  <ProductThumbnail color1="#3B3E41" color2="#CEE4FF" />
-                </Spacing>
-              </GridItem>
-              <GridItem columnSize={[12, 6, 4]}>
-                <Spacing size={70}>
-                  <ProductThumbnail color1="#A5C899" color2="#194365" />
-                </Spacing>
-              </GridItem>
-              <GridItem columnSize={[12, 6, 4]}>
-                <div style={{ transform: 'translateY(120px)' }}>
-                  <Spacing size={70}>
-                    <ProductThumbnail color1="#E88F56" color2="#AC1620" />
-                  </Spacing>
-                </div>
-              </GridItem>
-              <GridItem columnSize={[12, 6, 4]}>
-                <Spacing size={70}>
-                  <ProductThumbnail color1="#3B3E41" color2="#CEE4FF" />
-                </Spacing>
-              </GridItem>
-            </Grid>
-          </Spacing>
+          <Fragrances products={this.fragrances} />
+
           <Spacing size={80}>
             <Spacing size={20}>
               <Grid align="stretch" gap={0}>
@@ -80,9 +56,11 @@ export default class Shop extends PureComponent {
                   >
                     <div className="pt-95 pb-120 flex w-100 items-center justify-center">
                       <ProductThumbnail
-                        image={layeringImage}
-                        color1="#6B2854"
-                        color2="#80AEE8"
+                        product={
+                          this.layerings &&
+                          this.layerings.length &&
+                          this.layerings[0].node
+                        }
                         height
                         isLayering
                       />
@@ -101,9 +79,11 @@ export default class Shop extends PureComponent {
                     </span>
                     <div className="w-100 pt-95 pb-140 flex flex-col items-center justify-center">
                       <ProductThumbnail
-                        image={layeringImage2}
-                        color1="#FFC5E9"
-                        color2="#BEE0FF"
+                        product={
+                          this.layerings &&
+                          this.layerings.length &&
+                          this.layerings[0].node
+                        }
                         height
                         isLayering
                       />
@@ -114,60 +94,80 @@ export default class Shop extends PureComponent {
                   </div>
                 </GridItem>
                 <GridItem columnSize={4}>
-                  <div className="pt-95 pb-140 h-screen flex items-center justify-center">
-                    <ProductThumbnail
-                      image={layeringImage3}
-                      color1="#6B2854"
-                      color2="#80AEE8"
-                      height
-                      isLayering
-                    />
-                  </div>
-                  <div className="pt-95 pb-140 h-screen flex items-center justify-center">
-                    <ProductThumbnail
-                      image={layeringImage3}
-                      color1="#3B3E41"
-                      color2="#CEE4FF"
-                      height
-                      isLayering
-                    />
-                  </div>
-                  <div className="pt-95 pb-140 h-screen flex items-center justify-center">
-                    <ProductThumbnail
-                      image={layeringImage3}
-                      color1="#E1C68F"
-                      color2="#C5729F"
-                      height
-                      isLayering
-                    />
-                  </div>
-                  <div className="pt-95 pb-140 h-screen flex items-center justify-center">
-                    <ProductThumbnail
-                      image={layeringImage3}
-                      color1="#6B2854"
-                      color2="#80AEE8"
-                      height
-                      isLayering
-                    />
-                  </div>
+                  {this.layerings &&
+                    this.layerings.length &&
+                    this.layerings.map((item, index) => {
+                      return (
+                        <div
+                          key={index}
+                          className="pt-95 pb-140 h-screen flex items-center justify-center"
+                        >
+                          <ProductThumbnail
+                            product={item.node}
+                            height
+                            isLayering
+                          />
+                        </div>
+                      );
+                    })}
                 </GridItem>
               </Grid>
             </Spacing>
           </Spacing>
 
-          <Spacing type="padding" size={80}>
-            <Heading size="s" center>
-              Shop Discovery Pack
-            </Heading>
+          {this.discoveries &&
+            this.discoveries.length && (
+              <Spacing type="padding" size={80}>
+                <Heading size="s" center>
+                  Shop Discovery Pack
+                </Heading>
 
-            <Spacing>
-              <MaxWidth center value={700}>
-                <ProductThumbnail isDiscovery />
-              </MaxWidth>
-            </Spacing>
-          </Spacing>
+                <Spacing>
+                  <MaxWidth center value={700}>
+                    <ProductThumbnail
+                      product={this.discoveries[0].node}
+                      isDiscovery
+                    />
+                  </MaxWidth>
+                </Spacing>
+              </Spacing>
+            )}
         </PageWrap>
       </App>
     );
   }
 }
+
+const query = gql`
+  query query {
+    shop {
+      name
+      description
+      products(first: 50) {
+        edges {
+          node {
+            id
+            handle
+            title
+            description
+            descriptionHtml
+            productType
+            tags
+            images(first: 20) {
+              edges {
+                node {
+                  altText
+                  id
+                  originalSrc
+                  transformedSrc
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+`;
+
+export default withData(graphql(query)(Shop));
