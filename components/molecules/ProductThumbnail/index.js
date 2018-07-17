@@ -8,21 +8,25 @@ import Link from '../../atoms/Link';
 
 import ProductShape from '../../atoms/ProductShape';
 
-import productImage from '../../../static/images/_temp/voiledenuit.png';
-import discoveryImage from '../../../static/images/_temp/discovery2.png';
+import getProductGradient from '../../../lib/getProductGradient';
+import getProductHandle from '../../../lib/getProductHandle';
+import getProductImages from '../../../lib/getProductImages';
+import getProductTitle from '../../../lib/getProductTitle';
 
 import generalStyles from './general.module.css';
 
-export default function ProductThumbnail({
-  image,
-  title,
-  color1,
-  color2,
-  href,
-  isDiscovery,
-  isLayering
-}) {
-  const img = image || productImage;
+export default function ProductThumbnail({ product, isDiscovery, isLayering }) {
+  console.log(product);
+  const color1 = getProductGradient(product)
+    ? getProductGradient(product).color1
+    : '#6b2854';
+  const color2 = getProductGradient(product)
+    ? getProductGradient(product).color2
+    : '#80aee8';
+  const handle = getProductHandle(product);
+  const images = getProductImages(product);
+  const title = getProductTitle(product);
+  const img = images[0].transformedSrc;
   const containerClassName = classNames(
     generalStyles.imageContainer,
     'pixiContainer',
@@ -38,7 +42,7 @@ export default function ProductThumbnail({
 
   return (
     <div className="w-full px-20 flex items-center justify-center">
-      <Link className="w-full" tag="div" href={href}>
+      <Link className="w-full" tag="div" href={`/product/${handle}`}>
         <div className={containerClassName}>
           <img
             className={imageClassName}
@@ -74,6 +78,5 @@ ProductThumbnail.propTypes = {
 
 ProductThumbnail.defaultProps = {
   color1: '#6b2854',
-  color2: '#80aee8',
-  image: productImage
+  color2: '#80aee8'
 };
