@@ -1,0 +1,13 @@
+.container {
+  composes:
+    global(absolute)
+    global(pin)
+  ;
+  transition: opacity 0.5s;
+}
+
+.containerHidden {
+  composes:
+    global(opacity-0)
+  ;
+}

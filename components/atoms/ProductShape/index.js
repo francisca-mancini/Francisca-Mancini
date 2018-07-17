@@ -3,11 +3,14 @@ import isNode from 'detect-node';
 import PropTypes from 'prop-types';
 import throttle from 'lodash/throttle';
 import Observer from 'react-intersection-observer';
+import classNames from 'classnames';
 
 import ThresholdGradientFilter from '../../../lib/thresholdGradientShader';
 import findParent from '../../../lib/findParent';
 import numberToVec from '../../../lib/numberToVec';
 import hexToRgb from '../../../lib/hexToRgb';
+
+import generalStyles from './general.module.css';
 
 let PIXI;
 
@@ -28,6 +31,10 @@ export default class ProductShape extends Component {
     this.renderDelta = 0;
     this.movingCircles = [];
 
+    this.state = {
+      isHidden: true
+    };
+
     this.renderPixi = this.renderPixi.bind(this);
     this.resize = throttle(this.resize.bind(this), 100);
     this.handleVisibilityChange = this.handleVisibilityChange.bind(this);
@@ -37,6 +44,10 @@ export default class ProductShape extends Component {
     if (!isNode) {
       this.initPixi();
       this.addShaderPass();
+
+      setTimeout(() => {
+        this.setState({ isHidden: false });
+      }, 1000);
     }
 
     window.addEventListener('resize', this.resize);
@@ -180,10 +191,14 @@ export default class ProductShape extends Component {
   }
 
   render() {
+    const { isHidden } = this.state;
+    const containerClassName = classNames(generalStyles.container, {
+      [generalStyles.containerHidden]: isHidden
+    });
     return (
       <Observer onChange={this.handleVisibilityChange}>
         <div
-          className="absolute pin"
+          className={containerClassName}
           ref={ref => {
             this.canvasRef = ref;
           }}
