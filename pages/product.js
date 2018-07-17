@@ -108,7 +108,8 @@ const query = gql`
               }
               edges {
                 node {
-                  src
+                  originalSrc
+                  transformedSrc
                 }
               }
             }
