@@ -36,6 +36,8 @@ class Product extends PureComponent {
       return <div />;
     }
 
+    const mightLikeProducts = this.products.slice(0, 3);
+
     return (
       <App hasTopPad={false} hasBottomPad={false}>
         <PageWrap>
@@ -44,7 +46,7 @@ class Product extends PureComponent {
         <div className="relative z-20 bg-white">
           <Story product={this.product} />
           <PageWrap>
-            <YouMightLike products={this.products} />
+            <YouMightLike products={mightLikeProducts} />
           </PageWrap>
         </div>
       </App>
