@@ -46,14 +46,9 @@ export default class ProductBackgroundShapes extends PureComponent {
         motionFactor: 10000,
         xFactor: 200,
         yFactor: 300,
-        rotationFactor: 600,
+        rotationFactor: 400,
         scaleFactor: 0.8,
-        circles: [],
-        scale: {
-          value: 1,
-          max: 1.0,
-          min: 0.8
-        }
+        circles: []
       },
       {
         limit: 10,
@@ -69,14 +64,9 @@ export default class ProductBackgroundShapes extends PureComponent {
         motionFactor: 10000,
         xFactor: 200,
         yFactor: 300,
-        rotationFactor: 500,
+        rotationFactor: 300,
         scaleFactor: 0.8,
-        circles: [],
-        scale: {
-          value: 1,
-          max: 1,
-          min: 0.8
-        }
+        circles: []
       },
       {
         limit: 10,
@@ -92,14 +82,9 @@ export default class ProductBackgroundShapes extends PureComponent {
         motionFactor: 10000,
         xFactor: 200,
         yFactor: 300,
-        rotationFactor: 550,
+        rotationFactor: 450,
         scaleFactor: 0.8,
-        circles: [],
-        scale: {
-          value: 1,
-          max: 1,
-          min: 0.8
-        }
+        circles: []
       },
       {
         limit: 10,
@@ -115,14 +100,9 @@ export default class ProductBackgroundShapes extends PureComponent {
         motionFactor: 10000,
         xFactor: 200,
         yFactor: 300,
-        rotationFactor: 570,
+        rotationFactor: 360,
         scaleFactor: 0.8,
-        circles: [],
-        scale: {
-          value: 1,
-          max: 1,
-          min: 0.8
-        }
+        circles: []
       }
     ];
 
@@ -163,7 +143,6 @@ export default class ProductBackgroundShapes extends PureComponent {
     this.app.ticker.add(this.renderPixi);
 
     this.container = new PIXI.Container();
-    // this.container.scale.set(1.5);
     this.app.stage.addChild(this.container);
 
     this.addAreas();
@@ -182,6 +161,7 @@ export default class ProductBackgroundShapes extends PureComponent {
 
       item.container = this.createContainer(containerPosition);
       item.mainShape = this.createShape(item.mainShapeSprite, item.container);
+      item.mainShape.scale.set(0.7);
 
       for (let i = 0; i <= item.limit; i++) {
         const circle = this.createCircle(
@@ -251,37 +231,10 @@ export default class ProductBackgroundShapes extends PureComponent {
     this.container.filterArea = this.app.screen;
   }
 
-  easeInOutSine(a) {
-    return -0.5 * (Math.cos((Math.PI * a) / 1) - 1);
-  }
-
-  updateScale(item) {
-    let incr = -0.0009;
-    let newValue = item.scale.value;
-
-    if (newValue >= item.scale.max) {
-      incr = -0.001;
-      // newValue = item.scale.max - 0.01;
-    }
-
-    if (newValue <= item.scale.min) {
-      incr = 0.001;
-      // newValue = item.scale.min + 0.01;
-    }
-
-    newValue += incr;
-
-    console.log(incr);
-
-    return newValue;
-  }
-
   renderPixi() {
     this.frameCount += 1;
 
     this.areas.forEach((item, index) => {
-      // item.mainShape.scale.x = this.easeInOutSine(setMinMax(this.frameCount / 1000, 0.76, 1));
-      // item.mainShape.scale.y = this.easeInOutSine(setMinMax(this.frameCount / 1000, 0.76, 1));
       item.mainShape.rotation = Math.sin(this.frameCount / item.rotationFactor);
 
       for (let i = 0; i <= item.limit; i++) {
@@ -300,8 +253,6 @@ export default class ProductBackgroundShapes extends PureComponent {
           circle.x / item.xFactor,
           this.frameCount / item.motionFactor
         );
-
-        // console.log(scale <= 0.2 ? 0.2 : scale);
 
         circle.x += x;
         circle.y += y;

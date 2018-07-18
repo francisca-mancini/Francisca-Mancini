@@ -1,12 +1,9 @@
 import React, { Component } from 'react';
-import { graphql } from 'react-apollo';
 import gql from 'graphql-tag';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import MediaQuery from 'react-responsive';
 import throttle from 'lodash/throttle';
-
-import withData from '../../../lib/withData';
 
 import Heading from '../../atoms/Heading';
 import Spacing from '../../atoms/Spacing';
@@ -101,7 +98,6 @@ class Header extends Component {
       zIndex,
       isCollection
     }) => {
-      console.log(pathname);
       const notActive = pathname === '/';
       const isShop = pathname === '/product' && href === '/shop';
       const isCollect = pathname === '/collection' && isCollection;
