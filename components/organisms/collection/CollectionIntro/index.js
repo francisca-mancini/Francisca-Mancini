@@ -1,3 +1,5 @@
+import { Link } from 'react-scroll';
+
 import Heading from '../../../atoms/Heading';
 import Spacing from '../../../atoms/Spacing';
 import MaxWidth from '../../../atoms/MaxWidth';
@@ -11,7 +13,7 @@ import getCollectionHandle from '../../../../lib/getCollectionHandle';
 
 import Description from '../Description';
 
-export default function CollectionIntro({ collection, isHome }) {
+export default function CollectionIntro({ collection, isHome, to }) {
   const title = getCollectionTitle(collection);
   const description = getCollectionDescription(collection);
   const handle = getCollectionHandle(collection);
@@ -35,7 +37,15 @@ export default function CollectionIntro({ collection, isHome }) {
         </div>
       ) : (
         <div className="text-center opacity-50">
-          <LearnMore>Discover the Fragrances</LearnMore>
+          <Link
+            to={to}
+            spy={true}
+            smooth={true}
+            duration={500}
+            className="cursor-pointer"
+          >
+            <LearnMore>Discover the Fragrances</LearnMore>
+          </Link>
         </div>
       )}
     </div>

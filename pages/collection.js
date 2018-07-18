@@ -4,13 +4,14 @@ import gql from 'graphql-tag';
 import App from '../components/App';
 import stickybits from 'stickybits';
 import classNames from 'classnames';
+import { Link } from 'react-scroll';
 
 import { Grid, GridItem } from '../components/atoms/Grid';
 import PageWrap from '../components/atoms/PageWrap';
 import Spacing from '../components/atoms/Spacing';
 import Heading from '../components/atoms/Heading';
 import Button from '../components/atoms/Button';
-import Link from '../components/atoms/Link';
+import AtomLink from '../components/atoms/Link';
 
 import HeroVideo from '../components/molecules/HeroVideo';
 
@@ -106,12 +107,12 @@ class Collection extends PureComponent {
         <HeroVideo />
         <PageWrap>
           <Spacing size={80} type="padding">
-            <CollectionIntro collection={this.collection} />
+            <CollectionIntro collection={this.collection} to="fragrances" />
           </Spacing>
         </PageWrap>
 
         <Spacing size={80} type="padding" position="t">
-          <div style={containerStyle}>
+          <div style={containerStyle} id="fragrances">
             <PageWrap>
               <Grid gap={20} align="stretch">
                 <GridItem columnSize={2}>
@@ -136,7 +137,15 @@ class Collection extends PureComponent {
                               uppercase
                               tracking="02"
                             >
-                              {item.title}
+                              <Link
+                                className="cursor-pointer"
+                                to={item.handle}
+                                spy={true}
+                                smooth={true}
+                                duration={500}
+                              >
+                                {item.title}
+                              </Link>
                             </Heading>
                           </Spacing>
                         </div>
@@ -147,18 +156,20 @@ class Collection extends PureComponent {
                 <GridItem columnSize={8}>
                   {this.products.map((item, i) => {
                     return (
-                      <Fragrance
-                        key={item.handle}
-                        index={i}
-                        onIndexChange={this.handleNewIndex.bind(this)}
-                        color1={item.color1}
-                        color2={item.color2}
-                        image1={item.images[0]}
-                        image2={item.images[1]}
-                        image3={item.images[2]}
-                      >
-                        {item.title}
-                      </Fragrance>
+                      <div id={item.handle}>
+                        <Fragrance
+                          key={item.handle}
+                          index={i}
+                          onIndexChange={this.handleNewIndex.bind(this)}
+                          color1={item.color1}
+                          color2={item.color2}
+                          image1={item.images[0]}
+                          image2={item.images[1]}
+                          image3={item.images[2]}
+                        >
+                          {item.title}
+                        </Fragrance>
+                      </div>
                     );
                   })}
                 </GridItem>
@@ -168,20 +179,20 @@ class Collection extends PureComponent {
                     style={stickyStyle}
                   >
                     <Button size="s">
-                      <Link href={`/product/${dataItem.handle}`}>
+                      <AtomLink href={`/product/${dataItem.handle}`}>
                         {dataItem.title}
-                      </Link>
+                      </AtomLink>
                     </Button>
                     {dataItem.layeringHandle && (
                       <Spacing size={20} position="t">
-                        <Link
+                        <AtomLink
                           className="opacity-50"
                           tag="a"
                           href={`/product/${dataItem.layeringHandle}`}
                           underline
                         >
                           <Heading size="xs">Shop layering pack</Heading>
-                        </Link>
+                        </AtomLink>
                       </Spacing>
                     )}
                   </div>
