@@ -101,6 +101,19 @@ const query = gql`
                 }
               }
             }
+            collections(first: 10) {
+              pageInfo {
+                hasNextPage
+                hasPreviousPage
+              }
+              edges {
+                node {
+                  id
+                  handle
+                  title
+                }
+              }
+            }
             images(first: 250) {
               pageInfo {
                 hasNextPage

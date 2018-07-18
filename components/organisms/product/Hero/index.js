@@ -7,6 +7,7 @@ import Paragraph from '../../../atoms/Paragraph';
 import Heading from '../../../atoms/Heading';
 import Button from '../../../atoms/Button';
 import Spacing from '../../../atoms/Spacing';
+import ProductBackgroundShapes from '../../../atoms/ProductBackgroundShapes';
 
 import LearnMore from '../../../molecules/LearnMore';
 
@@ -15,9 +16,10 @@ import getProductTitle from '../../../../lib/getProductTitle';
 import getProductType from '../../../../lib/getProductType';
 import getProductPrice from '../../../../lib/getProductPrice';
 import getProductDescription from '../../../../lib/getProductDescription';
+import getCollectionTitle from '../../../../lib/getCollectionTitle';
+import getCleanType from '../../../../lib/getCleanType';
 
 import generalStyles from './hero.module.css';
-import ProductBackgroundShapes from '../../../atoms/ProductBackgroundShapes';
 
 class Hero extends PureComponent {
   componentDidMount() {
@@ -35,6 +37,11 @@ class Hero extends PureComponent {
     const type = product && getProductType(product);
     const price = product && getProductPrice(product);
     const description = product && getProductDescription(product);
+    const collectionTitle =
+      product && getCollectionTitle(product.collections.edges[0].node);
+    const cleanType = getCleanType(type);
+
+    console.log(product);
 
     return (
       <div>
@@ -51,7 +58,7 @@ class Hero extends PureComponent {
                 </Paragraph>
                 <div className={generalStyles.footerLeft}>
                   <Paragraph size="s">
-                    Collection N°1 Maps, Travel • Fragrances • Atlantica
+                    {collectionTitle} • {cleanType} • {title}
                   </Paragraph>
                 </div>
                 <div className={generalStyles.learnMore}>
