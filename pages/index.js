@@ -18,6 +18,7 @@ import Loader from '../components/molecules/Loader';
 import CollectionIntro from '../components/organisms/collection/CollectionIntro';
 
 import getCollectionHome from '../lib/getCollectionHome';
+import getProductsByType from '../lib/getProductsByType';
 
 class Home extends PureComponent {
   constructor() {
@@ -34,6 +35,10 @@ class Home extends PureComponent {
   componentWillMount() {
     const articles = this.props.data.shop.articles.edges;
     this.collection = getCollectionHome(articles, this.props.data);
+    this.products = this.collection.products.edges;
+    this.fragrance = getProductsByType(this.products, 'fragrance')[0];
+    this.layering = getProductsByType(this.products, 'layering')[0];
+    this.discovery = getProductsByType(this.products, 'discovery')[0];
   }
 
   componentDidMount() {
@@ -79,36 +84,21 @@ class Home extends PureComponent {
             </Spacing>
             <Spacing position="b" type="padding" size={80}>
               <Grid gap={[0, 70]}>
-                {products.map((item, index) => {
-                  if (index === 0) {
-                    return (
-                      <GridItem columnSize={[12, 6]}>
-                        <ProductThumbnail product={item.node} />
-                      </GridItem>
-                    );
-                  } else if (index === 1) {
-                    return (
-                      <GridItem columnSize={[12, 6]}>
-                        <div style={{ transform: 'translateY(120px)' }}>
-                          <ProductThumbnail product={item.node} />
-                        </div>
-                      </GridItem>
-                    );
-                  }
-                })}
+                <GridItem columnSize={[12, 6]}>
+                  <ProductThumbnail product={this.fragrance.node} />
+                </GridItem>
+                <GridItem columnSize={[12, 6]}>
+                  <div style={{ transform: 'translateY(120px)' }}>
+                    <ProductThumbnail isLayering product={this.layering.node} />
+                  </div>
+                </GridItem>
               </Grid>
             </Spacing>
             <Spacing size={80}>
               <Grid gap={[0, 70]} justify="center">
-                {products.map((item, index) => {
-                  if (index === 2) {
-                    return (
-                      <GridItem columnSize={[12, 6]}>
-                        <ProductThumbnail product={item.node} />
-                      </GridItem>
-                    );
-                  }
-                })}
+                <GridItem columnSize={[12, 7]}>
+                  <ProductThumbnail isDiscovery product={this.discovery.node} />
+                </GridItem>
               </Grid>
             </Spacing>
             <div className="text-center">

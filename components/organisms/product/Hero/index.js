@@ -20,6 +20,7 @@ import getCollectionTitle from '../../../../lib/getCollectionTitle';
 import getCleanType from '../../../../lib/getCleanType';
 
 import generalStyles from './hero.module.css';
+import getProductGradient from '../../../../lib/getProductGradient';
 
 class Hero extends PureComponent {
   componentDidMount() {
@@ -37,6 +38,7 @@ class Hero extends PureComponent {
     const type = product && getProductType(product);
     const price = product && getProductPrice(product);
     const description = product && getProductDescription(product);
+    const gradient = product && getProductGradient(product);
     const collectionTitle =
       product && getCollectionTitle(product.collections.edges[0].node);
     const cleanType = getCleanType(type);
@@ -45,7 +47,10 @@ class Hero extends PureComponent {
 
     return (
       <div>
-        <ProductBackgroundShapes />
+        <ProductBackgroundShapes
+          color1={gradient.color1}
+          color2={gradient.color2}
+        />
         <div className="relative z-10">
           <Grid gap={30} align="stretch">
             <GridItem columnSize={4}>
