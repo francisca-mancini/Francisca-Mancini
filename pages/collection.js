@@ -15,6 +15,7 @@ import AtomLink from '../components/atoms/Link';
 
 import HeroVideo from '../components/molecules/HeroVideo';
 
+import Basket from '../components/organisms/Basket';
 import CollectionIntro from '../components/organisms/collection/CollectionIntro';
 import Fragrance from '../components/organisms/collection/Fragrance';
 
@@ -104,6 +105,7 @@ class Collection extends PureComponent {
 
     return (
       <App hasTopPad={false} hasBottomPad={false} headerLight isHome>
+        <Basket />
         <HeroVideo />
         <PageWrap>
           <Spacing size={80} type="padding">

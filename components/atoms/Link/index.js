@@ -22,6 +22,7 @@ export default function AtomLink({
 
   const handleClick = e => {
     if (!onClick) return;
+    e.preventDefault();
 
     onClick(e);
   };

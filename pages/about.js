@@ -2,6 +2,8 @@ import withData from '../lib/withData';
 
 import App from '../components/App';
 
+import Basket from '../components/organisms/Basket';
+
 import PageWrap from '../components/atoms/PageWrap';
 import Heading from '../components/atoms/Heading';
 import Paragraph from '../components/atoms/Paragraph';
@@ -14,6 +16,7 @@ function About(data) {
 
   return (
     <App>
+      <Basket />
       <PageWrap>
         <div id="about">
           <Spacing size={60} type="padding">

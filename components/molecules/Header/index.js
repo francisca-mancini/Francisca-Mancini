@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import MediaQuery from 'react-responsive';
 import throttle from 'lodash/throttle';
+import { withGlobalState } from 'react-globally';
 
 import Heading from '../../atoms/Heading';
 import Spacing from '../../atoms/Spacing';
@@ -77,8 +78,14 @@ class Header extends Component {
     this.getHeroHeight();
   }
 
+  toggleBasket() {
+    this.props.setGlobalState({
+      cartOpen: true
+    });
+  }
+
   render() {
-    const { isLoaded, pathname } = this.props;
+    const { isLoaded, pathname, toggleBasket } = this.props;
     const { isLight } = this.state;
     const headerClassName = classNames(generalStyles.header, {
       [generalStyles.headerHidden]: !isLoaded,
@@ -96,7 +103,8 @@ class Header extends Component {
       isDropdown,
       isDropdownTrigger,
       zIndex,
-      isCollection
+      isCollection,
+      onClick
     }) => {
       const notActive = pathname === '/';
       const isShop = pathname === '/product' && href === '/shop';
@@ -113,19 +121,35 @@ class Header extends Component {
       return (
         <div className={linkClassName}>
           <Spacing size={isDropdown ? 5 : 10} position={isDropdown ? 'y' : 'x'}>
-            <Link href={href}>
-              <Heading
-                tag="span"
-                font="alternate"
-                uppercase
-                size="xxxs"
-                weight="semilight"
-                tracking="wide"
-                color={isDropdown ? 'black' : linkColor}
-              >
-                {children}
-              </Heading>
-            </Link>
+            {onClick ? (
+              <span onClick={onClick}>
+                <Heading
+                  tag="span"
+                  font="alternate"
+                  uppercase
+                  size="xxxs"
+                  weight="semilight"
+                  tracking="wide"
+                  color={isDropdown ? 'black' : linkColor}
+                >
+                  {children}
+                </Heading>
+              </span>
+            ) : (
+              <Link href={href}>
+                <Heading
+                  tag="span"
+                  font="alternate"
+                  uppercase
+                  size="xxxs"
+                  weight="semilight"
+                  tracking="wide"
+                  color={isDropdown ? 'black' : linkColor}
+                >
+                  {children}
+                </Heading>
+              </Link>
+            )}
           </Spacing>
         </div>
       );
@@ -182,8 +206,12 @@ class Header extends Component {
                         Shop
                       </NavLink>
                       <NavLink href="/philosophy">Philosophy</NavLink>
-                      <NavLink href="/account">Account</NavLink>
-                      <NavLink href="/cart">Cart / 0</NavLink>
+                      <NavLink href="https://admin-shopify.bonhomme.lol/account">
+                        Account
+                      </NavLink>
+                      <NavLink onClick={this.toggleBasket.bind(this)}>
+                        Cart / 0
+                      </NavLink>
                     </InlineGrid>
                   );
                 } else {
@@ -198,57 +226,57 @@ class Header extends Component {
   }
 }
 
-const query = gql`
-  query query {
-    shop {
-      name
-      description
-      articles(first: 20) {
-        edges {
-          node {
-            content
-          }
-        }
-      }
-      collections(first: 20) {
-        edges {
-          node {
-            handle
-            id
-            description
-            descriptionHtml
-            title
-            products(first: 20) {
-              edges {
-                node {
-                  id
-                  handle
-                  title
-                  description
-                  descriptionHtml
-                  productType
-                  tags
-                  images(first: 20) {
-                    edges {
-                      node {
-                        altText
-                        id
-                        originalSrc
-                        transformedSrc
-                      }
-                    }
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
-    }
-  }
-`;
+// const query = gql`
+//   query query {
+//     shop {
+//       name
+//       description
+//       articles(first: 20) {
+//         edges {
+//           node {
+//             content
+//           }
+//         }
+//       }
+//       collections(first: 20) {
+//         edges {
+//           node {
+//             handle
+//             id
+//             description
+//             descriptionHtml
+//             title
+//             products(first: 20) {
+//               edges {
+//                 node {
+//                   id
+//                   handle
+//                   title
+//                   description
+//                   descriptionHtml
+//                   productType
+//                   tags
+//                   images(first: 20) {
+//                     edges {
+//                       node {
+//                         altText
+//                         id
+//                         originalSrc
+//                         transformedSrc
+//                       }
+//                     }
+//                   }
+//                 }
+//               }
+//             }
+//           }
+//         }
+//       }
+//     }
+//   }
+// `;
 
-export default Header;
+export default withGlobalState(Header);
 
 Header.propTypes = {
   isLight: PropTypes.bool,

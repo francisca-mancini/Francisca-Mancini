@@ -11,6 +11,8 @@ import { Grid, GridItem } from '../components/atoms/Grid';
 import Heading from '../components/atoms/Heading';
 import Button from '../components/atoms/Button';
 
+import Basket from '../components/organisms/Basket';
+
 import ProductThumbnail from '../components/molecules/ProductThumbnail';
 
 import layeringImage from '../static/images/_temp/product3.png';
@@ -43,6 +45,7 @@ class Shop extends PureComponent {
 
     return (
       <App>
+        <Basket />
         <PageWrap>
           <Fragrances products={this.fragrances} />
 

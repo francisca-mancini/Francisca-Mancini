@@ -43,8 +43,6 @@ class Hero extends PureComponent {
       product && getCollectionTitle(product.collections.edges[0].node);
     const cleanType = getCleanType(type);
 
-    console.log(product);
-
     return (
       <div>
         <ProductBackgroundShapes

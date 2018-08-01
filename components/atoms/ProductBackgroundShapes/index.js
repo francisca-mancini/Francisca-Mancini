@@ -165,7 +165,7 @@ export default class ProductBackgroundShapes extends PureComponent {
 
       for (let i = 0; i <= item.limit; i++) {
         const circle = this.createCircle(
-          Math.random() * 100,
+          Math.random() * 130,
           0,
           0,
           item.container

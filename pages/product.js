@@ -5,6 +5,7 @@ import App from '../components/App';
 
 import PageWrap from '../components/atoms/PageWrap';
 
+import Basket from '../components/organisms/Basket';
 import Hero from '../components/organisms/product/Hero';
 import YouMightLike from '../components/organisms/product/YouMightLike';
 import Story from '../components/organisms/product/Story';
@@ -36,10 +37,13 @@ class Product extends PureComponent {
       return <div />;
     }
 
+    console.log(this.props);
+
     const mightLikeProducts = this.products.slice(0, 3);
 
     return (
       <App hasTopPad={false} hasBottomPad={false}>
+        <Basket />
         <PageWrap>
           <Hero product={this.product} />
         </PageWrap>

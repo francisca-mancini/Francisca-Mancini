@@ -29,11 +29,13 @@
     "react": "^16.3.2",
     "react-apollo": "2.1.0",
     "react-dom": "^16.3.2",
+    "react-globally": "^1.1.0",
     "react-intersection-observer": "^6.1.0",
     "react-player": "^1.6.4",
     "react-responsive": "^4.1.0",
     "react-scroll": "^1.7.10",
     "rellax": "^1.6.2",
+    "simplebar-react": "^0.0.1",
     "simplex-noise": "^2.4.0",
     "stickybits": "^3.3.2"
   },

@@ -1,6 +1,8 @@
 import PageWrap from '../components/atoms/PageWrap';
 import App from '../components/App';
 
+import Basket from '../components/organisms/Basket';
+
 import MaxWidth from '../components/atoms/MaxWidth';
 import Spacing from '../components/atoms/Spacing';
 import Paragraph from '../components/atoms/Paragraph';
@@ -12,6 +14,7 @@ import philosophyImage from '../static/images/_temp/philosophy.jpg';
 export default function Philosophy() {
   return (
     <App>
+      <Basket />
       <PageWrap>
         <MaxWidth value={1000} center>
           <Spacing>

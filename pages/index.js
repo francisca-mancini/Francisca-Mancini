@@ -15,6 +15,7 @@ import ProductThumbnail from '../components/molecules/ProductThumbnail';
 import HeroVideo from '../components/molecules/HeroVideo';
 import Loader from '../components/molecules/Loader';
 
+import Basket from '../components/organisms/Basket';
 import CollectionIntro from '../components/organisms/collection/CollectionIntro';
 
 import getCollectionHome from '../lib/getCollectionHome';
@@ -68,6 +69,7 @@ class Home extends PureComponent {
 
     return (
       <App hasTopPad={false} headerLight isHome isLoaded={isLoaded}>
+        <Basket />
         {!secondTime && <Loader onUpdate={this.onLoaderUpdate} />}
         <HeroVideo isPlaying={isLoaded} />
         <PageWrap>
