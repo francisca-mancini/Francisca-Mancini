@@ -27,6 +27,7 @@ import getProductBackground from '../lib/getProductBackground';
 import getProductCollectionImages from '../lib/getProductCollectionImages';
 import getProductLayeringHandle from '../lib/getProductLayeringHandle';
 import getProductGradient from '../lib/getProductGradient';
+import getCollectionDescription from '../lib/getCollectionDescription';
 
 class Collection extends PureComponent {
   static getInitialProps({ query: { handle } }) {
@@ -77,6 +78,7 @@ class Collection extends PureComponent {
           images: getProductCollectionImages(product),
           color1: getProductGradient(product).color1,
           color2: getProductGradient(product).color2,
+          desc: getCollectionDescription(product),
           layeringHandle: getProductLayeringHandle(
             this.collection.products,
             product
@@ -163,6 +165,7 @@ class Collection extends PureComponent {
                           onIndexChange={this.handleNewIndex.bind(this)}
                           color1={item.color1}
                           color2={item.color2}
+                          description={item.desc}
                           image1={item.images[0]}
                           image2={item.images[1]}
                           image3={item.images[2]}
@@ -180,7 +183,9 @@ class Collection extends PureComponent {
                   >
                     <Button size="s">
                       <AtomLink href={`/product/${dataItem.handle}`}>
-                        {dataItem.title}
+                        <span className="font-normal">
+                          Shop {dataItem.title}
+                        </span>
                       </AtomLink>
                     </Button>
                     {dataItem.layeringHandle && (
