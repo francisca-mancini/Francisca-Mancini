@@ -63,6 +63,8 @@ class Shop extends PureComponent {
                         }
                         height
                         isLayering
+                        isSingle
+                        isNoClick
                       />
                     </div>
                   </div>
@@ -72,8 +74,8 @@ class Shop extends PureComponent {
                     style={stickyStyle}
                     className="stickybits h-screen flex flex-col items-center justify-center"
                   >
-                    <span className="absolute z-10 pin-t pin-l w-full pt-40 text-center">
-                      <Heading size="s" center>
+                    <span className="absolute z-10 pin-t pin-l w-full pt-60 text-center">
+                      <Heading size="s" weight="semilight" center>
                         Shop Layering Packs
                       </Heading>
                     </span>
@@ -86,6 +88,8 @@ class Shop extends PureComponent {
                         }
                         height
                         isLayering
+                        isNoClick
+                        isSingle
                       />
                       <span className="absolute pin-b pin-l w-full pb-40 text-center">
                         <Button size="s">Shop Renaissance Layering Pack</Button>
@@ -106,6 +110,8 @@ class Shop extends PureComponent {
                             product={item.node}
                             height
                             isLayering
+                            isNoClick
+                            isSingle
                           />
                         </div>
                       );
@@ -118,12 +124,12 @@ class Shop extends PureComponent {
           {this.discoveries &&
             this.discoveries.length && (
               <Spacing type="padding" size={80}>
-                <Heading size="s" center>
+                <Heading size="s" weight="semilight" center>
                   Shop Discovery Pack
                 </Heading>
 
                 <Spacing>
-                  <MaxWidth center value={700}>
+                  <MaxWidth center value={600}>
                     <ProductThumbnail
                       product={this.discoveries[0].node}
                       isDiscovery

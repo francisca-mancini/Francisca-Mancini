@@ -78,7 +78,7 @@ class Home extends PureComponent {
           </div>
           <Spacing size={80} type="padding">
             <Spacing position="b">
-              <Heading tag="h3" size="xl" font="jenson" center>
+              <Heading tag="h3" size="xxxl" font="jenson" center>
                 Shop Featured Products
               </Heading>
             </Spacing>

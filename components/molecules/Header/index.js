@@ -148,7 +148,7 @@ class Header extends Component {
 
     return (
       <header className={headerClassName}>
-        <PageWrap>
+        <PageWrap className="max-w-full">
           <InlineGrid>
             <MediaQuery maxDeviceWidth={767}>
               <img src={menuSrc} width={34} height={18} />
