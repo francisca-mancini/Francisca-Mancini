@@ -22,13 +22,15 @@ import menuWhite from '../../../static/images/sprites/menu-white.svg';
 import menuBlack from '../../../static/images/sprites/menu-black.svg';
 
 import generalStyles from './general.module.css';
+import getSessionStorage from '../../../lib/getSessionStorage';
 
 class Header extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      isLight: props.isLight
+      isLight: props.isLight,
+      basketCount: 0
     };
 
     this.heroHeight = 0;
@@ -43,6 +45,20 @@ class Header extends Component {
 
     if (this.props.isHome) {
       this.getHeroHeight();
+    }
+
+    const basket = getSessionStorage('basket');
+    this.setState({
+      basketCount: basket ? basket.count : 0
+    });
+  }
+
+  componentDidUpdate(prevProps) {
+    if (prevProps.globalState.cartOpen !== this.props.globalState.cartOpen) {
+      const basket = getSessionStorage('basket');
+      this.setState({
+        basketCount: basket ? basket.count : 0
+      });
     }
   }
 
@@ -86,7 +102,7 @@ class Header extends Component {
 
   render() {
     const { isLoaded, pathname, toggleBasket } = this.props;
-    const { isLight } = this.state;
+    const { isLight, basketCount } = this.state;
     const headerClassName = classNames(generalStyles.header, {
       [generalStyles.headerHidden]: !isLoaded,
       [generalStyles.headerShow]: isLoaded
@@ -210,7 +226,7 @@ class Header extends Component {
                         Account
                       </NavLink>
                       <NavLink onClick={this.toggleBasket.bind(this)}>
-                        Cart / {this.props.globalState.cart.count}
+                        Cart / {basketCount}
                       </NavLink>
                     </InlineGrid>
                   );

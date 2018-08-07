@@ -22,6 +22,8 @@ import getCleanType from '../../../../lib/getCleanType';
 
 import generalStyles from './hero.module.css';
 import getProductGradient from '../../../../lib/getProductGradient';
+import getSessionStorage from '../../../../lib/getSessionStorage';
+import setSessionStorage from '../../../../lib/setSessionStorage';
 
 class Hero extends PureComponent {
   constructor() {
@@ -35,16 +37,18 @@ class Hero extends PureComponent {
   }
 
   addToBag() {
-    const items = this.props.globalState.cart.items;
-    const count = this.props.globalState.cart.count;
+    const basket = getSessionStorage('basket');
+    const items = basket.items;
+    const count = basket.count;
     const newItems = [...items, this.props.product];
 
     this.props.setGlobalState({
-      cartOpen: true,
-      cart: {
-        count: count + 1,
-        items: newItems
-      }
+      cartOpen: true
+    });
+
+    setSessionStorage('basket', {
+      items: newItems,
+      count: count + 1
     });
   }
 

@@ -25,17 +25,33 @@ class Basket extends PureComponent {
 
     this.state = {
       isOpen: false,
+      basket: {},
       cart: props.globalState.cart
     };
   }
 
-  // componentDidUpdate(prevProps) {
-  //   if (prevProps.globalState.cart !== this.props.globalState.cart) {
-  //     this.setState({
-  //       cart: this.props.globalState.cart
-  //     })
-  //   }
-  // }
+  componentDidMount() {
+    this.basket = getSessionStorage('basket');
+
+    if (!this.basket) {
+      const basket = {
+        count: 0,
+        items: []
+      };
+      setSessionStorage('basket', basket);
+      this.setState({ basket });
+    }
+  }
+
+  componentDidUpdate(prevProps) {
+    if (prevProps.globalState.cartOpen !== this.props.globalState.cartOpen) {
+      const basket = getSessionStorage('basket');
+      this.setState({
+        isOpen: this.props.isOpen,
+        basket
+      });
+    }
+  }
 
   toggleBasket() {
     this.props.setGlobalState({
@@ -45,7 +61,7 @@ class Basket extends PureComponent {
 
   render() {
     const { globalState } = this.props;
-    const { cart } = this.state;
+    const { basket } = this.state;
     const isOpen = globalState.cartOpen;
     const containerClassName = classNames(generalStyles.container, {
       [generalStyles.containerHidden]: !isOpen
@@ -62,15 +78,16 @@ class Basket extends PureComponent {
             <InlineGrid>
               <div onClick={this.toggleBasket.bind(this)}>x</div>
               <Heading size="xxxs" uppercase font="alternate">
-                cart / {globalState.cart.count}
+                cart / {basket ? basket.count : 0}
               </Heading>
             </InlineGrid>
           </div>
 
           <div className={generalStyles.items}>
             <SimpleBar style={{ height: '100%' }}>
-              {globalState.cart.items &&
-                globalState.cart.items.map((item, index) => {
+              {basket &&
+                basket.items &&
+                basket.items.map((item, index) => {
                   return <BasketItem product={item} key={index} />;
                 })}
             </SimpleBar>
