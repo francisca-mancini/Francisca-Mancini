@@ -1,6 +1,7 @@
 import React, { PureComponent } from 'react';
 import stickybits from 'stickybits';
 import classNames from 'classnames';
+import { withGlobalState } from 'react-globally';
 
 import { Grid, GridItem } from '../../../atoms/Grid';
 import Paragraph from '../../../atoms/Paragraph';
@@ -23,8 +24,28 @@ import generalStyles from './hero.module.css';
 import getProductGradient from '../../../../lib/getProductGradient';
 
 class Hero extends PureComponent {
+  constructor() {
+    super();
+
+    this.addToBag = this.addToBag.bind(this);
+  }
+
   componentDidMount() {
     stickybits('.stickybits');
+  }
+
+  addToBag() {
+    const items = this.props.globalState.cart.items;
+    const count = this.props.globalState.cart.count;
+    const newItems = [...items, this.props.product];
+
+    this.props.setGlobalState({
+      cartOpen: true,
+      cart: {
+        count: count + 1,
+        items: newItems
+      }
+    });
   }
 
   render() {
@@ -93,7 +114,7 @@ class Hero extends PureComponent {
                     {type} - £{price}
                   </Paragraph>
                 </Spacing>
-                <Button size="s">
+                <Button size="s" onClick={this.addToBag}>
                   <span className="font-normal">Add to bag</span>
                 </Button>
                 <div className={generalStyles.footerRight}>
@@ -108,4 +129,4 @@ class Hero extends PureComponent {
   }
 }
 
-export default Hero;
+export default withGlobalState(Hero);

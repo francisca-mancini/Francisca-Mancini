@@ -210,7 +210,7 @@ class Header extends Component {
                         Account
                       </NavLink>
                       <NavLink onClick={this.toggleBasket.bind(this)}>
-                        Cart / 0
+                        Cart / {this.props.globalState.cart.count}
                       </NavLink>
                     </InlineGrid>
                   );

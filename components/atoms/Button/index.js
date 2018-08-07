@@ -33,7 +33,7 @@ export default class Button extends PureComponent {
       <LinkTag href={href} prefetch={prefetch}>
         <ButtonTag
           className={cx('button', kind, size)}
-          onClick={this.handleClick}
+          onClick={this.handleClick.bind(this)}
         >
           <span className={cx('bg')} />
           <span className={cx('inner')}>{children}</span>

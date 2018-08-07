@@ -34,7 +34,11 @@ class App extends PureComponent {
     const pathname = router.pathname;
 
     const initialState = {
-      cartOpen: false
+      cartOpen: false,
+      cart: {
+        count: 0,
+        items: []
+      }
     };
 
     return (

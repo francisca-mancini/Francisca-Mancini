@@ -3,20 +3,26 @@ import Heading from '../../atoms/Heading';
 import Paragraph from '../../atoms/Paragraph';
 import Spacing from '../../atoms/Spacing';
 import AtomLink from '../../atoms/Link';
+import ProductThumbnail from '../../molecules/ProductThumbnail';
 
-export default function BasketItem() {
+import getProductPrice from '../../../lib/getProductPrice';
+import getProductTitle from '../../../lib/getProductTitle';
+
+export default function BasketItem({ product }) {
   return (
     <Spacing size={25} position="x" type="padding">
       <Spacing size={40}>
         <Grid align="center" gap={10}>
-          <GridItem columnSize={4}>{/* <ProductThumbnail /> */}</GridItem>
+          <GridItem columnSize={4}>
+            <ProductThumbnail hasNoInfo product={product} />
+          </GridItem>
           <GridItem columnSize={8}>
             <InlineGrid>
               <Heading font="serif" size="xxxxs" uppercase>
-                Atlantica
+                {getProductTitle(product)}
               </Heading>
               <Heading font="sans" size="s">
-                £500
+                £{getProductPrice(product)}
               </Heading>
             </InlineGrid>
             <Spacing size={10} position="t">

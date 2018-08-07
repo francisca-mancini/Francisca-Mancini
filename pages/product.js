@@ -37,8 +37,6 @@ class Product extends PureComponent {
       return <div />;
     }
 
-    console.log(this.props);
-
     const mightLikeProducts = this.products.slice(0, 3);
 
     return (

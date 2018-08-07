@@ -20,31 +20,22 @@ import setSessionStorage from '../../../lib/setSessionStorage';
 import getSessionStorage from '../../../lib/getSessionStorage';
 
 class Basket extends PureComponent {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
 
     this.state = {
-      isOpen: false
+      isOpen: false,
+      cart: props.globalState.cart
     };
   }
 
-  componentDidMount() {
-    this.basket = getSessionStorage('basket');
-
-    if (!this.basket) {
-      const basket = {
-        items: [1, 2, 3, 4, 5]
-      };
-      setSessionStorage('basket', basket);
-    }
-  }
-
-  componentDidUpdate(prevProps) {
-    if (prevProps.isOpen !== this.props.isOpen) {
-      this.setState({ isOpen: this.props.isOpen });
-      this.basket = getSessionStorage('basket');
-    }
-  }
+  // componentDidUpdate(prevProps) {
+  //   if (prevProps.globalState.cart !== this.props.globalState.cart) {
+  //     this.setState({
+  //       cart: this.props.globalState.cart
+  //     })
+  //   }
+  // }
 
   toggleBasket() {
     this.props.setGlobalState({
@@ -54,6 +45,7 @@ class Basket extends PureComponent {
 
   render() {
     const { globalState } = this.props;
+    const { cart } = this.state;
     const isOpen = globalState.cartOpen;
     const containerClassName = classNames(generalStyles.container, {
       [generalStyles.containerHidden]: !isOpen
@@ -61,8 +53,6 @@ class Basket extends PureComponent {
     const bgClassName = classNames(generalStyles.bg, {
       [generalStyles.bgHidden]: !isOpen
     });
-
-    // console.log(this.props.data)
 
     return (
       <Fragment>
@@ -72,16 +62,16 @@ class Basket extends PureComponent {
             <InlineGrid>
               <div onClick={this.toggleBasket.bind(this)}>x</div>
               <Heading size="xxxs" uppercase font="alternate">
-                cart / {this.basket && this.basket.items.length}
+                cart / {globalState.cart.count}
               </Heading>
             </InlineGrid>
           </div>
 
           <div className={generalStyles.items}>
             <SimpleBar style={{ height: '100%' }}>
-              {this.basket &&
-                this.basket.items.map((item, index) => {
-                  return <BasketItem key={index} />;
+              {globalState.cart.items &&
+                globalState.cart.items.map((item, index) => {
+                  return <BasketItem product={item} key={index} />;
                 })}
             </SimpleBar>
           </div>
