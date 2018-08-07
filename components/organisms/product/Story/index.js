@@ -65,7 +65,12 @@ function Story({ product }) {
                     Story
                   </Heading>
                 </Spacing>
-                <Paragraph font="jenson" size={getFontSize('xl')}>
+                <Paragraph
+                  indent
+                  justified
+                  font="jenson"
+                  size={getFontSize('xl')}
+                >
                   {story}
                 </Paragraph>
               </GridItem>
