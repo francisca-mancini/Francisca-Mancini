@@ -34,7 +34,14 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+  transform-origin: 50%;
+  transition: transform 0.3s ease-in-out;
+  will-change: transform;
   max-width: 470px;
+}
+
+.image:hover {
+  transform: translate(-50%, -50%) scale(1.03);
 }
 
 .imageFragrance {
@@ -43,10 +50,20 @@
   ;
 }
 
+.imageSingle {
+  composes:
+    global(w-auto)
+    global(h-90)
+  ;
+  transform: rotate(-5deg) translate(-50%, -50%);
+  transform-origin: 50%;
+  /* animation: float 2s infinite alternate ease-in-out; */
+}
+
 .imageDiscovery {
   composes:
     global(w-auto)
-    global(h-full)
+    global(h-90)
   ;
 }
 

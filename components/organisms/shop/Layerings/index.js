@@ -36,7 +36,7 @@ export default function Fragrances({ products }) {
               className="stickybits h-screen flex flex-col items-center justify-center"
             >
               <span className="absolute z-10 pin-t pin-l w-full pt-40 text-center">
-                <Heading size="s" center>
+                <Heading size="s" weight="semilight" center>
                   Shop Layering Packs
                 </Heading>
               </span>

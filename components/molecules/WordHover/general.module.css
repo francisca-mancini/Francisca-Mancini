@@ -7,6 +7,7 @@
     global(font-medium)
     global(whitespace-no-wrap)
   ;
+  cursor: url('/static/images/cursor.png') 10 11, auto;
 }
 
 .bubble {
@@ -15,12 +16,12 @@
     global(z-10)
     global(overflow-hidden)
     global(rounded-round)
-    global(pin-t)
-    global(pin-l)
     global(bg-center)
     global(bg-cover)
     global(pointer-events-none);
   ;
+  top: 60px;
+  left: 60px;
   box-shadow: 5px 7px 10px 0 rgba(0, 0, 0, 0.2);
   transform: rotate(0.01deg);
   transform-origin: center center;

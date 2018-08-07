@@ -12,6 +12,7 @@ import getProductGradient from '../../../lib/getProductGradient';
 import getProductHandle from '../../../lib/getProductHandle';
 import getProductImages from '../../../lib/getProductImages';
 import getProductTitle from '../../../lib/getProductTitle';
+import getProductSingle from '../../../lib/getProductSingle';
 
 import generalStyles from './general.module.css';
 
@@ -19,6 +20,8 @@ export default function ProductThumbnail({
   product,
   isDiscovery,
   isLayering,
+  isNoClick,
+  isSingle,
   hasNoInfo
 }) {
   const color1 = getProductGradient(product)
@@ -29,8 +32,9 @@ export default function ProductThumbnail({
     : '#80aee8';
   const handle = getProductHandle(product);
   const images = getProductImages(product);
+  const singleImage = isSingle ? getProductSingle(product) : null;
   const title = getProductTitle(product);
-  const img = images[0].transformedSrc;
+  const img = singleImage || images[0].transformedSrc;
   const containerClassName = classNames(
     generalStyles.imageContainer,
     'pixiContainer',
@@ -40,15 +44,34 @@ export default function ProductThumbnail({
   );
   const imageClassName = classNames(generalStyles.image, {
     [generalStyles.imageDiscovery]: isDiscovery,
-    [generalStyles.imageLayering]: isLayering,
+    [generalStyles.imageLayering]: isLayering && !isSingle,
+    [generalStyles.imageSingle]: isSingle,
     [generalStyles.imageFragrance]: !isLayering && !isDiscovery
   });
+  const imageStyles = {
+    animation: isSingle
+      ? `float ${(Math.random() + 0.3) * 20}s ${Math.random() +
+          0.5}s infinite alternate ease-in-out;`
+      : ''
+  };
+
+  const LinkTag = isNoClick ? 'div' : Link;
+  const LinkProps = {
+    className: 'w-full',
+    tag: 'div',
+    href: isNoClick ? null : `/product/${handle}`
+  };
 
   return (
     <div className="w-full px-20 flex items-center justify-center">
-      <Link className="w-full" tag="div" href={`/product/${handle}`}>
+      <LinkTag {...LinkProps}>
         <div className={containerClassName}>
-          <img className={imageClassName} src={img} alt="" />
+          <img
+            className={imageClassName}
+            src={img}
+            alt={title}
+            style={imageStyles}
+          />
           <ProductShape
             isDiscovery={isDiscovery}
             color1={color1}
@@ -73,7 +96,7 @@ export default function ProductThumbnail({
             </Paragraph>
           </div>
         )}
-      </Link>
+      </LinkTag>
     </div>
   );
 }

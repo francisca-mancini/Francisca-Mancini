@@ -50,7 +50,7 @@ export default function Footer({ isLight }) {
 
   return (
     <footer className={footerClassName}>
-      <PageWrap>
+      <PageWrap className="max-w-full">
         <InlineGrid direction={['col', 'col', 'row']}>
           <Spacing size={[20, 20, 0]} position="b">
             <Link href="/" className="leading-none flex items-center">

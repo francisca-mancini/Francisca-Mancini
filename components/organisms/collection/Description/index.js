@@ -44,6 +44,7 @@ export default function Description({ description }) {
       size={getFontSize('xxl')}
       tag="div"
       justified
+      indent
     >
       {mappedDescription.map(item => {
         if (item.image) {

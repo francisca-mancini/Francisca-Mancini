@@ -28,6 +28,7 @@ export default class ProductShape extends Component {
     this.circleColor = 0xff0000;
     this.movingCirclesCount = 5;
     this.movingFactor = 50;
+    this.discoveryMovingFactor = 100;
     this.renderDelta = 0;
     this.movingCircles = [];
 
@@ -144,6 +145,8 @@ export default class ProductShape extends Component {
   }
 
   addMovingCircles() {
+    const { isDiscovery } = this.props;
+
     for (let i = 0; i <= this.movingCirclesCount; i++) {
       const random = Math.random();
       const circle = this.createCircle(this.circlesSize, 0, 0);
@@ -153,12 +156,18 @@ export default class ProductShape extends Component {
         movingFactor: {
           x:
             Math.random() >= 0.5
-              ? Math.random() * this.movingFactor
-              : Math.random() * -this.movingFactor,
+              ? Math.random() *
+                (isDiscovery ? this.discoveryMovingFactor : this.movingFactor)
+              : Math.random() *
+                (isDiscovery
+                  ? -this.discoveryMovingFactor
+                  : -this.movingFactor),
           y:
             Math.random() >= 0.5
-              ? Math.random() * -this.movingFactor
-              : Math.random() * this.movingFactor
+              ? Math.random() *
+                (isDiscovery ? -this.movingFactor / 1.4 : -this.movingFactor)
+              : Math.random() *
+                (isDiscovery ? this.movingFactor / 1.4 : this.movingFactor)
         },
         scaleFactor: Math.random() + 0.2
       });

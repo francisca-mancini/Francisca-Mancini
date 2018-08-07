@@ -29,6 +29,7 @@
   composes:
     global(relative)
     global(inline-block)
+    global(text-center)
   ;
   will-change: transform;
 }

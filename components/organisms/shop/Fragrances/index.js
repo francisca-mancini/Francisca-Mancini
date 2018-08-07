@@ -11,21 +11,21 @@ import getProductImages from '../../../../lib/getProductImages';
 
 export default function Fragrances({ products }) {
   return (
-    <Spacing type="padding" size={80}>
-      <Heading size="s" center>
+    <Spacing type="padding" size={40}>
+      <Heading size="s" weight="semilight" center>
         Shop Fragrances
       </Heading>
-      <Grid gap={[0, 30]}>
+      <Grid gap={0}>
         {products &&
           products.length &&
           products.map((item, index) => {
             const product = item.node;
-            const y = index % 2 === 1 ? 120 : 0;
+            const y = index % 3 === 1 ? 60 : 0;
 
             return (
               <GridItem key={index} columnSize={[12, 6, 4]}>
                 <div style={{ transform: `translateY(${y}px)` }}>
-                  <Spacing size={70}>
+                  <Spacing size={50}>
                     <ProductThumbnail product={product} />
                   </Spacing>
                 </div>
