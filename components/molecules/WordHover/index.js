@@ -14,7 +14,8 @@ export default class WordHover extends Component {
     super();
 
     this.state = {
-      isMouseOver: false
+      isMouseOver: false,
+      hasOvered: false
     };
 
     this.bubbleSize = 100;
@@ -86,10 +87,8 @@ export default class WordHover extends Component {
   setBubblePosition() {
     const bounds = this.wordRef.getBoundingClientRect();
 
-    this.position = {
-      x: bounds.left,
-      y: bounds.top
-    };
+    this.position.x = bounds.left;
+    this.position.y = bounds.top;
   }
 
   handleNearby(distance) {
@@ -107,12 +106,12 @@ export default class WordHover extends Component {
       );
 
       this.targetScale = distanceToOne;
-      this.setState({ isMouseOver: true });
+      this.setState({ isMouseOver: true, hasOvered: true });
     }
   }
 
   handleMouseMove(e) {
-    const { isMouseOver } = this.state;
+    const { isMouseOver, hasOvered } = this.state;
 
     if (isMouseOver) {
       const halfBubble = this.bubbleSize / 2;
@@ -128,6 +127,10 @@ export default class WordHover extends Component {
         x: targetPosition.x,
         y: targetPosition.y
       };
+    } else {
+      if (!hasOvered) {
+        this.setBubblePosition();
+      }
     }
   }
 

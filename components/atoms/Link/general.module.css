@@ -8,8 +8,5 @@
 }
 
 .isUnderlined {
-  composes:
-    global(border-b-1)
-    global(border-solid)
-  ;
+  border-bottom: 1px solid;
 }

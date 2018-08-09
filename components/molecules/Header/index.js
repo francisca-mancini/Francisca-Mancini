@@ -138,7 +138,7 @@ class Header extends Component {
         <div className={linkClassName}>
           <Spacing size={isDropdown ? 5 : 10} position={isDropdown ? 'y' : 'x'}>
             {onClick ? (
-              <span onClick={onClick}>
+              <span className="cursor-pointer" onClick={onClick}>
                 <Heading
                   tag="span"
                   font="alternate"
