@@ -77,7 +77,8 @@ class BasketItem extends PureComponent {
     this.setState({ isRemoved: true });
 
     this.props.setGlobalState({
-      count: count - oldQuantity
+      count: count - oldQuantity,
+      cartOpen: false
     });
   }
 

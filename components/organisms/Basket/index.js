@@ -18,6 +18,7 @@ import Heading from '../../atoms/Heading';
 import withData from '../../../lib/withData';
 import setSessionStorage from '../../../lib/setSessionStorage';
 import getSessionStorage from '../../../lib/getSessionStorage';
+import getProductPrice from '../../../lib/getProductPrice';
 
 class Basket extends PureComponent {
   constructor(props) {
@@ -25,7 +26,8 @@ class Basket extends PureComponent {
 
     this.state = {
       isOpen: false,
-      basket: {}
+      basket: {},
+      totalPrice: 0
     };
   }
 
@@ -40,6 +42,8 @@ class Basket extends PureComponent {
       setSessionStorage('basket', basket);
       this.setState({ basket });
     }
+
+    this.calculateTotal();
   }
 
   componentDidUpdate(prevProps) {
@@ -49,14 +53,32 @@ class Basket extends PureComponent {
         isOpen: this.props.isOpen,
         basket
       });
+
+      this.calculateTotal();
     }
 
     if (prevProps.globalState.count !== this.props.globalState.count) {
-      const basket = getSessionStorage('basket');
-      this.setState({
-        basket
-      });
+      // const basket = getSessionStorage('basket');
+      // this.setState({
+      //   basket
+      // });
+      this.calculateTotal();
     }
+  }
+
+  calculateTotal() {
+    const basket = getSessionStorage('basket');
+    const items = basket.items;
+    let totalPrice = 0;
+
+    items.forEach(item => {
+      const product = item.product;
+      const quantity = item.quantity;
+      const price = getProductPrice(product);
+      totalPrice += parseInt(price * quantity);
+    });
+
+    this.setState({ totalPrice });
   }
 
   toggleBasket() {
@@ -67,7 +89,7 @@ class Basket extends PureComponent {
 
   render() {
     const { globalState } = this.props;
-    const { basket } = this.state;
+    const { basket, totalPrice } = this.state;
     const isOpen = globalState.cartOpen;
     const containerClassName = classNames(generalStyles.container, {
       [generalStyles.containerHidden]: !isOpen
@@ -108,7 +130,7 @@ class Basket extends PureComponent {
           <div className={generalStyles.footer}>
             <InlineGrid>
               <Paragraph size="s">Sub total</Paragraph>
-              <Paragraph size="s">£850</Paragraph>
+              <Paragraph size="s">£{totalPrice}</Paragraph>
             </InlineGrid>
             <div className="opacity-75 my-20">
               <Paragraph size="xs">Free shipping above £200</Paragraph>
