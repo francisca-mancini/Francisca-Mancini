@@ -15,6 +15,8 @@ import BasketItem from '../../molecules/BasketItem';
 import generalStyles from './general.module.css';
 import Heading from '../../atoms/Heading';
 
+import closeIcon from '../../../static/images/sprites/close.svg';
+
 import withData from '../../../lib/withData';
 import setSessionStorage from '../../../lib/setSessionStorage';
 import getSessionStorage from '../../../lib/getSessionStorage';
@@ -104,7 +106,12 @@ class Basket extends PureComponent {
         <div className={containerClassName}>
           <div className={generalStyles.header}>
             <InlineGrid>
-              <div onClick={this.toggleBasket.bind(this)}>x</div>
+              <div
+                className="cursor-pointer"
+                onClick={this.toggleBasket.bind(this)}
+              >
+                <img src={closeIcon} alt="close cart" width={19} height={19} />
+              </div>
               <Heading size="xxxs" uppercase font="alternate">
                 cart / {basket ? basket.count : 0}
               </Heading>
