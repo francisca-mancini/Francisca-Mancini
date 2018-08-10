@@ -2,6 +2,7 @@ import React, { PureComponent } from 'react';
 import stickybits from 'stickybits';
 import classNames from 'classnames';
 import { withGlobalState } from 'react-globally';
+import find from 'lodash/find';
 
 import { Grid, GridItem } from '../../../atoms/Grid';
 import Paragraph from '../../../atoms/Paragraph';
@@ -19,11 +20,11 @@ import getProductPrice from '../../../../lib/getProductPrice';
 import getProductDescription from '../../../../lib/getProductDescription';
 import getCollectionTitle from '../../../../lib/getCollectionTitle';
 import getCleanType from '../../../../lib/getCleanType';
-
-import generalStyles from './hero.module.css';
 import getProductGradient from '../../../../lib/getProductGradient';
 import getSessionStorage from '../../../../lib/getSessionStorage';
 import setSessionStorage from '../../../../lib/setSessionStorage';
+
+import generalStyles from './hero.module.css';
 
 class Hero extends PureComponent {
   constructor() {
@@ -40,7 +41,24 @@ class Hero extends PureComponent {
     const basket = getSessionStorage('basket');
     const items = basket.items;
     const count = basket.count;
-    const newItems = [...items, this.props.product];
+    let newItems;
+
+    const existing = find(items, o => {
+      return o.product.id === this.props.product.id;
+    });
+
+    if (existing) {
+      existing.quantity += 1;
+      newItems = [...items];
+    } else {
+      newItems = [
+        ...items,
+        {
+          quantity: 1,
+          product: this.props.product
+        }
+      ];
+    }
 
     this.props.setGlobalState({
       cartOpen: true

@@ -1,0 +1,23 @@
+.controls {
+  composes:
+    global(mx-10)
+    global(border-1)
+    global(border-solid)
+    global(rounded-round)
+    global(flex)
+    global(items-center)
+    global(justify-center)
+    global(cursor-pointer)
+    global(text-xxxxs)
+  ;
+  width: 20px;
+  height: 20px;
+}
+
+.minus {
+  composes: controls;
+}
+
+.plus {
+  composes: controls;
+}

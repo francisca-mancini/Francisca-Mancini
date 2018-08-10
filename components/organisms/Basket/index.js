@@ -25,15 +25,14 @@ class Basket extends PureComponent {
 
     this.state = {
       isOpen: false,
-      basket: {},
-      cart: props.globalState.cart
+      basket: {}
     };
   }
 
   componentDidMount() {
-    this.basket = getSessionStorage('basket');
+    const basket = getSessionStorage('basket');
 
-    if (!this.basket) {
+    if (!basket) {
       const basket = {
         count: 0,
         items: []
@@ -48,6 +47,13 @@ class Basket extends PureComponent {
       const basket = getSessionStorage('basket');
       this.setState({
         isOpen: this.props.isOpen,
+        basket
+      });
+    }
+
+    if (prevProps.globalState.count !== this.props.globalState.count) {
+      const basket = getSessionStorage('basket');
+      this.setState({
         basket
       });
     }
@@ -88,7 +94,13 @@ class Basket extends PureComponent {
               {basket &&
                 basket.items &&
                 basket.items.map((item, index) => {
-                  return <BasketItem product={item} key={index} />;
+                  return (
+                    <BasketItem
+                      product={item.product}
+                      quantity={item.quantity}
+                      key={index}
+                    />
+                  );
                 })}
             </SimpleBar>
           </div>
