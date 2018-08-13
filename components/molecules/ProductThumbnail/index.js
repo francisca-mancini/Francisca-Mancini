@@ -5,8 +5,9 @@ import Spacing from '../../atoms/Spacing';
 import Heading from '../../atoms/Heading';
 import Paragraph from '../../atoms/Paragraph';
 import Link from '../../atoms/Link';
-
 import ProductShape from '../../atoms/ProductShape';
+
+import FadeIn from '../FadeIn';
 
 import getProductGradient from '../../../lib/getProductGradient';
 import getProductHandle from '../../../lib/getProductHandle';
@@ -63,41 +64,43 @@ export default function ProductThumbnail({
   };
 
   return (
-    <div className="w-full px-20 flex items-center justify-center">
-      <LinkTag {...LinkProps}>
-        <div className={containerClassName}>
-          <img
-            className={imageClassName}
-            src={img}
-            alt={title}
-            style={imageStyles}
-          />
-          <ProductShape
-            isDiscovery={isDiscovery}
-            color1={color1}
-            color2={color2}
-          />
-        </div>
-        {!hasNoInfo && (
-          <div>
-            <Spacing size={15}>
-              <Heading
-                uppercase
-                size="xxxxs"
-                center
-                font="serif"
-                tracking="wide"
-              >
-                {title}
-              </Heading>
-            </Spacing>
-            <Paragraph weight="semilight" size="xs" center>
-              Fragrance bottle, 100ml - £500
-            </Paragraph>
+    <FadeIn>
+      <div className="w-full px-20 flex items-center justify-center">
+        <LinkTag {...LinkProps}>
+          <div className={containerClassName}>
+            <img
+              className={imageClassName}
+              src={img}
+              alt={title}
+              style={imageStyles}
+            />
+            <ProductShape
+              isDiscovery={isDiscovery}
+              color1={color1}
+              color2={color2}
+            />
           </div>
-        )}
-      </LinkTag>
-    </div>
+          {!hasNoInfo && (
+            <div>
+              <Spacing size={15}>
+                <Heading
+                  uppercase
+                  size="xxxxs"
+                  center
+                  font="serif"
+                  tracking="wide"
+                >
+                  {title}
+                </Heading>
+              </Spacing>
+              <Paragraph weight="semilight" size="xs" center>
+                Fragrance bottle, 100ml - £500
+              </Paragraph>
+            </div>
+          )}
+        </LinkTag>
+      </div>
+    </FadeIn>
   );
 }
 
