@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import MediaQuery from 'react-responsive';
 import throttle from 'lodash/throttle';
+import { withGlobalState } from 'react-globally';
 
 import Heading from '../../atoms/Heading';
 import Spacing from '../../atoms/Spacing';
@@ -21,13 +22,15 @@ import menuWhite from '../../../static/images/sprites/menu-white.svg';
 import menuBlack from '../../../static/images/sprites/menu-black.svg';
 
 import generalStyles from './general.module.css';
+import getSessionStorage from '../../../lib/getSessionStorage';
 
 class Header extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      isLight: props.isLight
+      isLight: props.isLight,
+      basketCount: 0
     };
 
     this.heroHeight = 0;
@@ -42,6 +45,20 @@ class Header extends Component {
 
     if (this.props.isHome) {
       this.getHeroHeight();
+    }
+
+    const basket = getSessionStorage('basket');
+    this.setState({
+      basketCount: basket ? basket.count : 0
+    });
+  }
+
+  componentDidUpdate(prevProps) {
+    if (prevProps.globalState.cartOpen !== this.props.globalState.cartOpen) {
+      const basket = getSessionStorage('basket');
+      this.setState({
+        basketCount: basket ? basket.count : 0
+      });
     }
   }
 
@@ -77,9 +94,15 @@ class Header extends Component {
     this.getHeroHeight();
   }
 
+  toggleBasket() {
+    this.props.setGlobalState({
+      cartOpen: true
+    });
+  }
+
   render() {
-    const { isLoaded, pathname } = this.props;
-    const { isLight } = this.state;
+    const { isLoaded, pathname, toggleBasket } = this.props;
+    const { isLight, basketCount } = this.state;
     const headerClassName = classNames(generalStyles.header, {
       [generalStyles.headerHidden]: !isLoaded,
       [generalStyles.headerShow]: isLoaded
@@ -96,7 +119,8 @@ class Header extends Component {
       isDropdown,
       isDropdownTrigger,
       zIndex,
-      isCollection
+      isCollection,
+      onClick
     }) => {
       const notActive = pathname === '/';
       const isShop = pathname === '/product' && href === '/shop';
@@ -113,19 +137,35 @@ class Header extends Component {
       return (
         <div className={linkClassName}>
           <Spacing size={isDropdown ? 5 : 10} position={isDropdown ? 'y' : 'x'}>
-            <Link href={href}>
-              <Heading
-                tag="span"
-                font="alternate"
-                uppercase
-                size="xxxs"
-                weight="semilight"
-                tracking="wide"
-                color={isDropdown ? 'black' : linkColor}
-              >
-                {children}
-              </Heading>
-            </Link>
+            {onClick ? (
+              <span className="cursor-pointer" onClick={onClick}>
+                <Heading
+                  tag="span"
+                  font="alternate"
+                  uppercase
+                  size="xxxs"
+                  weight="semilight"
+                  tracking="wide"
+                  color={isDropdown ? 'black' : linkColor}
+                >
+                  {children}
+                </Heading>
+              </span>
+            ) : (
+              <Link href={href}>
+                <Heading
+                  tag="span"
+                  font="alternate"
+                  uppercase
+                  size="xxxs"
+                  weight="semilight"
+                  tracking="wide"
+                  color={isDropdown ? 'black' : linkColor}
+                >
+                  {children}
+                </Heading>
+              </Link>
+            )}
           </Spacing>
         </div>
       );
@@ -182,8 +222,12 @@ class Header extends Component {
                         Shop
                       </NavLink>
                       <NavLink href="/philosophy">Philosophy</NavLink>
-                      <NavLink href="/account">Account</NavLink>
-                      <NavLink href="/cart">Cart / 0</NavLink>
+                      <NavLink href="https://admin-shopify.bonhomme.lol/account">
+                        Account
+                      </NavLink>
+                      <NavLink onClick={this.toggleBasket.bind(this)}>
+                        Cart / {basketCount}
+                      </NavLink>
                     </InlineGrid>
                   );
                 } else {
@@ -198,57 +242,57 @@ class Header extends Component {
   }
 }
 
-const query = gql`
-  query query {
-    shop {
-      name
-      description
-      articles(first: 20) {
-        edges {
-          node {
-            content
-          }
-        }
-      }
-      collections(first: 20) {
-        edges {
-          node {
-            handle
-            id
-            description
-            descriptionHtml
-            title
-            products(first: 20) {
-              edges {
-                node {
-                  id
-                  handle
-                  title
-                  description
-                  descriptionHtml
-                  productType
-                  tags
-                  images(first: 20) {
-                    edges {
-                      node {
-                        altText
-                        id
-                        originalSrc
-                        transformedSrc
-                      }
-                    }
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
-    }
-  }
-`;
+// const query = gql`
+//   query query {
+//     shop {
+//       name
+//       description
+//       articles(first: 20) {
+//         edges {
+//           node {
+//             content
+//           }
+//         }
+//       }
+//       collections(first: 20) {
+//         edges {
+//           node {
+//             handle
+//             id
+//             description
+//             descriptionHtml
+//             title
+//             products(first: 20) {
+//               edges {
+//                 node {
+//                   id
+//                   handle
+//                   title
+//                   description
+//                   descriptionHtml
+//                   productType
+//                   tags
+//                   images(first: 20) {
+//                     edges {
+//                       node {
+//                         altText
+//                         id
+//                         originalSrc
+//                         transformedSrc
+//                       }
+//                     }
+//                   }
+//                 }
+//               }
+//             }
+//           }
+//         }
+//       }
+//     }
+//   }
+// `;
 
-export default Header;
+export default withGlobalState(Header);
 
 Header.propTypes = {
   isLight: PropTypes.bool,

@@ -124,6 +124,7 @@ export default class ProductShape extends Component {
     const { color1, color2 } = this.props;
     const blurFilter = new PIXI.filters.BlurFilter();
     blurFilter.blur = 10;
+    blurFilter.padding = 0;
     blurFilter.autoFit = true;
 
     const thresholdGradientFilter = new ThresholdGradientFilter();

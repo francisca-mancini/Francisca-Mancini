@@ -21,7 +21,8 @@ export default function ProductThumbnail({
   isDiscovery,
   isLayering,
   isNoClick,
-  isSingle
+  isSingle,
+  hasNoInfo
 }) {
   const color1 = getProductGradient(product)
     ? getProductGradient(product).color1
@@ -77,16 +78,24 @@ export default function ProductThumbnail({
             color2={color2}
           />
         </div>
-        <div>
-          <Spacing size={15}>
-            <Heading uppercase size="xxxxs" center font="serif" tracking="wide">
-              {title}
-            </Heading>
-          </Spacing>
-          <Paragraph weight="semilight" size="xs" center>
-            Fragrance bottle, 100ml - £500
-          </Paragraph>
-        </div>
+        {!hasNoInfo && (
+          <div>
+            <Spacing size={15}>
+              <Heading
+                uppercase
+                size="xxxxs"
+                center
+                font="serif"
+                tracking="wide"
+              >
+                {title}
+              </Heading>
+            </Spacing>
+            <Paragraph weight="semilight" size="xs" center>
+              Fragrance bottle, 100ml - £500
+            </Paragraph>
+          </div>
+        )}
       </LinkTag>
     </div>
   );

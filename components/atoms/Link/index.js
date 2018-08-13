@@ -16,12 +16,13 @@ export default function AtomLink({
   onClick
 }) {
   const linkClassName = classNames(generalStyles.link, className, {
-    [generalStyles.isUnderline]: underline
+    [generalStyles.isUnderlined]: underline
   });
   const LinkTag = tag;
 
   const handleClick = e => {
     if (!onClick) return;
+    e.preventDefault();
 
     onClick(e);
   };

@@ -40,7 +40,7 @@
   max-width: 470px;
 }
 
-.image:hover {
+.image:not(.imageSingle):hover {
   transform: translate(-50%, -50%) scale(1.03);
 }
 

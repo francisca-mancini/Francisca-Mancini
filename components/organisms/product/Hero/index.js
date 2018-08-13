@@ -1,6 +1,8 @@
 import React, { PureComponent } from 'react';
 import stickybits from 'stickybits';
 import classNames from 'classnames';
+import { withGlobalState } from 'react-globally';
+import find from 'lodash/find';
 
 import { Grid, GridItem } from '../../../atoms/Grid';
 import Paragraph from '../../../atoms/Paragraph';
@@ -18,13 +20,54 @@ import getProductPrice from '../../../../lib/getProductPrice';
 import getProductDescription from '../../../../lib/getProductDescription';
 import getCollectionTitle from '../../../../lib/getCollectionTitle';
 import getCleanType from '../../../../lib/getCleanType';
+import getProductGradient from '../../../../lib/getProductGradient';
+import getSessionStorage from '../../../../lib/getSessionStorage';
+import setSessionStorage from '../../../../lib/setSessionStorage';
 
 import generalStyles from './hero.module.css';
-import getProductGradient from '../../../../lib/getProductGradient';
 
 class Hero extends PureComponent {
+  constructor() {
+    super();
+
+    this.addToBag = this.addToBag.bind(this);
+  }
+
   componentDidMount() {
     stickybits('.stickybits');
+  }
+
+  addToBag() {
+    const basket = getSessionStorage('basket');
+    const items = basket.items;
+    const count = basket.count;
+    let newItems;
+
+    const existing = find(items, o => {
+      return o.product.id === this.props.product.id;
+    });
+
+    if (existing) {
+      existing.quantity += 1;
+      newItems = [...items];
+    } else {
+      newItems = [
+        ...items,
+        {
+          quantity: 1,
+          product: this.props.product
+        }
+      ];
+    }
+
+    this.props.setGlobalState({
+      cartOpen: true
+    });
+
+    setSessionStorage('basket', {
+      items: newItems,
+      count: count + 1
+    });
   }
 
   render() {
@@ -42,8 +85,6 @@ class Hero extends PureComponent {
     const collectionTitle =
       product && getCollectionTitle(product.collections.edges[0].node);
     const cleanType = getCleanType(type);
-
-    console.log(product);
 
     return (
       <div>
@@ -95,7 +136,7 @@ class Hero extends PureComponent {
                     {type} - £{price}
                   </Paragraph>
                 </Spacing>
-                <Button size="s">
+                <Button size="s" onClick={this.addToBag}>
                   <span className="font-normal">Add to bag</span>
                 </Button>
                 <div className={generalStyles.footerRight}>
@@ -110,4 +151,4 @@ class Hero extends PureComponent {
   }
 }
 
-export default Hero;
+export default withGlobalState(Hero);

@@ -2,6 +2,7 @@ import React, { PureComponent } from 'react';
 import { withRouter } from 'next/router';
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
+import { Provider } from 'react-globally';
 
 import '../style.css';
 
@@ -10,7 +11,7 @@ import Footer from './molecules/Footer';
 
 class App extends PureComponent {
   componentDidMount() {
-    var firstTime = sessionStorage.getItem('hasLoadedAlready');
+    const firstTime = sessionStorage.getItem('hasLoadedAlready');
     if (!firstTime) {
       setTimeout(() => {
         sessionStorage.setItem('hasLoadedAlready', 'true');
@@ -32,21 +33,30 @@ class App extends PureComponent {
 
     const pathname = router.pathname;
 
+    const initialState = {
+      cartOpen: false
+    };
+
     return (
-      <div className="root" id="root">
-        <Header
-          pathname={pathname}
-          isLoaded={isLoaded}
-          isLight={headerLight}
-          isHome={isHome}
-        />
-        <div
-          className={classNames({ 'pt-80': hasTopPad, 'pb-80': hasBottomPad })}
-        >
-          {children}
+      <Provider globalState={initialState}>
+        <div className="root" id="root">
+          <Header
+            pathname={pathname}
+            isLoaded={isLoaded}
+            isLight={headerLight}
+            isHome={isHome}
+          />
+          <div
+            className={classNames({
+              'pt-80': hasTopPad,
+              'pb-80': hasBottomPad
+            })}
+          >
+            {children}
+          </div>
+          <Footer isLight={footerLight} />
         </div>
-        <Footer isLight={footerLight} />
-      </div>
+      </Provider>
     );
   }
 }

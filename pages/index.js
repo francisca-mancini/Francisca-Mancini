@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react';
 import withData from '../lib/withData';
-import { graphql } from 'react-apollo';
+import { graphql, compose } from 'react-apollo';
 import gql from 'graphql-tag';
 
 import App from '../components/App';
@@ -15,10 +15,13 @@ import ProductThumbnail from '../components/molecules/ProductThumbnail';
 import HeroVideo from '../components/molecules/HeroVideo';
 import Loader from '../components/molecules/Loader';
 
+import Basket from '../components/organisms/Basket';
 import CollectionIntro from '../components/organisms/collection/CollectionIntro';
 
 import getCollectionHome from '../lib/getCollectionHome';
 import getProductsByType from '../lib/getProductsByType';
+
+import { checkoutQuery, checkout } from '../lib/checkout';
 
 class Home extends PureComponent {
   constructor() {
@@ -29,6 +32,7 @@ class Home extends PureComponent {
       secondTime: false
     };
 
+    this.handleCheckout = this.handleCheckout.bind(this);
     this.onLoaderUpdate = this.onLoaderUpdate.bind(this);
   }
 
@@ -55,6 +59,10 @@ class Home extends PureComponent {
     this.setState({ isLoaded });
   }
 
+  handleCheckout() {
+    checkout(this);
+  }
+
   render() {
     const { isLoaded, secondTime } = this.state;
     const collectionProps = {
@@ -68,6 +76,7 @@ class Home extends PureComponent {
 
     return (
       <App hasTopPad={false} headerLight isHome isLoaded={isLoaded}>
+        <Basket onCheckout={this.handleCheckout} />
         {!secondTime && <Loader onUpdate={this.onLoaderUpdate} />}
         <HeroVideo isPlaying={isLoaded} />
         <PageWrap>
@@ -161,4 +170,9 @@ const query = gql`
   }
 `;
 
-export default withData(graphql(query)(Home));
+const HomeWithDataAndMutation = compose(
+  graphql(query),
+  graphql(checkoutQuery, { name: 'checkoutQuery' })
+)(Home);
+
+export default withData(HomeWithDataAndMutation);

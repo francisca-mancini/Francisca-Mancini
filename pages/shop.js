@@ -2,7 +2,7 @@ import React, { PureComponent } from 'react';
 import App from '../components/App';
 import stickybits from 'stickybits';
 import withData from '../lib/withData';
-import { graphql } from 'react-apollo';
+import { graphql, compose } from 'react-apollo';
 import gql from 'graphql-tag';
 
 import PageWrap from '../components/atoms/PageWrap';
@@ -10,6 +10,8 @@ import Spacing from '../components/atoms/Spacing';
 import { Grid, GridItem } from '../components/atoms/Grid';
 import Heading from '../components/atoms/Heading';
 import Button from '../components/atoms/Button';
+
+import Basket from '../components/organisms/Basket';
 
 import ProductThumbnail from '../components/molecules/ProductThumbnail';
 
@@ -22,8 +24,15 @@ import Fragrances from '../components/organisms/shop/Fragrances';
 import Layerings from '../components/organisms/shop/Layerings';
 
 import getProductsByType from '../lib/getProductsByType';
+import { checkoutQuery, checkout } from '../lib/checkout';
 
 class Shop extends PureComponent {
+  constructor() {
+    super();
+
+    this.handleCheckout = this.handleCheckout.bind(this);
+  }
+
   componentWillMount() {
     const products = this.props.data.shop.products.edges;
     this.fragrances = getProductsByType(products, 'fragrance');
@@ -35,6 +44,10 @@ class Shop extends PureComponent {
     stickybits('.stickybits');
   }
 
+  handleCheckout() {
+    checkout(this);
+  }
+
   render() {
     const stickyStyle = {
       top: 0,
@@ -43,6 +56,7 @@ class Shop extends PureComponent {
 
     return (
       <App>
+        <Basket onCheckout={this.handleCheckout} />
         <PageWrap>
           <Fragrances products={this.fragrances} />
 
@@ -176,4 +190,9 @@ const query = gql`
   }
 `;
 
-export default withData(graphql(query)(Shop));
+const ShopWithDataAndMutation = compose(
+  graphql(query),
+  graphql(checkoutQuery, { name: 'checkoutQuery' })
+)(Shop);
+
+export default withData(ShopWithDataAndMutation);

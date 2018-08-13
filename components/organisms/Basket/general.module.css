@@ -1,0 +1,50 @@
+.container {
+  composes:
+    global(fixed)
+    global(pin-t)
+    global(pin-r)
+    global(h-screen)
+    global(z-full)
+    global(bg-white)
+    global(flex)
+    global(flex-col)
+  ;
+  width: 430px;
+  transition: transform 0.3s ease-out;
+}
+
+.containerHidden {
+  transform: translateX(100%);
+}
+
+.bg {
+  composes:
+    global(fixed)
+    global(pin)
+    global(bg-black)
+    global(opacity-25)
+    global(z-full)
+    global(visible)
+  ;
+
+  transition: opacity 0.5s;
+}
+
+.bgHidden {
+  composes:
+    global(opacity-0)
+    global(hidden)
+  ;
+}
+
+.header,
+.footer {
+  composes: global(p-25);
+}
+
+.items {
+  composes:
+    global(h-full)
+    global(overflow-hidden)
+  ;
+}

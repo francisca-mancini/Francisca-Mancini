@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react';
-import { graphql } from 'react-apollo';
+import { graphql, compose } from 'react-apollo';
 import gql from 'graphql-tag';
 import App from '../components/App';
 import stickybits from 'stickybits';
@@ -15,6 +15,7 @@ import AtomLink from '../components/atoms/Link';
 
 import HeroVideo from '../components/molecules/HeroVideo';
 
+import Basket from '../components/organisms/Basket';
 import CollectionIntro from '../components/organisms/collection/CollectionIntro';
 import Fragrance from '../components/organisms/collection/Fragrance';
 
@@ -29,6 +30,8 @@ import getProductLayeringHandle from '../lib/getProductLayeringHandle';
 import getProductGradient from '../lib/getProductGradient';
 import getCollectionDescription from '../lib/getCollectionDescription';
 
+import { checkoutQuery, checkout } from '../lib/checkout';
+
 class Collection extends PureComponent {
   static getInitialProps({ query: { handle } }) {
     return { collectionHandle: handle };
@@ -38,6 +41,7 @@ class Collection extends PureComponent {
     super();
 
     this.state = { index: 0 };
+    this.handleCheckout = this.handleCheckout.bind(this);
   }
 
   componentWillMount() {
@@ -61,6 +65,10 @@ class Collection extends PureComponent {
     this.setState({
       index
     });
+  }
+
+  handleCheckout() {
+    checkout(this);
   }
 
   getProducts() {
@@ -106,6 +114,7 @@ class Collection extends PureComponent {
 
     return (
       <App hasTopPad={false} hasBottomPad={false} headerLight isHome>
+        <Basket onCheckout={this.handleCheckout} />
         <HeroVideo />
         <PageWrap>
           <Spacing size={80} type="padding">
@@ -244,4 +253,9 @@ const query = gql`
   }
 `;
 
-export default withData(graphql(query)(Collection));
+const CollectionWithDataAndMutation = compose(
+  graphql(query),
+  graphql(checkoutQuery, { name: 'checkoutQuery' })
+)(Collection);
+
+export default withData(CollectionWithDataAndMutation);
