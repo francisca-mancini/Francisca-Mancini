@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react';
-import { graphql } from 'react-apollo';
+import { graphql, compose } from 'react-apollo';
 import gql from 'graphql-tag';
 import App from '../components/App';
 
@@ -15,9 +15,17 @@ import getProductHandle from '../lib/getProductHandle';
 import getProductsButHandle from '../lib/getProductsButHandle';
 import withData from '../lib/withData';
 
+import { checkoutQuery, checkout } from '../lib/checkout';
+
 class Product extends PureComponent {
   static getInitialProps({ query: { handle } }) {
     return { productHandle: handle };
+  }
+
+  constructor() {
+    super();
+
+    this.handleCheckout = this.handleCheckout.bind(this);
   }
 
   componentWillMount() {
@@ -32,6 +40,10 @@ class Product extends PureComponent {
     }
   }
 
+  handleCheckout() {
+    checkout(this);
+  }
+
   render() {
     if (!this.product) {
       return <div />;
@@ -41,7 +53,7 @@ class Product extends PureComponent {
 
     return (
       <App hasTopPad={false} hasBottomPad={false}>
-        <Basket />
+        <Basket onCheckout={this.handleCheckout} />
         <PageWrap>
           <Hero product={this.product} />
         </PageWrap>
@@ -138,4 +150,9 @@ const query = gql`
   }
 `;
 
-export default withData(graphql(query)(Product));
+const ProductWithDataAndMutation = compose(
+  graphql(query),
+  graphql(checkoutQuery, { name: 'checkoutQuery' })
+)(Product);
+
+export default withData(ProductWithDataAndMutation);

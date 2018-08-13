@@ -31,6 +31,8 @@ class Basket extends PureComponent {
       basket: {},
       totalPrice: 0
     };
+
+    this.handleCheckout = this.handleCheckout.bind(this);
   }
 
   componentDidMount() {
@@ -87,6 +89,10 @@ class Basket extends PureComponent {
     this.props.setGlobalState({
       cartOpen: false
     });
+  }
+
+  handleCheckout() {
+    this.props.onCheckout();
   }
 
   render() {
@@ -146,7 +152,9 @@ class Basket extends PureComponent {
               </Paragraph>
             </div>
             <div className="text-center pt-30">
-              <Button size="s">Checkout</Button>
+              <Button onClick={this.handleCheckout} size="s">
+                Checkout
+              </Button>
             </div>
           </div>
         </div>
