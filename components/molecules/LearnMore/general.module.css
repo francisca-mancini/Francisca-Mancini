@@ -1,0 +1,16 @@
+.container {
+  composes:
+    global(opacity-50)
+    global(hover-opacity-75)
+    global(cursor-pointer)
+  ;
+  transition: 0.2s;
+}
+
+.img {
+  transition: 0.2s ease-in-out;
+}
+
+.container:hover .img {
+  transform: translateY(6px)
+}
