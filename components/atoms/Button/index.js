@@ -49,7 +49,7 @@ export default class Button extends PureComponent {
 
 Button.propTypes = {
   tag: PropTypes.oneOf(tagList),
-  children: PropTypes.string.isRequired,
+  children: PropTypes.node.isRequired,
   size: PropTypes.oneOf(Object.keys(sizeStyles)),
   kind: PropTypes.oneOf(Object.keys(kindStyles)),
   onClick: PropTypes.func

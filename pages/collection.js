@@ -138,7 +138,7 @@ class Collection extends PureComponent {
                       });
 
                       return (
-                        <div className={itemClassName}>
+                        <div key={i} className={itemClassName}>
                           <Spacing key={item.handle} size={10}>
                             <Heading
                               className="leading-none"
@@ -167,7 +167,7 @@ class Collection extends PureComponent {
                 <GridItem columnSize={8}>
                   {this.products.map((item, i) => {
                     return (
-                      <div id={item.handle}>
+                      <div key={i} id={item.handle}>
                         <Fragrance
                           key={item.handle}
                           index={i}

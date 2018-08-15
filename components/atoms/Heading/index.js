@@ -58,7 +58,7 @@ Heading.propTypes = {
   tag: PropTypes.oneOf(tagList),
   children: PropTypes.node.isRequired,
   color: PropTypes.string,
-  size: PropTypes.oneOf(Object.keys(sizeMap)),
+  size: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
   center: PropTypes.bool,
   uppercase: PropTypes.bool,
   font: PropTypes.oneOf(['sans', 'serif', 'jenson', 'alternate']),

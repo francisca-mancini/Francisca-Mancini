@@ -279,8 +279,8 @@ export default class ProductBackgroundShapes extends PureComponent {
 }
 
 ProductBackgroundShapes.propTypes = {
-  color1: PropTypes.array.isRequired,
-  color2: PropTypes.array.isRequired
+  color1: PropTypes.string.isRequired,
+  color2: PropTypes.string.isRequired
 };
 
 ProductBackgroundShapes.defaultProps = {

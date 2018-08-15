@@ -52,7 +52,7 @@ export default function ProductThumbnail({
   const imageStyles = {
     animation: isSingle
       ? `float ${(Math.random() + 0.3) * 20}s ${Math.random() +
-          0.5}s infinite alternate ease-in-out;`
+          0.5}s infinite alternate ease-in-out`
       : ''
   };
 

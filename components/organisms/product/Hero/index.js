@@ -104,7 +104,7 @@ class Hero extends PureComponent {
                   {description}
                 </Paragraph>
                 <div className={generalStyles.footerLeft}>
-                  <Paragraph size="s">
+                  <Paragraph size="s" weight="semilight">
                     {collectionTitle} • {cleanType} • {title}
                   </Paragraph>
                 </div>
@@ -141,7 +141,7 @@ class Hero extends PureComponent {
                   {title}
                 </Heading>
                 <Spacing size={25}>
-                  <Paragraph size="s">
+                  <Paragraph size="s" weight="semilight">
                     {type} - £{price}
                   </Paragraph>
                 </Spacing>
@@ -149,7 +149,9 @@ class Hero extends PureComponent {
                   <span className="font-normal">Add to bag</span>
                 </Button>
                 <div className={generalStyles.footerRight}>
-                  <Paragraph size="s">Free shipping above £100</Paragraph>
+                  <Paragraph weight="semilight" size="s">
+                    Free shipping above £100
+                  </Paragraph>
                 </div>
               </div>
             </GridItem>

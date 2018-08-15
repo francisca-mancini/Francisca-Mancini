@@ -38,7 +38,7 @@ export default function Paragraph({
   const ParagraphTag = tag;
   const sizeToClass = propToClassName(size, sizeMap);
   const paragraphStyles = {
-    'text-indent': indent ? '10%' : '0'
+    textIndent: indent ? '10%' : '0'
   };
   const paragraphClassName = classNames(
     sizeToClass,
