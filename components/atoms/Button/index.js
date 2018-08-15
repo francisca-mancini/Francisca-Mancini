@@ -1,4 +1,4 @@
-import { Fragment, PureComponent } from 'react';
+import { PureComponent } from 'react';
 import Link from 'next/link';
 import classNames from 'classnames/bind';
 import PropTypes from 'prop-types';
@@ -27,10 +27,14 @@ export default class Button extends PureComponent {
     const { tag, href, children, kind, size, prefetch } = this.props;
 
     const ButtonTag = tag;
-    const LinkTag = href ? Link : Fragment;
+    const LinkTag = href ? Link : 'span';
+    const linkProps = {
+      href: href || null,
+      prefetch: prefetch
+    };
 
     return (
-      <LinkTag href={href} prefetch={prefetch}>
+      <LinkTag {...linkProps}>
         <ButtonTag
           className={cx('button', kind, size)}
           onClick={this.handleClick.bind(this)}

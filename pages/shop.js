@@ -15,13 +15,9 @@ import Basket from '../components/organisms/Basket';
 
 import ProductThumbnail from '../components/molecules/ProductThumbnail';
 
-import layeringImage from '../static/images/_temp/product3.png';
-import layeringImage2 from '../static/images/_temp/product3-alt.png';
-import layeringImage3 from '../static/images/_temp/product3-alt-2.png';
 import MaxWidth from '../components/atoms/MaxWidth';
 
 import Fragrances from '../components/organisms/shop/Fragrances';
-import Layerings from '../components/organisms/shop/Layerings';
 
 import getProductsByType from '../lib/getProductsByType';
 import { checkoutQuery, checkout } from '../lib/checkout';

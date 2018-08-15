@@ -61,11 +61,11 @@ export default function Paragraph({
 
 Paragraph.propTypes = {
   tag: PropTypes.oneOf(tagList),
-  children: PropTypes.string.isRequired,
+  children: PropTypes.node.isRequired,
   color: PropTypes.string,
-  size: PropTypes.oneOf(Object.keys(sizeMap)),
+  size: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
   center: PropTypes.bool,
-  font: PropTypes.oneOf(['sans', 'serif']),
+  font: PropTypes.oneOf(['sans', 'serif', 'jenson', 'alternate']),
   weight: PropTypes.string,
   indent: PropTypes.bool
 };

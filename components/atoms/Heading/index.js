@@ -56,12 +56,12 @@ export default function Heading({
 
 Heading.propTypes = {
   tag: PropTypes.oneOf(tagList),
-  children: PropTypes.string.isRequired,
+  children: PropTypes.node.isRequired,
   color: PropTypes.string,
   size: PropTypes.oneOf(Object.keys(sizeMap)),
   center: PropTypes.bool,
   uppercase: PropTypes.bool,
-  font: PropTypes.oneOf(['sans', 'serif']),
+  font: PropTypes.oneOf(['sans', 'serif', 'jenson', 'alternate']),
   weight: PropTypes.string,
   tracking: PropTypes.string
 };

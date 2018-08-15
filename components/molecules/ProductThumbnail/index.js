@@ -105,8 +105,8 @@ export default function ProductThumbnail({
 }
 
 ProductThumbnail.propTypes = {
-  color1: PropTypes.array.isRequired,
-  color2: PropTypes.array.isRequired,
+  color1: PropTypes.string,
+  color2: PropTypes.string,
   image: PropTypes.string
 };
 

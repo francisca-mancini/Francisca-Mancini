@@ -46,9 +46,13 @@ export default function Description({ description }) {
       justified
       indent
     >
-      {mappedDescription.map(item => {
+      {mappedDescription.map((item, index) => {
         if (item.image) {
-          return <WordHover image={item.image}>{item.string}</WordHover>;
+          return (
+            <WordHover key={index} image={item.image}>
+              {item.string}
+            </WordHover>
+          );
         } else {
           return item.string;
         }
