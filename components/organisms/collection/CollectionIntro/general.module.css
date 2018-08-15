@@ -1,0 +1,5 @@
+.learnmore {
+  composes:
+    global(text-center)
+  ;
+}

@@ -23,6 +23,7 @@
   composes: centerFlex;
   composes:
     global(p-20)
+    global(z-50)
     global(max-w-full)
   ;
 }
@@ -34,7 +35,7 @@
 .learnMore {
   composes:
     global(absolute)
-    global(z-10)
+    global(z-20)
     global(text-center)
     global(pin-b)
     global(pb-30)
@@ -42,12 +43,9 @@
     global(flex-col)
     global(items-center)
     global(justify-center)
-    global(opacity-50)
-    global(cursor-pointer)
   ;
   width: calc(100% + 60px);
   left: calc(100% + 30px);
-  /* transform: translateX(-50%); */
 }
 
 .right {

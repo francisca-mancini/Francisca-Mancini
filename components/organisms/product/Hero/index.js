@@ -3,6 +3,7 @@ import stickybits from 'stickybits';
 import classNames from 'classnames';
 import { withGlobalState } from 'react-globally';
 import find from 'lodash/find';
+import { Link } from 'react-scroll';
 
 import { Grid, GridItem } from '../../../atoms/Grid';
 import Paragraph from '../../../atoms/Paragraph';
@@ -108,7 +109,15 @@ class Hero extends PureComponent {
                   </Paragraph>
                 </div>
                 <div className={generalStyles.learnMore}>
-                  <LearnMore>Learn more</LearnMore>
+                  <Link
+                    to="story"
+                    spy={true}
+                    smooth={true}
+                    duration={500}
+                    className="cursor-pointer"
+                  >
+                    <LearnMore>Learn more</LearnMore>
+                  </Link>
                 </div>
               </div>
             </GridItem>

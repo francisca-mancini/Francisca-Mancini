@@ -38,7 +38,7 @@ function Story({ product }) {
 
   return (
     <Spacing size={80} position="bottom" type="padding">
-      <div className={generalStyles.story}>
+      <div id="story" className={generalStyles.story}>
         <PageWrap>
           <Spacing size={80} type="padding">
             <Grid gap={30} align="center">

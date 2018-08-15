@@ -13,6 +13,8 @@ import getCollectionHandle from '../../../../lib/getCollectionHandle';
 
 import Description from '../Description';
 
+import generalStyles from './general.module.css';
+
 export default function CollectionIntro({ collection, isHome, to }) {
   const title = getCollectionTitle(collection);
   const description = getCollectionDescription(collection);
@@ -36,7 +38,7 @@ export default function CollectionIntro({ collection, isHome, to }) {
           </Button>
         </div>
       ) : (
-        <div className="text-center opacity-50">
+        <div className={generalStyles.learnmore}>
           <Link
             to={to}
             spy={true}
