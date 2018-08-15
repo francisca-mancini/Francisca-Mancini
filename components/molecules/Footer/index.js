@@ -1,13 +1,21 @@
-import React from 'react';
+import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import MediaQuery from 'react-responsive';
 import classNames from 'classnames/bind';
+import {
+  Element,
+  Events,
+  animateScroll as scroll,
+  scrollSpy,
+  scroller
+} from 'react-scroll';
 
 import PageWrap from '../../atoms/PageWrap';
 import { InlineGrid } from '../../atoms/Grid';
 import Link from '../../atoms/Link';
 import Spacing from '../../atoms/Spacing';
 import Heading from '../../atoms/Heading';
+import Button from '../../atoms/Button';
 
 import logoWhite from '../../../static/images/sprites/logo-white.svg';
 import logoBlack from '../../../static/images/sprites/logo-black.svg';
@@ -15,68 +23,131 @@ import logoMini from '../../../static/images/sprites/logo-mini-center.svg';
 
 import generalStyles from './general.module.css';
 
+import crossIcon from '../../../static/images/sprites/close.svg';
+import Paragraph from '../../atoms/Paragraph';
+
 const cx = classNames.bind({ ...generalStyles });
 
-export default function Footer({ isLight }) {
-  const footerClassName = cx('footer', {
-    isLight: isLight,
-    isDark: !isLight
-  });
-  const navItemClassName = cx('navItem', {
-    navItemLight: isLight,
-    navItemDark: !isLight
-  });
-  const logoSrc = isLight ? logoWhite : logoBlack;
+export default class Footer extends PureComponent {
+  constructor() {
+    super();
 
-  const NavLink = ({ children, href }) => {
-    return (
-      <Spacing size={10} position="x">
-        <Link href={href}>
-          <Heading
-            tag="span"
-            uppercase
-            size="xxxs"
-            font="alternate"
-            weight="semilight"
-            tracking="wide"
-            className={navItemClassName}
-          >
-            {children}
-          </Heading>
-        </Link>
-      </Spacing>
+    this.state = {
+      newsletterOpen: false
+    };
+
+    this.toggleNewsletter = this.toggleNewsletter.bind(this);
+  }
+
+  toggleNewsletter() {
+    this.setState(
+      {
+        newsletterOpen: !this.state.newsletterOpen
+      },
+      () => {
+        scroll.scrollToBottom(200);
+      }
     );
-  };
+  }
 
-  return (
-    <footer className={footerClassName}>
-      <PageWrap className="max-w-full">
-        <InlineGrid direction={['col', 'col', 'row']}>
-          <Spacing size={[20, 20, 0]} position="b">
-            <Link href="/" className="leading-none flex items-center">
-              <MediaQuery minDeviceWidth={768} values={{ deviceWidth: 800 }}>
-                {matches => {
-                  if (matches) {
-                    return <img src={logoSrc} width={243} height={16} />;
-                  } else {
-                    return <img src={logoMini} width={156} height={45} />;
-                  }
-                }}
-              </MediaQuery>
-            </Link>
-          </Spacing>
-          <InlineGrid className="flex-wrap" justify="center">
-            <NavLink href="/about">About</NavLink>
-            <NavLink href="/about#contact">Contact</NavLink>
-            <NavLink href="https://instagram.com">Instagram</NavLink>
-            <NavLink href="/help">Help</NavLink>
-            <NavLink href="/newsletter">Newsletter</NavLink>
-            <NavLink href="/legals">Legals</NavLink>
+  render() {
+    const { isLight } = this.props;
+    const { newsletterOpen } = this.state;
+    const footerClassName = cx('footer', {
+      isLight: isLight,
+      isDark: !isLight,
+      footerOpen: newsletterOpen
+    });
+    const newsletterClassName = cx('newsletter');
+    const navItemClassName = cx('navItem', {
+      navItemLight: isLight,
+      navItemDark: !isLight
+    });
+    const logoSrc = isLight ? logoWhite : logoBlack;
+
+    const NavLink = ({ children, href, ...props }) => {
+      const LinkTag = href ? Link : 'span';
+      const linkProps = {
+        href: href || null,
+        className: 'cursor-pointer',
+        ...props
+      };
+
+      return (
+        <Spacing size={10} position="x">
+          <LinkTag {...linkProps}>
+            <Heading
+              tag="span"
+              uppercase
+              size="xxxs"
+              font="alternate"
+              weight="semilight"
+              tracking="wide"
+              className={navItemClassName}
+            >
+              {children}
+            </Heading>
+          </LinkTag>
+        </Spacing>
+      );
+    };
+
+    return (
+      <footer className={footerClassName}>
+        <PageWrap className="max-w-full">
+          <InlineGrid direction={['col', 'col', 'row']}>
+            <Spacing size={[20, 20, 0]} position="b">
+              <Link href="/" className="leading-none flex items-center">
+                <MediaQuery minDeviceWidth={768} values={{ deviceWidth: 800 }}>
+                  {matches => {
+                    if (matches) {
+                      return <img src={logoSrc} width={243} height={16} />;
+                    } else {
+                      return <img src={logoMini} width={156} height={45} />;
+                    }
+                  }}
+                </MediaQuery>
+              </Link>
+            </Spacing>
+            <InlineGrid className="flex-wrap" justify="center">
+              <NavLink href="/about">About</NavLink>
+              <NavLink href="/about#contact">Contact</NavLink>
+              <NavLink href="https://instagram.com">Instagram</NavLink>
+              <NavLink href="/help">Help</NavLink>
+              <NavLink onClick={this.toggleNewsletter}>Newsletter</NavLink>
+              <NavLink href="/legals">Legals</NavLink>
+            </InlineGrid>
           </InlineGrid>
-        </InlineGrid>
-      </PageWrap>
-    </footer>
-  );
+        </PageWrap>
+        <div className={newsletterClassName}>
+          <Spacing size={60}>
+            <PageWrap className="max-w-full flex flex-col items-center justify-center">
+              <div
+                className={generalStyles.cross}
+                onClick={this.toggleNewsletter}
+              >
+                <img src={crossIcon} alt="close newsletter" />
+              </div>
+              <Spacing size={40}>
+                <Paragraph size="l" weight="semilight">
+                  Subscribe to the Newsletter to receive the latest news.
+                </Paragraph>
+              </Spacing>
+              <div className="flex">
+                <Spacing size={20} position="x">
+                  <input
+                    className={generalStyles.input}
+                    placeholder="Enter email"
+                  />
+                </Spacing>
+                <Button>Sign up</Button>
+              </div>
+            </PageWrap>
+          </Spacing>
+        </div>
+      </footer>
+    );
+  }
 }
 
 Footer.propTypes = {
