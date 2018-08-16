@@ -52,16 +52,6 @@ export default class WordHover extends Component {
     this.RAF.start();
   }
 
-  componentDidUpdate(prevProps, prevState) {
-    if (prevState.isMouseOver !== this.state.isMouseOver) {
-      if (this.state.isMouseOver) {
-        document.body.className += ' cursor';
-      } else {
-        document.querySelector('body').classList.remove('cursor');
-      }
-    }
-  }
-
   componentWillUnmount() {
     this.RAF.unsubscribe();
     this.RAF = null;

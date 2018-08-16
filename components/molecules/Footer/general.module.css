@@ -6,6 +6,8 @@
     global(relative)
     global(z-20)
     global(overflow-hidden)
+    global(flex)
+    global(items-center)
   ;
   height: 108px;
   transition: 0.2s ease-in-out;
