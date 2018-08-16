@@ -21,7 +21,7 @@ export default function CollectionIntro({ collection, isHome, to }) {
   const handle = getCollectionHandle(collection);
 
   return (
-    <div className="bg-white">
+    <div>
       <Heading font="jenson" size="xxxl" center>
         {title}
       </Heading>

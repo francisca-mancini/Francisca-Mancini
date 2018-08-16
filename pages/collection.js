@@ -41,7 +41,7 @@ class Collection extends PureComponent {
   constructor() {
     super();
 
-    this.state = { index: 0 };
+    this.state = { index: 0, firstOut: true };
     this.handleCheckout = this.handleCheckout.bind(this);
   }
 
@@ -65,6 +65,12 @@ class Collection extends PureComponent {
   handleNewIndex(index) {
     this.setState({
       index
+    });
+  }
+
+  handleFirstOut(bool) {
+    this.setState({
+      firstOut: bool
     });
   }
 
@@ -99,10 +105,10 @@ class Collection extends PureComponent {
   }
 
   render() {
-    const { index } = this.state;
+    const { index, firstOut } = this.state;
     const dataItem = this.products[index];
     const containerStyle = {
-      backgroundColor: dataItem.bgColor,
+      backgroundColor: firstOut ? 'white' : dataItem.bgColor,
       transition: '0.8s ease-in-out'
     };
     const stickyStyle = {
@@ -118,106 +124,107 @@ class Collection extends PureComponent {
       <App hasTopPad={false} hasBottomPad={false} headerLight isHome>
         <Basket onCheckout={this.handleCheckout} />
         <HeroVideo />
-        <PageWrap>
-          <Spacing size={80} type="padding">
-            <CollectionIntro collection={this.collection} to="fragrances" />
-          </Spacing>
-        </PageWrap>
-
-        <Spacing size={80} type="padding" position="t">
-          <div style={containerStyle} id="fragrances">
+        <div style={containerStyle}>
+          <Spacing size={80} type="padding" position="b">
             <PageWrap>
-              <Grid gap={20} align="stretch">
-                <GridItem columnSize={2}>
-                  <div
-                    className="stickybits flex flex-col h-screen justify-center"
-                    style={stickyStyle}
-                  >
-                    {this.products.map((item, i) => {
-                      const itemClassName = classNames({
-                        'opacity-100': i === index,
-                        'opacity-50': i !== index
-                      });
+              <Spacing size={80} type="padding">
+                <CollectionIntro collection={this.collection} to="fragrances" />
+              </Spacing>
+            </PageWrap>
+          </Spacing>
+        </div>
 
-                      return (
-                        <div key={i} className={itemClassName}>
-                          <Spacing key={item.handle} size={10}>
-                            <Heading
-                              className="leading-none"
-                              tag="h3"
-                              font="serif"
-                              size="xxxs"
-                              uppercase
-                              tracking="02"
-                            >
-                              <Link
-                                className="cursor-pointer"
-                                to={item.handle}
-                                spy={true}
-                                smooth={true}
-                                duration={500}
-                              >
-                                {item.title}
-                              </Link>
-                            </Heading>
-                          </Spacing>
-                        </div>
-                      );
-                    })}
-                  </div>
-                </GridItem>
-                <GridItem columnSize={8}>
+        <div style={containerStyle} id="fragrances">
+          <PageWrap>
+            <Grid gap={20} align="stretch">
+              <GridItem columnSize={2}>
+                <div
+                  className="stickybits flex flex-col h-screen justify-center"
+                  style={stickyStyle}
+                >
                   {this.products.map((item, i) => {
+                    const itemClassName = classNames({
+                      'opacity-100': i === index,
+                      'opacity-50': i !== index
+                    });
+
                     return (
-                      <div key={i} id={item.handle}>
-                        <Fragrance
-                          key={item.handle}
-                          index={i}
-                          onIndexChange={this.handleNewIndex.bind(this)}
-                          color1={item.color1}
-                          color2={item.color2}
-                          description={item.desc}
-                          image1={item.images[0]}
-                          image2={item.images[1]}
-                          image3={item.images[2]}
-                          story={item.story}
-                        >
-                          {item.title}
-                        </Fragrance>
+                      <div key={i} className={itemClassName}>
+                        <Spacing key={item.handle} size={10}>
+                          <Heading
+                            className="leading-none"
+                            tag="h3"
+                            font="serif"
+                            size="xxxs"
+                            uppercase
+                            tracking="02"
+                          >
+                            <Link
+                              className="cursor-pointer"
+                              to={item.handle}
+                              spy={true}
+                              smooth={true}
+                              duration={500}
+                            >
+                              {item.title}
+                            </Link>
+                          </Heading>
+                        </Spacing>
                       </div>
                     );
                   })}
-                </GridItem>
-                <GridItem columnSize={2}>
-                  <div
-                    className="stickybits flex flex-col h-screen items-center justify-center"
-                    style={stickyStyle}
-                  >
-                    <Button size="s">
-                      <AtomLink href={`/product/${dataItem.handle}`}>
-                        <span className="font-normal">
-                          Shop {dataItem.title}
-                        </span>
+                </div>
+              </GridItem>
+              <GridItem columnSize={8}>
+                {this.products.map((item, i) => {
+                  return (
+                    <div key={i} id={item.handle}>
+                      <Fragrance
+                        key={item.handle}
+                        index={i}
+                        onIndexChange={this.handleNewIndex.bind(this)}
+                        onFirstOut={this.handleFirstOut.bind(this)}
+                        color1={item.color1}
+                        color2={item.color2}
+                        description={item.desc}
+                        image1={item.images[0]}
+                        image2={item.images[1]}
+                        image3={item.images[2]}
+                        story={item.story}
+                      >
+                        {item.title}
+                      </Fragrance>
+                    </div>
+                  );
+                })}
+              </GridItem>
+              <GridItem columnSize={2}>
+                <div
+                  className="stickybits flex flex-col h-screen items-center justify-center"
+                  style={stickyStyle}
+                >
+                  <Button size="s">
+                    <AtomLink href={`/product/${dataItem.handle}`}>
+                      <span className="font-normal">Shop {dataItem.title}</span>
+                    </AtomLink>
+                  </Button>
+                  {dataItem.layeringHandle && (
+                    <Spacing size={20} position="t">
+                      <AtomLink
+                        className="opacity-50 hover-opacity-100"
+                        tag="a"
+                        href={`/product/${dataItem.layeringHandle}`}
+                        underline
+                      >
+                        <Heading size="xs">Shop layering pack</Heading>
                       </AtomLink>
-                    </Button>
-                    {dataItem.layeringHandle && (
-                      <Spacing size={20} position="t">
-                        <AtomLink
-                          className="opacity-50 hover-opacity-100"
-                          tag="a"
-                          href={`/product/${dataItem.layeringHandle}`}
-                          underline
-                        >
-                          <Heading size="xs">Shop layering pack</Heading>
-                        </AtomLink>
-                      </Spacing>
-                    )}
-                  </div>
-                </GridItem>
-              </Grid>
-            </PageWrap>
-          </div>
-        </Spacing>
+                    </Spacing>
+                  )}
+                </div>
+              </GridItem>
+            </Grid>
+          </PageWrap>
+        </div>
       </App>
     );
   }

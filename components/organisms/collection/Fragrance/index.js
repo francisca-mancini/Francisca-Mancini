@@ -20,6 +20,9 @@ export default class Fragrance extends PureComponent {
   handleIntersection(inView) {
     if (inView) {
       this.props.onIndexChange(this.props.index);
+      this.props.onFirstOut(false);
+    } else if (!inView && this.props.index === 0) {
+      this.props.onFirstOut(true);
     }
   }
 
