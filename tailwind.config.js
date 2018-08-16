@@ -224,6 +224,7 @@ module.exports = {
     tight: '-0.05em',
     normal: '0',
     '02': '0.2rem',
+    '025': '0.25rem',
     wide: '0.06em'
   },
 
@@ -415,6 +416,7 @@ module.exports = {
     px: '1px',
     80: '80%',
     50: '50%',
+    70: '70%',
     90: '90%',
     full: '100%',
     '90screen': '90vh',

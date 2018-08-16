@@ -84,6 +84,7 @@ const query = gql`
             title
             handle
             description
+            descriptionHtml
             options {
               id
               name

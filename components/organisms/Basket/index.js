@@ -5,7 +5,6 @@ import { graphql } from 'react-apollo';
 import gql from 'graphql-tag';
 import { withGlobalState } from 'react-globally';
 
-import MaxWidth from '../../atoms/MaxWidth';
 import { InlineGrid } from '../../atoms/Grid';
 import Paragraph from '../../atoms/Paragraph';
 import Button from '../../atoms/Button';

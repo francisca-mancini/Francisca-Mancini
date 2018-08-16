@@ -44,7 +44,7 @@
   composes: image;
   composes:
     global(pin-t)
-    global(h-80)
+    global(h-70)
   ;
   left: 10%;
 }
@@ -55,5 +55,5 @@
     global(h-50)
   ;
   top: 10%;
-  right: 10%;
+  right: 18%;
 }

@@ -31,6 +31,7 @@ import getProductGradient from '../lib/getProductGradient';
 import getCollectionDescription from '../lib/getCollectionDescription';
 
 import { checkoutQuery, checkout } from '../lib/checkout';
+import getProductStory from '../lib/getProductStory';
 
 class Collection extends PureComponent {
   static getInitialProps({ query: { handle } }) {
@@ -82,6 +83,7 @@ class Collection extends PureComponent {
           title: getProductTitle(product),
           handle: getProductHandle(product),
           description: getProductDescription(product),
+          story: getProductStory(product),
           bgColor: getProductBackground(product),
           images: getProductCollectionImages(product),
           color1: getProductGradient(product).color1,
@@ -178,6 +180,7 @@ class Collection extends PureComponent {
                           image1={item.images[0]}
                           image2={item.images[1]}
                           image3={item.images[2]}
+                          story={item.story}
                         >
                           {item.title}
                         </Fragrance>
@@ -200,7 +203,7 @@ class Collection extends PureComponent {
                     {dataItem.layeringHandle && (
                       <Spacing size={20} position="t">
                         <AtomLink
-                          className="opacity-50"
+                          className="opacity-50 hover-opacity-100"
                           tag="a"
                           href={`/product/${dataItem.layeringHandle}`}
                           underline

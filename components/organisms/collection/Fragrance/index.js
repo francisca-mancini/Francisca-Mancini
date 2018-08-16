@@ -9,6 +9,8 @@ import ProductShape from '../../../atoms/ProductShape';
 import MaxWidth from '../../../atoms/MaxWidth';
 import ParallaxWrapper from '../../../atoms/ParallaxWrapper';
 
+import Story from '../Story';
+
 import getFontSize from '../../../../lib/getFontSize';
 
 import generalStyles from './general.module.css';
@@ -22,7 +24,15 @@ export default class Fragrance extends PureComponent {
   }
 
   render() {
-    const { children, color1, color2, image1, image2, image3 } = this.props;
+    const {
+      story,
+      children,
+      color1,
+      color2,
+      image1,
+      image2,
+      image3
+    } = this.props;
 
     return (
       <Observer onChange={this.handleIntersection.bind(this)} threshold={0.5}>
@@ -48,28 +58,19 @@ export default class Fragrance extends PureComponent {
             </ParallaxWrapper>
           </div>
           <ParallaxWrapper speed={1.2} positionAbsolute={false}>
-            <Heading size={getFontSize('m')} font="serif" uppercase center>
+            <Heading
+              size={getFontSize('m')}
+              tracking="025"
+              font="serif"
+              uppercase
+              center
+            >
               {children}
             </Heading>
           </ParallaxWrapper>
           <Spacing size={30}>
             <MaxWidth center value={720}>
-              <ParallaxWrapper positionAbsolute={false}>
-                <Paragraph
-                  indent
-                  justified
-                  size={getFontSize('xl')}
-                  font="jenson"
-                >
-                  This highly spiritual scent, with Frankincense, incense,
-                  musks, and fire it can be found after a trip across the north
-                  of Africa, from the High Atlas to the Nile. There is an altar
-                  carved in stone, and to the right, on the floor there is an
-                  ancient vase. Inside this vase, set aside for ceremonial
-                  offerings, lays Atlantica, a magical ritual perfume made out
-                  of the most precious oils.
-                </Paragraph>
-              </ParallaxWrapper>
+              <Story description={story} />
             </MaxWidth>
           </Spacing>
         </div>

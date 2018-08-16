@@ -5,11 +5,14 @@ import Heading from '../../../atoms/Heading';
 import PageWrap from '../../../atoms/PageWrap';
 import MaxWidth from '../../../atoms/MaxWidth';
 
+import Description from '../Description';
+
 import getProductStory from '../../../../lib/getProductStory';
 import getProductNotes from '../../../../lib/getProductNotes';
 import getFontSize from '../../../../lib/getFontSize';
 
 import generalStyles from './general.module.css';
+import getCollectionDescription from '../../../../lib/getCollectionDescription';
 
 const Note = ({ label, children }) => {
   return (
@@ -35,6 +38,8 @@ const Note = ({ label, children }) => {
 function Story({ product }) {
   const story = product && getProductStory(product);
   const notes = product && getProductNotes(product);
+
+  console.log(story);
 
   return (
     <Spacing size={80} position="bottom" type="padding">
@@ -65,14 +70,7 @@ function Story({ product }) {
                     Story
                   </Heading>
                 </Spacing>
-                <Paragraph
-                  indent
-                  justified
-                  font="jenson"
-                  size={getFontSize('xl')}
-                >
-                  {story}
-                </Paragraph>
+                <Description description={story} />
               </GridItem>
             </Grid>
           </Spacing>

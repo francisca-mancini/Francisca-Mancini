@@ -94,7 +94,7 @@ class Hero extends PureComponent {
           color2={gradient.color2}
         />
         <div className="relative z-10">
-          <Grid gap={30} align="stretch">
+          <Grid gap={20} align="stretch">
             <GridItem columnSize={4}>
               <div
                 style={stickyStyle}
