@@ -231,7 +231,14 @@ class Header extends Component {
                     </InlineGrid>
                   );
                 } else {
-                  return <img src={cartSrc} width={20} height={20} />;
+                  return (
+                    <img
+                      onClick={this.toggleBasket.bind(this)}
+                      src={cartSrc}
+                      width={20}
+                      height={20}
+                    />
+                  );
                 }
               }}
             </MediaQuery>
