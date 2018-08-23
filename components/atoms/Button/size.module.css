@@ -1,7 +1,8 @@
 .m {
   composes:
     global(px-30)
-    global(text-l)
+    global(sm-text-l)
+    global(text-m)
   ;
   padding-top: 22px;
   padding-bottom: 24px;
