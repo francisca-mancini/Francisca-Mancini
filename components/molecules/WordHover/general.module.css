@@ -7,7 +7,12 @@
     global(font-medium)
     global(whitespace-no-wrap)
   ;
-  cursor: url('/static/images/cursor.png') 10 11, auto;
+}
+
+@media screen and (min-width: 768px) {
+  .word {
+    cursor: url('/static/images/cursor.png') 10 11, auto;
+  }
 }
 
 .bubble {
@@ -18,7 +23,9 @@
     global(rounded-round)
     global(bg-center)
     global(bg-cover)
-    global(pointer-events-none);
+    global(pointer-events-none)
+    global(hidden)
+    global(md-block)
   ;
   top: 60px;
   left: 60px;
