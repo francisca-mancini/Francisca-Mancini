@@ -136,10 +136,10 @@ class Collection extends PureComponent {
 
         <div style={containerStyle} id="fragrances">
           <PageWrap>
-            <Grid gap={20} align="stretch">
-              <GridItem columnSize={2}>
+            <Grid gap={[0, 0, 20]} align="stretch">
+              <GridItem columnSize={[0, 0, 2]}>
                 <div
-                  className="stickybits flex flex-col h-screen justify-center"
+                  className="stickybits flex-col h-screen justify-center hidden md-flex"
                   style={stickyStyle}
                 >
                   {this.products.map((item, i) => {
@@ -155,7 +155,7 @@ class Collection extends PureComponent {
                             className="leading-none"
                             tag="h3"
                             font="serif"
-                            size="xxxs"
+                            size={['xxxxs', 'xxxxs', 'xxxxs', 'xxxxs', 'xxxs']}
                             uppercase
                             tracking="02"
                           >
@@ -175,7 +175,7 @@ class Collection extends PureComponent {
                   })}
                 </div>
               </GridItem>
-              <GridItem columnSize={8}>
+              <GridItem columnSize={[12, 12, 8]}>
                 {this.products.map((item, i) => {
                   return (
                     <div key={i} id={item.handle}>
@@ -191,6 +191,9 @@ class Collection extends PureComponent {
                         image2={item.images[1]}
                         image3={item.images[2]}
                         story={item.story}
+                        handle={item.handle}
+                        layeringHandle={item.layeringHandle}
+                        title={item.title}
                       >
                         {item.title}
                       </Fragrance>
@@ -198,9 +201,9 @@ class Collection extends PureComponent {
                   );
                 })}
               </GridItem>
-              <GridItem columnSize={2}>
+              <GridItem columnSize={[0, 0, 2]}>
                 <div
-                  className="stickybits flex flex-col h-screen items-center justify-center"
+                  className="stickybits hidden md-flex flex-col h-screen items-center justify-center"
                   style={stickyStyle}
                 >
                   <Button size="s">

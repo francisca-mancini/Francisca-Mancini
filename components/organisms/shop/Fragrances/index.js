@@ -1,13 +1,11 @@
 import React from 'react';
+import MediaQuery from 'react-responsive';
 
 import Spacing from '../../../atoms/Spacing';
 import { Grid, GridItem } from '../../../atoms/Grid';
 import Heading from '../../../atoms/Heading';
 
 import ProductThumbnail from '../../../molecules/ProductThumbnail';
-
-import getProductHandle from '../../../../lib/getProductHandle';
-import getProductImages from '../../../../lib/getProductImages';
 
 export default function Fragrances({ products }) {
   return (
@@ -24,11 +22,18 @@ export default function Fragrances({ products }) {
 
             return (
               <GridItem key={index} columnSize={[12, 6, 4]}>
-                <div style={{ transform: `translateY(${y}px)` }}>
+                <MediaQuery minDeviceWidth={768}>
+                  <div style={{ transform: `translateY(${y}px)` }}>
+                    <Spacing size={50}>
+                      <ProductThumbnail product={product} />
+                    </Spacing>
+                  </div>
+                </MediaQuery>
+                <MediaQuery maxDeviceWidth={767}>
                   <Spacing size={50}>
                     <ProductThumbnail product={product} />
                   </Spacing>
-                </div>
+                </MediaQuery>
               </GridItem>
             );
           })}

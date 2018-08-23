@@ -1,8 +1,9 @@
-import React, { PureComponent } from 'react';
+import React, { PureComponent, Fragment } from 'react';
 import App from '../components/App';
 import stickybits from 'stickybits';
 import withData from '../lib/withData';
 import { graphql, compose } from 'react-apollo';
+import MediaQuery from 'react-responsive';
 import gql from 'graphql-tag';
 
 import PageWrap from '../components/atoms/PageWrap';
@@ -20,7 +21,9 @@ import MaxWidth from '../components/atoms/MaxWidth';
 import Fragrances from '../components/organisms/shop/Fragrances';
 
 import getProductsByType from '../lib/getProductsByType';
+import getProductsByVoile from '../lib/getProductsByVoile';
 import { checkoutQuery, checkout } from '../lib/checkout';
+import Layerings from '../components/organisms/shop/Layerings';
 
 class Shop extends PureComponent {
   constructor() {
@@ -34,6 +37,7 @@ class Shop extends PureComponent {
     this.fragrances = getProductsByType(products, 'fragrance');
     this.layerings = getProductsByType(products, 'layering');
     this.discoveries = getProductsByType(products, 'discovery');
+    this.voiles = getProductsByVoile(products);
   }
 
   componentDidMount() {
@@ -59,71 +63,49 @@ class Shop extends PureComponent {
           <Spacing size={80}>
             <Spacing size={20}>
               <Grid align="stretch" gap={0}>
-                <GridItem columnSize={4}>
-                  <div
-                    style={stickyStyle}
-                    className="stickybits h-screen flex flex-col items-center justify-center"
-                  >
-                    <div className="pt-95 pb-120 flex w-100 items-center justify-center">
-                      <ProductThumbnail
-                        product={
-                          this.layerings &&
-                          this.layerings.length &&
-                          this.layerings[0].node
-                        }
-                        height
-                        isLayering
-                        isSingle
-                        isNoClick
-                      />
-                    </div>
-                  </div>
-                </GridItem>
-                <GridItem columnSize={4}>
-                  <div
-                    style={stickyStyle}
-                    className="stickybits h-screen flex flex-col items-center justify-center"
-                  >
-                    <span className="absolute z-10 pin-t pin-l w-full pt-60 text-center">
-                      <Heading size="s" weight="semilight" center>
-                        Shop Layering Packs
-                      </Heading>
-                    </span>
-                    <div className="w-100 pt-95 pb-140 flex flex-col items-center justify-center">
-                      <ProductThumbnail
-                        product={
-                          this.layerings &&
-                          this.layerings.length &&
-                          this.layerings[0].node
-                        }
-                        height
-                        isLayering
-                        isNoClick
-                        isSingle
-                      />
-                      <span className="absolute pin-b pin-l w-full pb-40 text-center">
-                        <Button size="s">Shop Renaissance Layering Pack</Button>
-                      </span>
-                    </div>
-                  </div>
-                </GridItem>
-                <GridItem columnSize={4}>
+                <MediaQuery minDeviceWidth={768}>
+                  <Layerings
+                    product1={this.layerings[0].node}
+                    product2={this.layerings[0].node}
+                  />
+                </MediaQuery>
+                <GridItem columnSize={[12, 12, 4]}>
+                  <MediaQuery maxDeviceWidth={767}>
+                    <Heading size="s" weight="semilight" center>
+                      Shop Layering Packs
+                    </Heading>
+                  </MediaQuery>
                   {this.layerings &&
                     this.layerings.length &&
                     this.layerings.map((item, index) => {
                       return (
-                        <div
-                          key={index}
-                          className="pt-95 pb-140 h-screen flex items-center justify-center"
-                        >
-                          <ProductThumbnail
-                            product={item.node}
-                            height
-                            isLayering
-                            isNoClick
-                            isSingle
-                          />
-                        </div>
+                        <Fragment>
+                          <MediaQuery minDeviceWidth={768}>
+                            <div
+                              key={index}
+                              className="pt-95 pb-140 h-screen flex items-center justify-center"
+                            >
+                              <ProductThumbnail
+                                product={item.node}
+                                height
+                                isLayering
+                                isNoClick
+                                isSingle
+                                isNoPrice
+                              />
+                            </div>
+                          </MediaQuery>
+                          <MediaQuery maxDeviceWidth={767}>
+                            <Spacing size={100}>
+                              <ProductThumbnail
+                                product={item.node}
+                                voiles={this.voiles}
+                                isLayering
+                                isMultiple
+                              />
+                            </Spacing>
+                          </MediaQuery>
+                        </Fragment>
                       );
                     })}
                 </GridItem>
