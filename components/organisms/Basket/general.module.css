@@ -8,9 +8,15 @@
     global(bg-white)
     global(flex)
     global(flex-col)
+    global(w-full)
   ;
-  width: 430px;
   transition: transform 0.3s ease-out;
+}
+
+@media screen and (min-width: 768px) {
+  .container {
+    width: 430px;
+  }
 }
 
 .containerHidden {
@@ -47,4 +53,11 @@
     global(h-full)
     global(overflow-hidden)
   ;
+  box-shadow: 0 -2px 3px 0 rgba(0,0,0,0.05) inset;
+}
+
+@media screen and (min-width: 768px) {
+  .items {
+    box-shadow: none;
+  }
 }

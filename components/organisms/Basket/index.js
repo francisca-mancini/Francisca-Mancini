@@ -144,13 +144,13 @@ class Basket extends PureComponent {
               <Paragraph size="s">Sub total</Paragraph>
               <Paragraph size="s">£{totalPrice}</Paragraph>
             </InlineGrid>
-            <div className="opacity-75 my-20">
+            <div className="opacity-75 my-5 md-my-20">
               <Paragraph size="xs">Free shipping above £200</Paragraph>
               <Paragraph size="xs">
                 Secure payment visa master card &amp; paypal.
               </Paragraph>
             </div>
-            <div className="text-center pt-30">
+            <div className="text-center pt-10 md-pt-30">
               <Button onClick={this.handleCheckout} size="s">
                 Checkout
               </Button>
