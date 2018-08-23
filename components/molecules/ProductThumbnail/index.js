@@ -1,3 +1,4 @@
+import React, { Fragment } from 'react';
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
 
@@ -19,11 +20,14 @@ import generalStyles from './general.module.css';
 
 export default function ProductThumbnail({
   product,
+  voiles,
   isDiscovery,
   isLayering,
   isNoClick,
   isSingle,
-  hasNoInfo
+  isMultiple,
+  hasNoInfo,
+  isNoPrice
 }) {
   const color1 = getProductGradient(product)
     ? getProductGradient(product).color1
@@ -33,7 +37,9 @@ export default function ProductThumbnail({
     : '#80aee8';
   const handle = getProductHandle(product);
   const images = getProductImages(product);
-  const singleImage = isSingle ? getProductSingle(product) : null;
+  const singleImage = isSingle || isMultiple ? getProductSingle(product) : null;
+  const voile1 = isMultiple ? getProductSingle(voiles[0].node)[0] : null;
+  const voile2 = isMultiple ? getProductSingle(voiles[1].node)[0] : null;
   const title = getProductTitle(product);
   const img = singleImage || images[0].transformedSrc;
   const containerClassName = classNames(
@@ -45,15 +51,26 @@ export default function ProductThumbnail({
   );
   const imageClassName = classNames(generalStyles.image, {
     [generalStyles.imageDiscovery]: isDiscovery,
-    [generalStyles.imageLayering]: isLayering && !isSingle,
+    [generalStyles.imageLayering]: isLayering && !isSingle && !isMultiple,
+    [generalStyles.imageMultiple]: isMultiple,
     [generalStyles.imageSingle]: isSingle,
     [generalStyles.imageFragrance]: !isLayering && !isDiscovery
   });
   const imageStyles = {
-    animation: isSingle
-      ? `float ${(Math.random() + 0.3) * 20}s ${Math.random() +
-          0.5}s infinite alternate ease-in-out`
-      : ''
+    animation:
+      isSingle || isMultiple
+        ? `float ${(Math.random() + 0.3) * 20}s ${Math.random() +
+            0.5}s infinite alternate ease-in-out`
+        : ''
+  };
+  const multipleStyles1 = {
+    transform: 'translate(-50%, -50%) rotate(-4deg)'
+  };
+  const multipleStyles2 = {
+    transform: 'translate(-50%, -65%) rotate(2deg)'
+  };
+  const multipleStyles3 = {
+    transform: 'translate(-50%, -50%) rotate(-3deg)'
   };
 
   const LinkTag = isNoClick ? 'div' : Link;
@@ -68,12 +85,35 @@ export default function ProductThumbnail({
       <div className="w-full px-20 flex items-center justify-center">
         <LinkTag {...LinkProps}>
           <div className={containerClassName}>
-            <img
-              className={imageClassName}
-              src={img}
-              alt={title}
-              style={imageStyles}
-            />
+            {isMultiple ? (
+              <Fragment>
+                <img
+                  src={voile1}
+                  alt={title}
+                  className={imageClassName}
+                  style={multipleStyles1}
+                />
+                <img
+                  src={voile1}
+                  alt={title}
+                  className={imageClassName}
+                  style={multipleStyles2}
+                />
+                <img
+                  src={singleImage}
+                  alt={title}
+                  className={imageClassName}
+                  style={multipleStyles3}
+                />
+              </Fragment>
+            ) : (
+              <img
+                className={imageClassName}
+                src={img}
+                alt={title}
+                style={imageStyles}
+              />
+            )}
             <ProductShape
               isDiscovery={isDiscovery}
               color1={color1}
@@ -94,7 +134,7 @@ export default function ProductThumbnail({
                 </Heading>
               </Spacing>
               <Paragraph weight="semilight" size="xs" center>
-                Fragrance bottle, 100ml - £500
+                Fragrance bottle, 100ml {isNoPrice ? '' : '- £500'}
               </Paragraph>
             </div>
           )}

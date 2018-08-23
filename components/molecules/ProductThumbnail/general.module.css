@@ -50,6 +50,28 @@
   ;
 }
 
+.imageMultiple {
+  composes:
+    global(w-auto)
+    global(h-70)
+    global(absolute)
+    global(pin-t)
+  ;
+  transform-origin: 50%;
+}
+
+.imageMultiple:first-of-type {
+  left: 25%;
+}
+
+.imageMultiple:nth-of-type(2) {
+  left: 50%;
+}
+
+.imageMultiple:nth-of-type(3) {
+  left: 75%;
+}
+
 .imageSingle {
   composes:
     global(w-auto)
