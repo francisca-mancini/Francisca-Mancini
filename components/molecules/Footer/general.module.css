@@ -2,19 +2,47 @@
   composes:
     global(relative)
     global(py-30)
-    global(bg-white)
+    global(md-bg-white)
+    global(bg-black)
     global(relative)
     global(z-20)
     global(overflow-hidden)
     global(flex)
-    global(items-center)
   ;
-  height: 108px;
+  height: 144px;
   transition: 0.2s ease-in-out;
 }
 
+@media screen and (min-width: 768px) {
+  .footer {
+    height: 108px;
+  }
+}
+
 .footerOpen {
-  height: 454px;
+  height: 500px;
+}
+
+@media screen and (min-width: 768px) {
+  .footerOpen {
+    height: 454px;
+  }
+}
+
+.pageWrap {
+  composes:
+    global(max-w-full)
+    global(py-30)
+    global(md-py-0)
+    global(relative)
+  ;
+  top: -40px;
+}
+
+@media screen and (min-width: 768px) {
+  .pageWrap {
+    top: 0;
+  }
 }
 
 .isLight {
@@ -39,9 +67,14 @@
     global(bg-white)
   ;
   box-shadow: 0 2px 10px rgba(0,0,0,0.04) inset;
-  top: 108px;
+  top: 144px;
 }
 
+@media screen and (min-width: 768px) {
+  .newsletter {
+    top: 108px;
+  }
+}
 .cross {
   composes:
     global(cursor-pointer)
@@ -51,7 +84,8 @@
 .input {
   composes:
     global(px-30)
-    global(text-l)
+    global(md-text-l)
+    global(text-m)
     global(rounded-50)
     global(text-center)
     global(border-1)

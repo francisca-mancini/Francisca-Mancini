@@ -94,7 +94,7 @@ export default class Footer extends PureComponent {
 
     return (
       <footer className={footerClassName}>
-        <PageWrap className="max-w-full">
+        <PageWrap className={generalStyles.pageWrap}>
           <InlineGrid direction={['col', 'col', 'row']}>
             <Spacing size={[20, 20, 0]} position="b">
               <Link href="/" className="leading-none flex items-center">
@@ -128,19 +128,21 @@ export default class Footer extends PureComponent {
               >
                 <img src={crossIcon} alt="close newsletter" />
               </div>
-              <Spacing size={40}>
-                <Paragraph size="l" weight="semilight">
+              <Spacing size={[20, 20, 40]}>
+                <Paragraph size={['m', 'm', 'l']} weight="semilight">
                   Subscribe to the Newsletter to receive the latest news.
                 </Paragraph>
               </Spacing>
-              <div className="flex">
-                <Spacing size={20} position="x">
+              <div className="flex md-flex-row flex-col items-center">
+                <Spacing size={[0, 0, 20]} position="x">
                   <input
                     className={generalStyles.input}
                     placeholder="Enter email"
                   />
                 </Spacing>
-                <Button>Sign up</Button>
+                <Spacing size={[10, 10, 0]} position="y">
+                  <Button>Sign up</Button>
+                </Spacing>
               </div>
             </PageWrap>
           </Spacing>
