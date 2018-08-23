@@ -22,6 +22,7 @@ import getCollectionHome from '../lib/getCollectionHome';
 import getProductsByType from '../lib/getProductsByType';
 
 import { checkoutQuery, checkout } from '../lib/checkout';
+import getProductsByVoile from '../lib/getProductsByVoile';
 
 class Home extends PureComponent {
   constructor() {
@@ -43,6 +44,7 @@ class Home extends PureComponent {
     this.fragrance = getProductsByType(this.products, 'fragrance')[0];
     this.layering = getProductsByType(this.products, 'layering')[0];
     this.discovery = getProductsByType(this.products, 'discovery')[0];
+    this.voiles = getProductsByVoile(this.products);
   }
 
   componentDidMount() {
@@ -87,7 +89,7 @@ class Home extends PureComponent {
           </div>
           <Spacing size={80} type="padding">
             <Spacing position="b">
-              <Heading tag="h3" size="xxxl" font="jenson" center>
+              <Heading tag="h3" size={['m', 'xxxl']} font="jenson" center>
                 Shop Featured Products
               </Heading>
             </Spacing>
@@ -98,7 +100,12 @@ class Home extends PureComponent {
                 </GridItem>
                 <GridItem columnSize={[12, 6]}>
                   <div style={{ transform: 'translateY(120px)' }}>
-                    <ProductThumbnail isLayering product={this.layering.node} />
+                    <ProductThumbnail
+                      isLayering
+                      product={this.layering.node}
+                      voiles={this.voiles}
+                      isMultiple
+                    />
                   </div>
                 </GridItem>
               </Grid>
