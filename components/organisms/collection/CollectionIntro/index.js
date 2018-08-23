@@ -22,7 +22,7 @@ export default function CollectionIntro({ collection, isHome, to }) {
 
   return (
     <div>
-      <Heading font="jenson" size="xxxl" center>
+      <Heading font="jenson" size={['m', 'xxxl']} center>
         {title}
       </Heading>
       <Spacing size={50}>

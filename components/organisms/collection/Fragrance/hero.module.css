@@ -34,10 +34,18 @@
   composes: image;
   composes:
     global(pin-b)
-    global(h-80)
+    global(h-full)
   ;
   left: 50%;
   transform: translateX(-50%);
+}
+
+@media screen and (min-width: 768px) {
+  .mainImage {
+    composes:
+      global(h-80)
+    ;
+  }
 }
 
 .secondImage {

@@ -2,6 +2,8 @@ import React, { PureComponent } from 'react';
 import Observer from 'react-intersection-observer';
 import classNames from 'classnames';
 
+import AtomLink from '../../../atoms/Link';
+import Button from '../../../atoms/Button';
 import Heading from '../../../atoms/Heading';
 import Paragraph from '../../../atoms/Paragraph';
 import Spacing from '../../../atoms/Spacing';
@@ -17,6 +19,19 @@ import generalStyles from './general.module.css';
 import heroStyles from './hero.module.css';
 
 export default class Fragrance extends PureComponent {
+  constructor() {
+    super();
+
+    this.threshold = 0.3;
+  }
+  componentDidMount() {
+    if (window.innerWidth >= 768) {
+      this.threshold = 0.5;
+    } else {
+      this.threshold = 0.3;
+    }
+  }
+
   handleIntersection(inView) {
     if (inView) {
       this.props.onIndexChange(this.props.index);
@@ -34,11 +49,17 @@ export default class Fragrance extends PureComponent {
       color2,
       image1,
       image2,
-      image3
+      image3,
+      title,
+      handle,
+      layeringHandle
     } = this.props;
 
     return (
-      <Observer onChange={this.handleIntersection.bind(this)} threshold={0.5}>
+      <Observer
+        onChange={this.handleIntersection.bind(this)}
+        threshold={this.threshold}
+      >
         <div className={generalStyles.container}>
           <div className={heroStyles.container}>
             <ParallaxWrapper speed={1}>
@@ -76,6 +97,25 @@ export default class Fragrance extends PureComponent {
               <Story description={story} />
             </MaxWidth>
           </Spacing>
+          <div className="md-hidden flex flex-col items-center justify-center">
+            <Button size="s">
+              <AtomLink href={`/product/${handle}`}>
+                <span className="font-normal">Shop {title}</span>
+              </AtomLink>
+            </Button>
+            {layeringHandle && (
+              <Spacing size={20} position="t">
+                <AtomLink
+                  className="opacity-50 hover-opacity-100"
+                  tag="a"
+                  href={`/product/${layeringHandle}`}
+                  underline
+                >
+                  <Heading size="xs">Shop pack</Heading>
+                </AtomLink>
+              </Spacing>
+            )}
+          </div>
         </div>
       </Observer>
     );

@@ -4,6 +4,7 @@
     global(flex)
     global(flex-col)
     global(justify-center)
+    global(py-80)
+    global(md-py-140)
   ;
-  padding: 140px 0;
 }
