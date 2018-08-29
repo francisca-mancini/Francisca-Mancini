@@ -1,18 +1,22 @@
 .footer {
   composes:
-    global(absolute)
+    global(md-absolute)
     global(pin-l)
     global(pin-b)
     global(pb-30)
   ;
-  width: calc(100% + 30px);
+}
+
+@media screen and (min-width: 768px) {
+  .footer {
+    width: calc(100% + 30px);
+  }
 }
 
 .centerFlex {
   composes:
     global(relative)
-    global(h-screen)
-    global(flex)
+    global(md-h-screen)
     global(flex-col)
     global(justify-center)
     global(items-center)
@@ -25,11 +29,18 @@
     global(p-20)
     global(z-50)
     global(max-w-full)
+    global(hidden)
+    global(md-flex)
   ;
 }
 
 .imageContainer {
   composes: centerFlex;
+  composes:
+    global(flex)
+    global(pt-140)
+    global(md-pt-0)
+  ;
 }
 
 .learnMore {
@@ -50,6 +61,11 @@
 
 .right {
   composes: centerFlex;
+  composes:
+    global(flex)
+    global(my-40)
+    global(md-my-0)
+  ;
 }
 
 .footerLeft {
@@ -61,6 +77,8 @@
   composes: footer;
   composes:
     global(text-right)
+    global(hidden)
+    global(md-block)
   ;
   right: -30px;
 }

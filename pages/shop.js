@@ -49,11 +49,6 @@ class Shop extends PureComponent {
   }
 
   render() {
-    const stickyStyle = {
-      top: 0,
-      bottom: 'auto'
-    };
-
     return (
       <App>
         <Basket onCheckout={this.handleCheckout} />

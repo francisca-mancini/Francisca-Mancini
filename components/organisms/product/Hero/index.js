@@ -4,6 +4,8 @@ import classNames from 'classnames';
 import { withGlobalState } from 'react-globally';
 import find from 'lodash/find';
 import { Link } from 'react-scroll';
+import MediaQuery from 'react-responsive';
+import Slider from 'react-slick';
 
 import { Grid, GridItem } from '../../../atoms/Grid';
 import Paragraph from '../../../atoms/Paragraph';
@@ -87,6 +89,15 @@ class Hero extends PureComponent {
       product && getCollectionTitle(product.collections.edges[0].node);
     const cleanType = getCleanType(type);
 
+    const settings = {
+      dots: true,
+      infinite: true,
+      speed: 500,
+      slidesToShow: 1,
+      slidesToScroll: 1,
+      arrows: false
+    };
+
     return (
       <div>
         <ProductBackgroundShapes
@@ -95,7 +106,7 @@ class Hero extends PureComponent {
         />
         <div className="relative z-10">
           <Grid gap={20} align="stretch">
-            <GridItem columnSize={4}>
+            <GridItem columnSize={[0, 0, 4]}>
               <div
                 style={stickyStyle}
                 className={classNames('stickybits', generalStyles.left)}
@@ -121,18 +132,37 @@ class Hero extends PureComponent {
                 </div>
               </div>
             </GridItem>
-            <GridItem columnSize={4}>
-              {images &&
-                images.length &&
-                images.map((item, index) => {
-                  return (
-                    <div key={index} className={generalStyles.imageContainer}>
-                      <img src={item.src} alt="" />
-                    </div>
-                  );
-                })}
+            <GridItem columnSize={[12, 12, 4]}>
+              <MediaQuery minDeviceWidth={768}>
+                {images &&
+                  images.length &&
+                  images.map((item, index) => {
+                    return (
+                      <div key={index} className={generalStyles.imageContainer}>
+                        <img src={item.src} alt="" />
+                      </div>
+                    );
+                  })}
+              </MediaQuery>
+              <MediaQuery maxDeviceWidth={767}>
+                {images &&
+                  images.length && (
+                    <Slider {...settings}>
+                      {images.map((item, index) => {
+                        return (
+                          <div
+                            key={index}
+                            className={generalStyles.imageContainer}
+                          >
+                            <img src={item.src} alt={title} />
+                          </div>
+                        );
+                      })}
+                    </Slider>
+                  )}
+              </MediaQuery>
             </GridItem>
-            <GridItem columnSize={4}>
+            <GridItem columnSize={[12, 12, 4]}>
               <div
                 style={stickyStyle}
                 className={classNames('stickybits', generalStyles.right)}
@@ -140,14 +170,16 @@ class Hero extends PureComponent {
                 <Heading uppercase size="m" font="serif">
                   {title}
                 </Heading>
-                <Spacing size={25}>
+                <Spacing size={[0, 0, 25]}>
                   <Paragraph size="s" weight="semilight">
-                    {type} - £{price}
+                    {cleanType} - £{price}
                   </Paragraph>
                 </Spacing>
-                <Button size="s" onClick={this.addToBag}>
-                  <span className="font-normal">Add to bag</span>
-                </Button>
+                <Spacing size={[15, 15, 0]} position="t">
+                  <Button size="s" onClick={this.addToBag}>
+                    <span className="font-normal">Add to bag</span>
+                  </Button>
+                </Spacing>
                 <div className={generalStyles.footerRight}>
                   <Paragraph weight="semilight" size="s">
                     Free shipping above £100

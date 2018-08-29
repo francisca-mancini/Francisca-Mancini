@@ -3,14 +3,19 @@
     global(relative)
     global(z-20)
   ;
-  background-color: #FDE6E3;
+}
+
+@media screen and (max-width: 767px) {
+  .story {
+    background-color: white !important;
+  }
 }
 
 .noteLeft {
   composes:
     global(text-right)
   ;
-  min-width: 90px;
+  min-width: 50px;
 }
 
 .noteRight {

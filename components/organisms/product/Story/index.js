@@ -9,10 +9,10 @@ import Description from '../Description';
 
 import getProductStory from '../../../../lib/getProductStory';
 import getProductNotes from '../../../../lib/getProductNotes';
+import getProductBackground from '../../../../lib/getProductBackground';
 import getFontSize from '../../../../lib/getFontSize';
 
 import generalStyles from './general.module.css';
-import getCollectionDescription from '../../../../lib/getCollectionDescription';
 
 const Note = ({ label, children }) => {
   return (
@@ -38,18 +38,20 @@ const Note = ({ label, children }) => {
 function Story({ product }) {
   const story = product && getProductStory(product);
   const notes = product && getProductNotes(product);
-
-  console.log(story);
+  const bg = product && getProductBackground(product);
+  const storyStyles = {
+    backgroundColor: bg
+  };
 
   return (
     <Spacing size={80} position="bottom" type="padding">
-      <div id="story" className={generalStyles.story}>
+      <div id="story" className={generalStyles.story} style={storyStyles}>
         <PageWrap>
           <Spacing size={80} type="padding">
-            <Grid gap={30} align="center">
-              <GridItem columnSize={6}>
+            <Grid gap={[0, 0, 30]} align="center">
+              <GridItem columnSize={[12, 12, 6]}>
                 <Spacing size={30} position="b">
-                  <Heading size="s" weight="semilight" center>
+                  <Heading size={['xs', 's', 's']} weight="semilight" center>
                     Fragrance notes
                   </Heading>
                 </Spacing>
@@ -64,13 +66,15 @@ function Story({ product }) {
                     );
                   })}
               </GridItem>
-              <GridItem columnSize={6}>
-                <Spacing size={30} position="b">
-                  <Heading size="s" weight="semilight" center>
-                    Story
-                  </Heading>
+              <GridItem columnSize={[12, 12, 6]}>
+                <Spacing size={[100, 100, 0]} position="t">
+                  <Spacing size={30} position="b">
+                    <Heading size={['xs', 's', 's']} weight="semilight" center>
+                      Story
+                    </Heading>
+                  </Spacing>
+                  <Description description={story} />
                 </Spacing>
-                <Description description={story} />
               </GridItem>
             </Grid>
           </Spacing>
