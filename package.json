@@ -34,6 +34,7 @@
     "react-player": "^1.6.4",
     "react-responsive": "^4.1.0",
     "react-scroll": "^1.7.10",
+    "react-slick": "^0.23.1",
     "rellax": "^1.6.2",
     "simplebar-react": "^0.0.1",
     "simplex-noise": "^2.4.0",
