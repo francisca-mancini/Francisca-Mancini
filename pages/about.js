@@ -37,11 +37,11 @@ class About extends PureComponent {
           <div id="about">
             <Spacing size={60} type="padding">
               <MaxWidth value={maxWidth} center>
-                <Heading tag="h3" center size="xxl" font="serif">
+                <Heading tag="h3" center size={['m', 'l', 'xxl']} font="serif">
                   About
                 </Heading>
                 <Spacing size={40} position="t">
-                  <Paragraph size="xxl" weight="semilight">
+                  <Paragraph size={['m', 'l', 'xxl']} weight="semilight">
                     Francisca Mancini, born in Buenos Aires, is an art advisor
                     who works from the gallery she founded with her partner in
                     London. Her clients who have long trusted her choices to
@@ -58,11 +58,11 @@ class About extends PureComponent {
           <div id="contact">
             <Spacing size={60} type="padding">
               <MaxWidth value={maxWidth} center>
-                <Heading tag="h3" center size="xxl" font="serif">
+                <Heading tag="h3" center size={['m', 'l', 'xxl']} font="serif">
                   Contact
                 </Heading>
                 <Spacing size={40} position="t">
-                  <Paragraph size="xxl" weight="semilight">
+                  <Paragraph size={['m', 'l', 'xxl']} weight="semilight">
                     Francisca Mancini, born in Buenos Aires, is an art advisor
                     who works from the gallery she founded with her partner in
                     London. Her clients who have long trusted her choices to
@@ -79,34 +79,34 @@ class About extends PureComponent {
           <div id="stocklist">
             <Spacing size={60} type="padding">
               <MaxWidth value={maxWidth} center>
-                <Heading tag="h3" center size="xxl" font="serif">
+                <Heading tag="h3" center size={['m', 'l', 'xxl']} font="serif">
                   Stocklist
                 </Heading>
                 <Spacing size={40} position="t">
-                  <Paragraph size="xxl" weight="semilight">
+                  <Paragraph size={['m', 'l', 'xxl']} weight="semilight">
                     Liberty London
                   </Paragraph>
-                  <Paragraph size="xxl" weight="semilight">
+                  <Paragraph size={['m', 'l', 'xxl']} weight="semilight">
                     Regent St, Carnaby, London W1B 5AH
                   </Paragraph>
-                  <Paragraph size="xxl" weight="semilight">
+                  <Paragraph size={['m', 'l', 'xxl']} weight="semilight">
                     +44 20 7734 1234
                   </Paragraph>
-                  <Paragraph size="xxl">
+                  <Paragraph size={['m', 'l', 'xxl']}>
                     <Link href="http://google.com">Visit website</Link>
                   </Paragraph>
                 </Spacing>
                 <Spacing size={40} position="t">
-                  <Paragraph size="xxl" weight="semilight">
+                  <Paragraph size={['m', 'l', 'xxl']} weight="semilight">
                     Dover street Market
                   </Paragraph>
-                  <Paragraph size="xxl" weight="semilight">
+                  <Paragraph size={['m', 'l', 'xxl']} weight="semilight">
                     Regent St, Carnaby, London W1B 5AH
                   </Paragraph>
-                  <Paragraph size="xxl" weight="semilight">
+                  <Paragraph size={['m', 'l', 'xxl']} weight="semilight">
                     +44 20 7734 1234
                   </Paragraph>
-                  <Paragraph size="xxl">
+                  <Paragraph size={['m', 'l', 'xxl']}>
                     <Link href="http://google.com">Visit website</Link>
                   </Paragraph>
                 </Spacing>
@@ -116,11 +116,11 @@ class About extends PureComponent {
 
           <Spacing size={60} type="padding">
             <MaxWidth value={maxWidth} center>
-              <Heading tag="h3" center size="xxl" font="serif">
+              <Heading tag="h3" center size={['m', 'l', 'xxl']} font="serif">
                 Press
               </Heading>
               <Spacing size={40} position="t">
-                <Paragraph size="xxl" weight="semilight">
+                <Paragraph size={['m', 'l', 'xxl']} weight="semilight">
                   Francisca Mancini, born in Buenos Aires, is an art advisor who
                   works from the gallery she founded with her partner in London.
                   Her clients who have long trusted her choices.
@@ -129,32 +129,32 @@ class About extends PureComponent {
 
               <Spacing>
                 <Spacing position="b" size={30}>
-                  <Heading weight="semilight" size="xl">
+                  <Heading weight="semilight" size={['xs', 'l', 'xl']}>
                     January 14th
                   </Heading>
                 </Spacing>
                 <Spacing position="b" size={10}>
-                  <Heading weight="semilight" size="xxl" tag="h4">
+                  <Heading weight="semilight" size={['m', 'l', 'xxl']} tag="h4">
                     Article description
                   </Heading>
                 </Spacing>
-                <Heading size="xxl">
+                <Heading size={['m', 'l', 'xxl']}>
                   <Link href="http://google.com">Read Article</Link>
                 </Heading>
               </Spacing>
 
               <Spacing>
                 <Spacing position="b" size={30}>
-                  <Heading weight="semilight" size="xl">
+                  <Heading weight="semilight" size={['xs', 'l', 'xl']}>
                     January 14th
                   </Heading>
                 </Spacing>
                 <Spacing position="b" size={10}>
-                  <Heading weight="semilight" size="xxl" tag="h4">
+                  <Heading weight="semilight" size={['m', 'l', 'xxl']} tag="h4">
                     Article description
                   </Heading>
                 </Spacing>
-                <Heading size="xxl">
+                <Heading size={['m', 'l', 'xxl']}>
                   <Link href="http://google.com">Read Article</Link>
                 </Heading>
               </Spacing>
