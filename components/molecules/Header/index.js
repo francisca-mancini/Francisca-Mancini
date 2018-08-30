@@ -1,10 +1,10 @@
-import React, { Component } from 'react';
-import gql from 'graphql-tag';
+import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import MediaQuery from 'react-responsive';
 import throttle from 'lodash/throttle';
 import { withGlobalState } from 'react-globally';
+import SimpleBar from 'simplebar-react';
 
 import Heading from '../../atoms/Heading';
 import Spacing from '../../atoms/Spacing';
@@ -24,19 +24,21 @@ import menuBlack from '../../../static/images/sprites/menu-black.svg';
 import generalStyles from './general.module.css';
 import getSessionStorage from '../../../lib/getSessionStorage';
 
-class Header extends Component {
+class Header extends PureComponent {
   constructor(props) {
     super(props);
 
     this.state = {
       isLight: props.isLight,
-      basketCount: 0
+      basketCount: 0,
+      isMobileOpen: false
     };
 
     this.heroHeight = 0;
 
     this.handleScroll = throttle(this.handleScroll.bind(this), 200);
     this.handleResize = throttle(this.handleResize.bind(this), 200);
+    this.toggleMobileMenu = this.toggleMobileMenu.bind(this);
   }
 
   componentDidMount() {
@@ -100,18 +102,29 @@ class Header extends Component {
     });
   }
 
+  toggleMobileMenu() {
+    this.setState({
+      isMobileOpen: !this.state.isMobileOpen
+    });
+  }
+
   render() {
-    const { isLoaded, pathname, toggleBasket } = this.props;
-    const { isLight, basketCount } = this.state;
+    const { isLoaded, pathname } = this.props;
+    const { isLight, basketCount, isMobileOpen } = this.state;
     const headerClassName = classNames(generalStyles.header, {
       [generalStyles.headerHidden]: !isLoaded,
       [generalStyles.headerShow]: isLoaded
     });
-    const logoSrc = isLight ? logoWhite : logoBlack;
-    const logoMiniSrc = isLight ? logoMiniWhite : logoMiniBlack;
-    const cartSrc = isLight ? cartWhite : cartBlack;
-    const menuSrc = isLight ? menuWhite : menuBlack;
-    const linkColor = isLight ? 'white' : 'black';
+    const mobileContainerClassName = classNames(generalStyles.mobileContainer, {
+      [generalStyles.mobileContainerOpen]: isMobileOpen,
+      [generalStyles.mobileContainerClosed]: !isMobileOpen
+    });
+    const headerLight = isMobileOpen ? false : isLight;
+    const logoSrc = headerLight ? logoWhite : logoBlack;
+    const logoMiniSrc = headerLight ? logoMiniWhite : logoMiniBlack;
+    const cartSrc = headerLight ? cartWhite : cartBlack;
+    const menuSrc = headerLight ? menuWhite : menuBlack;
+    const linkColor = headerLight ? 'white' : 'black';
 
     const NavLink = ({
       children,
@@ -138,7 +151,7 @@ class Header extends Component {
         <div className={linkClassName}>
           <Spacing size={isDropdown ? 5 : 10} position={isDropdown ? 'y' : 'x'}>
             {onClick ? (
-              <span className="cursor-pointer" onClick={onClick}>
+              <span className={generalStyles.innerLink} onClick={onClick}>
                 <Heading
                   tag="span"
                   font="alternate"
@@ -152,7 +165,7 @@ class Header extends Component {
                 </Heading>
               </span>
             ) : (
-              <Link href={href}>
+              <Link href={href} className={generalStyles.innerLink}>
                 <Heading
                   tag="span"
                   font="alternate"
@@ -188,10 +201,24 @@ class Header extends Component {
 
     return (
       <header className={headerClassName}>
-        <PageWrap className="max-w-full">
+        <PageWrap className="max-w-full relative z-20">
           <InlineGrid>
             <MediaQuery maxDeviceWidth={767}>
-              <img src={menuSrc} width={34} height={18} />
+              {matches => {
+                if (matches) {
+                  return (
+                    <img
+                      onClick={this.toggleMobileMenu}
+                      className="cursor-pointer"
+                      src={menuSrc}
+                      width={34}
+                      height={18}
+                    />
+                  );
+                } else {
+                  return null;
+                }
+              }}
             </MediaQuery>
             <Link href="/" className="leading-none flex items-center">
               <MediaQuery minDeviceWidth={768} values={{ deviceWidth: 800 }}>
@@ -244,60 +271,44 @@ class Header extends Component {
             </MediaQuery>
           </InlineGrid>
         </PageWrap>
+        <div className={mobileContainerClassName}>
+          <div className={generalStyles.mobileInner}>
+            <SimpleBar style={{ height: '100%' }}>
+              <NavLink href="/collection/maps-travel">
+                Collection N°1: MAPS, TRAVEL
+              </NavLink>
+              <NavLink href="/shop">Shop</NavLink>
+              <NavLink href="/about">About</NavLink>
+              <NavLink href="/help">Help</NavLink>
+              <NavLink href="/philosophy">Philosophy</NavLink>
+              <NavLink href="/account">Account</NavLink>
+              <Spacing size={20}>
+                <Heading size="xxs" weight="semilight" center>
+                  <Link href="/about#contact">Contact</Link>
+                </Heading>
+              </Spacing>
+              <Spacing size={20}>
+                <Heading size="xxs" weight="semilight" center>
+                  <Link href="http://instagram.com">Instagram</Link>
+                </Heading>
+              </Spacing>
+              <Spacing size={20}>
+                <Heading size="xxs" weight="semilight" center>
+                  <Link href="#">Newsletter</Link>
+                </Heading>
+              </Spacing>
+              <Spacing size={20}>
+                <Heading size="xxs" weight="semilight" center>
+                  <Link href="/legals">Legals</Link>
+                </Heading>
+              </Spacing>
+            </SimpleBar>
+          </div>
+        </div>
       </header>
     );
   }
 }
-
-// const query = gql`
-//   query query {
-//     shop {
-//       name
-//       description
-//       articles(first: 20) {
-//         edges {
-//           node {
-//             content
-//           }
-//         }
-//       }
-//       collections(first: 20) {
-//         edges {
-//           node {
-//             handle
-//             id
-//             description
-//             descriptionHtml
-//             title
-//             products(first: 20) {
-//               edges {
-//                 node {
-//                   id
-//                   handle
-//                   title
-//                   description
-//                   descriptionHtml
-//                   productType
-//                   tags
-//                   images(first: 20) {
-//                     edges {
-//                       node {
-//                         altText
-//                         id
-//                         originalSrc
-//                         transformedSrc
-//                       }
-//                     }
-//                   }
-//                 }
-//               }
-//             }
-//           }
-//         }
-//       }
-//     }
-//   }
-// `;
 
 export default withGlobalState(Header);
 

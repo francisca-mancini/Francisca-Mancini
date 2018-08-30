@@ -17,7 +17,27 @@
 }
 
 .link {
-composes: global(opacity-50)
+  composes: 
+    global(md-opacity-50)
+    global(text-center)
+    global(md-text-left)
+  ;
+}
+
+@media screen and (max-width: 767px) {
+  .link {
+    border-bottom: 1px solid rgba(0,0,0,0.1);
+  }
+}
+
+.innerLink {
+  composes:
+    global(inline-block)
+    global(w-full)
+    global(py-15)
+    global(md-py-0)
+    global(cursor-pointer)
+  ;
 }
 
 .active {
@@ -51,4 +71,35 @@ composes: global(opacity-50)
   transform: translateY(0);
   visibility: visible;
   opacity: 1;
+}
+
+.mobileContainer {
+  composes:
+    global(h-screen)
+    global(fixed)
+    global(pin)
+    global(bg-white)
+    global(text-black)
+    global(pt-110)
+    global(overflow-hidden)
+  ;
+}
+
+.mobileContainerOpen {
+  composes:
+    global(block)
+  ;
+}
+
+.mobileContainerClosed {
+  composes:
+    global(hidden)
+  ;
+}
+
+.mobileInner {
+  composes:
+    global(h-full)
+  ;
+  border-top: 1px solid rgba(0,0,0,0.1);
 }
