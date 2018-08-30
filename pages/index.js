@@ -2,6 +2,7 @@ import React, { PureComponent } from 'react';
 import withData from '../lib/withData';
 import { graphql, compose } from 'react-apollo';
 import gql from 'graphql-tag';
+import MediaQuery from 'react-responsive';
 
 import App from '../components/App';
 
@@ -99,18 +100,30 @@ class Home extends PureComponent {
                   <ProductThumbnail product={this.fragrance.node} />
                 </GridItem>
                 <GridItem columnSize={[12, 6]}>
-                  <div style={{ transform: 'translateY(120px)' }}>
-                    <ProductThumbnail
-                      isLayering
-                      product={this.layering.node}
-                      voiles={this.voiles}
-                      isMultiple
-                    />
-                  </div>
+                  <MediaQuery minDeviceWidth={768}>
+                    <div style={{ transform: 'translateY(120px)' }}>
+                      <ProductThumbnail
+                        isLayering
+                        product={this.layering.node}
+                        voiles={this.voiles}
+                        isMultiple
+                      />
+                    </div>
+                  </MediaQuery>
+                  <MediaQuery maxDeviceWidth={767}>
+                    <Spacing size={[80, 80, 0]} position="t" type="padding">
+                      <ProductThumbnail
+                        isLayering
+                        product={this.layering.node}
+                        voiles={this.voiles}
+                        isMultiple
+                      />
+                    </Spacing>
+                  </MediaQuery>
                 </GridItem>
               </Grid>
             </Spacing>
-            <Spacing size={80}>
+            <Spacing size={[30, 30, 80]} type="padding">
               <Grid gap={[0, 70]} justify="center">
                 <GridItem columnSize={[12, 7]}>
                   <ProductThumbnail isDiscovery product={this.discovery.node} />
