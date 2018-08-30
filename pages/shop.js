@@ -110,7 +110,7 @@ class Shop extends PureComponent {
 
           {this.discoveries &&
             this.discoveries.length && (
-              <Spacing type="padding" size={80}>
+              <Spacing type="padding" size={[0, 0, 80]}>
                 <Heading size="s" weight="semilight" center>
                   Shop Discovery Pack
                 </Heading>
