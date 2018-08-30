@@ -96,6 +96,16 @@
   padding-bottom: 24px;
 }
 
+@media screen and (max-width: 767px) {
+  .input {
+    composes:
+      global(w-full)
+    ;
+    padding-top: 19px;
+    padding-bottom: 17px;
+  }
+}
+
 .navItemLight {
   composes:
     global(text-white)

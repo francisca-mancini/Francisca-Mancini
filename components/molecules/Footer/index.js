@@ -133,15 +133,17 @@ export default class Footer extends PureComponent {
                   Subscribe to the Newsletter to receive the latest news.
                 </Paragraph>
               </Spacing>
-              <div className="flex md-flex-row flex-col items-center">
-                <Spacing size={[0, 0, 20]} position="x">
+              <div className="flex md-flex-row flex-col items-center w-full md-w-auto">
+                <Spacing size={[0, 0, 20]} position="x" className="w-full">
                   <input
                     className={generalStyles.input}
                     placeholder="Enter email"
                   />
                 </Spacing>
-                <Spacing size={[10, 10, 0]} position="y">
-                  <Button>Sign up</Button>
+                <Spacing size={[10, 10, 0]} position="y" className="w-full">
+                  <Button className="w-full md-w-auto inline-block text-center">
+                    Sign up
+                  </Button>
                 </Spacing>
               </div>
             </PageWrap>

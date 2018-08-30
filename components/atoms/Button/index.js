@@ -24,19 +24,20 @@ export default class Button extends PureComponent {
   }
 
   render() {
-    const { tag, href, children, kind, size, prefetch } = this.props;
+    const { tag, href, children, kind, size, prefetch, className } = this.props;
 
     const ButtonTag = tag;
     const LinkTag = href ? Link : 'span';
     const linkProps = {
       href: href || null,
-      prefetch: prefetch
+      prefetch: prefetch,
+      className
     };
 
     return (
       <LinkTag {...linkProps}>
         <ButtonTag
-          className={cx('button', kind, size)}
+          className={cx('button', kind, size, className)}
           onClick={this.handleClick.bind(this)}
         >
           <span className={cx('bg')} />

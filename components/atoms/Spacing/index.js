@@ -1,12 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import classNames from 'classnames';
 
 import propToClassName from '../../../lib/propToClassName';
 
-export default function Spacing({ children, size, type, position }) {
+export default function Spacing({ children, size, type, position, className }) {
   const newType = type === 'margin' ? 'm' : 'p';
   const mergedProps = mergeProps(newType, position, size);
-  const spacingClassNames = propToClassName(mergedProps);
+  const spacingClassNames = classNames(propToClassName(mergedProps), className);
 
   return <div className={spacingClassNames}>{children}</div>;
 }
