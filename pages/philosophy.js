@@ -40,8 +40,17 @@ class Philosophy extends PureComponent {
               </MaxWidth>
             </Spacing>
 
+            <Heading
+              size={['m', 'l', 'xxl']}
+              font="jenson"
+              weight="light"
+              center
+            >
+              Philosophy
+            </Heading>
+
             <Spacing>
-              <Paragraph size="xxl" font="jenson">
+              <Paragraph size={['m', 'l', 'xxl']} font="jenson">
                 Francisca Mancini, born in{' '}
                 <span className="font-sans font-medium">Buenos Aires</span>, is
                 an art advisor who works from the gallery she founded with her
@@ -54,7 +63,7 @@ class Philosophy extends PureComponent {
             </Spacing>
 
             <Spacing>
-              <Paragraph size="xxl" font="jenson">
+              <Paragraph size={['m', 'l', 'xxl']} font="jenson">
                 Core values of the brand: spirituality, individual identity,
                 luxury, singularity, sophistication, elegance, artistic added
                 value, this perfumes are meant to be like veil that you wrap
@@ -71,7 +80,7 @@ class Philosophy extends PureComponent {
 
             <Spacing>
               <MaxWidth value={670} center>
-                <Paragraph weight="medium" size="xxl" center>
+                <Paragraph weight="medium" size={['m', 'l', 'xxl']} center>
                   My fragrances are formulated with the intention of being
                   layered.
                 </Paragraph>
@@ -79,7 +88,7 @@ class Philosophy extends PureComponent {
             </Spacing>
 
             <Spacing>
-              <Paragraph size="xxl" font="jenson">
+              <Paragraph size={['m', 'l', 'xxl']} font="jenson">
                 Even if you wear jeans every day, you might want to wear
                 different colours. Same with perfume; my fragrances are
                 formulated with the intention of being layered. Even if you wear
@@ -97,7 +106,7 @@ class Philosophy extends PureComponent {
             </Spacing>
 
             <Spacing>
-              <Paragraph size="xxl" weight="medium" center>
+              <Paragraph size={['m', 'l', 'xxl']} weight="medium" center>
                 A fragrance is an instant.<br />
                 A memory,<br />
                 a place, a voyage.
@@ -105,7 +114,7 @@ class Philosophy extends PureComponent {
             </Spacing>
 
             <Spacing>
-              <Paragraph size="xxl" font="jenson">
+              <Paragraph size={['m', 'l', 'xxl']} font="jenson">
                 A fragrance is an instant. A memory, a place, a voyage. They are
                 a dream, in a sense that they trans-port you to whatever that{' '}
                 <span className="font-sans font-medium">fragrance</span>{' '}
@@ -115,7 +124,7 @@ class Philosophy extends PureComponent {
             </Spacing>
 
             <Spacing>
-              <Paragraph size="xxl" font="jenson">
+              <Paragraph size={['m', 'l', 'xxl']} font="jenson">
                 These fragances are smart, sophisticated and effortlessly chic.
                 Stylish and very high quality,{' '}
                 <span className="font-sans font-medium">jewel</span> like.
@@ -131,12 +140,12 @@ class Philosophy extends PureComponent {
             </Spacing>
 
             <Spacing size={20}>
-              <Heading tag="h3" size="l" weight="semilight">
+              <Heading tag="h3" size={['xs', 's', 'l']} weight="semilight">
                 Francisca Mancini
               </Heading>
             </Spacing>
             <Spacing size={20}>
-              <Heading tag="h3" size="l" weight="semilight">
+              <Heading tag="h3" size={['xs', 's', 'l']} weight="semilight">
                 Date
               </Heading>
             </Spacing>
