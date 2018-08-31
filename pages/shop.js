@@ -5,12 +5,12 @@ import withData from '../lib/withData';
 import { graphql, compose } from 'react-apollo';
 import MediaQuery from 'react-responsive';
 import gql from 'graphql-tag';
+import Observer from 'react-intersection-observer';
 
 import PageWrap from '../components/atoms/PageWrap';
 import Spacing from '../components/atoms/Spacing';
 import { Grid, GridItem } from '../components/atoms/Grid';
 import Heading from '../components/atoms/Heading';
-import Button from '../components/atoms/Button';
 
 import Basket from '../components/organisms/Basket';
 
@@ -24,12 +24,21 @@ import getProductsByType from '../lib/getProductsByType';
 import getProductsByVoile from '../lib/getProductsByVoile';
 import { checkoutQuery, checkout } from '../lib/checkout';
 import Layerings from '../components/organisms/shop/Layerings';
+import getProductHandle from '../lib/getProductHandle';
+import getProductTitle from '../lib/getProductTitle';
+import getProductPrice from '../lib/getProductPrice';
 
 class Shop extends PureComponent {
   constructor() {
     super();
 
+    this.state = {
+      activeIndex: 0
+    };
+
     this.handleCheckout = this.handleCheckout.bind(this);
+
+    this.threshold = 0.3;
   }
 
   componentWillMount() {
@@ -42,13 +51,29 @@ class Shop extends PureComponent {
 
   componentDidMount() {
     stickybits('.stickybits');
+
+    if (window.innerWidth >= 768) {
+      this.threshold = 0.5;
+    } else {
+      this.threshold = 0.3;
+    }
   }
 
   handleCheckout() {
     checkout(this);
   }
 
+  handleIntersection(inView, index) {
+    if (inView) {
+      this.setState({
+        activeIndex: index
+      });
+    }
+  }
+
   render() {
+    const { activeIndex } = this.state;
+
     return (
       <App>
         <Basket onCheckout={this.handleCheckout} />
@@ -58,12 +83,13 @@ class Shop extends PureComponent {
           <Spacing size={80}>
             <Spacing size={20}>
               <Grid align="stretch" gap={0}>
-                <MediaQuery minDeviceWidth={768}>
-                  <Layerings
-                    product1={this.layerings[0].node}
-                    product2={this.layerings[0].node}
-                  />
-                </MediaQuery>
+                <Layerings
+                  product1={this.voiles[0] && this.voiles[0].node}
+                  product2={this.voiles[1] && this.voiles[1].node}
+                  href={getProductHandle(this.layerings[activeIndex].node)}
+                  title={getProductTitle(this.layerings[activeIndex].node)}
+                  price={getProductPrice(this.layerings[activeIndex].node)}
+                />
                 <GridItem columnSize={[12, 12, 4]}>
                   <MediaQuery maxDeviceWidth={767}>
                     <Heading size="s" weight="semilight" center>
@@ -74,7 +100,12 @@ class Shop extends PureComponent {
                     this.layerings.length &&
                     this.layerings.map((item, index) => {
                       return (
-                        <Fragment>
+                        <Observer
+                          onChange={inView => {
+                            this.handleIntersection(inView, index);
+                          }}
+                          threshold={this.threshold}
+                        >
                           <MediaQuery minDeviceWidth={768}>
                             <div
                               key={index}
@@ -100,7 +131,7 @@ class Shop extends PureComponent {
                               />
                             </Spacing>
                           </MediaQuery>
-                        </Fragment>
+                        </Observer>
                       );
                     })}
                 </GridItem>
@@ -146,6 +177,12 @@ const query = gql`
             descriptionHtml
             productType
             tags
+            priceRange {
+              maxVariantPrice {
+                amount
+                currencyCode
+              }
+            }
             images(first: 20) {
               edges {
                 node {
