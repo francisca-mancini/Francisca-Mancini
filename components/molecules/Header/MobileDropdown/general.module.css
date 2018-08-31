@@ -1,0 +1,39 @@
+.title {
+  composes:
+    global(relative)
+    global(py-15)
+    global(cursor-pointer)
+  ;
+  border-bottom: 1px solid rgba(0,0,0,0.1);
+}
+
+.title::after {
+  content: "";
+  border: 6px solid transparent;
+  border-top: 6px solid black;
+  position: absolute;
+  top: 50%;
+  right: 20px;
+  transform: translateY(-4px);
+}
+
+.titleOpen {
+  composes:
+    global(text-white)
+    global(bg-black)
+  ;
+  border-bottom: 1px solid rgba(0,0,0,1);
+}
+
+.titleOpen::after {
+  border-top: 6px solid transparent;
+  border-bottom: 6px solid white;
+  transform: translateY(-10px);
+}
+
+.inner {
+  composes:
+    global(pb-20)
+  ;
+  border-bottom: 1px solid rgba(0,0,0,0.1);
+}

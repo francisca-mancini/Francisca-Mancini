@@ -23,6 +23,7 @@ import menuBlack from '../../../static/images/sprites/menu-black.svg';
 
 import generalStyles from './general.module.css';
 import getSessionStorage from '../../../lib/getSessionStorage';
+import MobileDropdown from './MobileDropdown';
 
 class Header extends PureComponent {
   constructor(props) {
@@ -277,9 +278,29 @@ class Header extends PureComponent {
               <NavLink href="/collection/maps-travel">
                 Collection N°1: MAPS, TRAVEL
               </NavLink>
-              <NavLink href="/shop">Shop</NavLink>
+              <MobileDropdown title="Shop">
+                <Spacing size={20} position="t">
+                  <Heading size="xxs" weight="semilight" center>
+                    <Link href="/shop">Shop All</Link>
+                  </Heading>
+                </Spacing>
+                <Spacing size={20} position="t">
+                  <Heading size="xxs" weight="semilight" center>
+                    <Link href="/shop#fragrances">Fragrances</Link>
+                  </Heading>
+                </Spacing>
+                <Spacing size={20} position="t">
+                  <Heading size="xxs" weight="semilight" center>
+                    <Link href="/shop#layering">Layering packs</Link>
+                  </Heading>
+                </Spacing>
+                <Spacing size={20} position="t">
+                  <Heading size="xxs" weight="semilight" center>
+                    <Link href="/shop#discovery">Discovery samples</Link>
+                  </Heading>
+                </Spacing>
+              </MobileDropdown>
               <NavLink href="/about">About</NavLink>
-              <NavLink href="/help">Help</NavLink>
               <NavLink href="/philosophy">Philosophy</NavLink>
               <NavLink href="/account">Account</NavLink>
               <Spacing size={20}>
@@ -290,6 +311,11 @@ class Header extends PureComponent {
               <Spacing size={20}>
                 <Heading size="xxs" weight="semilight" center>
                   <Link href="http://instagram.com">Instagram</Link>
+                </Heading>
+              </Spacing>
+              <Spacing size={20}>
+                <Heading size="xxs" weight="semilight" center>
+                  <Link href="/help">Help</Link>
                 </Heading>
               </Spacing>
               <Spacing size={20}>

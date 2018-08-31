@@ -78,83 +78,89 @@ class Shop extends PureComponent {
       <App>
         <Basket onCheckout={this.handleCheckout} />
         <PageWrap>
-          <Fragrances products={this.fragrances} />
+          <div id="fragrances">
+            <Fragrances products={this.fragrances} />
+          </div>
 
           <Spacing size={80}>
-            <Spacing size={20}>
-              <Grid align="stretch" gap={0}>
-                <Layerings
-                  product1={this.voiles[0] && this.voiles[0].node}
-                  product2={this.voiles[1] && this.voiles[1].node}
-                  href={getProductHandle(this.layerings[activeIndex].node)}
-                  title={getProductTitle(this.layerings[activeIndex].node)}
-                  price={getProductPrice(this.layerings[activeIndex].node)}
-                />
-                <GridItem columnSize={[12, 12, 4]}>
-                  <MediaQuery maxDeviceWidth={767}>
-                    <Heading size="s" weight="semilight" center>
-                      Shop Layering Packs
-                    </Heading>
-                  </MediaQuery>
-                  {this.layerings &&
-                    this.layerings.length &&
-                    this.layerings.map((item, index) => {
-                      return (
-                        <Observer
-                          onChange={inView => {
-                            this.handleIntersection(inView, index);
-                          }}
-                          threshold={this.threshold}
-                        >
-                          <MediaQuery minDeviceWidth={768}>
-                            <div
-                              key={index}
-                              className="pt-95 pb-140 h-screen flex items-center justify-center"
-                            >
-                              <ProductThumbnail
-                                product={item.node}
-                                height
-                                isLayering
-                                isNoClick
-                                isSingle
-                                isNoPrice
-                              />
-                            </div>
-                          </MediaQuery>
-                          <MediaQuery maxDeviceWidth={767}>
-                            <Spacing size={100}>
-                              <ProductThumbnail
-                                product={item.node}
-                                voiles={this.voiles}
-                                isLayering
-                                isMultiple
-                              />
-                            </Spacing>
-                          </MediaQuery>
-                        </Observer>
-                      );
-                    })}
-                </GridItem>
-              </Grid>
-            </Spacing>
+            <div id="layerings">
+              <Spacing size={20}>
+                <Grid align="stretch" gap={0}>
+                  <Layerings
+                    product1={this.voiles[0] && this.voiles[0].node}
+                    product2={this.voiles[1] && this.voiles[1].node}
+                    href={getProductHandle(this.layerings[activeIndex].node)}
+                    title={getProductTitle(this.layerings[activeIndex].node)}
+                    price={getProductPrice(this.layerings[activeIndex].node)}
+                  />
+                  <GridItem columnSize={[12, 12, 4]}>
+                    <MediaQuery maxDeviceWidth={767}>
+                      <Heading size="s" weight="semilight" center>
+                        Shop Layering Packs
+                      </Heading>
+                    </MediaQuery>
+                    {this.layerings &&
+                      this.layerings.length &&
+                      this.layerings.map((item, index) => {
+                        return (
+                          <Observer
+                            onChange={inView => {
+                              this.handleIntersection(inView, index);
+                            }}
+                            threshold={this.threshold}
+                          >
+                            <MediaQuery minDeviceWidth={768}>
+                              <div
+                                key={index}
+                                className="pt-95 pb-140 h-screen flex items-center justify-center"
+                              >
+                                <ProductThumbnail
+                                  product={item.node}
+                                  height
+                                  isLayering
+                                  isNoClick
+                                  isSingle
+                                  isNoPrice
+                                />
+                              </div>
+                            </MediaQuery>
+                            <MediaQuery maxDeviceWidth={767}>
+                              <Spacing size={100}>
+                                <ProductThumbnail
+                                  product={item.node}
+                                  voiles={this.voiles}
+                                  isLayering
+                                  isMultiple
+                                />
+                              </Spacing>
+                            </MediaQuery>
+                          </Observer>
+                        );
+                      })}
+                  </GridItem>
+                </Grid>
+              </Spacing>
+            </div>
           </Spacing>
 
           {this.discoveries &&
             this.discoveries.length && (
-              <Spacing type="padding" size={[0, 0, 80]}>
-                <Heading size="s" weight="semilight" center>
-                  Shop Discovery Pack
-                </Heading>
+              <div id="discovery">
+                <Spacing type="padding" size={[0, 0, 80]}>
+                  <Heading size="s" weight="semilight" center>
+                    Shop Discovery Pack
+                  </Heading>
 
-                <Spacing>
-                  <MaxWidth center value={600}>
-                    <ProductThumbnail
-                      product={this.discoveries[0].node}
-                      isDiscovery
-                    />
-                  </MaxWidth>
+                  <Spacing>
+                    <MaxWidth center value={600}>
+                      <ProductThumbnail
+                        product={this.discoveries[0].node}
+                        isDiscovery
+                      />
+                    </MaxWidth>
+                  </Spacing>
                 </Spacing>
-              </Spacing>
+              </div>
             )}
         </PageWrap>
       </App>
