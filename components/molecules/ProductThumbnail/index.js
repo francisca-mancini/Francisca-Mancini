@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, PureComponent } from 'react';
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
 
@@ -15,133 +15,142 @@ import getProductHandle from '../../../lib/getProductHandle';
 import getProductImages from '../../../lib/getProductImages';
 import getProductTitle from '../../../lib/getProductTitle';
 import getProductSingle from '../../../lib/getProductSingle';
+import getCleanType from '../../../lib/getCleanType';
+import getProductType from '../../../lib/getProductType';
 
 import generalStyles from './general.module.css';
 
-export default function ProductThumbnail({
-  product,
-  voiles,
-  isDiscovery,
-  isLayering,
-  isNoClick,
-  isSingle,
-  isMultiple,
-  hasNoInfo,
-  isNoPrice
-}) {
-  const color1 = getProductGradient(product)
-    ? getProductGradient(product).color1
-    : '#6b2854';
-  const color2 = getProductGradient(product)
-    ? getProductGradient(product).color2
-    : '#80aee8';
-  const handle = getProductHandle(product);
-  const images = getProductImages(product);
-  const singleImage = isSingle || isMultiple ? getProductSingle(product) : null;
-  const voile1 = isMultiple ? getProductSingle(voiles[0].node)[0] : null;
-  const voile2 = isMultiple ? getProductSingle(voiles[1].node)[0] : null;
-  const title = getProductTitle(product);
-  const img = singleImage || images[0].transformedSrc;
-  const containerClassName = classNames(
-    generalStyles.imageContainer,
-    'pixiContainer',
-    {
-      [generalStyles.imageContainerDiscovery]: isDiscovery
-    }
-  );
-  const imageClassName = classNames(generalStyles.image, {
-    [generalStyles.imageDiscovery]: isDiscovery,
-    [generalStyles.imageLayering]: isLayering && !isSingle && !isMultiple,
-    [generalStyles.imageMultiple]: isMultiple,
-    [generalStyles.imageSingle]: isSingle,
-    [generalStyles.imageFragrance]: !isLayering && !isDiscovery
-  });
-  const imageStyles = {
-    animation:
-      isSingle || isMultiple
-        ? `float ${(Math.random() + 0.3) * 20}s ${Math.random() +
-            0.5}s infinite alternate ease-in-out`
-        : ''
-  };
-  const multipleStyles1 = {
-    transform: 'translate(-50%, -50%) rotate(-4deg)'
-  };
-  const multipleStyles2 = {
-    transform: 'translate(-50%, -65%) rotate(2deg)'
-  };
-  const multipleStyles3 = {
-    transform: 'translate(-50%, -50%) rotate(-3deg)'
-  };
+export default class ProductThumbnail extends PureComponent {
+  render() {
+    const {
+      product,
+      voiles,
+      isDiscovery,
+      isLayering,
+      isNoClick,
+      isSingle,
+      isMultiple,
+      hasNoInfo,
+      isNoPrice
+    } = this.props;
 
-  const LinkTag = isNoClick ? 'div' : Link;
-  const LinkProps = {
-    className: 'w-full',
-    tag: 'div',
-    href: isNoClick ? null : `/product/${handle}`
-  };
+    const color1 = getProductGradient(product)
+      ? getProductGradient(product).color1
+      : '#6b2854';
+    const color2 = getProductGradient(product)
+      ? getProductGradient(product).color2
+      : '#80aee8';
+    const handle = getProductHandle(product);
+    const images = getProductImages(product);
+    const singleImage =
+      isSingle || isMultiple ? getProductSingle(product) : null;
+    const voile1 = isMultiple ? getProductSingle(voiles[0].node)[0] : null;
+    const voile2 = isMultiple ? getProductSingle(voiles[1].node)[0] : null;
+    const type = getProductType(product);
+    const cleanType = getCleanType(type);
+    const title = getProductTitle(product);
+    const img = singleImage || images[0].transformedSrc;
+    const containerClassName = classNames(
+      generalStyles.imageContainer,
+      'pixiContainer',
+      {
+        [generalStyles.imageContainerDiscovery]: isDiscovery
+      }
+    );
+    const imageClassName = classNames(generalStyles.image, {
+      [generalStyles.imageDiscovery]: isDiscovery,
+      [generalStyles.imageLayering]: isLayering && !isSingle && !isMultiple,
+      [generalStyles.imageMultiple]: isMultiple,
+      [generalStyles.imageSingle]: isSingle,
+      [generalStyles.imageFragrance]: !isLayering && !isDiscovery
+    });
+    const imageStyles = {
+      animation:
+        isSingle || isMultiple
+          ? `float ${(Math.random() + 0.3) * 20}s ${Math.random() +
+              0.5}s infinite alternate ease-in-out`
+          : ''
+    };
+    const multipleStyles1 = {
+      transform: 'translate(-50%, -50%) rotate(-4deg)'
+    };
+    const multipleStyles2 = {
+      transform: 'translate(-50%, -65%) rotate(2deg)'
+    };
+    const multipleStyles3 = {
+      transform: 'translate(-50%, -50%) rotate(-3deg)'
+    };
 
-  return (
-    <FadeIn>
-      <div className="w-full px-20 flex items-center justify-center">
-        <LinkTag {...LinkProps}>
-          <div className={containerClassName}>
-            {isMultiple ? (
-              <Fragment>
+    const LinkTag = isNoClick ? 'div' : Link;
+    const LinkProps = {
+      className: 'w-full',
+      tag: 'div',
+      href: isNoClick ? null : `/product/${handle}`
+    };
+
+    return (
+      <FadeIn>
+        <div className="w-full px-20 flex items-center justify-center">
+          <LinkTag {...LinkProps}>
+            <div className={containerClassName}>
+              {isMultiple ? (
+                <Fragment>
+                  <img
+                    src={voile1}
+                    alt={title}
+                    className={imageClassName}
+                    style={multipleStyles1}
+                  />
+                  <img
+                    src={voile1}
+                    alt={title}
+                    className={imageClassName}
+                    style={multipleStyles2}
+                  />
+                  <img
+                    src={singleImage}
+                    alt={title}
+                    className={imageClassName}
+                    style={multipleStyles3}
+                  />
+                </Fragment>
+              ) : (
                 <img
-                  src={voile1}
-                  alt={title}
                   className={imageClassName}
-                  style={multipleStyles1}
-                />
-                <img
-                  src={voile1}
+                  src={img}
                   alt={title}
-                  className={imageClassName}
-                  style={multipleStyles2}
+                  style={imageStyles}
                 />
-                <img
-                  src={singleImage}
-                  alt={title}
-                  className={imageClassName}
-                  style={multipleStyles3}
-                />
-              </Fragment>
-            ) : (
-              <img
-                className={imageClassName}
-                src={img}
-                alt={title}
-                style={imageStyles}
+              )}
+              <ProductShape
+                isDiscovery={isDiscovery}
+                color1={color1}
+                color2={color2}
               />
-            )}
-            <ProductShape
-              isDiscovery={isDiscovery}
-              color1={color1}
-              color2={color2}
-            />
-          </div>
-          {!hasNoInfo && (
-            <div>
-              <Spacing size={15}>
-                <Heading
-                  uppercase
-                  size="xxxxs"
-                  center
-                  font="serif"
-                  tracking="wide"
-                >
-                  {title}
-                </Heading>
-              </Spacing>
-              <Paragraph weight="semilight" size="xs" center>
-                Fragrance bottle, 100ml {isNoPrice ? '' : '- £500'}
-              </Paragraph>
             </div>
-          )}
-        </LinkTag>
-      </div>
-    </FadeIn>
-  );
+            {!hasNoInfo && (
+              <div>
+                <Spacing size={15}>
+                  <Heading
+                    uppercase
+                    size="xxxxs"
+                    center
+                    font="serif"
+                    tracking="wide"
+                  >
+                    {title}
+                  </Heading>
+                </Spacing>
+                <Paragraph weight="semilight" size="xs" center>
+                  {cleanType} {isNoPrice ? '' : '- £500'}
+                </Paragraph>
+              </div>
+            )}
+          </LinkTag>
+        </div>
+      </FadeIn>
+    );
+  }
 }
 
 ProductThumbnail.propTypes = {

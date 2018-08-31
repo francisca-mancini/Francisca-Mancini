@@ -1,4 +1,8 @@
 .container {
+  composes:
+    global(max-h-full)
+    global(w-full)
+  ;
   transition: 0.5s ease-in-out;
 }
 
