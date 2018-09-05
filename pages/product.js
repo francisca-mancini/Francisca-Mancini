@@ -13,6 +13,8 @@ import Story from '../components/organisms/product/Story';
 import getProduct from '../lib/getProduct';
 import getProductHandle from '../lib/getProductHandle';
 import getProductsButHandle from '../lib/getProductsButHandle';
+import getProductRelated from '../lib/getProductRelated';
+import getProductsByVoile from '../lib/getProductsByVoile';
 import withData from '../lib/withData';
 
 import { checkoutQuery, checkout } from '../lib/checkout';
@@ -30,14 +32,22 @@ class Product extends PureComponent {
 
   componentWillMount() {
     this.product = getProduct(this.props.data, this.props.productHandle);
-    this.products = getProductsButHandle(
-      this.props.data.shop.products.edges,
-      getProductHandle(this.product)
-    );
 
     if (!this.product) {
       this.props.url.push('/404');
     }
+
+    this.products = getProductsButHandle(
+      this.props.data.shop.products.edges,
+      getProductHandle(this.product)
+    );
+    this.voiles = getProductsByVoile(this.products);
+
+    this.relatedProducts = getProductRelated(
+      this.product,
+      this.products,
+      this.props.data
+    );
   }
 
   handleCheckout() {
@@ -49,8 +59,6 @@ class Product extends PureComponent {
       return <div />;
     }
 
-    const mightLikeProducts = this.products.slice(0, 3);
-
     return (
       <App hasTopPad={false} hasBottomPad={false}>
         <Basket onCheckout={this.handleCheckout} />
@@ -59,9 +67,15 @@ class Product extends PureComponent {
         </PageWrap>
         <div className="relative z-20 bg-white">
           <Story product={this.product} />
-          <PageWrap>
-            <YouMightLike products={mightLikeProducts} />
-          </PageWrap>
+          {this.relatedProducts &&
+            this.relatedProducts.length && (
+              <PageWrap>
+                <YouMightLike
+                  voiles={this.voiles}
+                  products={this.relatedProducts}
+                />
+              </PageWrap>
+            )}
         </div>
       </App>
     );
@@ -73,6 +87,40 @@ const query = gql`
     shop {
       name
       description
+      collections(first: 20) {
+        edges {
+          node {
+            handle
+            id
+            description
+            descriptionHtml
+            title
+            products(first: 20) {
+              edges {
+                node {
+                  id
+                  handle
+                  title
+                  description
+                  descriptionHtml
+                  productType
+                  tags
+                  images(first: 20) {
+                    edges {
+                      node {
+                        altText
+                        id
+                        originalSrc
+                        transformedSrc
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
       products(first: 20) {
         pageInfo {
           hasNextPage

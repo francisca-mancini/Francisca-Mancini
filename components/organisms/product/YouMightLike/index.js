@@ -6,8 +6,9 @@ import Spacing from '../../../atoms/Spacing';
 import { Grid, GridItem } from '../../../atoms/Grid';
 import ProductThumbnail from '../../../molecules/ProductThumbnail';
 import Heading from '../../../atoms/Heading';
+import getProductType from '../../../../lib/getProductType';
 
-export default function YouMightLike({ products }) {
+export default function YouMightLike({ products, voiles }) {
   const settings = {
     dots: true,
     infinite: true,
@@ -29,11 +30,18 @@ export default function YouMightLike({ products }) {
             </Spacing>
             <Spacing size={80} position="b" type="padding">
               <MediaQuery minDeviceWidth={768}>
-                <Grid gap={30}>
+                <Grid gap={30} justify="center">
                   {products.map((item, index) => {
+                    const type = getProductType(item.node);
+
                     return (
                       <GridItem key={index} columnSize={4}>
-                        <ProductThumbnail product={item.node} />
+                        <ProductThumbnail
+                          voiles={voiles}
+                          isMultiple={type === 'layering' || false}
+                          isLayering={type === 'layering' || false}
+                          product={item.node}
+                        />
                       </GridItem>
                     );
                   })}

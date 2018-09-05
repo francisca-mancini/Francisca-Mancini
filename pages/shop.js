@@ -27,6 +27,7 @@ import Layerings from '../components/organisms/shop/Layerings';
 import getProductHandle from '../lib/getProductHandle';
 import getProductTitle from '../lib/getProductTitle';
 import getProductPrice from '../lib/getProductPrice';
+import getProductType from '../lib/getProductType';
 
 class Shop extends PureComponent {
   constructor() {
@@ -89,7 +90,9 @@ class Shop extends PureComponent {
                   <Layerings
                     product1={this.voiles[0] && this.voiles[0].node}
                     product2={this.voiles[1] && this.voiles[1].node}
-                    href={getProductHandle(this.layerings[activeIndex].node)}
+                    href={`/product/${getProductHandle(
+                      this.layerings[activeIndex].node
+                    )}`}
                     title={getProductTitle(this.layerings[activeIndex].node)}
                     price={getProductPrice(this.layerings[activeIndex].node)}
                   />
@@ -143,9 +146,9 @@ class Shop extends PureComponent {
             </div>
           </Spacing>
 
-          {this.discoveries &&
-            this.discoveries.length && (
-              <div id="discovery">
+          <div id="discovery">
+            {this.discoveries &&
+              this.discoveries.length && (
                 <Spacing type="padding" size={[0, 0, 80]}>
                   <Heading size="s" weight="semilight" center>
                     Shop Discovery Pack
@@ -160,8 +163,8 @@ class Shop extends PureComponent {
                     </MaxWidth>
                   </Spacing>
                 </Spacing>
-              </div>
-            )}
+              )}
+          </div>
         </PageWrap>
       </App>
     );

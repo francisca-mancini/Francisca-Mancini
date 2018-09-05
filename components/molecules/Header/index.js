@@ -291,7 +291,7 @@ class Header extends PureComponent {
                 </Spacing>
                 <Spacing size={20} position="t">
                   <Heading size="xxs" weight="semilight" center>
-                    <Link href="/shop#layering">Layering packs</Link>
+                    <Link href="/shop#layerings">Layering packs</Link>
                   </Heading>
                 </Spacing>
                 <Spacing size={20} position="t">
