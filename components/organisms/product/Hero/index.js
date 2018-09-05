@@ -74,7 +74,7 @@ class Hero extends PureComponent {
   }
 
   render() {
-    const { product } = this.props;
+    const { product, dataProduct } = this.props;
     const stickyStyle = {
       top: 0,
       bottom: 'auto'
@@ -84,7 +84,7 @@ class Hero extends PureComponent {
     const type = product && getProductType(product);
     const price = product && getProductPrice(product);
     const description = product && getProductDescription(product);
-    const gradient = product && getProductGradient(product);
+    const gradient = dataProduct && getProductGradient(dataProduct);
     const collectionTitle =
       product && getCollectionTitle(product.collections.edges[0].node);
     const cleanType = getCleanType(type);

@@ -18,6 +18,8 @@ import getProductsByVoile from '../lib/getProductsByVoile';
 import withData from '../lib/withData';
 
 import { checkoutQuery, checkout } from '../lib/checkout';
+import getProductType from '../lib/getProductType';
+import getLayeringFragrance from '../lib/getLayeringFragrance';
 
 class Product extends PureComponent {
   static getInitialProps({ query: { handle } }) {
@@ -41,7 +43,14 @@ class Product extends PureComponent {
       this.props.data.shop.products.edges,
       getProductHandle(this.product)
     );
+    this.type = getProductType(this.product);
     this.voiles = getProductsByVoile(this.products);
+
+    if (this.type === 'layering') {
+      this.dataProduct = getLayeringFragrance(this.products, this.product).node;
+    } else {
+      this.dataProduct = this.product;
+    }
 
     this.relatedProducts = getProductRelated(
       this.product,
@@ -63,16 +72,17 @@ class Product extends PureComponent {
       <App hasTopPad={false} hasBottomPad={false}>
         <Basket onCheckout={this.handleCheckout} />
         <PageWrap>
-          <Hero product={this.product} />
+          <Hero product={this.product} dataProduct={this.dataProduct} />
         </PageWrap>
         <div className="relative z-20 bg-white">
-          <Story product={this.product} />
+          <Story product={this.product} dataProduct={this.dataProduct} />
           {this.relatedProducts &&
             this.relatedProducts.length && (
               <PageWrap>
                 <YouMightLike
                   voiles={this.voiles}
                   products={this.relatedProducts}
+                  productList={this.products}
                 />
               </PageWrap>
             )}

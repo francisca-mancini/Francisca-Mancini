@@ -24,6 +24,7 @@ export default class ProductThumbnail extends PureComponent {
   render() {
     const {
       product,
+      dataProduct,
       voiles,
       isDiscovery,
       isLayering,
@@ -34,12 +35,12 @@ export default class ProductThumbnail extends PureComponent {
       isNoPrice
     } = this.props;
 
-    const color1 = getProductGradient(product)
-      ? getProductGradient(product).color1
-      : '#6b2854';
-    const color2 = getProductGradient(product)
-      ? getProductGradient(product).color2
-      : '#80aee8';
+    const color1 = isLayering
+      ? getProductGradient(dataProduct).color1
+      : getProductGradient(product).color1;
+    const color2 = isLayering
+      ? getProductGradient(dataProduct).color2
+      : getProductGradient(product).color2;
     const handle = getProductHandle(product);
     const images = getProductImages(product);
     const singleImage =

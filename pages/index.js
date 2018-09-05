@@ -24,6 +24,7 @@ import getProductsByType from '../lib/getProductsByType';
 
 import { checkoutQuery, checkout } from '../lib/checkout';
 import getProductsByVoile from '../lib/getProductsByVoile';
+import getLayeringFragrance from '../lib/getLayeringFragrance';
 
 class Home extends PureComponent {
   constructor() {
@@ -46,6 +47,11 @@ class Home extends PureComponent {
     this.layering = getProductsByType(this.products, 'layering')[0];
     this.discovery = getProductsByType(this.products, 'discovery')[0];
     this.voiles = getProductsByVoile(this.products);
+
+    this.dataProduct = getLayeringFragrance(
+      this.products,
+      this.layering.node
+    ).node;
   }
 
   componentDidMount() {
@@ -105,6 +111,7 @@ class Home extends PureComponent {
                       <ProductThumbnail
                         isLayering
                         product={this.layering.node}
+                        dataProduct={this.dataProduct}
                         voiles={this.voiles}
                         isMultiple
                       />
@@ -114,6 +121,7 @@ class Home extends PureComponent {
                     <Spacing size={[80, 80, 0]} position="t" type="padding">
                       <ProductThumbnail
                         isLayering
+                        dataProduct={this.dataProduct}
                         product={this.layering.node}
                         voiles={this.voiles}
                         isMultiple

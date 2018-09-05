@@ -35,10 +35,10 @@ const Note = ({ label, children }) => {
   );
 };
 
-function Story({ product }) {
-  const story = product && getProductStory(product);
-  const notes = product && getProductNotes(product);
-  const bg = product && getProductBackground(product);
+function Story({ product, dataProduct }) {
+  const story = dataProduct && getProductStory(dataProduct);
+  const notes = dataProduct && getProductNotes(dataProduct);
+  const bg = dataProduct && getProductBackground(dataProduct);
   const storyStyles = {
     backgroundColor: bg
   };

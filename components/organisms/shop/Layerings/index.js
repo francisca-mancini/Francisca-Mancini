@@ -29,6 +29,7 @@ export default function Layerings({ product1, product2, href, title, price }) {
           <div className="pt-95 pb-120 flex w-50 items-center justify-center">
             <ProductThumbnail
               product={product1}
+              dataProduct={product1}
               height
               isLayering
               isSingle
@@ -39,6 +40,7 @@ export default function Layerings({ product1, product2, href, title, price }) {
           <div className="pt-95 pb-120 flex w-50 items-center justify-center">
             <ProductThumbnail
               product={product2}
+              dataProduct={product2}
               height
               isLayering
               isSingle

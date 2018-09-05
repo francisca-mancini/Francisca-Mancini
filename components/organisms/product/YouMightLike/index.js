@@ -7,8 +7,9 @@ import { Grid, GridItem } from '../../../atoms/Grid';
 import ProductThumbnail from '../../../molecules/ProductThumbnail';
 import Heading from '../../../atoms/Heading';
 import getProductType from '../../../../lib/getProductType';
+import getLayeringFragrance from '../../../../lib/getLayeringFragrance';
 
-export default function YouMightLike({ products, voiles }) {
+export default function YouMightLike({ products, voiles, productList }) {
   const settings = {
     dots: true,
     infinite: true,
@@ -33,6 +34,15 @@ export default function YouMightLike({ products, voiles }) {
                 <Grid gap={30} justify="center">
                   {products.map((item, index) => {
                     const type = getProductType(item.node);
+                    let dataProduct;
+
+                    if (type === 'layering') {
+                      dataProduct = getLayeringFragrance(productList, item.node)
+                        ? getLayeringFragrance(productList, item.node).node
+                        : item.node;
+                    } else {
+                      dataProduct = item.node;
+                    }
 
                     return (
                       <GridItem key={index} columnSize={4}>
@@ -41,6 +51,7 @@ export default function YouMightLike({ products, voiles }) {
                           isMultiple={type === 'layering' || false}
                           isLayering={type === 'layering' || false}
                           product={item.node}
+                          dataProduct={dataProduct}
                         />
                       </GridItem>
                     );

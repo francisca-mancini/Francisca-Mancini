@@ -28,6 +28,7 @@ import getProductHandle from '../lib/getProductHandle';
 import getProductTitle from '../lib/getProductTitle';
 import getProductPrice from '../lib/getProductPrice';
 import getProductType from '../lib/getProductType';
+import getLayeringFragrance from '../lib/getLayeringFragrance';
 
 class Shop extends PureComponent {
   constructor() {
@@ -43,11 +44,11 @@ class Shop extends PureComponent {
   }
 
   componentWillMount() {
-    const products = this.props.data.shop.products.edges;
-    this.fragrances = getProductsByType(products, 'fragrance');
-    this.layerings = getProductsByType(products, 'layering');
-    this.discoveries = getProductsByType(products, 'discovery');
-    this.voiles = getProductsByVoile(products);
+    this.products = this.props.data.shop.products.edges;
+    this.fragrances = getProductsByType(this.products, 'fragrance');
+    this.layerings = getProductsByType(this.products, 'layering');
+    this.discoveries = getProductsByType(this.products, 'discovery');
+    this.voiles = getProductsByVoile(this.products);
   }
 
   componentDidMount() {
@@ -105,6 +106,11 @@ class Shop extends PureComponent {
                     {this.layerings &&
                       this.layerings.length &&
                       this.layerings.map((item, index) => {
+                        const dataProduct = getLayeringFragrance(
+                          this.products,
+                          item.node
+                        );
+
                         return (
                           <Observer
                             onChange={inView => {
@@ -119,6 +125,7 @@ class Shop extends PureComponent {
                               >
                                 <ProductThumbnail
                                   product={item.node}
+                                  dataProduct={dataProduct.node}
                                   height
                                   isLayering
                                   isNoClick
@@ -132,6 +139,7 @@ class Shop extends PureComponent {
                                 <ProductThumbnail
                                   product={item.node}
                                   voiles={this.voiles}
+                                  dataProduct={dataProduct.node}
                                   isLayering
                                   isMultiple
                                 />
