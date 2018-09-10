@@ -90,8 +90,8 @@
     global(text-center)
     global(border-1)
     global(border-solid)
-
   ;
+  outline: none !important;
   padding-top: 22px;
   padding-bottom: 24px;
 }

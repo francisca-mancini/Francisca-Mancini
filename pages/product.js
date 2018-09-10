@@ -82,7 +82,7 @@ class Product extends PureComponent {
                 <YouMightLike
                   voiles={this.voiles}
                   products={this.relatedProducts}
-                  productList={this.products}
+                  productList={this.props.data.shop.products.edges}
                 />
               </PageWrap>
             )}

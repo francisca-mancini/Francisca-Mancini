@@ -38,8 +38,7 @@ export default function YouMightLike({ products, voiles, productList }) {
 
                     if (type === 'layering') {
                       dataProduct = getLayeringFragrance(productList, item.node)
-                        ? getLayeringFragrance(productList, item.node).node
-                        : item.node;
+                        .node;
                     } else {
                       dataProduct = item.node;
                     }
@@ -61,7 +60,26 @@ export default function YouMightLike({ products, voiles, productList }) {
               <MediaQuery maxDeviceWidth={767}>
                 <Slider {...settings}>
                   {products.map((item, index) => {
-                    return <ProductThumbnail key={index} product={item.node} />;
+                    const type = getProductType(item.node);
+                    let dataProduct;
+
+                    if (type === 'layering') {
+                      dataProduct = getLayeringFragrance(productList, item.node)
+                        .node;
+                    } else {
+                      dataProduct = item.node;
+                    }
+
+                    return (
+                      <ProductThumbnail
+                        voiles={voiles}
+                        key={index}
+                        product={item.node}
+                        dataProduct={dataProduct}
+                        isMultiple={type === 'layering' || false}
+                        isLayering={type === 'layering' || false}
+                      />
+                    );
                   })}
                 </Slider>
               </MediaQuery>

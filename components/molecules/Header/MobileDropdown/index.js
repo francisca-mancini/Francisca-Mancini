@@ -11,7 +11,7 @@ export default class MobileDropdown extends PureComponent {
     super();
 
     this.state = {
-      isOpen: true
+      isOpen: false
     };
   }
 

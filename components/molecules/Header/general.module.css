@@ -41,7 +41,7 @@
 }
 
 .active {
-  composes: global(opacity-100)
+  opacity: 1;
 }
 
 .dropdown {

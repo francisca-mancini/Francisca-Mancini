@@ -9,6 +9,8 @@
     global(flex)
     global(flex-col)
     global(w-full)
+    global(pb-60)
+    global(md-pb-0)
   ;
   transition: transform 0.3s ease-out;
 }
