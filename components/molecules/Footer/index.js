@@ -120,7 +120,7 @@ export default class Footer extends PureComponent {
           </InlineGrid>
         </PageWrap>
         <div className={newsletterClassName}>
-          <Spacing size={60}>
+          <Spacing size={[40, 40, 60]}>
             <PageWrap className="max-w-full flex flex-col items-center justify-center">
               <div
                 className={generalStyles.cross}

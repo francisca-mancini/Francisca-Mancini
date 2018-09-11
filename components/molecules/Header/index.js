@@ -14,16 +14,14 @@ import { InlineGrid } from '../../atoms/Grid';
 
 import logoWhite from '../../../static/images/sprites/logo-white.svg';
 import logoBlack from '../../../static/images/sprites/logo-black.svg';
-import logoMiniWhite from '../../../static/images/sprites/logo-mini-white.svg';
-import logoMiniBlack from '../../../static/images/sprites/logo-mini-black.svg';
 import cartWhite from '../../../static/images/sprites/cart-white.svg';
 import cartBlack from '../../../static/images/sprites/cart-black.svg';
-import menuWhite from '../../../static/images/sprites/menu-white.svg';
-import menuBlack from '../../../static/images/sprites/menu-black.svg';
 
 import generalStyles from './general.module.css';
 import getSessionStorage from '../../../lib/getSessionStorage';
 import MobileDropdown from './MobileDropdown';
+import MenuIcon from './MenuIcon';
+import MobileLogo from './MobileLogo';
 
 class Header extends PureComponent {
   constructor(props) {
@@ -122,9 +120,7 @@ class Header extends PureComponent {
     });
     const headerLight = isMobileOpen ? false : isLight;
     const logoSrc = headerLight ? logoWhite : logoBlack;
-    const logoMiniSrc = headerLight ? logoMiniWhite : logoMiniBlack;
     const cartSrc = headerLight ? cartWhite : cartBlack;
-    const menuSrc = headerLight ? menuWhite : menuBlack;
     const linkColor = headerLight ? 'white' : 'black';
 
     const NavLink = ({
@@ -208,13 +204,14 @@ class Header extends PureComponent {
               {matches => {
                 if (matches) {
                   return (
-                    <img
+                    <div
                       onClick={this.toggleMobileMenu}
                       className="cursor-pointer"
-                      src={menuSrc}
                       width={34}
                       height={18}
-                    />
+                    >
+                      <MenuIcon isLight={headerLight} />
+                    </div>
                   );
                 } else {
                   return null;
@@ -227,7 +224,7 @@ class Header extends PureComponent {
                   if (matches) {
                     return <img src={logoSrc} width={243} height={16} />;
                   } else {
-                    return <img src={logoMiniSrc} width={41} height={44} />;
+                    return <MobileLogo isLight={headerLight} />;
                   }
                 }}
               </MediaQuery>
