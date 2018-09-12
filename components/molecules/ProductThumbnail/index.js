@@ -17,6 +17,7 @@ import getProductTitle from '../../../lib/getProductTitle';
 import getProductSingle from '../../../lib/getProductSingle';
 import getCleanType from '../../../lib/getCleanType';
 import getProductType from '../../../lib/getProductType';
+import getProductPrice from '../../../lib/getProductPrice';
 
 import generalStyles from './general.module.css';
 
@@ -43,6 +44,7 @@ export default class ProductThumbnail extends PureComponent {
       : getProductGradient(product).color2;
     const handle = getProductHandle(product);
     const images = getProductImages(product);
+    const price = getProductPrice(product);
     const singleImage =
       isSingle || isMultiple ? getProductSingle(product) : null;
     const voile1 = isMultiple ? getProductSingle(voiles[0].node)[0] : null;
@@ -143,7 +145,7 @@ export default class ProductThumbnail extends PureComponent {
                   </Heading>
                 </Spacing>
                 <Paragraph weight="semilight" size="xs" center>
-                  {cleanType} {isNoPrice ? '' : '- £500'}
+                  {cleanType} {isNoPrice ? '' : `- £${price}`}
                 </Paragraph>
               </div>
             )}
