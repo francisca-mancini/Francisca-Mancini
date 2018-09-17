@@ -21,6 +21,10 @@ app.prepare().then(() => {
     return app.render(req, res, '/product', { handle: req.params.handle });
   });
 
+  server.get('/shop/:handle', (req, res) => {
+    return app.render(req, res, '/shop', { handle: req.params.handle });
+  });
+
   server.get('/collection/:handle', (req, res) => {
     return app.render(req, res, '/collection', { handle: req.params.handle });
   });

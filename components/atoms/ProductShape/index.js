@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import isNode from 'detect-node';
 import PropTypes from 'prop-types';
 import throttle from 'lodash/throttle';
+import debounce from 'lodash/debounce';
 import Observer from 'react-intersection-observer';
 import classNames from 'classnames';
 
@@ -37,36 +38,29 @@ export default class ProductShape extends Component {
     };
 
     this.renderPixi = this.renderPixi.bind(this);
-    this.resize = throttle(this.resize.bind(this), 100);
     this.handleVisibilityChange = this.handleVisibilityChange.bind(this);
+    this.handleResize = debounce(this.handleResize.bind(this), 200, {
+      leading: false,
+      trailing: true
+    });
   }
 
   componentDidMount() {
     if (!isNode) {
       this.initPixi();
-      this.addShaderPass();
-
-      setTimeout(() => {
-        this.setState({ isHidden: false });
-      }, 1000);
     }
 
-    window.addEventListener('resize', this.resize);
+    window.addEventListener('resize', this.handleResize);
   }
 
   componentWillUnmount() {
-    window.removeEventListener('resize', this.resize);
+    window.removeEventListener('resize', this.handleResize);
   }
 
-  handleVisibilityChange(inView) {
-    if (inView) {
-      if (this.app) this.app.ticker.start();
-    } else {
-      if (this.app) this.app.ticker.stop();
-    }
-  }
+  handleResize() {
+    this.destroyPixi();
+    this.initPixi();
 
-  resize() {
     const { isDiscovery } = this.props;
     const parent = findParent(this.canvasRef, 'pixiContainer');
 
@@ -79,6 +73,19 @@ export default class ProductShape extends Component {
     this.circlesSize = isDiscovery
       ? this.height / this.circleSizeFactor
       : this.width / this.circleSizeFactor;
+  }
+
+  handleVisibilityChange(inView) {
+    if (inView) {
+      if (this.app) this.app.ticker.start();
+    } else {
+      if (this.app) this.app.ticker.stop();
+    }
+  }
+
+  destroyPixi() {
+    this.app.ticker.stop();
+    this.app.destroy(true, true);
   }
 
   initPixi() {
@@ -118,6 +125,7 @@ export default class ProductShape extends Component {
 
     this.addBaseShape();
     this.addMovingCircles();
+    this.addShaderPass();
   }
 
   addShaderPass() {
@@ -138,6 +146,10 @@ export default class ProductShape extends Component {
 
     this.container.filters = [blurFilter, thresholdGradientFilter];
     this.container.filterArea = this.app.screen;
+
+    setTimeout(() => {
+      this.setState({ isHidden: false });
+    }, 1000);
   }
 
   addBaseShape() {
@@ -192,10 +204,13 @@ export default class ProductShape extends Component {
 
     if (this.movingCircles.length > 0) {
       this.movingCircles.forEach(item => {
-        const rawScale = Math.sin(this.renderDelta / 10) * 1.2;
+        if (!item.circle.transform) return;
+        // const rawScale = Math.sin(this.renderDelta / 10) * 1.2;
 
-        item.circle.x = Math.sin(this.renderDelta) * item.movingFactor.x;
-        item.circle.y = Math.cos(this.renderDelta) * item.movingFactor.y;
+        if (item.circle) {
+          item.circle.x = Math.sin(this.renderDelta) * item.movingFactor.x;
+          item.circle.y = Math.cos(this.renderDelta) * item.movingFactor.y;
+        }
       });
     }
   }

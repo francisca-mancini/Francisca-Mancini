@@ -6,6 +6,7 @@ import { graphql, compose } from 'react-apollo';
 import MediaQuery from 'react-responsive';
 import gql from 'graphql-tag';
 import Observer from 'react-intersection-observer';
+import Scroll, { Element, scroller } from 'react-scroll';
 
 import PageWrap from '../components/atoms/PageWrap';
 import Spacing from '../components/atoms/Spacing';
@@ -31,6 +32,10 @@ import getProductType from '../lib/getProductType';
 import getLayeringFragrance from '../lib/getLayeringFragrance';
 
 class Shop extends PureComponent {
+  static getInitialProps({ query: { handle } }) {
+    return { handle: handle };
+  }
+
   constructor() {
     super();
 
@@ -52,7 +57,18 @@ class Shop extends PureComponent {
   }
 
   componentDidMount() {
+    const { handle } = this.props;
+
     stickybits('.stickybits');
+
+    if (handle) {
+      scroller.scrollTo(handle, {
+        duration: 300,
+        delay: 100,
+        smooth: true,
+        offset: -100
+      });
+    }
 
     if (window.innerWidth >= 768) {
       this.threshold = 0.5;
@@ -80,12 +96,12 @@ class Shop extends PureComponent {
       <App>
         <Basket onCheckout={this.handleCheckout} />
         <PageWrap>
-          <div id="fragrances">
+          <Element name="fragrances">
             <Fragrances products={this.fragrances} />
-          </div>
+          </Element>
 
           <Spacing size={80}>
-            <div id="layerings">
+            <Element name="layerings">
               <Spacing size={20}>
                 <Grid align="stretch" gap={0}>
                   <Layerings
@@ -98,11 +114,14 @@ class Shop extends PureComponent {
                     price={getProductPrice(this.layerings[activeIndex].node)}
                   />
                   <GridItem columnSize={[12, 12, 4]}>
-                    <MediaQuery maxDeviceWidth={767}>
-                      <Heading size="s" weight="semilight" center>
-                        Shop Layering Packs
-                      </Heading>
-                    </MediaQuery>
+                    <Heading
+                      className="md-hidden"
+                      size="s"
+                      weight="semilight"
+                      center
+                    >
+                      Shop Layering Packs
+                    </Heading>
                     {this.layerings &&
                       this.layerings.length &&
                       this.layerings.map((item, index) => {
@@ -113,6 +132,7 @@ class Shop extends PureComponent {
 
                         return (
                           <Observer
+                            key={index}
                             onChange={inView => {
                               this.handleIntersection(inView, index);
                             }}
@@ -151,10 +171,10 @@ class Shop extends PureComponent {
                   </GridItem>
                 </Grid>
               </Spacing>
-            </div>
+            </Element>
           </Spacing>
 
-          <div id="discovery">
+          <Element name="discovery">
             {this.discoveries &&
               this.discoveries.length && (
                 <Spacing type="padding" size={[0, 0, 80]}>
@@ -172,7 +192,7 @@ class Shop extends PureComponent {
                   </Spacing>
                 </Spacing>
               )}
-          </div>
+          </Element>
         </PageWrap>
       </App>
     );

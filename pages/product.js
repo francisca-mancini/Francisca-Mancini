@@ -115,6 +115,12 @@ const query = gql`
                   descriptionHtml
                   productType
                   tags
+                  priceRange {
+                    maxVariantPrice {
+                      amount
+                      currencyCode
+                    }
+                  }
                   images(first: 20) {
                     edges {
                       node {

@@ -2,6 +2,8 @@ import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import MediaQuery from 'react-responsive';
 import classNames from 'classnames/bind';
+import jsonp from 'jsonp';
+import queryString from 'query-string';
 import {
   Element,
   Events,
@@ -33,10 +35,32 @@ export default class Footer extends PureComponent {
     super();
 
     this.state = {
-      newsletterOpen: false
+      newsletterOpen: false,
+      newsletterSent: null
     };
 
     this.toggleNewsletter = this.toggleNewsletter.bind(this);
+  }
+
+  handleSubmit(e) {
+    e.preventDefault();
+    const email = this.emailRef.value;
+
+    jsonp(
+      `//franciscamancini.us19.list-manage.com/subscribe/post-json?u=ab8ed04bf1e270d137701bf40&amp;id=7d4a26c1a9&EMAIL=${email}`,
+      { param: 'c' },
+      (err, data) => {
+        if (data.result === 'success') {
+          this.setState({
+            newsletterSent: true
+          });
+        } else {
+          this.setState({
+            newsletterSent: false
+          });
+        }
+      }
+    );
   }
 
   toggleNewsletter() {
@@ -52,7 +76,7 @@ export default class Footer extends PureComponent {
 
   render() {
     const { isLight } = this.props;
-    const { newsletterOpen } = this.state;
+    const { newsletterOpen, newsletterSent } = this.state;
     const footerClassName = cx('footer', {
       isLight: isLight,
       isDark: !isLight,
@@ -134,17 +158,50 @@ export default class Footer extends PureComponent {
                 </Paragraph>
               </Spacing>
               <div className="flex md-flex-row flex-col items-center w-full md-w-auto">
-                <Spacing size={[0, 0, 20]} position="x" className="w-full">
-                  <input
-                    className={generalStyles.input}
-                    placeholder="Enter email"
-                  />
-                </Spacing>
-                <Spacing size={[10, 10, 0]} position="y" className="w-full">
-                  <Button className="w-full md-w-auto inline-block text-center">
-                    Sign up
-                  </Button>
-                </Spacing>
+                {newsletterSent === null ? (
+                  <form
+                    method="get"
+                    onSubmit={this.handleSubmit.bind(this)}
+                    name="mc-embedded-subscribe-form"
+                    className="flex md-flex-row flex-col items-center w-full md-w-auto"
+                  >
+                    <Spacing size={[0, 0, 20]} position="x" className="w-full">
+                      <input
+                        ref={ref => {
+                          this.emailRef = ref;
+                        }}
+                        name="EMAIL"
+                        type="email"
+                        required
+                        className={generalStyles.input}
+                        placeholder="Enter email"
+                      />
+                      {/* <input style={{ position: 'absolute', opacity: 0 }} type="text" name="b_ab8ed04bf1e270d137701bf40_7d4a26c1a9" tabindex="-1" value=""></input> */}
+                    </Spacing>
+                    <Spacing
+                      size={[10, 10, 0]}
+                      position="y"
+                      className="w-full inline-block"
+                    >
+                      <Button
+                        id="mc-embedded-subscribe"
+                        tag="button"
+                        type="submit"
+                        className="w-full md-w-auto inline-block text-center"
+                      >
+                        Sign up
+                      </Button>
+                    </Spacing>
+                  </form>
+                ) : (
+                  <span className="opacity-50">
+                    <Paragraph size={['m', 'm', 'l']} weight="semilight">
+                      {newsletterSent === true
+                        ? 'Thank your for subscibring, we will be in touch via mail.'
+                        : 'Something went wrong please try again later.'}
+                    </Paragraph>
+                  </span>
+                )}
               </div>
             </PageWrap>
           </Spacing>

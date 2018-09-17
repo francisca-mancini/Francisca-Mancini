@@ -24,11 +24,21 @@ export default class Button extends PureComponent {
   }
 
   render() {
-    const { tag, href, children, kind, size, prefetch, className } = this.props;
+    const {
+      tag,
+      href,
+      children,
+      kind,
+      size,
+      prefetch,
+      className,
+      type
+    } = this.props;
 
     const ButtonTag = tag;
     const LinkTag = href ? Link : 'span';
     const linkProps = {
+      type,
       href: href || null,
       prefetch: prefetch,
       className

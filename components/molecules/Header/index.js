@@ -219,15 +219,13 @@ class Header extends PureComponent {
               }}
             </MediaQuery>
             <Link href="/" className="leading-none flex items-center">
-              <MediaQuery minDeviceWidth={768} values={{ deviceWidth: 800 }}>
-                {matches => {
-                  if (matches) {
-                    return <img src={logoSrc} width={243} height={16} />;
-                  } else {
-                    return <MobileLogo isLight={headerLight} />;
-                  }
-                }}
-              </MediaQuery>
+              <img
+                className="hidden md-inline-block"
+                src={logoSrc}
+                width={243}
+                height={16}
+              />
+              <MobileLogo isLight={headerLight} />
             </Link>
             <MediaQuery minDeviceWidth={768}>
               {matches => {
@@ -283,23 +281,25 @@ class Header extends PureComponent {
                 </Spacing>
                 <Spacing size={20} position="t">
                   <Heading size="xxs" weight="semilight" center>
-                    <Link href="/shop#fragrances">Fragrances</Link>
+                    <Link href="/shop/fragrances">Fragrances</Link>
                   </Heading>
                 </Spacing>
                 <Spacing size={20} position="t">
                   <Heading size="xxs" weight="semilight" center>
-                    <Link href="/shop#layerings">Layering packs</Link>
+                    <Link href="/shop/layerings">Layering packs</Link>
                   </Heading>
                 </Spacing>
                 <Spacing size={20} position="t">
                   <Heading size="xxs" weight="semilight" center>
-                    <Link href="/shop#discovery">Discovery samples</Link>
+                    <Link href="/shop/discovery">Discovery samples</Link>
                   </Heading>
                 </Spacing>
               </MobileDropdown>
               <NavLink href="/about">About</NavLink>
               <NavLink href="/philosophy">Philosophy</NavLink>
-              <NavLink href="/account">Account</NavLink>
+              <NavLink href="https://admin-shopify.bonhomme.lol">
+                Account
+              </NavLink>
               <Spacing size={20}>
                 <Heading size="xxs" weight="semilight" center>
                   <Link href="/about#contact">Contact</Link>

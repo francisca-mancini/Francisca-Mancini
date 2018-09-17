@@ -5,6 +5,11 @@ import logoMiniBlack from '../../../../static/images/sprites/logo-mini-black.svg
 
 export default function MobileLogo({ isLight }) {
   return (
-    <img src={isLight ? logoMiniWhite : logoMiniBlack} width={41} height={44} />
+    <img
+      className="md-hidden"
+      src={isLight ? logoMiniWhite : logoMiniBlack}
+      width={41}
+      height={44}
+    />
   );
 }

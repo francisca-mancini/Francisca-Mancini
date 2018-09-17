@@ -2,6 +2,7 @@ import React, { PureComponent } from 'react';
 import isNode from 'detect-node';
 import PropTypes from 'prop-types';
 import throttle from 'lodash/throttle';
+import debounce from 'lodash/debounce';
 import Observer from 'react-intersection-observer';
 import SimplexNoise from 'simplex-noise';
 import classNames from 'classnames';
@@ -112,11 +113,25 @@ export default class ProductBackgroundShapes extends PureComponent {
 
     this.renderPixi = this.renderPixi.bind(this);
     this.handleVisibilityChange = this.handleVisibilityChange.bind(this);
+    this.handleResize = debounce(this.handleResize.bind(this), 200, {
+      leading: false,
+      trailing: true
+    });
   }
 
   componentDidMount() {
     this.initPixi();
-    this.addShaderPass();
+
+    window.addEventListener('resize', this.handleResize);
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('resize', this.handleResize);
+  }
+
+  handleResize() {
+    this.destroyPixi();
+    this.initPixi();
   }
 
   handleVisibilityChange(inView) {
@@ -146,6 +161,11 @@ export default class ProductBackgroundShapes extends PureComponent {
     this.app.stage.addChild(this.container);
 
     this.addAreas();
+    this.addShaderPass();
+  }
+
+  destroyPixi() {
+    this.app.destroy(true, true);
   }
 
   addAreas() {

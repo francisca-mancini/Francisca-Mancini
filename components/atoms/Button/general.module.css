@@ -8,6 +8,7 @@
     global(relative)
     global(rounded-50)
   ;
+  border: none;
 }
 
 .bg {
