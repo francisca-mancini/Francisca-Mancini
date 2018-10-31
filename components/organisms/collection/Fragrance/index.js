@@ -81,17 +81,15 @@ export default class Fragrance extends PureComponent {
               <img className={heroStyles.mainImage} src={image1} alt="" />
             </ParallaxWrapper>
           </div>
-          <ParallaxWrapper speed={1.2} positionAbsolute={false}>
-            <Heading
-              size={getFontSize('m')}
-              tracking="025"
-              font="serif"
-              uppercase
-              center
-            >
-              {children}
-            </Heading>
-          </ParallaxWrapper>
+          <Heading
+            size={getFontSize('m')}
+            tracking="025"
+            font="serif"
+            uppercase
+            center
+          >
+            {children}
+          </Heading>
           <Spacing size={30}>
             <MaxWidth center value={720}>
               <Story description={story} />

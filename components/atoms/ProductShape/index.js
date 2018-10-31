@@ -47,6 +47,7 @@ export default class ProductShape extends Component {
 
   componentDidMount() {
     if (!isNode) {
+      this.checkSizes();
       this.initPixi();
     }
 
@@ -55,6 +56,22 @@ export default class ProductShape extends Component {
 
   componentWillUnmount() {
     window.removeEventListener('resize', this.handleResize);
+  }
+
+  checkSizes() {
+    const windowWidth = window.innerWidth;
+
+    console.log(windowWidth);
+
+    if (windowWidth <= 900) {
+      this.circleSizeFactor = 4;
+      this.baseSizeFactor = 5.5;
+      this.movingFactor = 30;
+    } else {
+      this.circleSizeFactor = 3.3;
+      this.baseSizeFactor = 4.4;
+      // this.movingFactor = 50;
+    }
   }
 
   handleResize() {
@@ -217,8 +234,10 @@ export default class ProductShape extends Component {
 
   render() {
     const { isHidden } = this.state;
+    const { isDiscovery } = this.props;
     const containerClassName = classNames(generalStyles.container, {
-      [generalStyles.containerHidden]: isHidden
+      [generalStyles.containerHidden]: isHidden,
+      [generalStyles.containerDiscovery]: isDiscovery
     });
     return (
       <Observer onChange={this.handleVisibilityChange}>

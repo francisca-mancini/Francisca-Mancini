@@ -1,18 +1,22 @@
 import React, { PureComponent } from 'react';
+import classNames from 'classnames';
 import Observer from 'react-intersection-observer';
 import ReactPlayer from 'react-player';
 import PropTypes from 'prop-types';
 
 import generalStyles from './general.module.css';
 
-import video from '../../../static/videos/_temp/video2.mp4';
+import video from '../../../static/videos/video.mp4';
+import soundOn from '../../../static/images/sprites/sound-on.svg';
+import soundOff from '../../../static/images/sprites/sound-off.svg';
 
 export default class HeroVideo extends PureComponent {
   constructor() {
     super();
 
     this.state = {
-      isPlaying: false
+      isPlaying: false,
+      isMuted: true
     };
 
     this.duration = 0;
@@ -39,6 +43,10 @@ export default class HeroVideo extends PureComponent {
     this.barRef.style.transform = `translateX(${timeFraction.toFixed(3)}%)`;
   };
 
+  toggleMute() {
+    this.setState({ isMuted: !this.state.isMuted });
+  }
+
   handleIntersection(inView) {
     const { isPlaying } = this.props;
 
@@ -47,6 +55,14 @@ export default class HeroVideo extends PureComponent {
   }
 
   render() {
+    const { isMuted } = this.state;
+    const soundOnClassName = classNames(generalStyles.soundOn, {
+      hidden: !isMuted
+    });
+    const soundOffClassName = classNames(generalStyles.soundOff, {
+      hidden: isMuted
+    });
+
     return (
       <Observer onChange={this.handleIntersection}>
         <div id="heroVideo" className={generalStyles.hero}>
@@ -58,8 +74,8 @@ export default class HeroVideo extends PureComponent {
             width="100%"
             height="auto"
             url={video}
-            volume={0}
-            muted
+            volume={isMuted ? 0 : 1}
+            muted={isMuted}
             loop
             playsinline
             playing={this.state.isPlaying}
@@ -74,6 +90,13 @@ export default class HeroVideo extends PureComponent {
                 }}
                 className={generalStyles.bar}
               />
+            </div>
+            <div
+              className={generalStyles.sound}
+              onClick={this.toggleMute.bind(this)}
+            >
+              <img src={soundOn} className={soundOnClassName} />
+              <img src={soundOff} className={soundOffClassName} />
             </div>
           </div>
         </div>

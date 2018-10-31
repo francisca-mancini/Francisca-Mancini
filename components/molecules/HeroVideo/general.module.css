@@ -28,10 +28,10 @@
 
 .seekbar {
   composes:
-    global(w-full)
     global(relative)
     global(overflow-hidden)
   ;
+  width: calc(100% - 30px);
   height: 2px;
   background-color: rgba(255,255,255,0.3);
 }
@@ -46,4 +46,22 @@
   ;
   transition: transform 1s linear;
   left: -100%;
+}
+
+.sound {
+  position: absolute;
+  top: 14px;
+  right: 10px;
+  width: 30px;
+  cursor: pointer;
+}
+
+.soundOn {
+  width: 20px;
+  position: absolute;
+}
+
+.soundOff {
+  width: 20px;
+  position: absolute;
 }

@@ -245,7 +245,7 @@ class Header extends PureComponent {
                         Shop
                       </NavLink>
                       <NavLink href="/philosophy">Philosophy</NavLink>
-                      <NavLink href="https://admin-shopify.bonhomme.lol/account">
+                      <NavLink href="https://admin.franciscamancini.com/account">
                         Account
                       </NavLink>
                       <NavLink onClick={this.toggleBasket.bind(this)}>
@@ -297,7 +297,7 @@ class Header extends PureComponent {
               </MobileDropdown>
               <NavLink href="/about">About</NavLink>
               <NavLink href="/philosophy">Philosophy</NavLink>
-              <NavLink href="https://admin-shopify.bonhomme.lol">
+              <NavLink href="https://admin.franciscamancini.com.lol">
                 Account
               </NavLink>
               <Spacing size={20}>

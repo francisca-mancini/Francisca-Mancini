@@ -6,6 +6,10 @@
   transition: opacity 0.5s;
 }
 
+.containerDiscovery {
+  transform: scaleX(1.7);
+}
+
 .containerHidden {
   composes:
     global(opacity-0)

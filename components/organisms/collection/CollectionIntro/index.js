@@ -46,7 +46,7 @@ export default function CollectionIntro({ collection, isHome, to }) {
             duration={500}
             className="cursor-pointer"
           >
-            <LearnMore>Discover the Fragrances</LearnMore>
+            <LearnMore>Discover the collection</LearnMore>
           </Link>
         </div>
       )}

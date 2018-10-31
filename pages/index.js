@@ -40,6 +40,7 @@ class Home extends PureComponent {
   }
 
   componentWillMount() {
+    console.log(this.props);
     const articles = this.props.data.shop.articles.edges;
     this.collection = getCollectionHome(articles, this.props.data);
     this.products = this.collection.products.edges;
@@ -182,6 +183,16 @@ const query = gql`
                     maxVariantPrice {
                       amount
                       currencyCode
+                    }
+                  }
+                  variants(first: 20) {
+                    edges {
+                      node {
+                        selectedOptions {
+                          name
+                          value
+                        }
+                      }
                     }
                   }
                   images(first: 20) {

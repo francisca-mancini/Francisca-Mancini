@@ -46,7 +46,7 @@
 
 .imageFragrance {
   composes:
-    global(w-full)
+    global(w-80)
   ;
 }
 

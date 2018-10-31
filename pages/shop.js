@@ -30,6 +30,7 @@ import getProductTitle from '../lib/getProductTitle';
 import getProductPrice from '../lib/getProductPrice';
 import getProductType from '../lib/getProductType';
 import getLayeringFragrance from '../lib/getLayeringFragrance';
+import getProductVariantType from '../lib/getProductVariantType';
 
 class Shop extends PureComponent {
   static getInitialProps({ query: { handle } }) {
@@ -54,6 +55,10 @@ class Shop extends PureComponent {
     this.layerings = getProductsByType(this.products, 'layering');
     this.discoveries = getProductsByType(this.products, 'discovery');
     this.voiles = getProductsByVoile(this.products);
+
+    this.fragranceType = getProductVariantType(this.fragrances[0].node);
+    this.layeringType = getProductVariantType(this.layerings[0].node);
+    this.discoveryType = getProductVariantType(this.discoveries[0].node);
   }
 
   componentDidMount() {
@@ -97,7 +102,10 @@ class Shop extends PureComponent {
         <Basket onCheckout={this.handleCheckout} />
         <PageWrap>
           <Element name="fragrances">
-            <Fragrances products={this.fragrances} />
+            <Fragrances
+              fragranceType={this.fragranceType}
+              products={this.fragrances}
+            />
           </Element>
 
           <Spacing size={80}>
@@ -105,6 +113,7 @@ class Shop extends PureComponent {
               <Spacing size={20}>
                 <Grid align="stretch" gap={0}>
                   <Layerings
+                    layeringType={this.layeringType}
                     product1={this.voiles[0] && this.voiles[0].node}
                     product2={this.voiles[1] && this.voiles[1].node}
                     href={`/product/${getProductHandle(
@@ -120,7 +129,7 @@ class Shop extends PureComponent {
                       weight="semilight"
                       center
                     >
-                      Shop Layering Packs
+                      Shop {this.layeringType}
                     </Heading>
                     {this.layerings &&
                       this.layerings.length &&
@@ -179,7 +188,7 @@ class Shop extends PureComponent {
               this.discoveries.length && (
                 <Spacing type="padding" size={[0, 0, 80]}>
                   <Heading size="s" weight="semilight" center>
-                    Shop Discovery Pack
+                    Shop {this.discoveryType}
                   </Heading>
 
                   <Spacing>
@@ -218,6 +227,16 @@ const query = gql`
               maxVariantPrice {
                 amount
                 currencyCode
+              }
+            }
+            variants(first: 20) {
+              edges {
+                node {
+                  selectedOptions {
+                    name
+                    value
+                  }
+                }
               }
             }
             images(first: 20) {

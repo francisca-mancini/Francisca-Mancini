@@ -8,7 +8,14 @@ import Link from '../../../atoms/Link';
 
 import ProductThumbnail from '../../../molecules/ProductThumbnail';
 
-export default function Layerings({ product1, product2, href, title, price }) {
+export default function Layerings({
+  product1,
+  product2,
+  href,
+  title,
+  price,
+  layeringType
+}) {
   const stickyStyle = {
     top: 0,
     bottom: 'auto'
@@ -23,7 +30,7 @@ export default function Layerings({ product1, product2, href, title, price }) {
         >
           <span className="absolute z-10 pin-t pin-r w-50 pt-60 text-center">
             <Heading size="s" weight="semilight" center>
-              Shop Layering Packs
+              Shop {layeringType}
             </Heading>
           </span>
           <div className="pt-95 pb-120 flex w-50 items-center justify-center">
@@ -51,7 +58,7 @@ export default function Layerings({ product1, product2, href, title, price }) {
           <span className="absolute pin-b pin-r w-50 pb-40 text-center">
             <Button size="s">
               <Link href={href}>
-                Shop {title} Layering Pack - £{price}
+                Shop {title} {layeringType} - £{price}
               </Link>
             </Button>
           </span>

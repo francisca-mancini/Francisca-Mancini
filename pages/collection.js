@@ -32,6 +32,8 @@ import getCollectionDescription from '../lib/getCollectionDescription';
 
 import { checkoutQuery, checkout } from '../lib/checkout';
 import getProductStory from '../lib/getProductStory';
+import getProductVariantType from '../lib/getProductVariantType';
+import getProductLayering from '../lib/getProductLayering';
 
 class Collection extends PureComponent {
   static getInitialProps({ query: { handle } }) {
@@ -85,6 +87,12 @@ class Collection extends PureComponent {
       const product = item.node;
 
       if (product.productType === 'fragrance') {
+        const layering = getProductLayering(
+          this.collection.products.edges,
+          product
+        );
+        console.log(layering);
+
         this.products.push({
           title: getProductTitle(product),
           handle: getProductHandle(product),
@@ -95,6 +103,7 @@ class Collection extends PureComponent {
           color1: getProductGradient(product).color1,
           color2: getProductGradient(product).color2,
           desc: getCollectionDescription(product),
+          type: layering ? getProductVariantType(layering.node) : '',
           layeringHandle: getProductLayeringHandle(
             this.collection.products,
             product
@@ -219,7 +228,7 @@ class Collection extends PureComponent {
                         href={`/product/${dataItem.layeringHandle}`}
                         underline
                       >
-                        <Heading size="xs">Shop layering pack</Heading>
+                        <Heading size="xs">Shop {dataItem.type}</Heading>
                       </AtomLink>
                     </Spacing>
                   )}
@@ -256,6 +265,16 @@ const query = gql`
                   descriptionHtml
                   productType
                   tags
+                  variants(first: 20) {
+                    edges {
+                      node {
+                        selectedOptions {
+                          name
+                          value
+                        }
+                      }
+                    }
+                  }
                 }
               }
             }

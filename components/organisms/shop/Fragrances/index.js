@@ -7,11 +7,11 @@ import Heading from '../../../atoms/Heading';
 
 import ProductThumbnail from '../../../molecules/ProductThumbnail';
 
-export default function Fragrances({ products }) {
+export default function Fragrances({ products, fragranceType }) {
   return (
     <Spacing type="padding" size={40}>
       <Heading size="s" weight="semilight" center>
-        Shop Fragrances
+        Shop {fragranceType}
       </Heading>
       <Grid gap={0}>
         {products &&

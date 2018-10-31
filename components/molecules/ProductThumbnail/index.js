@@ -18,6 +18,7 @@ import getProductSingle from '../../../lib/getProductSingle';
 import getCleanType from '../../../lib/getCleanType';
 import getProductType from '../../../lib/getProductType';
 import getProductPrice from '../../../lib/getProductPrice';
+import getProductVariantType from '../../../lib/getProductVariantType';
 
 import generalStyles from './general.module.css';
 
@@ -53,6 +54,7 @@ export default class ProductThumbnail extends PureComponent {
     const cleanType = getCleanType(type);
     const title = getProductTitle(product);
     const img = singleImage || images[0].transformedSrc;
+    const variantType = getProductVariantType(product);
     const containerClassName = classNames(
       generalStyles.imageContainer,
       'pixiContainer',
@@ -145,7 +147,7 @@ export default class ProductThumbnail extends PureComponent {
                   </Heading>
                 </Spacing>
                 <Paragraph weight="semilight" size="xs" center>
-                  {cleanType} {isNoPrice ? '' : `- £${price}`}
+                  {variantType} {isNoPrice ? '' : `- £${price}`}
                 </Paragraph>
               </div>
             )}

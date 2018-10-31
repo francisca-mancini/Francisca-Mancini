@@ -5,7 +5,7 @@ import { withRouter } from 'next/router';
 
 import generalStyles from './general.module.css';
 
-import loadingImage from '../../../static/images/loading-bg.jpg';
+import loadingImage from '../../../static/images/loading-bg3.jpg';
 
 class Loader extends PureComponent {
   constructor() {
@@ -50,10 +50,7 @@ class Loader extends PureComponent {
       prevState.videoLoaded !== videoLoaded ||
       prevState.animationLoaded !== animationLoaded
     ) {
-      console.log('change');
-
-      if (!ready && imagesLoaded && videoLoaded && animationLoaded) {
-        console.log('ready should be true');
+      if (!ready && imagesLoaded && animationLoaded) {
         this.launchLoader();
       }
     }
@@ -79,7 +76,7 @@ class Loader extends PureComponent {
 
     if (videoLoaded) return;
 
-    if (video.readyState === 4) {
+    if (video.readyState === 3) {
       this.setState({ videoLoaded: true });
     } else {
       setTimeout(this.checkVideo, 100);
