@@ -61,8 +61,6 @@ export default class ProductShape extends Component {
   checkSizes() {
     const windowWidth = window.innerWidth;
 
-    console.log(windowWidth);
-
     if (windowWidth <= 900) {
       this.circleSizeFactor = 4;
       this.baseSizeFactor = 5.5;

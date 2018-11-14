@@ -28,6 +28,12 @@ img {
   max-width: 100%;
 }
 
+a {
+  text-decoration: none;
+  color: inherit;
+  font-weight: bold;
+}
+
 .cursor {
   cursor: url('/static/images/cursor.png') 10 11, auto;
 }

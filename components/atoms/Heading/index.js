@@ -34,7 +34,8 @@ export default function Heading({
   font,
   weight,
   tracking,
-  className
+  className,
+  ...props
 }) {
   const HeadingTag = tag;
   const sizeToClass = propToClassName(size, sizeMap);
@@ -51,12 +52,16 @@ export default function Heading({
     }
   );
 
-  return <HeadingTag className={headingClassName}>{children}</HeadingTag>;
+  return (
+    <HeadingTag {...props} className={headingClassName}>
+      {children}
+    </HeadingTag>
+  );
 }
 
 Heading.propTypes = {
   tag: PropTypes.oneOf(tagList),
-  children: PropTypes.node.isRequired,
+  children: PropTypes.node,
   color: PropTypes.string,
   size: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
   center: PropTypes.bool,

@@ -64,9 +64,11 @@ class Philosophy extends PureComponent {
                 case 'paragraph':
                   return (
                     <Spacing key={index}>
-                      <Paragraph size={['m', 'l', 'xxl']} font="jenson">
-                        {item.string}
-                      </Paragraph>
+                      <Paragraph
+                        size={['m', 'l', 'xxl']}
+                        font="jenson"
+                        dangerouslySetInnerHTML={{ __html: item.string }}
+                      />
                     </Spacing>
                   );
                 case 'quote':
@@ -76,9 +78,8 @@ class Philosophy extends PureComponent {
                         weight="medium"
                         size={['m', 'l', 'xxl']}
                         center
-                      >
-                        {item.string}
-                      </Paragraph>
+                        dangerouslySetInnerHTML={{ __html: item.string }}
+                      />
                     </MaxWidth>
                   );
                 case 'date':
@@ -98,9 +99,8 @@ class Philosophy extends PureComponent {
                           tag="h3"
                           size={['xs', 's', 'l']}
                           weight="semilight"
-                        >
-                          {item.string}
-                        </Heading>
+                          dangerouslySetInnerHTML={{ __html: item.string }}
+                        />
                       </Spacing>
                     </Fragment>
                   );

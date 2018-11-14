@@ -33,7 +33,8 @@ export default function Paragraph({
   justified,
   weight,
   color,
-  indent
+  indent,
+  ...props
 }) {
   const ParagraphTag = tag;
   const sizeToClass = propToClassName(size, sizeMap);
@@ -53,7 +54,11 @@ export default function Paragraph({
   );
 
   return (
-    <ParagraphTag className={paragraphClassName} style={paragraphStyles}>
+    <ParagraphTag
+      {...props}
+      className={paragraphClassName}
+      style={paragraphStyles}
+    >
       {children}
     </ParagraphTag>
   );
@@ -61,7 +66,7 @@ export default function Paragraph({
 
 Paragraph.propTypes = {
   tag: PropTypes.oneOf(tagList),
-  children: PropTypes.node.isRequired,
+  children: PropTypes.node,
   color: PropTypes.string,
   size: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
   center: PropTypes.bool,

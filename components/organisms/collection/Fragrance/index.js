@@ -22,6 +22,10 @@ export default class Fragrance extends PureComponent {
   constructor() {
     super();
 
+    this.state = {
+      collectionInView: false
+    };
+
     this.threshold = 0.3;
   }
   componentDidMount() {
@@ -41,6 +45,10 @@ export default class Fragrance extends PureComponent {
     }
   }
 
+  handleImagesIntersection(inView) {
+    this.setState({ collectionInView: inView });
+  }
+
   render() {
     const {
       story,
@@ -54,6 +62,19 @@ export default class Fragrance extends PureComponent {
       handle,
       layeringHandle
     } = this.props;
+    const { collectionInView } = this.state;
+    const thirdImageClassName = classNames(heroStyles.thirdImage, {
+      [heroStyles.thirdImageHidden]: !collectionInView
+    });
+    const secondImageClassName = classNames(heroStyles.secondImage, {
+      [heroStyles.secondImageHidden]: !collectionInView
+    });
+    const mainImageClassName = classNames(heroStyles.mainImage, {
+      [heroStyles.mainImageHidden]: !collectionInView
+    });
+    const shapeContainerClassName = classNames(heroStyles.shapeContainer, {
+      [heroStyles.shapeContainerHidden]: !collectionInView
+    });
 
     return (
       <Observer
@@ -62,24 +83,36 @@ export default class Fragrance extends PureComponent {
       >
         <div className={generalStyles.container}>
           <div className={heroStyles.container}>
-            <ParallaxWrapper speed={1}>
-              <div className={heroStyles.shapeContainer}>
-                <div
-                  className={classNames(heroStyles.shapeRatio, 'pixiContainer')}
-                >
-                  <ProductShape isTransparent color1={color1} color2={color2} />
+            <Observer
+              onChange={this.handleImagesIntersection.bind(this)}
+              threshold={0.5}
+            >
+              <ParallaxWrapper speed={1}>
+                <div className={shapeContainerClassName}>
+                  <div
+                    className={classNames(
+                      heroStyles.shapeRatio,
+                      'pixiContainer'
+                    )}
+                  >
+                    <ProductShape
+                      isTransparent
+                      color1={color1}
+                      color2={color2}
+                    />
+                  </div>
                 </div>
-              </div>
-            </ParallaxWrapper>
-            <ParallaxWrapper speed={1.7}>
-              <img className={heroStyles.thirdImage} src={image3} alt="" />
-            </ParallaxWrapper>
-            <ParallaxWrapper speed={2.2}>
-              <img className={heroStyles.secondImage} src={image2} alt="" />
-            </ParallaxWrapper>
-            <ParallaxWrapper speed={2.8}>
-              <img className={heroStyles.mainImage} src={image1} alt="" />
-            </ParallaxWrapper>
+              </ParallaxWrapper>
+              <ParallaxWrapper speed={1.7}>
+                <img className={thirdImageClassName} src={image3} alt="" />
+              </ParallaxWrapper>
+              <ParallaxWrapper speed={2.2}>
+                <img className={secondImageClassName} src={image2} alt="" />
+              </ParallaxWrapper>
+              <ParallaxWrapper speed={2.8}>
+                <img className={mainImageClassName} src={image1} alt="" />
+              </ParallaxWrapper>
+            </Observer>
           </div>
           <Heading
             size={getFontSize('m')}

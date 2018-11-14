@@ -91,7 +91,6 @@ class Collection extends PureComponent {
           this.collection.products.edges,
           product
         );
-        console.log(layering);
 
         this.products.push({
           title: getProductTitle(product),

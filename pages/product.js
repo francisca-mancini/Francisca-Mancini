@@ -121,6 +121,16 @@ const query = gql`
                       currencyCode
                     }
                   }
+                  variants(first: 20) {
+                    edges {
+                      node {
+                        selectedOptions {
+                          name
+                          value
+                        }
+                      }
+                    }
+                  }
                   images(first: 20) {
                     edges {
                       node {

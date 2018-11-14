@@ -142,7 +142,7 @@ export default class Footer extends PureComponent {
               <NavLink href="https://instagram.com">Instagram</NavLink>
               <NavLink href="/help">Help</NavLink>
               <NavLink onClick={this.toggleNewsletter}>Newsletter</NavLink>
-              <NavLink href="/legals">Legals</NavLink>
+              <NavLink href="/terms">Legals</NavLink>
             </InlineGrid>
           </InlineGrid>
         </PageWrap>
