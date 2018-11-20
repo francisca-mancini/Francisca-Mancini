@@ -62,6 +62,8 @@ class Home extends PureComponent {
     } else {
       this.setState({ isLoaded: true, secondTime: true });
     }
+
+    console.log('github pushed');
   }
 
   onLoaderUpdate(isLoaded) {
