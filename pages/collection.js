@@ -34,6 +34,7 @@ import { checkoutQuery, checkout } from '../lib/checkout';
 import getProductStory from '../lib/getProductStory';
 import getProductVariantType from '../lib/getProductVariantType';
 import getProductLayering from '../lib/getProductLayering';
+import getCollectionVideo from '../lib/getCollectionVideo';
 
 class Collection extends PureComponent {
   static getInitialProps({ query: { handle } }) {
@@ -57,6 +58,7 @@ class Collection extends PureComponent {
       this.props.url.push('/404');
     }
 
+    this.video = getCollectionVideo(this.collection);
     this.getProducts();
   }
 
@@ -131,7 +133,7 @@ class Collection extends PureComponent {
     return (
       <App hasTopPad={false} hasBottomPad={false} headerLight isHome>
         <Basket onCheckout={this.handleCheckout} />
-        <HeroVideo />
+        <HeroVideo src={this.video.url} poster={this.video.image} />
         <div style={containerStyle}>
           <Spacing size={80} type="padding" position="b">
             <PageWrap>
@@ -254,6 +256,9 @@ const query = gql`
             description
             descriptionHtml
             title
+            image {
+              transformedSrc
+            }
             products(first: 20) {
               edges {
                 node {

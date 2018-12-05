@@ -5,8 +5,6 @@ import { withRouter } from 'next/router';
 
 import generalStyles from './general.module.css';
 
-import loadingImage from '../../../static/images/loading-bg3.jpg';
-
 class Loader extends PureComponent {
   constructor() {
     super();
@@ -30,6 +28,8 @@ class Loader extends PureComponent {
     this.checkVideo();
 
     this.containerRef.style.height = `${this.containerRef.offsetHeight}px`;
+    const heroVideo = document.getElementById('heroVideo');
+    this.loadingImage = heroVideo ? heroVideo.dataset.poster : '';
 
     this.maskRef.addEventListener('animationend', this.checkAnimation, false);
     window.addEventListener('load', this.checkVideo, false);
@@ -74,7 +74,7 @@ class Loader extends PureComponent {
     const { videoLoaded } = this.state;
     const video = document.querySelector('video');
 
-    if (videoLoaded) return;
+    if (videoLoaded && !video) return;
 
     if (video.readyState === 3) {
       this.setState({ videoLoaded: true });
@@ -119,7 +119,7 @@ class Loader extends PureComponent {
           ref={ref => {
             this.innerRef = ref;
           }}
-          style={{ backgroundImage: `url(${loadingImage})` }}
+          style={{ backgroundImage: `url(${this.loadingImage})` }}
         >
           <div className={holderClassName}>
             <div className={holderInnerClassName}>

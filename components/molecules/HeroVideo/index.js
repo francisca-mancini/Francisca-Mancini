@@ -6,7 +6,6 @@ import PropTypes from 'prop-types';
 
 import generalStyles from './general.module.css';
 
-import video from '../../../static/videos/video.mp4';
 import soundOn from '../../../static/images/sprites/sound-on.svg';
 import soundOff from '../../../static/images/sprites/sound-off.svg';
 
@@ -55,6 +54,7 @@ export default class HeroVideo extends PureComponent {
   }
 
   render() {
+    const { src, poster } = this.props;
     const { isMuted } = this.state;
     const soundOnClassName = classNames(generalStyles.soundOn, {
       hidden: !isMuted
@@ -65,7 +65,7 @@ export default class HeroVideo extends PureComponent {
 
     return (
       <Observer onChange={this.handleIntersection}>
-        <div id="heroVideo" className={generalStyles.hero}>
+        <div id="heroVideo" data-poster={poster} className={generalStyles.hero}>
           <ReactPlayer
             ref={ref => {
               this.playerRef = ref;
@@ -73,7 +73,7 @@ export default class HeroVideo extends PureComponent {
             className={generalStyles.video}
             width="100%"
             height="auto"
-            url={video}
+            url={src}
             volume={isMuted ? 0 : 1}
             muted={isMuted}
             loop

@@ -21,6 +21,7 @@ import CollectionIntro from '../components/organisms/collection/CollectionIntro'
 
 import getCollectionHome from '../lib/getCollectionHome';
 import getProductsByType from '../lib/getProductsByType';
+import getCollectionVideo from '../lib/getCollectionVideo';
 
 import { checkoutQuery, checkout } from '../lib/checkout';
 import getProductsByVoile from '../lib/getProductsByVoile';
@@ -49,8 +50,7 @@ class Home extends PureComponent {
     this.layering = getProductsByType(this.products, 'layering')[0];
     this.discovery = getProductsByType(this.products, 'discovery')[0];
     this.voiles = getProductsByVoile(this.products);
-
-    console.log(this.product);
+    this.video = getCollectionVideo(this.collection);
 
     this.dataProduct = getLayeringFragrance(
       this.products,
@@ -85,13 +85,15 @@ class Home extends PureComponent {
       }
     };
 
-    const products = this.collection.products.edges;
-
     return (
       <App hasTopPad={false} headerLight isHome isLoaded={isLoaded}>
         <Basket onCheckout={this.handleCheckout} />
         {!secondTime && <Loader onUpdate={this.onLoaderUpdate} />}
-        <HeroVideo isPlaying={isLoaded} />
+        <HeroVideo
+          isPlaying={isLoaded}
+          src={this.video.url}
+          poster={this.video.image}
+        />
         <PageWrap>
           <div {...collectionProps}>
             <Spacing size={80} type="padding">
@@ -224,6 +226,9 @@ const query = gql`
             description
             descriptionHtml
             title
+            image {
+              transformedSrc
+            }
             products(first: 20) {
               edges {
                 node {
