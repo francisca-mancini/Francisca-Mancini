@@ -69,7 +69,11 @@ class Product extends PureComponent {
     }
 
     return (
-      <App hasTopPad={false} hasBottomPad={false}>
+      <App
+        hasTopPad={false}
+        hasBottomPad={false}
+        collections={this.props.data.shop.collections}
+      >
         <Basket onCheckout={this.handleCheckout} />
         <PageWrap>
           <Hero product={this.product} dataProduct={this.dataProduct} />

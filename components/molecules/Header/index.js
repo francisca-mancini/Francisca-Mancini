@@ -76,11 +76,7 @@ class Header extends PureComponent {
   }
 
   handleScroll(e) {
-    let y = e.pageY;
-
-    if (e.pageY === undefined) {
-      y = window.pageYOffset;
-    }
+    const y = e.pageY || window.pageYOffset;
 
     if (this.props.isHome && y >= this.heroHeight) {
       this.setState({ isLight: false });
@@ -108,7 +104,7 @@ class Header extends PureComponent {
   }
 
   render() {
-    const { isLoaded, pathname } = this.props;
+    const { isLoaded, pathname, collections } = this.props;
     const { isLight, basketCount, isMobileOpen } = this.state;
     const headerClassName = classNames(generalStyles.header, {
       [generalStyles.headerHidden]: !isLoaded,
@@ -122,6 +118,7 @@ class Header extends PureComponent {
     const logoSrc = headerLight ? logoWhite : logoBlack;
     const cartSrc = headerLight ? cartWhite : cartBlack;
     const linkColor = headerLight ? 'white' : 'black';
+    const singleCollection = collections.edges.length > 1 ? false : true;
 
     const NavLink = ({
       children,
@@ -185,16 +182,21 @@ class Header extends PureComponent {
       return (
         <div className={generalStyles.dropdown}>
           <div className={generalStyles.dropdownInner}>
-            <NavLink isDropdown href="/collection/maps-travel">
-              N°1: MAPS, TRAVEL
-            </NavLink>
-            <NavLink isDropdown href="/collection/maps-travel">
-              N°1: MAPS, TRAVEL
-            </NavLink>
+            {collections.edges.map((item, index) => {
+              const name = item.node.title;
+              const handle = item.node.handle;
+              return (
+                <NavLink isDropdown href={`/collection/${handle}`}>
+                  {name}
+                </NavLink>
+              );
+            })}
           </div>
         </div>
       );
     };
+
+    console.log(collections);
 
     return (
       <header className={headerClassName}>
@@ -236,10 +238,10 @@ class Header extends PureComponent {
                         isCollection
                         // className="relative"
                         href="/collection/maps-travel"
-                        // isDropdownTrigger
+                        isDropdownTrigger={!singleCollection}
                       >
-                        N°1: Maps Travel
-                        {/* <CollectionDropdown /> */}
+                        {singleCollection ? 'N°1: Maps Travel' : 'collections'}
+                        {!singleCollection && <CollectionDropdown />}
                       </NavLink>
                       <NavLink href="/shop" zIndex>
                         Shop

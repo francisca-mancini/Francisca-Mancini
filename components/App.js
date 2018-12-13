@@ -28,7 +28,8 @@ class App extends PureComponent {
       footerLight,
       hasTopPad,
       hasBottomPad,
-      isLoaded
+      isLoaded,
+      collections
     } = this.props;
 
     const pathname = router.pathname;
@@ -45,6 +46,7 @@ class App extends PureComponent {
             isLoaded={isLoaded}
             isLight={headerLight}
             isHome={isHome}
+            collections={collections}
           />
           <div
             className={classNames({
@@ -65,7 +67,8 @@ App.propTypes = {
   hasTopPad: PropTypes.bool,
   headerLight: PropTypes.bool,
   footerLight: PropTypes.bool,
-  isLoaded: PropTypes.bool
+  isLoaded: PropTypes.bool,
+  collections: PropTypes.any
 };
 
 App.defaultProps = {

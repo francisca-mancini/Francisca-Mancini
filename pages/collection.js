@@ -131,7 +131,13 @@ class Collection extends PureComponent {
     }
 
     return (
-      <App hasTopPad={false} hasBottomPad={false} headerLight isHome>
+      <App
+        hasTopPad={false}
+        hasBottomPad={false}
+        headerLight
+        isHome
+        collections={this.props.data.shop.collections}
+      >
         <Basket onCheckout={this.handleCheckout} />
         <HeroVideo src={this.video.url} poster={this.video.image} />
         <div style={containerStyle}>

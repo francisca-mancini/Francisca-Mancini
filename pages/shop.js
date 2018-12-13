@@ -98,7 +98,7 @@ class Shop extends PureComponent {
     const { activeIndex } = this.state;
 
     return (
-      <App>
+      <App collections={this.props.data.shop.collections}>
         <Basket onCheckout={this.handleCheckout} />
         <PageWrap>
           <Element name="fragrances">
@@ -213,6 +213,17 @@ const query = gql`
     shop {
       name
       description
+      collections(first: 20) {
+        edges {
+          node {
+            handle
+            id
+            description
+            descriptionHtml
+            title
+          }
+        }
+      }
       products(first: 50) {
         edges {
           node {

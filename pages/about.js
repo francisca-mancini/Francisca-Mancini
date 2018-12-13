@@ -38,7 +38,7 @@ class About extends PureComponent {
 
   render() {
     return (
-      <App>
+      <App collections={this.props.data.shop.collections}>
         <Basket onCheckout={this.handleCheckout} />
         <PageWrap>
           <Spacing size={60} type="padding">
@@ -93,6 +93,17 @@ const query = gql`
     shop {
       name
       description
+      collections(first: 20) {
+        edges {
+          node {
+            handle
+            id
+            description
+            descriptionHtml
+            title
+          }
+        }
+      }
       articles(first: 20) {
         edges {
           node {

@@ -86,7 +86,13 @@ class Home extends PureComponent {
     };
 
     return (
-      <App hasTopPad={false} headerLight isHome isLoaded={isLoaded}>
+      <App
+        hasTopPad={false}
+        headerLight
+        isHome
+        isLoaded={isLoaded}
+        collections={this.props.data.shop.collections}
+      >
         <Basket onCheckout={this.handleCheckout} />
         {!secondTime && <Loader onUpdate={this.onLoaderUpdate} />}
         <HeroVideo
