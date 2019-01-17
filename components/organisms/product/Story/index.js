@@ -11,6 +11,7 @@ import getProductStory from '../../../../lib/getProductStory';
 import getProductNotes from '../../../../lib/getProductNotes';
 import getProductBackground from '../../../../lib/getProductBackground';
 import getFontSize from '../../../../lib/getFontSize';
+import getProductType from '../../../../lib/getProductType';
 
 import generalStyles from './general.module.css';
 
@@ -36,37 +37,44 @@ const Note = ({ label, children }) => {
 };
 
 function Story({ product, dataProduct }) {
+  const type = getProductType(product);
+  let notes = null;
+  if (type !== 'discovery') {
+    notes = dataProduct && getProductNotes(dataProduct);
+  }
   const story = dataProduct && getProductStory(dataProduct);
-  const notes = dataProduct && getProductNotes(dataProduct);
   const bg = dataProduct && getProductBackground(dataProduct);
   const storyStyles = {
     backgroundColor: bg
   };
+  const storyCol = [12, 12, story ? 6 : 12];
 
   return (
     <Spacing size={80} position="bottom" type="padding">
       <div id="story" className={generalStyles.story} style={storyStyles}>
         <PageWrap>
           <Spacing size={80} type="padding">
-            <Grid gap={[0, 0, 30]} align="center">
-              <GridItem columnSize={[12, 12, 6]}>
-                <Spacing size={30} position="b">
-                  <Heading size={['xs', 's', 's']} weight="semilight" center>
-                    Fragrance notes
-                  </Heading>
-                </Spacing>
+            <Grid gap={[0, 0, 30]} align="center" justify="center">
+              {notes && (
+                <GridItem columnSize={[12, 12, 6]}>
+                  <Spacing size={30} position="b">
+                    <Heading size={['xs', 's', 's']} weight="semilight" center>
+                      Fragrance notes
+                    </Heading>
+                  </Spacing>
 
-                {notes &&
-                  notes.length &&
-                  notes.map((item, index) => {
-                    return (
-                      <Note key={index} label={item.label}>
-                        {item.note}
-                      </Note>
-                    );
-                  })}
-              </GridItem>
-              <GridItem columnSize={[12, 12, 6]}>
+                  {notes &&
+                    notes.length &&
+                    notes.map((item, index) => {
+                      return (
+                        <Note key={index} label={item.label}>
+                          {item.note}
+                        </Note>
+                      );
+                    })}
+                </GridItem>
+              )}
+              <GridItem columnSize={storyCol}>
                 <Spacing size={[100, 100, 0]} position="t">
                   <Spacing size={30} position="b">
                     <Heading size={['xs', 's', 's']} weight="semilight" center>
