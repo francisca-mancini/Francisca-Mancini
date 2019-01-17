@@ -50,6 +50,20 @@
   ;
 }
 
+.multipleContainer {
+  position: absolute;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  transform: scale(1);
+  transition: transform 0.3s ease-in-out;
+}
+.multipleContainer:hover {
+  transform: scale(1.03);
+}
+
 .imageMultiple {
   composes:
     global(w-auto)

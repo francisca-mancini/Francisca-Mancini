@@ -99,7 +99,7 @@ export default class ProductThumbnail extends PureComponent {
           <LinkTag {...LinkProps}>
             <div className={containerClassName}>
               {isMultiple ? (
-                <Fragment>
+                <div className={generalStyles.multipleContainer}>
                   <img
                     src={voile1}
                     alt={title}
@@ -118,7 +118,7 @@ export default class ProductThumbnail extends PureComponent {
                     className={imageClassName}
                     style={multipleStyles3}
                   />
-                </Fragment>
+                </div>
               ) : (
                 <img
                   className={imageClassName}
