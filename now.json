@@ -1,3 +1,10 @@
 {
-  "alias": ["franciscamancini.com", "www.franciscamancini.com"]
+  "version": 2,
+  "alias": ["franciscamancini.com", "www.franciscamancini.com"],
+  "builds": [
+    {
+      "src": "package.json",
+      "use": "@now/next"
+    }
+  ]
 }
