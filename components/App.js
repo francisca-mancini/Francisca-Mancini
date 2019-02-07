@@ -15,7 +15,7 @@ class App extends PureComponent {
     if (!firstTime) {
       setTimeout(() => {
         sessionStorage.setItem('hasLoadedAlready', 'true');
-      }, 1000);
+      }, 999);
     }
   }
 
