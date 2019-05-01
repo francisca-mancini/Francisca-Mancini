@@ -137,9 +137,10 @@ export default class Footer extends PureComponent {
               </Link>
             </Spacing>
             <InlineGrid className="flex-wrap" justify="center">
-              <NavLink href="/about">About</NavLink>
               <NavLink href="/about#contact">Contact</NavLink>
-              <NavLink href="https://instagram.com">Instagram</NavLink>
+              <NavLink href="https://www.instagram.com/franciscamancini/">
+                Instagram
+              </NavLink>
               <NavLink href="/help">Help</NavLink>
               <NavLink onClick={this.toggleNewsletter}>Newsletter</NavLink>
               <NavLink href="/terms">Legals</NavLink>

@@ -247,6 +247,7 @@ class Header extends PureComponent {
                         Shop
                       </NavLink>
                       <NavLink href="/philosophy">Philosophy</NavLink>
+                      <NavLink href="/about">About</NavLink>
                       <NavLink href="https://admin.franciscamancini.com/account">
                         Account
                       </NavLink>
