@@ -58,11 +58,13 @@ class About extends PureComponent {
                 switch (item.type) {
                   case 'paragraph':
                     return (
-                      <Paragraph
-                        size={['m', 'l', 'xxl']}
-                        font="jenson"
-                        dangerouslySetInnerHTML={{ __html: item.string }}
-                      />
+                      <Spacing key={index} size={30} position="b">
+                        <Paragraph
+                          size={['m', 'l']}
+                          font="jenson"
+                          dangerouslySetInnerHTML={{ __html: item.string }}
+                        />
+                      </Spacing>
                     );
                   case 'title':
                     return (

@@ -58,7 +58,7 @@ class Help extends PureComponent {
                     return (
                       <Spacing key={index}>
                         <Paragraph
-                          size={['m', 'l', 'xxl']}
+                          size={['m', 'l']}
                           font="jenson"
                           dangerouslySetInnerHTML={{ __html: item.string }}
                         />

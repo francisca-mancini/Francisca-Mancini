@@ -59,7 +59,7 @@ class Terms extends PureComponent {
                     return (
                       <Spacing key={index}>
                         <Paragraph
-                          size={['m', 'l', 'xxl']}
+                          size={['m', 'l']}
                           font="jenson"
                           dangerouslySetInnerHTML={{ __html: item.string }}
                         />
@@ -68,7 +68,7 @@ class Terms extends PureComponent {
                   case 'title':
                     return (
                       <Heading
-                        size={['m', 'l', 'xxl']}
+                        size={['m', 'l']}
                         font="jenson"
                         weight="light"
                         center

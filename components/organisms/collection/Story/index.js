@@ -38,7 +38,7 @@ export default function Story({ description }) {
   });
 
   return (
-    <Paragraph indent justified size={getFontSize('xl')} font="jenson">
+    <Paragraph indent justified size={getFontSize('l')} font="jenson">
       {mappedDescription.map((item, index) => {
         if (item.image) {
           return (

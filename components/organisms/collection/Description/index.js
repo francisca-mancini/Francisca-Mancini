@@ -41,7 +41,7 @@ export default function Description({ description }) {
     <Paragraph
       font="jenson"
       weight="light"
-      size="xl"
+      size={['m', 'l']}
       tag="div"
       justified
       indent

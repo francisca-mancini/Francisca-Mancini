@@ -50,22 +50,24 @@ class Philosophy extends PureComponent {
               </MaxWidth>
             </Spacing>
 
-            <Heading
-              size={['m', 'l', 'xxl']}
-              font="jenson"
-              weight="light"
-              center
-            >
-              {this.title}
-            </Heading>
+            <Spacing>
+              <Heading
+                size={['m', 'l', 'xxl']}
+                font="jenson"
+                weight="light"
+                center
+              >
+                {this.title}
+              </Heading>
+            </Spacing>
 
             {this.content.map((item, index) => {
               switch (item.type) {
                 case 'paragraph':
                   return (
-                    <Spacing key={index}>
+                    <Spacing size={30} position="b">
                       <Paragraph
-                        size={['m', 'l', 'xxl']}
+                        size={['m', 'l']}
                         font="jenson"
                         dangerouslySetInnerHTML={{ __html: item.string }}
                       />
@@ -73,14 +75,16 @@ class Philosophy extends PureComponent {
                   );
                 case 'quote':
                   return (
-                    <MaxWidth value={670} center key={index}>
-                      <Paragraph
-                        weight="medium"
-                        size={['m', 'l', 'xxl']}
-                        center
-                        dangerouslySetInnerHTML={{ __html: item.string }}
-                      />
-                    </MaxWidth>
+                    <Spacing size={30}>
+                      <MaxWidth value={550} center key={index}>
+                        <Paragraph
+                          weight="medium"
+                          size={['m', 'l']}
+                          center
+                          dangerouslySetInnerHTML={{ __html: item.string }}
+                        />
+                      </MaxWidth>
+                    </Spacing>
                   );
                 case 'date':
                   return (

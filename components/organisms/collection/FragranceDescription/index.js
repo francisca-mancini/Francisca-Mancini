@@ -38,7 +38,7 @@ export default function FragranceDescription({ description }) {
   });
 
   return (
-    <Paragraph indent justified size={getFontSize('xl')} font="jenson">
+    <Paragraph indent justified size={getFontSize('l')} font="jenson">
       {mappedDescription.map(item => {
         if (item.image) {
           return <WordHover image={item.image}>{item.string}</WordHover>;
