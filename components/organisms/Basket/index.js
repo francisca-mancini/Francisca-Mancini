@@ -50,7 +50,10 @@ class Basket extends PureComponent {
   }
 
   componentDidUpdate(prevProps) {
-    if (prevProps.globalState.cartOpen !== this.props.globalState.cartOpen) {
+    if (
+      prevProps.globalState.cartOpen !== this.props.globalState.cartOpen ||
+      prevProps.globalState.count !== this.props.globalState.count
+    ) {
       const basket = getSessionStorage('basket');
       this.setState({
         isOpen: this.props.isOpen,
@@ -60,13 +63,13 @@ class Basket extends PureComponent {
       this.calculateTotal();
     }
 
-    if (prevProps.globalState.count !== this.props.globalState.count) {
-      // const basket = getSessionStorage('basket');
-      // this.setState({
-      //   basket
-      // });
-      this.calculateTotal();
-    }
+    // if (prevProps.globalState.count !== this.props.globalState.count) {
+    //   // const basket = getSessionStorage('basket');
+    //   // this.setState({
+    //   //   basket
+    //   // });
+    //   this.calculateTotal();
+    // }
   }
 
   calculateTotal() {

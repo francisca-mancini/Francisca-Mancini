@@ -23,8 +23,7 @@ class BasketItem extends PureComponent {
     super(props);
 
     this.state = {
-      quantity: props.quantity,
-      isRemoved: false
+      quantity: props.quantity
     };
 
     this.add = throttle(this.add.bind(this), 200);
@@ -57,7 +56,7 @@ class BasketItem extends PureComponent {
 
   delete() {
     const basket = getSessionStorage('basket');
-    let items = basket.items;
+    const items = basket.items;
     const count = basket.count;
 
     const product = remove(items, o => {
@@ -76,8 +75,6 @@ class BasketItem extends PureComponent {
       items: newItems,
       count: newcount
     });
-
-    this.setState({ isRemoved: true });
 
     this.props.setGlobalState({
       count: newcount,
@@ -101,26 +98,24 @@ class BasketItem extends PureComponent {
     const diff = quantity - oldQuantity;
     product.quantity = quantity;
     const newItems = [...items];
+    const newCount = count + diff;
 
     setSessionStorage('basket', {
       items: newItems,
-      count: count + diff
+      count: newCount
     });
 
     this.props.setGlobalState({
-      count: count + diff
+      count: newCount
     });
   }
 
   render() {
     const { product } = this.props;
-    const { quantity, isRemoved } = this.state;
-    const wrapperStyle = {
-      display: isRemoved ? 'none' : 'block'
-    };
+    const { quantity } = this.state;
 
     return (
-      <div style={wrapperStyle}>
+      <div>
         <Spacing size={25} position="x" type="padding">
           <Spacing size={40}>
             <Grid align="center" gap={10}>
@@ -155,13 +150,12 @@ class BasketItem extends PureComponent {
                 </Spacing>
                 <InlineGrid justify="end">
                   <Paragraph size="xs">
-                    <div
+                    <span
                       onClick={this.delete}
-                      underline
                       className="opacity-75 cursor-pointer underline"
                     >
                       Remove item
-                    </div>
+                    </span>
                   </Paragraph>
                 </InlineGrid>
               </GridItem>
