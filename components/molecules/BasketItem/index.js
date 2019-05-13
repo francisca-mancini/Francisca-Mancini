@@ -131,12 +131,7 @@ class BasketItem extends PureComponent {
                     £{getProductPrice(product)}
                   </Heading>
                 </InlineGrid>
-                <Spacing size={10} position="t">
-                  <Paragraph size="xs">
-                    Lorem ipsum kg dfkjgh kjhg fgj hgjkdf gk
-                  </Paragraph>
-                </Spacing>
-                <Spacing size={5}>
+                <Spacing size={15}>
                   <InlineGrid justify="start">
                     <Paragraph size="xs">Quantity</Paragraph>
                     <div onClick={this.remove} className={generalStyles.minus}>
