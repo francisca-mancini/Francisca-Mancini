@@ -57,28 +57,31 @@ class BasketItem extends PureComponent {
 
   delete() {
     const basket = getSessionStorage('basket');
-    const items = basket.items;
+    let items = basket.items;
     const count = basket.count;
 
     const product = remove(items, o => {
       return o.product.id === this.props.product.id;
-    });
+    })[0];
 
     if (!product) return;
 
     const oldQuantity = product.quantity;
     const newItems = [...items];
 
+    const newcount = count - oldQuantity;
+    const cartOpen = newcount > 0 ? true : false;
+
     setSessionStorage('basket', {
       items: newItems,
-      count: count - oldQuantity
+      count: newcount
     });
 
     this.setState({ isRemoved: true });
 
     this.props.setGlobalState({
-      count: count - oldQuantity,
-      cartOpen: false
+      count: newcount,
+      cartOpen: cartOpen
     });
   }
 
