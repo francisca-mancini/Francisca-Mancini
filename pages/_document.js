@@ -32,10 +32,6 @@ export default class MyDocument extends Document {
         htmlAttributes={{ lang: 'en' }}
         title="Francisca Mancini"
         meta={[
-          {
-            name: 'google-site-verification',
-            content: 'UBXMjdqrRCQ3hQ7HXzVU1Pu5RI9q9S0gWcPg4sEsHOY'
-          },
           { name: 'viewport', content: 'width=device-width, initial-scale=1' },
           {
             name: 'description',
@@ -55,6 +51,10 @@ export default class MyDocument extends Document {
           {this.helmetJsx}
           {this.helmetHeadComponents}
           {/* <meta name="robots" content="index,follow"> */}
+          <meta
+            name="google-site-verification"
+            content="UBXMjdqrRCQ3hQ7HXzVU1Pu5RI9q9S0gWcPg4sEsHOY"
+          />
           <link rel="icon" type="image/png" href="/static/images/favicon.png" />
           <link rel="stylesheet" href="/_next/static/style.css" />
           <script src="https://cdn.polyfill.io/v2/polyfill.min.js?rum=0&features=IntersectionObserver" />
