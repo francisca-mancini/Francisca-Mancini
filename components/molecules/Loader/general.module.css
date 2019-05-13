@@ -11,7 +11,10 @@
 }
 
 .containerHide {
-  animation: hideContainer 0.15s 1s 1 ease-out forwards;
+  /*animation: hideContainer 0.15s 1s 1 ease-out forwards;*/
+  transition: all 0.9s cubic-bezier(0.785, 0.135, 0.2, 1), opacity 0.15s ease-out 1s, visibility 0s ease-out 2s;
+  opacity: 0;
+  visibility: hidden;
 }
 
 .inner {
