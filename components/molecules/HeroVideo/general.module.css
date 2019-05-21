@@ -5,6 +5,7 @@
     global(max-h-80screen)
     global(overflow-hidden)
   ;
+  background-color: black;
 }
 
 .video {
@@ -14,6 +15,14 @@
     global(w-full)
     global(h-full)
   ;
+  max-width: 142vh;
+  margin-left: auto;
+  margin-right: auto;
+
+}
+
+.video > video {
+  display: block;
 }
 
 .seekbarContainer {
