@@ -146,12 +146,9 @@ export default class ProductBackgroundShapes extends PureComponent {
     this.app = new PIXI.Application({
       width: window.innerWidth,
       height: window.innerHeight,
-      powerPreference: 'high-performance',
-      resolution: 2,
+      resolution: 1,
       autoResize: true,
-      transparent: true,
-      forceFXAA: true,
-      roundPixels: true
+      transparent: true
     });
 
     this.canvasRef.appendChild(this.app.view);

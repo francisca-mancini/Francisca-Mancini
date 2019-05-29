@@ -73,26 +73,43 @@ export default class ProductShape extends Component {
   }
 
   handleResize() {
+    this.setState({ isHidden: true });
     this.destroyPixi();
     this.initPixi();
 
-    const { isDiscovery } = this.props;
-    const parent = findParent(this.canvasRef, 'pixiContainer');
+    const rect = this.canvasRef.getBoundingClientRect();
 
-    this.width = parent.offsetWidth;
-    this.height = parent.offsetHeight;
+    const isInView =
+      rect.bottom >= 0 &&
+      rect.right >= 0 &&
+      rect.top <=
+        (window.innerHeight || document.documentElement.clientHeight) &&
+      rect.left <= (window.innerWidth || document.documentElement.clientWidth);
 
-    this.baseShapeSize = isDiscovery
-      ? this.height / this.baseSizeFactor
-      : this.width / this.baseSizeFactor;
-    this.circlesSize = isDiscovery
-      ? this.height / this.circleSizeFactor
-      : this.width / this.circleSizeFactor;
+    console.log(isInView);
+
+    this.handleVisibilityChange(isInView);
+
+    // const { isDiscovery } = this.props;
+    // const parent = findParent(this.canvasRef, 'pixiContainer');
+
+    // this.width = parent.offsetWidth;
+    // this.height = parent.offsetHeight;
+
+    // this.baseShapeSize = isDiscovery
+    //   ? this.height / this.baseSizeFactor
+    //   : this.width / this.baseSizeFactor;
+    // this.circlesSize = isDiscovery
+    //   ? this.height / this.circleSizeFactor
+    //   : this.width / this.circleSizeFactor;
   }
 
   handleVisibilityChange(inView) {
     if (inView) {
-      if (this.app) this.app.ticker.start();
+      if (this.app) {
+        this.setState({ isHidden: false });
+        this.app.ticker.start();
+      }
     } else {
       if (this.app) this.app.ticker.stop();
     }
@@ -120,10 +137,11 @@ export default class ProductShape extends Component {
     this.app = new PIXI.Application({
       width: this.width,
       height: this.height,
-      powerPreference: 'high-performance',
-      resolution: 2,
+      // powerPreference: 'high-performance',
+      resolution: 1,
       autoResize: true,
-      transparent: this.props.isTransparent
+      transparent: this.props.isTransparent,
+      autoStart: false
     });
     if (!this.props.isTransparent) {
       this.app.renderer.backgroundColor = 0xffffff;
@@ -162,9 +180,9 @@ export default class ProductShape extends Component {
     this.container.filters = [blurFilter, thresholdGradientFilter];
     this.container.filterArea = this.app.screen;
 
-    setTimeout(() => {
-      this.setState({ isHidden: false });
-    }, 1000);
+    // setTimeout(() => {
+    //   this.setState({ isHidden: false });
+    // }, 1000);
   }
 
   addBaseShape() {
@@ -208,7 +226,6 @@ export default class ProductShape extends Component {
     circle.beginFill(this.circleColor, 1);
     circle.drawCircle(x, y, size);
     circle.endFill();
-    circle.interactive = true;
 
     this.container.addChild(circle);
     return circle;
