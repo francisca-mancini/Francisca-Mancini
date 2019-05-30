@@ -13,6 +13,7 @@ import ProductThumbnail from '../../molecules/ProductThumbnail';
 
 import getProductPrice from '../../../lib/getProductPrice';
 import getProductTitle from '../../../lib/getProductTitle';
+import getProductDescription from '../../../lib/getProductDescription';
 import setSessionStorage from '../../../lib/setSessionStorage';
 import getSessionStorage from '../../../lib/getSessionStorage';
 
@@ -123,7 +124,7 @@ class BasketItem extends PureComponent {
                 <ProductThumbnail hasNoInfo product={product} />
               </GridItem>
               <GridItem columnSize={8}>
-                <InlineGrid>
+                <InlineGrid align="end">
                   <Heading font="serif" size="xxxxs" uppercase>
                     {getProductTitle(product)}
                   </Heading>
@@ -131,7 +132,12 @@ class BasketItem extends PureComponent {
                     £{getProductPrice(product)}
                   </Heading>
                 </InlineGrid>
-                <Spacing size={15}>
+                <Spacing size={5}>
+                  <Paragraph weight="semilight" size="xxs">
+                    {getProductDescription(product)}
+                  </Paragraph>
+                </Spacing>
+                <Spacing size={10}>
                   <InlineGrid justify="start">
                     <Paragraph size="xs">Quantity</Paragraph>
                     <div onClick={this.remove} className={generalStyles.minus}>
