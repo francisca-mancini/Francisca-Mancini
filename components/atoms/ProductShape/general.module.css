@@ -6,6 +6,11 @@
   transition: opacity 0.5s;
 }
 
+
+.containerSafari canvas {
+  display: none;
+}
+
 .containerDiscovery {
   transform: scaleX(1.7);
 }
@@ -14,4 +19,14 @@
   composes:
     global(opacity-0)
   ;
+}
+
+
+.fallback {
+    position: absolute;
+    top: 15%;
+    left: 15%;
+    width: 70%;
+    height: 70%;
+    z-index: -1;
 }

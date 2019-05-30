@@ -43,6 +43,8 @@ export default class ProductShape extends Component {
       leading: false,
       trailing: true
     });
+
+    this.isSafari = false;
   }
 
   componentDidMount() {
@@ -52,6 +54,7 @@ export default class ProductShape extends Component {
     }
 
     window.addEventListener('resize', this.handleResize);
+    this.isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
   }
 
   componentWillUnmount() {
@@ -247,11 +250,22 @@ export default class ProductShape extends Component {
 
   render() {
     const { isHidden } = this.state;
-    const { isDiscovery } = this.props;
+    const { isDiscovery, color1, color2 } = this.props;
+    const isSafari = this.isSafari;
+
+    console.log('isSafari ' + isSafari);
+
     const containerClassName = classNames(generalStyles.container, {
       [generalStyles.containerHidden]: isHidden,
-      [generalStyles.containerDiscovery]: isDiscovery
+      [generalStyles.containerDiscovery]: isDiscovery,
+      [generalStyles.containerSafari]: isSafari
     });
+    const fallbackClassName = classNames(generalStyles.fallback, {});
+    const styles = {
+      background: 'linear-gradient(' + color1 + ',' + color2 + ')',
+      borderRadius:
+        Math.random() * 30 + 40 + '% ' + (Math.random() * 30 + 40) + '%'
+    };
     return (
       <Observer onChange={this.handleVisibilityChange}>
         <div
@@ -260,6 +274,7 @@ export default class ProductShape extends Component {
             this.canvasRef = ref;
           }}
         />
+        {isSafari && <div className={fallbackClassName} style={styles} />}
       </Observer>
     );
   }
