@@ -1,11 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
 <svg width="306px" height="314px" viewBox="0 0 306 314" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-    <!-- Generator: Sketch 50.2 (55047) - http://www.bohemiancoding.com/sketch -->
-    <title>Thumb/voiledenuit</title>
-    <desc>Created with Sketch.</desc>
-    <defs></defs>
     <g id="Symbols" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-        <g id="Thumb/voiledenuitbubble" transform="translate(-16.000000, -10.000000)" fill="#000000">
+        <g id="Thumb/voiledenuitbubble" transform="translate(-16.000000, -10.000000)" fill="red">
             <path d="M20.1226545,208.03225 C-1.09387673,147.236482 61.2369491,-28.7294689 168.939061,17.7119373 C276.641172,64.1533436 316.883977,86.0877505 321.454674,156.214828 C326.025371,226.341905 282.835536,323.297875 183.18762,323.297875 C83.5397034,323.297875 41.3391857,268.828018 20.1226545,208.03225 Z" id="Thumb/voiledenuit"></path>
         </g>
     </g>

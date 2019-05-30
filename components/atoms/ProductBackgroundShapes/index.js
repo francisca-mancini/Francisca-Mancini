@@ -208,7 +208,7 @@ export default class ProductBackgroundShapes extends PureComponent {
   }
 
   createShape(sprite, container) {
-    const texture = PIXI.Texture.fromImage(sprite);
+    const texture = PIXI.Texture.from(sprite);
     const shape = new PIXI.Sprite(texture);
     shape.anchor.set(0.5, 0.5);
     container.addChild(shape);
@@ -220,7 +220,7 @@ export default class ProductBackgroundShapes extends PureComponent {
     const circle = new PIXI.Graphics();
 
     circle.lineStyle(0);
-    circle.beginFill(this.circleColor, 1);
+    circle.beginFill(0xff0000, 1);
     circle.drawCircle(x, y, size);
     circle.endFill();
 

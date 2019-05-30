@@ -1,11 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
 <svg width="325px" height="301px" viewBox="0 0 325 301" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-    <!-- Generator: Sketch 50.2 (55047) - http://www.bohemiancoding.com/sketch -->
-    <title>Thumb/sandokan</title>
-    <desc>Created with Sketch.</desc>
-    <defs></defs>
     <g id="Symbols" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-        <g id="Thumb/sandokanbubble" transform="translate(-14.000000, -12.000000)" fill="#000000">
+        <g id="Thumb/sandokanbubble" transform="translate(-14.000000, -12.000000)" fill="red">
             <path d="M129.300781,13.3867188 C216.167969,26.3710938 298.597656,41.1796875 329.625,100.964844 C360.652344,160.75 305.070313,287.34375 242.621094,306.464844 C180.171875,325.585938 29.5117187,299.4375 16.78125,210.664063 C4.05078125,121.890625 42.4335937,0.40234375 129.300781,13.3867188 Z" id="Thumb/sandokan"></path>
         </g>
     </g>

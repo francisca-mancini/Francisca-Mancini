@@ -86,8 +86,6 @@ export default class ProductShape extends Component {
         (window.innerHeight || document.documentElement.clientHeight) &&
       rect.left <= (window.innerWidth || document.documentElement.clientWidth);
 
-    console.log(isInView);
-
     this.handleVisibilityChange(isInView);
 
     // const { isDiscovery } = this.props;
