@@ -50,7 +50,7 @@ function Story({ product, dataProduct }) {
   const storyCol = [12, 12, story ? 6 : 12];
 
   return (
-    <Spacing size={80} position="bottom" type="padding">
+    <Spacing size={80} position="b" type="padding">
       <div id="story" className={generalStyles.story} style={storyStyles}>
         <PageWrap>
           <Spacing size={80} type="padding">
