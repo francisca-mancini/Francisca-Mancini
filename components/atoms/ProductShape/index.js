@@ -253,8 +253,6 @@ export default class ProductShape extends Component {
     const { isDiscovery, color1, color2 } = this.props;
     const isSafari = this.isSafari;
 
-    console.log('isSafari ' + isSafari);
-
     const containerClassName = classNames(generalStyles.container, {
       [generalStyles.containerHidden]: isHidden,
       [generalStyles.containerDiscovery]: isDiscovery,
