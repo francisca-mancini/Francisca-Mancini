@@ -41,7 +41,8 @@
     "rellax": "^1.6.2",
     "simplebar-react": "^0.0.1",
     "simplex-noise": "^2.4.0",
-    "stickybits": "^3.3.2"
+    "stickybits": "^3.3.2",
+    "webpack": "^4.41.6"
   },
   "author": "Maxime Bonhomme",
   "license": "MIT",
