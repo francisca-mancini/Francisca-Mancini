@@ -36,7 +36,7 @@ export default class MyDocument extends Document {
           {
             name: 'description',
             content:
-              'Francisca Mancini, born in Buenos Aires, is an art advisor who works from the gallery she founded with her partner in London. Her clients who have long trusted her choices to build their art collections started to gain interest in the per-fumes she would wear. So perfume-making would be the way in which Francisca started to reflect her unique personality and inner worlds.'
+              'Francisca Mancini was born in Buenos Aires where she became an art historian, before moving to London. Following her passion, she began training in perfumery and this rapidly became the way in which Francisca started to reflect her personality and inner world.'
           },
           { property: 'og:title', content: 'Francisca Mancini' }
         ]}
